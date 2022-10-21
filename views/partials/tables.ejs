@@ -1,0 +1,151 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Inventory</h1>
+   
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Inventory List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Tracking Number</th>
+                            <th>P/N</th>
+                            <th>Area</th>
+                            <th>Location</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Remark / GRP Charges</th>
+                            <th>Ageing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%itemlist.forEach((result,index)=> {%>
+                            <tr class="content">
+                                <td scope="row" class="trackingNum">
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tnModal<%= index %>""><%= result.trackingNumber %></button>
+                                </td>
+                                <td><span><%= result.parcelNumber %></span></td>
+                                <td><span><%= result.area %></span></td>
+                                <td><span><%= result.areaIndicator %></span></td>
+                                <td><span><%= result.name %></span></td>
+                                <td class="itemStatus"><span><%= result.status %></span></td>
+                                <td><span><%= result.note %></span></td>
+                                <td><span id="days<%=index%>">
+                                    <% function dateDiff() { 
+                                      let todate = Date.parse(moment().format())
+                                      let expire = Date.parse(result.expireDate)
+                                      let days = Math.round((expire - todate) / (60 * 60 * 24 * 1000))
+                                      if (days <= 0){
+                                        days = "Expired Task"
+                                      }
+                                      else{
+                                        days = days + " Days"
+                                      }
+                                      return days
+                                    }
+                                  %>
+                                    <%= dateDiff() %></span></td>
+                                <!--<td>
+                                  <button type="button" class="btn btn-info p-1" data-toggle="modal" data-target="#editModal<%= index %>">
+                                    <i class="far fa-edit"></i>
+                                  </button>
+                                </td> -->
+                            </tr>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="tnModal<%= index %>" tabindex="-1" role="dialog" aria-labelledby="tnModalLabel<%= index %>" aria-hidden="true">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="tnModalLabel<%= index %>"><%= result.trackingNumber %></h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                            
+                                        <div class="modal-body container">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h3 class="text-center">Value:</h3> <p class="text-center">BND$ <%= result.value %></p> 
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <h3 class="text-center">Area:</h3> <p class="text-center"><%= result.area %></p> 
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <h3 class="expire text-center">Location:</h3><P class="text-center"><%= result.areaIndicator %></P>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h4 class="text-center">Name:</h4> <P class="text-center"><%= result.name %></P>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <h4 class="text-center">Address:</h4> <P class="text-center"><%= result.address %></P>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <h4 class="text-center">Entry Date: </h4><P class="text-center"><%= moment(result.entryDate).format("DD/MM/YYYY, h:mm:ss a") %></P>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h4 class="text-center">Contact:</h4> <p class="text-center"><%= result.contact %></p> 
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <h4 class="text-center">Product:</h4> <p class="text-center"><%= result.product %></p> 
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <h4 class="expire text-center">Expiry Date: </h4><P class="text-center"><%= moment(result.expireDate).format("DD/MM/YYYY, h:mm:ss a") %></P>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4>Parcel History:</h4>
+                                                    <% for(var i = 0 ; i < result.history.length; i++) {%>
+                                                    <ul>
+                                                        <li><%= result.history[i].statusDetail %></li>
+                                                        <ul>
+                                                            <li><b>Updated on:</b> &nbsp;<%= result.history[i].dateUpdated %></li>
+                                                        </ul>
+                                                    </ul>
+                                                <% } %>
+                                                </div>
+                                                
+                                            </div>
+
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                            <a class="btn btn-primary" href="login.html">Logout</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- End Modal-->
+                        <%})%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

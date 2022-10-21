@@ -1,0 +1,109 @@
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <form class="user" method="POST" action="/itemInSuccess">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="p-5">
+
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Item In</h1>
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="grpTrack" id="grpTrack" aria-describedby="grpTrackHelp" placeholder="Enter Tracking Number">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="shipmentCost" id="shipmentCost" aria-describedby="shipmentCostHelp" placeholder="Enter Shipment Cost">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="form-control form-control-user" id="area">
+                                            <option>A-1</option>
+                                            <option>A-2</option>
+                                            <option>A-3</option>
+                                            <option>A-4</option>
+                                            <option>B-1</option>
+                                            <option>B-2</option>
+                                            <option>B-3</option>
+                                            <option>B-4</option>
+                                            <option>C-1</option>
+                                            <option>C-2</option>
+                                            <option>C-3</option>
+                                            <option>C-4</option>
+                                            <option>D-1</option>
+                                            <option>D-2</option>
+                                            <option>D-3</option>
+                                            <option>D-4</option>
+                                            <option>E-1</option>
+                                            <option>E-2</option>
+                                            <option>E-3</option>
+                                            <option>E-4</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="date" class="form-control form-control-user" name="dateArrive" id="dateArrive" aria-describedby="dateArriveHelp" placeholder="Enter Date Arrive">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Parcel Details</h1>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <p class="text-center">Name:</p>
+                                        <h5 class="text-center" id="customerName">Customer Name</h5>
+                                        <input type="hidden" class="form-control form-control-user" name="name" id="name" aria-describedby="nameHelp">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <p class="text-center">Address:</p>
+                                        <h5 class="text-center" id="customerAddress">Customer Address</h5>
+                                        <input type="hidden" class="form-control form-control-user" name="address" id="address" aria-describedby="addressrHelp">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <p class="text-center">Contact:</p>
+                                        <h5 class="text-center" id="customerContact">Customer contact</h5>
+                                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
+                                    </div>
+                                </div>
+                            </div>
+                
+                        </div>
+
+                        <!--Additional Information-->
+                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
+                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
+                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
+                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
+                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
+                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
+                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
+                        <!-- End of Information -->
+
+                        <input type="hidden" class="form-control form-control-user" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="GRP">
+
+                        <div class="row">
+                            <a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
