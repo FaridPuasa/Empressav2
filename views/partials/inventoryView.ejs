@@ -1,0 +1,134 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Inventory</h1>
+   
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Inventory List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Product Brand</th>
+                            <th>Product Name</th>
+                            <th>Entity</th>
+                            <th>Product Quantity</th>
+                            <th>Product Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Product ID</td>
+                            <td>Product Brand</td>
+                            <td>Product Name</td>
+                            <th>XXX</th>
+                            <td>Product Quantity</td>
+                            <td>Product Pricing</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalView"><i class="fas fa-eye"></i></button>
+                                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#modalEdit"><i class="fas fa-pencil-alt"></i></button>
+                                <button type="button" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal View-->
+<div class="modal fade" id="modalView" tabindex="-1" role="dialog" aria-labelledby="modalViewLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalViewLabel">ID - XXXXXXXXXXXXX</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Product Brand: XXXXXXXXX</p>
+                <p>Product Name: XXXXXXXXX</p>
+                <p>Entity: XXXXXXXXX</p>
+                <p>Price per unit: $XXXX</p>
+                <p>Sale Price per unit: $XXXX</p>
+                <p>Total Quantity: XXX units</p>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Variety</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Variety 1</td>
+                                <td>XXXX</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal View -->
+
+<!-- Modal Update-->
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditLabel">ID - XXXXXXXXXXXXX</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Product Brand: XXXXXXXXX</p>
+                <p>Product Name: XXXXXXXXX</p>
+                <p>Entity: XXXXXXXXX</p>
+                <p>Price per unit: <input type="text" placeholder="$XXXX"></p>
+                <p>Sale Price per unit: <input type="text" placeholder="$XXXX"></p>
+                <p>Total Quantity: <input type="text" placeholder="XXXX"> units</p>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Variety</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Variety 1</td>
+                                <td><input type="text" placeholder="XXXX"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Update -->

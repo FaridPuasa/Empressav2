@@ -246,8 +246,6 @@ const insertPodByList = ((req,res) => {
     })
 })
 
-
-
 module.exports = {
     insertPod,
     insertOnePod,

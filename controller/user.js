@@ -139,5 +139,4 @@ module.exports = {
     deleteUser,
     loginUser,
     readLogin,
-
 }

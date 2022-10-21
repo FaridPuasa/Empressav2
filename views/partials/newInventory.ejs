@@ -1,0 +1,101 @@
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <form class="user" method="POST" action="/newInventory">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="p-5">
+
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">New Inventory</h1>
+                                    </div>
+
+                                    <div class="form-group" id="department">
+                                        <select class="form-control" name="department" id="department">
+                                            <option class="active">Product For</option>
+                                            <option>Go Belistore</option>
+                                            <option>Bruneian Made Finest</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group" id="productName">
+                                        <input type="text" class="form-control" name="productName" id="productName" aria-describedby="productName" placeholder="Enter Product Name">
+                                    </div>
+
+                                    <div class="form-group" id="category">
+                                        <select class="form-control" name="productCategory" id="productCategory">
+                                          <option class="active">Category</option>
+                                          <option value="food">Food</option>
+                                          <option value="perfume">Perfume</option>
+                                          <option value="kids">Kids Clothing</option>
+                                          <option value="male">Male Clothing</option>
+                                          <option value="female">Female Clothing</option>
+                                          <option value="shoe">Shoes</option>
+                                          <option value="stationary">Stationary</option>
+                                          <option value="sports">Sports Equipment</option>
+                                          <option value="others">Others</option>
+                                        </select>
+                                    </div>
+                                      
+                                    <div class="form-group" id="productOther">
+                                        <input type="text" class="form-control" name="productOther" id="productOther" aria-describedby="productOther" placeholder="Enter Product Other">
+                                    </div>
+
+                                    <div class="form-group" id="productQuantity">
+                                        <input type="text" class="form-control" name="productQuantity" id="productQuantity" aria-describedby="productQuantity" placeholder="Enter Product Quantity">
+                                    </div>
+
+                                    <div class="form-group" id="productPrice">
+                                        <input type="text" class="form-control" name="productPrice" id="productPrice" aria-describedby="productPrice" placeholder="Enter Product Price">
+                                    </div>
+
+                                    <div class="form-group" id="productSalePrice">
+                                        <input type="text" class="form-control" name="productSalePrice" id="productSalePrice" aria-describedby="productSalePrice" placeholder="Enter Product Sale Price">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <div class="p-5">
+
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Product Variety</h1>
+                                    </div>
+
+                                    <div class="form-group" id="variety">
+                                        <input type="text" class="form-control" name="variety" id="variety" aria-describedby="variety" placeholder="Enter Product Variety">
+                                    </div>
+
+                                    <div class="form-group" id="varietyQuantity">
+                                        <input type="text" class="form-control" name="varietyQuantity" id="varietyQuantity" aria-describedby="varietyQuantity" placeholder="Enter Variety Quantity">
+                                    </div>
+
+                                </div>
+                            </div>
+                
+                        </div>
+
+                        <!--Additional Information-->
+                        
+                        <!-- End of Information -->
+
+                        <input type="hidden" class="form-control form-control-user" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="NEWINVENTORY">
+
+                        <div class="row">
+                            <a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

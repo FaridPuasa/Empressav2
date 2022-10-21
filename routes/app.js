@@ -15,11 +15,11 @@ const {
     deleteUser,
     loginUser,
 } = require('../controller/user')
-const {
+/*const {
     insertExport,
     readExport,
-} = require('../controller/export')
-const {
+} = require('../controller/export')*/
+/*const {
     insertZalora,
     insertPharmacy,
     insertGrp,
@@ -28,7 +28,7 @@ const {
     updateItemTC,
     updateForOut,
     updateSelfCollect,
-} = require('../controller/inventory')
+} = require('../controller/inventory')*/
 const {
     insertPod,
     insertOnePod,
@@ -36,11 +36,11 @@ const {
     insertPodByList,
     readPod,
 } = require('../controller/pod')
-const {
+/*const {
     insertGrmy,
     readGrmy,
     updateGrmy,
-} = require('../controller/grmy')
+} = require('../controller/grmy')*/
 
 //get
 router.get('/', (req,res)=>{

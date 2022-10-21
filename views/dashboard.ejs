@@ -21,113 +21,7 @@
 
                 <!-- content of page goes here -->
 
-                <div class="container">
-                    <!-- Outer Row -->
-                    <div class="row justify-content-center">
-                
-                        <div class="col-xl-10 col-lg-12 col-md-9">
-                
-                            <div class="card o-hidden border-0 shadow-lg my-5">
-                                <div class="card-body p-0">
-                                    <!-- Nested Row within Card Body -->
-                                    <form class="user" method="POST" action="/newInventory">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="p-5">
-                
-                                                    <div class="text-center">
-                                                        <h1 class="h4 text-gray-900 mb-4">New Inventory</h1>
-                                                    </div>
-
-                                                    <div class="form-group" id="department">
-                                                        <select class="form-control" name="department" id="department">
-                                                            <option class="active">Product For</option>
-                                                            <option>Go Belistore</option>
-                                                            <option>Bruneian Made Finest</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group" id="productName">
-                                                        <input type="text" class="form-control" name="productName" id="productName" aria-describedby="productName" placeholder="Enter Product Name">
-                                                    </div>
-
-                                                    <div class="form-group" id="category">
-                                                        <select class="form-control" name="category" id="category">
-                                                            <option class="active">Category</option>
-                                                            <option>Food</option>
-                                                            <option>Perfume</option>
-                                                            <option>Kids Clothing</option>
-                                                            <option>Male Clothing</option>
-                                                            <option>Female Clothing</option>
-                                                            <option>Shoes</option>
-                                                            <option>Stationary</option>
-                                                            <option>Sports Equipment</option>
-                                                            <option>Others</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group" id="productOther">
-                                                        <input type="hidden" class="form-control" name="productOther" id="productOther" aria-describedby="productOther" placeholder="Enter Product Other">
-                                                    </div>
-
-                                                    <div class="form-group" id="productPrice">
-                                                        <input type="number" class="form-control" name="productPrice" id="productPrice" aria-describedby="productPrice" placeholder="Enter Product Price">
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                
-                                            <div class="col-lg-6">
-                
-                                                <div class="p-5">
-                                                    <div class="text-center">
-                                                        <h1 class="h4 text-gray-900 mb-4">Parcel Details</h1>
-                                                    </div>
-                
-                                                    <div class="form-group">
-                                                        <p class="text-center">Name:</p>
-                                                        <h5 class="text-center" id="customerName">Customer Name</h5>
-                                                        <input type="hidden" class="form-control form-control-user" name="name" id="name" aria-describedby="nameHelp">
-                                                    </div>
-                
-                                                    <div class="form-group">
-                                                        <p class="text-center">Address:</p>
-                                                        <h5 class="text-center" id="customerAddress">Customer Address</h5>
-                                                        <input type="hidden" class="form-control form-control-user" name="address" id="address" aria-describedby="addressrHelp">
-                                                    </div>
-                
-                                                    <div class="form-group">
-                                                        <p class="text-center">Contact:</p>
-                                                        <h5 class="text-center" id="customerContact">Customer contact</h5>
-                                                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                
-                                        </div>
-                
-                                        <!--Additional Information-->
-                                        <input type="hidden" class="form-control form-control-user" name="value" id="value" aria-describedby="contactHelp">
-                                        <input type="hidden" class="form-control form-control-user" name="zaloraTag" id="zaloraTag" aria-describedby="contactHelp">
-                                        <input type="hidden" class="form-control form-control-user" name="areaLoc" id="areaLoc" aria-describedby="contactHelp">
-                                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
-                                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
-                                        <input type="hidden" class="form-control form-control-user" name="dateArriveTemp" id="dateArriveTemp" aria-describedby="contactHelp">
-                                        <input type="hidden" class="form-control form-control-user" name="areaCodeTemp" id="areaCodeTemp" aria-describedby="contactHelp">
-                                        <!-- End of Information -->
-                
-                                        <input type="hidden" class="form-control form-control-user" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="ZALORA">
-                
-                                        <div class="row">
-                                            <a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>
-                                        </div>
-                
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <%- include('partials/newInventory.ejs') %>
 
                 <!-- /.container-fluid -->
 
@@ -153,13 +47,32 @@
     <%- include('partials/scripts.ejs') %>
 
     <script>
-        let category = document.getElementById("category")
         let othersField = document.getElementById("productOther")
-        if(category == "Others"){
-            othersField.setAttribute("type", "text") //set status not hidden
-            document.body.appendChild(othersField)
+        othersField.style.display = 'none'
+        let category = document.getElementById("productCategory").addEventListener('change', function() {
+        val = this.value
+            if(val == "others"){
+                othersField.style.display = 'block';
+            }
+            else{
+                othersField.style.display = 'none';
+            }
+        })
+    </script>
+
+    <script>
+        /*
+            <p id="text">Complete</p>
+            <button id="button-complete">Completed</button>
+        */
+        let texts = document.getElementById("text").innerHTML
+        let btn = document.getElementById("button-complete")
+        console.log(texts)
+        if (texts = "Complete"){
+            btn.setAttribute("disabled","")
         }
     </script>
-    
+
 </body>
 </html>
+
