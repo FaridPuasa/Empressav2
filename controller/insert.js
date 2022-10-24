@@ -25,8 +25,6 @@ const insertZalora = ((req,res)=>{
     }
     let zalora = new zaloraDB ({
         trackingNumber: tracker,
-        parcelNumber: data.parcelNumber,
-        patientNumber: data.patientNum,
         name: data.name,
         contact: data.contact,
         address: data.address,
@@ -34,7 +32,6 @@ const insertZalora = ((req,res)=>{
         areaIndicator: data.areaLoc,
         task: data.taskCB,
         tag: data.zaloraTag,
-        product:data.formMETHOD,
         value: data.value,
         status: status,
         reEntry: "FALSE",
@@ -49,6 +46,7 @@ const insertZalora = ((req,res)=>{
         userID: data.userID,
         userPos: data.userPos,
         count: 0,
+        product:data.formMETHOD,
     })
     zalora.history.push(parcelStatus)
     zalora.save(err=>{
@@ -79,7 +77,6 @@ const insertPharmacy = ((req,res)=> {
     }
     let pharmacy = new pharmacyDB ({
         trackingNumber: tracker,
-        parcelNumber: data.parcelNumber,
         patientNumber: data.patientNum,
         name: data.name,
         contact: data.contact,
@@ -88,7 +85,6 @@ const insertPharmacy = ((req,res)=> {
         areaIndicator: data.areaLoc,
         task: data.taskCB,
         tag: data.zaloraTag,
-        product:data.formMETHOD,
         value: data.value,
         status: status,
         reEntry: "FALSE",
@@ -103,6 +99,7 @@ const insertPharmacy = ((req,res)=> {
         userID: data.userID,
         userPos: data.userPos,
         count: 0,
+        product:data.formMETHOD,
     })
     pharmacy.history.push(parcelStatus)
     pharmacy.save(err=>{
@@ -133,7 +130,7 @@ const insertGrp = ((req,res) =>{
     }
     let grp = new grpDB ({
         trackingNumber: tracker,
-        parcelNumber: data.parcelNumber,
+        
         patientNumber: data.patientNum,
         name: data.name,
         contact: data.contact,
@@ -232,7 +229,7 @@ const insertRunner = ((req,res)=>{
     }
     let runner = new runnerDB ({
         trackingNumber: tracker,
-        parcelNumber: data.parcelNumber,
+        
         patientNumber: data.patientNum,
         name: data.name,
         contact: data.contact,
@@ -286,7 +283,7 @@ const insertPersonal = ((req,res)=>{
     }
     let personal = new personalDB ({
         trackingNumber: tracker,
-        parcelNumber: data.parcelNumber,
+        
         patientNumber: data.patientNum,
         name: data.name,
         contact: data.contact,

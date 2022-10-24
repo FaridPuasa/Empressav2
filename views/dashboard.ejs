@@ -19,91 +19,9 @@
 
                 <!-- Begin Page Content -->
 
+				<%- include('partials/newInventory.ejs') %>
+
                 <!-- content of page goes here -->
-
-
-
-                <div class="container-fluid">
-
-                    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Proof of Delivery</h6>
-        </div>
-
-        <div class="card-body">
-            <!-- Outer Row -->
-            <div class="row justify-content-center">
-                <div class="col-xl-10 col-lg-12 col-md-9">
-                    <form class="user" method="POST" action="/itemInSuccess">
-                        
-                            <div id="toolbar">
-                                <!--<div class="d-flex justify-content-center">
-                                <button type="button" class="btn btn-light btn-lg ">Excel Upload</button>
-                                    <div class="dropdown-container">
-                                        <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sliders-h"></i> Advance Search</button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <div class="dropdown-list">
-                                                    <input id="search_input" type="search" placeholder="Search states" class="dropdown-search"/>
-                                                    <ul></ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>-->
-                            </div>
-            
-                                <table
-                                    id="table"
-                                    data-toolbar="#toolbar"
-                                    data-search="true"
-                                    data-show-refresh="true"
-                                    data-show-toggle="true"
-                                    data-show-fullscreen="true"
-                                    data-show-columns="true"
-                                    data-show-columns-toggle-all="true"
-                                    data-detail-view="false"
-                                    data-show-export="true"
-                                    data-click-to-select="true"
-                                    data-detail-formatter="detailFormatter"
-                                    data-minimum-count-columns="2"
-                                    data-show-pagination-switch="true"
-                                    data-pagination="true"
-                                    data-id-field="id"
-                                    data-page-list="[10, 25, 50, 100, all]"
-                                    data-show-footer="true"
-                                    
-                                    data-response-handler="responseHandler">
-                                <thead>
-                                    <tr>
-                                        <th data-field="fname" data-sortable="true">First Name</th>
-                                        <th data-field="lname" data-sortable="true">Last Name</th>
-                                        <th data-field="type" data-sortable="true">Type</th>
-                                        <th data-field="phone" data-sortable="true">Phone</th>
-                                        <th data-field="unit" data-sortable="true">Unit</th>
-                                        <th data-field="community" data-sortable="true">Community</th>
-                                        <th data-field="address" data-sortable="true">Address</th>
-                                        <th data-field="city" data-sortable="true">City</th>
-                                        <th data-field="state" data-sortable="true">State</th>
-                                        <th data-field="zip" data-sortable="true">Zip</th>
-                                        <th data-field="zip" data-sortable="true" data-visible="false">Lease Start Date</th>
-                                        <th data-field="zip" data-sortable="true" data-visible="false">Lease End Date</th>
-                                        <th data-field="zip" data-sortable="true" data-visible="false">Date Purchased</th>
-                                        <th data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        
-                            <input type="hidden" class="form-control form-control-user" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="POD">
-
-                        <!--<a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>-->
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-                    
 
                 <!-- /.container-fluid -->
 
@@ -127,6 +45,61 @@
 
     <!-- scripts goes here -->
     <%- include('partials/scripts.ejs') %>
+
+	<script>
+		function addTextInput() {
+			let test = document.getElementById("newRow")
+			let vt = document.getElementsByClassName("vt")
+
+			let div = document.createElement('div');
+			div.className = 'form-group'
+			let div1 = document.createElement('div');
+			div1.className = 'form-group'
+			let div2 = document.createElement('div');
+			div2.className = 'form-group'
+
+			let varietyType = document.createElement("select")
+			varietyType.className = "form-control vt"
+			varietyType.name = "varietyType"
+			varietyType.id = "varietyType1"
+			
+			let option1 = document.createElement("option")
+			option1.value = "size"
+			option1.text = "Size"
+			
+			let option2 = document.createElement("option")
+			option2.value = "colour"
+			option2.text = "Colour"
+
+			
+
+			let variety = document.createElement("input")
+			variety.className = "form-control"
+			variety.type = "text"
+			variety.name = "variety"
+			variety.id = "variety"
+			variety.placeholder = "Enter Variety"
+
+			let varietyQuantity = document.createElement("input")
+			varietyQuantity.className = "form-control"
+			varietyQuantity.type = "number"
+			varietyQuantity.name = "varietyQuantity"
+			varietyQuantity.id = "varietyQuantity"
+			varietyQuantity.placeholder = "Enter Variety Quantity"
+
+			div2.appendChild(varietyType)
+
+			vt.appendChild(option1)
+			vt.appendChild(option2)
+
+			div.appendChild(variety)
+			div1.appendChild(varietyQuantity)
+			
+			test.appendChild(div2)
+			test.appendChild(div)
+			test.appendChild(div1)
+		}
+	</script>
 
     <script>
         let othersField = document.getElementById("productOther")
