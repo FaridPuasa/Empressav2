@@ -49,7 +49,7 @@
 	<script>
 		function addTextInput() {
 			let test = document.getElementById("newRow")
-			let vt = document.getElementsByClassName("vt")
+			let vt = document.getElementById("select")
 
 			let div = document.createElement('div');
 			div.className = 'form-group'
@@ -59,9 +59,9 @@
 			div2.className = 'form-group'
 
 			let varietyType = document.createElement("select")
-			varietyType.className = "form-control vt"
+			varietyType.className = "form-control"
 			varietyType.name = "varietyType"
-			varietyType.id = "varietyType1"
+			varietyType.id = "select"
 			
 			let option1 = document.createElement("option")
 			option1.value = "size"
@@ -70,8 +70,6 @@
 			let option2 = document.createElement("option")
 			option2.value = "colour"
 			option2.text = "Colour"
-
-			
 
 			let variety = document.createElement("input")
 			variety.className = "form-control"
