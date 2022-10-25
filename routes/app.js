@@ -35,7 +35,9 @@ const {
     insertTempPod,
     insertPodByList,
     readPod,
-} = require('../controller/pod')
+} = require('../controller/pod');
+const pod = require('../models/pod');
+const { query } = require('express');
 /*const {
     insertGrmy,
     readGrmy,
@@ -48,6 +50,17 @@ router.get('/', (req,res)=>{
         title: "Login",
         moment: moment,
     })
+})
+
+router.get('/pod/:service', (req,res)=>{
+    podDB.find().sort({$natural: -1}).limit(1).next().then(
+        (result)=>{
+            console.log(result)
+        },
+        (err)=>{
+            console.log("Error on POD:" + err)
+        }
+    )
 })
 
 router.get('/zalora', (req,res) => {

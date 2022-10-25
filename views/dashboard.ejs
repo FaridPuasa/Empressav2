@@ -19,7 +19,7 @@
 
                 <!-- Begin Page Content -->
 
-				<%- include('partials/newInventory.ejs') %>
+				<%- include('partials/pod.ejs') %>
 
                 <!-- content of page goes here -->
 
@@ -47,32 +47,22 @@
     <%- include('partials/scripts.ejs') %>
 
 	<script>
+		function update() {
+			$('#clock').html(moment().format('Do MMMM YYYY | h:mm:ss a'));
+		}
+
+		setInterval(update, 1000);
+	</script>
+
+	<script>
 		function addTextInput() {
 			let test = document.getElementById("newRow")
-			let vt = document.getElementsByClassName("vt")
 
 			let div = document.createElement('div');
 			div.className = 'form-group'
 			let div1 = document.createElement('div');
 			div1.className = 'form-group'
-			let div2 = document.createElement('div');
-			div2.className = 'form-group'
-
-			let varietyType = document.createElement("select")
-			varietyType.className = "form-control vt"
-			varietyType.name = "varietyType"
-			varietyType.id = "varietyType1"
-			
-			let option1 = document.createElement("option")
-			option1.value = "size"
-			option1.text = "Size"
-			
-			let option2 = document.createElement("option")
-			option2.value = "colour"
-			option2.text = "Colour"
-
-			
-
+		
 			let variety = document.createElement("input")
 			variety.className = "form-control"
 			variety.type = "text"
@@ -87,19 +77,50 @@
 			varietyQuantity.id = "varietyQuantity"
 			varietyQuantity.placeholder = "Enter Variety Quantity"
 
-			div2.appendChild(varietyType)
-
-			vt.appendChild(option1)
-			vt.appendChild(option2)
-
 			div.appendChild(variety)
 			div1.appendChild(varietyQuantity)
 			
-			test.appendChild(div2)
 			test.appendChild(div)
 			test.appendChild(div1)
 		}
 	</script>
+
+<script>
+	function addRowToPod() {
+		let row = document.getElementById('podRow')
+
+		//declaring create element methods
+		let tableRow = document.createElement('tr')
+		let columnNumber = document.createElement('td')
+		let columnTrackingNumber = document.createElement('td')
+		let columnItemWithMe = document.createElement('td')
+		let columnName = document.createElement('td')
+		let columnAddress = document.createElement('td')
+		let columnContact = document.createElement('td')
+		let columnValue = document.createElement('td')
+		let columnPaymentMethod = document.createElement('td')
+		let columnStatus = document.createElement('td')
+		let columnRemark = document.createElement('td')
+		
+		//declaring create element for input methods
+		let inputNumber = document.createElement('input')
+		let inputTrackingNumber = document.createElement('input')
+		let inputName = document.createElement('input')
+		let inputAddress = document.createElement('input')
+		let inputContact = document.createElement('input')
+		let inputValue = document.createElement('input')
+		let inputPaymentMethod = document.createElement('input')
+
+		inputTrackingNumber.className = "form-control"
+		inputTrackingNumber.type = "text"
+		inputTrackingNumber.name = "trackingNumber"
+		inputTrackingNumber.placeholder = "Enter Tracking Number"
+
+		columnNumber.className = 'text-center'
+		columnNumber.className = 'numbering'
+		
+	}
+</script>
 
     <script>
         let othersField = document.getElementById("productOther")

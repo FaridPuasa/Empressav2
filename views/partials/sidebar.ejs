@@ -4,7 +4,9 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box" viewBox="0 0 16 16">
+                <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+            </svg>
         </div>
         <div class="sidebar-brand-text mx-3">WMS<sup>2</sup></div>
     </a>
@@ -13,10 +15,11 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item active">
+        <a class="nav-link" href="/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <span>Dashboard</span>
+        </a>
     </li>
 
     <!-- Divider -->
@@ -24,40 +27,71 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Interface
+        OPERATIONS
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Components</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
+                <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+            </svg>
+            <span>Item In</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="buttons.html">Buttons</a>
-                <a class="collapse-item" href="cards.html">Cards</a>
+                <h6 class="collapse-header">Services:</h6>
+                <a class="collapse-item" href="/moh">MOH</a>
+                <a class="collapse-item" href="/jpmc">JPMC</a>
+                <a class="collapse-item" href="/panaga">Panaga</a>
+                <a class="collapse-item" href="/fmx">FMX</a>
+                <a class="collapse-item" href="/grp">GRP</a>
+                <a class="collapse-item" href="/gbs">Go Belistore</a>
+                <!--<a class="collapse-item" href="/zalroa">Zalora</a>-->
             </div>
         </div>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Utilities</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
+                <path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+            </svg>
+            <span>Item Out</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
+                <h6 class="collapse-header">services</h6>
+                <a class="collapse-item" href="/moh">MOH</a>
+                <a class="collapse-item" href="/jpmc">JPMC</a>
+                <a class="collapse-item" href="/panaga">Panaga</a>
+                <a class="collapse-item" href="/fmx">FMX</a>
+                <a class="collapse-item" href="/grp">GRP</a>
+                <a class="collapse-item" href="/gbs">Go Belistore</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInstock" aria-expanded="true" aria-controls="collapseUtilities">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookshelf" viewBox="0 0 16 16">
+                <path d="M2.5 0a.5.5 0 0 1 .5.5V2h10V.5a.5.5 0 0 1 1 0v15a.5.5 0 0 1-1 0V15H3v.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zM3 14h10v-3H3v3zm0-4h10V7H3v3zm0-4h10V3H3v3z"/>
+            </svg>
+            <span>In-stock</span>
+        </a>
+        <div id="collapseInstock" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">services</h6>
+                <a class="collapse-item" href="/moh">MOH</a>
+                <a class="collapse-item" href="/jpmc">JPMC</a>
+                <a class="collapse-item" href="/panaga">Panaga</a>
+                <a class="collapse-item" href="/fmx">FMX</a>
+                <a class="collapse-item" href="/grp">GRP</a>
+                <a class="collapse-item" href="/gbs">Go Belistore</a>
             </div>
         </div>
     </li>
@@ -67,42 +101,180 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Addons
+        List
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Pages</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseList" aria-expanded="true" aria-controls="collapsePages">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+            </svg>
+            <span>Item List</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseList" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
-                <a class="collapse-item" href="login.html">Login</a>
-                <a class="collapse-item" href="register.html">Register</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
+                <h6 class="collapse-header">services</h6>
+                <a class="collapse-item" href="/moh">MOH</a>
+                <a class="collapse-item" href="/jpmc">JPMC</a>
+                <a class="collapse-item" href="/panaga">Panaga</a>
+                <a class="collapse-item" href="/fmx">FMX</a>
+                <a class="collapse-item" href="/grp">GRP</a>
+                <a class="collapse-item" href="/gbs">Go Belistore</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePodList"
+            aria-expanded="true" aria-controls="collapsePages">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+            </svg>
+            <span>POD List</span>
+        </a>
+        <div id="collapsePodList" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">services</h6>
+                <a class="collapse-item" href="/moh">MOH</a>
+                <a class="collapse-item" href="/jpmc">JPMC</a>
+                <a class="collapse-item" href="/panaga">Panaga</a>
+                <a class="collapse-item" href="/fmx">FMX</a>
+                <a class="collapse-item" href="/grp">GRP</a>
+                <a class="collapse-item" href="/gbs">Go Belistore</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRestockList"
+            aria-expanded="true" aria-controls="collapsePages">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+            </svg>
+            <span>Restock List</span>
+        </a>
+        <div id="collapseRestockList" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">services</h6>
+                <a class="collapse-item" href="/moh">MOH</a>
+                <a class="collapse-item" href="/jpmc">JPMC</a>
+                <a class="collapse-item" href="/panaga">Panaga</a>
+                <a class="collapse-item" href="/fmx">FMX</a>
+                <a class="collapse-item" href="/grp">GRP</a>
+                <a class="collapse-item" href="/gbs">Go Belistore</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Documents
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePod" aria-expanded="true" aria-controls="collapsePages">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-plus" viewBox="0 0 16 16">
+                <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
+                <path d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z"/>
+                <path d="M8.5 6.5a.5.5 0 0 0-1 0V8H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V9H10a.5.5 0 0 0 0-1H8.5V6.5Z"/>
+            </svg>
+            <span>Proof of Delivery</span>
+        </a>
+        <div id="collapsePod" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">services</h6>
+                <a class="collapse-item" href="/moh">MOH</a>
+                <a class="collapse-item" href="/jpmc">JPMC</a>
+                <a class="collapse-item" href="/panaga">Panaga</a>
+                <a class="collapse-item" href="/fmx">FMX</a>
+                <a class="collapse-item" href="/grp">GRP</a>
+                <a class="collapse-item" href="/gbs">Go Belistore</a>
             </div>
         </div>
     </li>
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
+        <a class="nav-link" href="/restock_order">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+            </svg>
+            <span>Restock Order</span>
+        </a>
     </li>
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseExportDocument" aria-expanded="true" aria-controls="collapsePages">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  width="16" height="16" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 502 502" fill="currentColor" xml:space="preserve">
+                <g>
+                    <g>
+                        <g>
+                            <path d="M491.951,414.346l-66.37-66.37c-6.971-6.97-17.36-9.036-26.468-5.264c-9.108,3.772-14.993,12.58-14.993,22.438v9.98
+                                c0,2.364-1.923,4.287-4.287,4.287h-6.713V103c0-2.652-1.054-5.196-2.929-7.071l-93-93C275.316,1.054,272.772,0,270.12,0h-253
+                                c-5.523,0-10,4.477-10,10v482c0,5.523,4.477,10,10,10h346c5.523,0,10-4.477,10-10v-28.583h6.713c2.364,0,4.287,1.923,4.287,4.287
+                                v9.98c0,9.858,5.885,18.666,14.993,22.438c3.023,1.252,6.186,1.861,9.319,1.861c6.308,0,12.492-2.469,17.149-7.125l66.37-66.37
+                                c1.875-1.875,2.929-4.419,2.929-7.071C494.88,418.765,493.826,416.221,491.951,414.346z M280.12,34.142L338.978,93H280.12V34.142
+                                z M353.12,482h-326V20h233v83c0,5.523,4.477,10,10,10h83v266.417h-21c-5.523,0-10,4.477-10,10v64c0,5.523,4.477,10,10,10h21V482z
+                                M411.438,480.716c-1.762,1.763-3.683,1.338-4.672,0.929c-0.988-0.41-2.646-1.468-2.646-3.961v-9.98
+                                c0-13.392-10.895-24.287-24.287-24.287H342.12v-44h37.713c13.392,0,24.287-10.895,24.287-24.287v-9.98
+                                c0-2.492,1.658-3.551,2.646-3.96c0.988-0.41,2.91-0.834,4.672,0.929l59.299,59.298L411.438,480.716z"/>
+                            <path d="M77.62,174h165.5c5.523,0,10-4.477,10-10s-4.477-10-10-10H77.62c-5.523,0-10,4.477-10,10S72.097,174,77.62,174z"/>
+                            <path d="M302.62,220h-225c-5.523,0-10,4.477-10,10s4.477,10,10,10h225c5.523,0,10-4.477,10-10S308.143,220,302.62,220z"/>
+                            <path d="M302.62,286h-225c-5.523,0-10,4.477-10,10s4.477,10,10,10h225c5.523,0,10-4.477,10-10S308.143,286,302.62,286z"/>
+                            <path d="M302.62,352h-225c-5.523,0-10,4.477-10,10s4.477,10,10,10h225c5.523,0,10-4.477,10-10S308.143,352,302.62,352z"/>
+                            <path d="M302.62,154h-22c-5.523,0-10,4.477-10,10s4.477,10,10,10h22c5.523,0,10-4.477,10-10S308.143,154,302.62,154z"/>
+                        </g>
+                    </g>
+                </g>
+                </svg>
+            <span>Export Entry</span>
+        </a>
+        <div id="collapseExportDocument" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">services</h6>
+                <a class="collapse-item" href="/moh">MOH</a>
+                <a class="collapse-item" href="/jpmc">JPMC</a>
+                <a class="collapse-item" href="/panaga">Panaga</a>
+                <a class="collapse-item" href="/fmx">FMX</a>
+                <a class="collapse-item" href="/grp">GRP</a>
+                <a class="collapse-item" href="/gbs">Go Belistore</a>
+            </div>
+        </div>
+    </li>
+    
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Miscellaneous
+    </div>
+
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        <a class="nav-link" href="/new_user">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+            <span>New User</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/user_list">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+                <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+            </svg>
+            <span>User List</span>
+        </a>
     </li>
 
     <!-- Divider -->

@@ -26,8 +26,25 @@ const instockSchema  = new mongoose.Schema({
     productVarietyQuantity: reqString,
     createdBy: reqString,
     dateCreated: dateEntry,
-    history: [{statusDetail: reqString, dateUpdated: reqString ,updateBy: reqString, updateById: reqString, updateByPos: reqString}],
-    editHistory: [{oldArea: reqString, oldAreaIndicator: reqString , oldNote: reqString, oldAddress: reqString, oldContact: reqString, editedBy: reqString, editedAt: reqString}],
+    history: [{
+        productPrice: reqString, 
+        productSalePrice: reqString, 
+        productQuantity: reqString, 
+        productVarietyQuantity: reqString, 
+        productVariety: reqString, 
+        dateUpdated: reqString,
+        updateBy: reqString, 
+        updateById: reqString
+    }],
+    editHistory: [{
+        oldProductPrice: reqString, 
+        oldProductSalePrice: reqString, 
+        oldProductQuantity: reqString, 
+        oldProductVarietyQuantity: reqString, 
+        oldProductVariety: reqString, 
+        editedBy: reqString, 
+        editedAt: reqString
+    }],
 }, {timestamps: true})
 
 //inventorySchema.index({createdAt: 1},{expireAfterSeconds: 31536000});//1 year
