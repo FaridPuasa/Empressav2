@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Zalora Proof of Delivery</h1>
+    <h1 class="h3 mb-2 text-gray-800">MOH Proof of Delivery</h1>
    
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -18,24 +18,25 @@
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" colspan="8">PROOF OF DELIVERY | ZALORA</th>
+                                    <th scope="col" colspan="8">PROOF OF DELIVERY | MOH</th>
                                     <th scope="col" colsapn="1">
                                         <div class="text-center">
                                             <img src="/img/gr_logo.png" class="rounded" alt="go_rush.png">
                                         </div>
                                     </th>
                                     <th></th>
+                                    <th scope="col"></th>
                                 </tr>
                                 <tr>
                                     <th scope="col">Made By:</th>
-                                    <th scope="col" colspan="2">
+                                    <th scope="col" colspan="3">
                                         <select class="form-control" id="area">
                                             <option class="active">Marin</option>
                                             <option>Fathin</option>
                                         </select>
                                     </th>
                                     <th scope="col">Area of Delivery:</th>
-                                    <th scope="col" colspan="2">
+                                    <th scope="col" colspan="3">
                                         <select class="form-control" id="area">
                                             <option class="active">Area Selection</option>
                                             <option>BERAKAS 1</option>
@@ -51,12 +52,12 @@
                                         </select>
                                     </th>
                                     <th scope="col">GR/POD/ZAL:</th>
-                                    <th scope="col" colspan="2"><input type="text" class="form-control" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="POD"></th>
-                                    <th></th>
+                                    <th scope="col" colspan="2">seq<input type="hidden" class="form-control" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="seq"></th>
+                                    
                                 </tr>
                                 <tr>
                                     <th scope="col">Dispatcher Name:</th>
-                                    <th scope="col" colspan="2">
+                                    <th scope="col" colspan="3">
                                         <select name="agentTemp" id="agentTemp" style="border-radius: 5px;" class="form-control">
                                             <option value="">Agent Selection</option>
                                             <option value="994634">FD SOWDEQ</option>
@@ -80,15 +81,16 @@
                                         </select>
                                     </th>
                                     <th scope="col">Date of Delivery:</th>
-                                    <th scope="col" colspan="2"><input type="date" class="form-control" name="deliveryDate" id="deliveryDate" aria-describedby="contactHelp"></th>
+                                    <th scope="col" colspan="3"><input type="date" class="form-control" name="deliveryDate" id="deliveryDate" aria-describedby="contactHelp"></th>
                                     <th scope="col"></th>
-                                    <th scope="col" colspan="2"><input type="date" class="form-control" name="deliveryDate" id="deliveryDate" aria-describedby="contactHelp"></th>
-                                    <th></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
                                 <tr>
                                     <th scope="col" class="text-center">No.</th>
                                     <th scope="col" class="text-center">T/N</th>
                                     <th scope="col" class="text-center">Item with me</th>
+                                    <th scope="col" class="text-center">Fridge Item</th>
                                     <th scope="col" class="text-center">Customer Name</th>
                                     <th scope="col" class="text-center">Customer Address</th>
                                     <th scope="col" class="text-center">Customer Contact</th>
@@ -102,6 +104,7 @@
                                 <tr>
                                     <td class="text-center numbering">1.<input type="hidden" class="form-control" name="numebring" id="numbering" value="1."></td>
                                     <td><input type="text" class="form-control" name="trackingNumber" id="trackingNumber" aria-describedby="trackingNumberHelp" placeholder="Enter Tracking Number"></td>
+                                    <td></td>
                                     <td></td>
                                     <td class="text-center">
                                         <span id="name">Otto</span>
@@ -130,6 +133,11 @@
                                     <td class="text-center numbering">2.<input type="hidden" class="form-control" name="numebring" id="numbering" value="2."></td>
                                     <td><input type="text" class="form-control" name="trackingNumber" id="trackingNumber" aria-describedby="trackingNumberHelp" placeholder="Enter Tracking Number"></td>
                                     <td></td>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <input type="checkbox" class="d-flex align-items-center" name="fridgeItem" id="fridgeItem">
+                                        </div>
+                                    </td>
                                     <td class="text-center">
                                         <span id="name">Otto</span>
                                         <input type="hidden" class="form-control" name="name" aria-describedby="nameHelp">
