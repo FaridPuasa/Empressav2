@@ -66,52 +66,322 @@ router.get('/pod/:service', (req,res)=>{
 router.get('/:services-pod', (req,res)=>{
     let services = req.params.services
     console.log(services)
-    res.render('pod',{
-        title: `${services} POD`,
-        moment: moment,
-    })
+    if(services == 'moh'){
+        res.render('pod',{
+            title: `${services} POD`,
+            partials: ('./partials/pod/moh'),
+            moment: moment,
+        })
+    }
+    else if(services == 'jpmc'){
+        res.render('pod',{
+            title: `${services} POD`,
+            partials: ('./partials/pod/jpmc'),
+            moment: moment,
+        })
+    }
+    else if(services == 'png'){
+        res.render('pod',{
+            title: `${services} POD`,
+            partials: ('./partials/pod/panaga'),
+            moment: moment,
+        })
+    }
+    else if(services == 'fmx'){
+        res.render('pod',{
+            title: `${services} POD`,
+            partials: ('./partials/pod/fmx'),
+            moment: moment,
+        })
+    }
+    else if(services == 'zalora'){
+        res.render('pod',{
+            title: `${services} POD`,
+            partials: ('./partials/pod/zalora'),
+            moment: moment,
+        })
+    }else if(services == 'grp'){
+        res.render('pod',{
+            title: `${services} POD`,
+            partials: ('./partials/pod/grp'),
+            moment: moment,
+        })
+    }
+    else if(services == 'runner'){
+        res.render('pod',{
+            title: `${services} POD`,
+            partials: ('./partials/pod/runner'),
+            moment: moment,
+        })
+    }
+    else if(services == 'personal'){
+        res.render('pod',{
+            title: `${services} POD`,
+            partials: ('./partials/pod/personal'),
+            moment: moment,
+        })
+    }
+    else{
+        console.log('failed')
+    }
 })
 
-router.get('/zalora', (req,res) => {
-    res.render('zalorain', {
-        title: "Login",
-        moment: moment,
-    })
+router.get('/:services-in', (req,res)=>{
+    let services = req.params.services
+    console.log(services)
+    if(services == 'moh'){
+        res.render('itemin',{
+            title: `${services} In`,
+            partials: ('./partials/itemin/moh'),
+            moment: moment,
+        })
+    }
+    else if(services == 'jpmc'){
+        res.render('itemin',{
+            title: `${services} In`,
+            partials: ('./partials/itemin/jpmc'),
+            moment: moment,
+        })
+    }
+    else if(services == 'png'){
+        res.render('itemin',{
+            title: `${services} In`,
+            partials: ('./partials/itemin/panaga'),
+            moment: moment,
+        })
+    }
+    else if(services == 'fmx'){
+        res.render('itemin',{
+            title: `${services} In`,
+            partials: ('./partials/itemin/fmx'),
+            moment: moment,
+        })
+    }
+    else if(services == 'zalora'){
+        res.render('itemin',{
+            title: `${services} In`,
+            partials: ('./partials/itemin/zalora'),
+            moment: moment,
+        })
+    }else if(services == 'grp'){
+        res.render('itemin',{
+            title: `${services} In`,
+            partials: ('./partials/itemin/grp'),
+            moment: moment,
+        })
+    }
+    else if(services == 'runner'){
+        res.render('itemin',{
+            title: `${services} In`,
+            partials: ('./partials/itemin/runner'),
+            moment: moment,
+        })
+    }
+    else if(services == 'personal'){
+        res.render('itemin',{
+            title: `${services} In`,
+            partials: ('./partials/itemin/personal'),
+            moment: moment,
+        })
+    }
+    else{
+        console.log('failed')
+    }
 })
 
-router.get('/pharmacy', (req,res) => {
-    res.render('pharmacyin', {
-        title: "Login",
-        moment: moment,
-    })
-})
-router.get('/grp', (req,res)=>{
-    res.render('grpin', {
-        title: "Login",
-        moment: moment,
-    })
-})
-router.get('/grmy', (req,res)=>{
-    res.render('grmy', {
-        title: "Login",
-        moment: moment,
-        message: {
-            success: "Test",
-            error: "away"
-        }
-    })
-})
-router.get('/export', (req,res)=>{
-    res.render('export', {
-        title: "Login",
-        moment: moment,
-    })
+router.get('/:services-list', (req,res)=>{
+    let services = req.params.services
+    console.log(services)
+    if(services == 'moh'){
+        res.render('list',{
+            title: `${services} List`,
+            partials: ('./partials/list/moh'),
+            moment: moment,
+        })
+    }
+    else if(services == 'jpmc'){
+        res.render('list',{
+            title: `${services} List`,
+            partials: ('./partials/list/jpmc'),
+            moment: moment,
+        })
+    }
+    else if(services == 'png'){
+        res.render('list',{
+            title: `${services} List`,
+            partials: ('./partials/list/panaga'),
+            moment: moment,
+        })
+    }
+    else if(services == 'fmx'){
+        res.render('list',{
+            title: `${services} List`,
+            partials: ('./partials/list/fmx'),
+            moment: moment,
+        })
+    }
+    else if(services == 'zalora'){
+        res.render('list',{
+            title: `${services} List`,
+            partials: ('./partials/list/zalora'),
+            moment: moment,
+        })
+    }else if(services == 'grp'){
+        res.render('list',{
+            title: `${services} List`,
+            partials: ('./partials/list/grp'),
+            moment: moment,
+        })
+    }
+    else if(services == 'runner'){
+        res.render('list',{
+            title: `${services} List`,
+            partials: ('./partials/list/runner'),
+            moment: moment,
+        })
+    }
+    else if(services == 'personal'){
+        res.render('list',{
+            title: `${services} List`,
+            partials: ('./partials/list/personal'),
+            moment: moment,
+        })
+    }
+    else{
+        console.log('failed')
+    }
 })
 
-/*
+router.get('/:services-list', (req,res)=>{
+    let services = req.params.services
+    console.log(services)
+    if(services == 'moh'){
+        res.render('podlist',{
+            title: `${services} List`,
+            partials: ('./partials/podlist/moh'),
+            moment: moment,
+        })
+    }
+    else if(services == 'jpmc'){
+        res.render('podlist',{
+            title: `${services} List`,
+            partials: ('./partials/podlist/jpmc'),
+            moment: moment,
+        })
+    }
+    else if(services == 'png'){
+        res.render('podlist',{
+            title: `${services} List`,
+            partials: ('./partials/podlist/panaga'),
+            moment: moment,
+        })
+    }
+    else if(services == 'fmx'){
+        res.render('podlist',{
+            title: `${services} List`,
+            partials: ('./partials/podlist/fmx'),
+            moment: moment,
+        })
+    }
+    else if(services == 'zalora'){
+        res.render('podlist',{
+            title: `${services} List`,
+            partials: ('./partials/podlist/zalora'),
+            moment: moment,
+        })
+    }else if(services == 'grp'){
+        res.render('podlist',{
+            title: `${services} List`,
+            partials: ('./partials/podlist/grp'),
+            moment: moment,
+        })
+    }
+    else if(services == 'runner'){
+        res.render('podlist',{
+            title: `${services} List`,
+            partials: ('./partials/podlist/runner'),
+            moment: moment,
+        })
+    }
+    else if(services == 'personal'){
+        res.render('podlist',{
+            title: `${services} List`,
+            partials: ('./partials/podlist/personal'),
+            moment: moment,
+        })
+    }
+    else{
+        console.log('failed')
+    }
+})
+
+router.get('/:services-list', (req,res)=>{
+    let services = req.params.services
+    console.log(services)
+    if(services == 'moh'){
+        res.render('export',{
+            title: `${services} List`,
+            partials: ('./partials/export%2Dentry/moh'),
+            moment: moment,
+        })
+    }
+    else if(services == 'jpmc'){
+        res.render('export',{
+            title: `${services} List`,
+            partials: ('./partials/export%2Dentry/jpmc'),
+            moment: moment,
+        })
+    }
+    else if(services == 'png'){
+        res.render('export',{
+            title: `${services} List`,
+            partials: ('./partials/export%2Dentry/panaga'),
+            moment: moment,
+        })
+    }
+    else if(services == 'fmx'){
+        res.render('export',{
+            title: `${services} List`,
+            partials: ('./partials/export%2Dentry/fmx'),
+            moment: moment,
+        })
+    }
+    else if(services == 'zalora'){
+        res.render('export',{
+            title: `${services} List`,
+            partials: ('./partials/export%2Dentry/zalora'),
+            moment: moment,
+        })
+    }else if(services == 'grp'){
+        res.render('export',{
+            title: `${services} List`,
+            partials: ('./partials/export%2Dentry/grp'),
+            moment: moment,
+        })
+    }
+    else if(services == 'runner'){
+        res.render('export',{
+            title: `${services} List`,
+            partials: ('./partials/export%2Dentry/runner'),
+            moment: moment,
+        })
+    }
+    else if(services == 'personal'){
+        res.render('export',{
+            title: `${services} List`,
+            partials: ('./partials/export%2Dentry/personal'),
+            moment: moment,
+        })
+    }
+    else{
+        console.log('failed')
+    }
+})
+
+
 router.get('/pod', )
 router.get('/podlist', )
-*/
+
 
 //post
 router.post('/dashboard', loginUser)
