@@ -5,8 +5,8 @@ const string = {
     type: String,
 }
 
-const podGeneralSchema  = new mongoose.Schema({
-    podGeneralId: string,
+const podZaloraSchema  = new mongoose.Schema({
+    podZaloraId: string,
     podSequence: string,
     madeby: string,
     deliveryArea: string,
@@ -22,4 +22,4 @@ const podGeneralSchema  = new mongoose.Schema({
     deliveryType: {type: [String]},
 })
 
-module.exports = mongoose.model('podGenerals', podGeneralSchema)
+module.exports = mongoose.model('podZaloras', podZaloraSchema)

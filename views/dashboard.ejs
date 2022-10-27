@@ -19,7 +19,7 @@
 
                 <!-- Begin Page Content -->
 
-				<%- include('partials/podGeneral.ejs') %>
+				<%- include('partials/pod/jpmc.ejs') %>
 
                 <!-- content of page goes here -->
 
@@ -48,7 +48,7 @@
 
 	<script>
 		function update() {
-			$('#clock').html(moment().format('Do MMMM YYYY | h:mm:ss a'));
+			$('#clock').html(moment().format('dddd | Do MMMM YYYY | h:mm:ss a'));
 		}
 	
 		setInterval(update, 1000);

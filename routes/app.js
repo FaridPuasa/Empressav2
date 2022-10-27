@@ -29,14 +29,14 @@ const {
     updateForOut,
     updateSelfCollect,
 } = require('../controller/inventory')*/
-const {
+/*const {
     insertPod,
     insertOnePod,
     insertTempPod,
     insertPodByList,
     readPod,
 } = require('../controller/pod');
-const pod = require('../models/pod');
+//const pod = require('../models/pod');
 const { query } = require('express');
 /*const {
     insertGrmy,

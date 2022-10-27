@@ -1,7 +1,4 @@
 <div class="container-fluid">
-
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Zalora Proof of Delivery</h1>
    
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -17,27 +14,29 @@
                         <div class="table-responsive-xl">
                         <table class="table">
                             <thead class="thead-light">
+                                <!--1st row header-->
                                 <tr>
-                                    <th scope="col" colspan="8">PROOF OF DELIVERY | ZALORA</th>
-                                    <th></th>
+                                    <th scope="col" colspan="8">PROOF OF DELIVERY | JPMC</th>
                                     <th scope="col" colsapn="1">
                                         <div class="text-center">
                                             <img src="/img/gr_logo.png" class="rounded" alt="go_rush.png">
                                         </div>
                                     </th>
-                                    <th></th>
+                                    <th></th><th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
+                                <!--2nd row header-->
                                 <tr>
                                     <th scope="col">Made By:</th>
                                     <th scope="col" colspan="3">
-                                        <select class="form-control" id="area">
+                                        <select class="form-control" name='madeby' id="area">
                                             <option class="active">Marin</option>
                                             <option>Fathin</option>
                                         </select>
                                     </th>
                                     <th scope="col">Area of Delivery:</th>
                                     <th scope="col" colspan="3">
-                                        <select class="form-control" id="area">
+                                        <select class="form-control" name='deliveryArea' id="area">
                                             <option class="active">Area Selection</option>
                                             <option>BERAKAS 1</option>
                                             <option>BERAKAS 2</option>
@@ -51,14 +50,15 @@
                                             <option>TEMBURONG</option>
                                         </select>
                                     </th>
-                                    <th></th>
-                                    <th scope="col">GR/POD/ZAL:</th>
-                                    <th scope="col" colspan="2">seq<input type="hidden" class="form-control" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="seq"></th>
+                                    <th scope="col">GR/POD/JPMC:</th>
+                                    <th scope="col" colspan="2">seq<input type="hidden" class="form-control" name="podsequence" id="podsequence" aria-describedby="contactHelp" value="seq"></th>
+                                    <th scope="col"></th>
                                 </tr>
+                                <!--3rd row header-->
                                 <tr>
                                     <th scope="col">Dispatcher Name:</th>
                                     <th scope="col" colspan="3">
-                                        <select name="agentTemp" id="agentTemp" style="border-radius: 5px;" class="form-control">
+                                        <select name="agentName" id="agentName" style="border-radius: 5px;" class="form-control">
                                             <option value="">Agent Selection</option>
                                             <option value="994634">FD SOWDEQ</option>
                                             <option value="997381">FD RAHIM</option>
@@ -85,11 +85,13 @@
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
                                 <tr>
                                     <th scope="col" class="text-center">No.</th>
                                     <th scope="col" class="text-center">T/N</th>
                                     <th scope="col" class="text-center">Item with me</th>
+                                    <th scope="col" class="text-center">Fridge Item</th>
                                     <th scope="col" class="text-center">Customer Name</th>
                                     <th scope="col" class="text-center">Customer Address</th>
                                     <th scope="col" class="text-center">Customer Contact</th>
@@ -98,64 +100,40 @@
                                     <th scope="col" class="text-center">Delivery Type</th>
                                     <th scope="col" class="text-center">Success/Fail</th>
                                     <th scope="col" class="text-center">Remark</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
+                            <!--Table Content-->
                             <tbody>
                                 <tr>
                                     <td class="text-center numbering">1.<input type="hidden" class="form-control" name="numebring" id="numbering" value="1."></td>
                                     <td><input type="text" class="form-control" name="trackingNumber" id="trackingNumber" aria-describedby="trackingNumberHelp" placeholder="Enter Tracking Number"></td>
                                     <td></td>
+                                    <td></td>
                                     <td class="text-center">
                                         <span id="name">Otto</span>
-                                        <input type="hidden" class="form-control" name="name" aria-describedby="nameHelp">
+                                        <input type="hidden" class="form-control" name="contactName" aria-describedby="nameHelp">
                                     </td>
                                     <td class="text-center">
                                         <span id="address">@mdo</span>
-                                        <input type="hidden" class="form-control" name="address" aria-describedby="addressHelp">
+                                        <input type="hidden" class="form-control" name="contactAddress" aria-describedby="addressHelp">
                                     </td>
                                     <td class="text-center">
                                         <span id="contact">XXX XXXX</span>
-                                        <input type="hidden" class="form-control" name="contact" aria-describedby="contactHelp">
+                                        <input type="hidden" class="form-control" name="contactNumber" aria-describedby="contactHelp">
                                     </td>
                                     <td class="text-center">
-                                        <span id="value">XXX</span>
-                                        <input type="hidden" class="form-control" name="value" aria-describedby="valueHelp">
+                                        <span id="value">$ XXX</span>
+                                        <input type="hidden" class="form-control" name="parcelValue" aria-describedby="valueHelp">
                                     </td>
                                     <td class="text-center">
                                         <span id="paymentMethod">COD / BT</span>
-                                        <input type="hidden" class="form-control" name="value" aria-describedby="valueHelp">
+                                        <input type="hidden" class="form-control" name="paymentMethod" aria-describedby="valueHelp">
                                     </td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr>
-                                    <td class="text-center numbering">2.<input type="hidden" class="form-control" name="numebring" id="numbering" value="2."></td>
-                                    <td><input type="text" class="form-control" name="trackingNumber" id="trackingNumber" aria-describedby="trackingNumberHelp" placeholder="Enter Tracking Number"></td>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <span id="name">Otto</span>
-                                        <input type="hidden" class="form-control" name="name" aria-describedby="nameHelp">
-                                    </td>
-                                    <td class="text-center">
-                                        <span id="address">@mdo</span>
-                                        <input type="hidden" class="form-control" name="address" aria-describedby="addressHelp">
-                                    </td>
-                                    <td class="text-center">
-                                        <span id="contact">XXX XXXX</span>
-                                        <input type="hidden" class="form-control" name="contact" aria-describedby="contactHelp">
-                                    </td>
-                                    <td class="text-center">
-                                        <span id="value">XXX</span>
-                                        <input type="hidden" class="form-control" name="value" aria-describedby="valueHelp">
-                                    </td>
-                                    <td class="text-center">
-                                        <span id="paymentMethod">COD / BT</span>
-                                        <input type="hidden" class="form-control" name="value" aria-describedby="valueHelp">
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr> 
+                                <!--Total Row-->
                                 <tr>
                                     <td class="text-center numbering">Total Parcel</td>
                                     <td id="totalParcel">XXXX</td>
@@ -170,17 +148,18 @@
                                         Total Amount:
                                     </td>
                                     <td class="text-center">
-                                        <span id="totalValue (BND)">XXX</span>
-                                        <input type="hidden" class="form-control" name="value" aria-describedby="valueHelp">
+                                        <span id="totalValue">$ XXX</span>
+                                        <input type="hidden" class="form-control" name="totalValue" id="totalValue" aria-describedby="totalValueHelp">
                                     </td>
                                     <td class="text-center">
                                     </td>
                                     <td></td>
                                     <td></td>
+                                    <td></td>
                                 </tr> 
                             </tbody>
                         </table>
-
+                        <!--Second Table No automation required here-->
                         <table class="table">
                             <thead class="thead-light">
                                 <th colspan="6" class="text-center">OFFICIAL USE ONLY (CASH)</th>
@@ -213,7 +192,7 @@
                             </tbody>
 
                         </table>
-                        <input type="hidden" class="form-control form-control-user" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="POD">
+                        <input type="hidden" class="form-control form-control-user" name="method" id="method" aria-describedby="contactHelp" value="pod_JPMC">
 
                         <!--<a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>-->
                         </div>
