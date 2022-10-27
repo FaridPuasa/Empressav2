@@ -20,24 +20,10 @@
                                         <input type="text" class="form-control" name="trackingNumber" id="trackingNumber" aria-describedby="trackingNumberHelp" placeholder="Enter Tracking Number" onkeyup="checkTrackingNum(this, 'trackingNum')" maxlength="9">
                                     </div>
 
-                                    <div class="form-group" id="areaArea">
-                                        <select class="form-control" id="area">
-                                            <option class="active">Area Selection</option>
-                                            <option>BERAKAS 1</option>
-                                            <option>BERAKAS 2</option>
-                                            <option>JALAN TUTONG 1</option>
-                                            <option>JALAN TUTONG 2</option>
-                                            <option>JALAN TUTONG 3</option>
-                                            <option>GADONG 1</option>
-                                            <option>GADONG 2</option>
-                                            <option>TUTONG</option>
-                                            <option>BELAIT</option>
-                                            <option>TEMBURONG</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group" id="dateArea">
-                                        <input type="text" class="form-control" name="dateArrive" id="dateArrive" aria-describedby="parcelNumberHelp" placeholder="Enter Date Arrive" onfocus="(this.type='date')">
+                                    <div class="form-group">
+                                        <p class="text-center">Area Code:</p>
+                                        <h5 class="text-center" id="areaCode">Customer Address</h5>
+                                        <input type="hidden" class="form-control form-control-user" name="areaCode" id="areaCode" aria-describedby="areaCodeHelp">
                                     </div>
 
                                 </div>

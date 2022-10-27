@@ -1,63 +1,69 @@
-const zaloraDB = require('../models/zaloras')
-const pharmacyDB = require('../models/pharmacies')
-const grpDB = require('../models/grps')
-const runnerDB = require('../models/runners')
-const personalDB = require('../models/personals')
-const miscDB = require('../models/miscs')
-const fmxDB = require('../models/fmxs')
+const warehouseDB = require('../models/warehouseInventory')
+const podGeneralDB = require('../models/podGeneral')
+const podPharmacyDB = require('../models/podPharmacy')
 const stockDB = require('../models/stocks')
 const moment = require('moment')
 
 //All insert or new item controller
-
 const insertZalora = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let tracker = data.trackingNumber
     let status = "IN WAREHOUSE"
+    let attempt = 'false'
+    let reentry = 'false'
+    let reschedule = 'false'
+    let startCount = 0
     let parcelStatus = {
         statusDetail: status, 
-        dateUpdated: date,
+        dateUpdated: dateEntry,
         updateBy: data.username, 
         updateById: data.userID, 
-        updateByPos: data.userPos
     }
-    let zalora = new zaloraDB ({
-        trackingNumber: tracker,
-        name: data.name,
-        contact: data.contact,
-        address: data.address,
-        area: data.area,
-        areaIndicator: data.areaLoc,
-        task: data.taskCB,
-        tag: data.zaloraTag,
+    let warehouse = new warehouseDB ({
+        //Main
+        trackingNumber: data.trackingNumber,
+        contactName: data.contactName,
+        contactNumber: data.contactNumber,
+        contactAddress: data.contactAddress,
+        patientNumber: data.patientNumber,
+        areaCode: data.areaCode,
+        serviceTag: data.serviceTag,
+        shelfCode: data.shelfCode,
+        fridgeItem: data.fridgeItem,
+        deliveryType: data.delvieryType,
+        paymentType: data.paymentType,
         value: data.value,
-        status: status,
-        reEntry: "FALSE",
-        reason: data.reason,
+        status: data.status,
         remark: data.remark,
         note: data.note,
-        attemp: "FALSE",
-        reSchedule: data.reSchedule,
-        dateArrive: date,
+        currentStatus: status,
+        service: data.service,
+        //Date
+        entryDate: date,
         dateEntry: dateEntry,
-        userName: data.username,
-        userID: data.userID,
-        userPos: data.userPos,
-        count: 0,
-        product:data.formMETHOD,
+        //Extra
+        attempt: attempt,
+        reentry: reentry,
+        reschedule: reschedule,
+        count: startCount,
     })
-    zalora.history.push(parcelStatus)
-    zalora.save(err=>{
+    warehouse.history.push(parcelStatus)
+    warehouse.save(err=>{
         if (err) {
             console.log (err)
             res.flash('error', `Tracking number already exist | Require fields missing`)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
         }
         else{
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
             res.status(201).send()
+            res.redirect('/:services-in')
         }
     })
 })
@@ -66,51 +72,61 @@ const insertPharmacy = ((req,res)=> {
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let tracker = data.trackingNumber
-    let status = "IN WAREHOUSE"
+    let status = "IN MEDICINE ROOM"
+    let attempt = 'false'
+    let reentry = 'false'
+    let reschedule = 'false'
+    let startCount = 0
     let parcelStatus = {
         statusDetail: status, 
-        dateUpdated: date,
+        dateUpdated: dateEntry,
         updateBy: data.username, 
         updateById: data.userID, 
-        updateByPos: data.userPos
     }
-    let pharmacy = new pharmacyDB ({
-        trackingNumber: tracker,
-        patientNumber: data.patientNum,
-        name: data.name,
-        contact: data.contact,
-        address: data.address,
-        area: data.area,
-        areaIndicator: data.areaLoc,
-        task: data.taskCB,
-        tag: data.zaloraTag,
+    let warehouse = new warehouseDB ({
+        //Main
+        trackingNumber: data.trackingNumber,
+        contactName: data.contactName,
+        contactNumber: data.contactNumber,
+        contactAddress: data.contactAddress,
+        patientNumber: data.patientNumber,
+        areaCode: data.areaCode,
+        serviceTag: data.serviceTag,
+        shelfCode: data.shelfCode,
+        fridgeItem: data.fridgeItem,
+        deliveryType: data.delvieryType,
+        paymentType: data.paymentType,
         value: data.value,
-        status: status,
-        reEntry: "FALSE",
-        reason: data.reason,
+        status: data.status,
         remark: data.remark,
         note: data.note,
-        attemp: "FALSE",
-        reSchedule: data.reSchedule,
-        dateArrive: date,
+        currentStatus: status,
+        service: data.service,
+        //Date
+        entryDate: date,
         dateEntry: dateEntry,
-        userName: data.username,
-        userID: data.userID,
-        userPos: data.userPos,
-        count: 0,
-        product:data.formMETHOD,
+        //Extra
+        attempt: attempt,
+        reentry: reentry,
+        reschedule: reschedule,
+        count: startCount,
     })
-    pharmacy.history.push(parcelStatus)
-    pharmacy.save(err=>{
+    warehouse.history.push(parcelStatus)
+    warehouse.save(err=>{
         if (err) {
             console.log (err)
             res.flash('error', `Tracking number already exist | Require fields missing`)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
         }
         else{
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
             res.status(201).send()
+            res.redirect('/:services-in')
         }
     })
 })
@@ -119,52 +135,61 @@ const insertGrp = ((req,res) =>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let tracker = data.trackingNumber
     let status = "IN WAREHOUSE"
+    let attempt = 'false'
+    let reentry = 'false'
+    let reschedule = 'false'
+    let startCount = 0
     let parcelStatus = {
         statusDetail: status, 
-        dateUpdated: date,
+        dateUpdated: dateEntry,
         updateBy: data.username, 
         updateById: data.userID, 
-        updateByPos: data.userPos
     }
-    let grp = new grpDB ({
-        trackingNumber: tracker,
-        
-        patientNumber: data.patientNum,
-        name: data.name,
-        contact: data.contact,
-        address: data.address,
-        area: data.area,
-        areaIndicator: data.areaLoc,
-        task: data.taskCB,
-        tag: data.zaloraTag,
-        product:data.formMETHOD,
+    let warehouse = new warehouseDB ({
+        //Main
+        trackingNumber: data.trackingNumber,
+        contactName: data.contactName,
+        contactNumber: data.contactNumber,
+        contactAddress: data.contactAddress,
+        patientNumber: data.patientNumber,
+        areaCode: data.areaCode,
+        serviceTag: data.serviceTag,
+        shelfCode: data.shelfCode,
+        fridgeItem: data.fridgeItem,
+        deliveryType: data.delvieryType,
+        paymentType: data.paymentType,
         value: data.value,
-        status: status,
-        reEntry: "FALSE",
-        reason: data.reason,
+        status: data.status,
         remark: data.remark,
         note: data.note,
-        attemp: "FALSE",
-        reSchedule: data.reSchedule,
-        dateArrive: date,
+        currentStatus: status,
+        service: data.service,
+        //Date
+        entryDate: date,
         dateEntry: dateEntry,
-        userName: data.username,
-        userID: data.userID,
-        userPos: data.userPos,
-        count: 0,
+        //Extra
+        attempt: attempt,
+        reentry: reentry,
+        reschedule: reschedule,
+        count: startCount,
     })
-    grp.history.push(parcelStatus)
-    grp.save(err=>{
+    warehouse.history.push(parcelStatus)
+    warehouse.save(err=>{
         if (err) {
             console.log (err)
             res.flash('error', `Tracking number already exist | Require fields missing`)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
         }
         else{
             console.log('Status: 201 - success entry to database')
-            res.status(201).send()
             req.flash('success', `${data} has been added to the database.`)
+            res.status(201).send()
+            res.redirect('/:services-in')
         }
     })
 })
@@ -172,44 +197,62 @@ const insertGrp = ((req,res) =>{
 const insertFmx = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
-    let status = "IN WAREHOUSE"
     let data = req.body
-    let history = {
-        statusDetail: status,
-        dateUpdated: date,
-        updateBy: data.userName,
-        updateById: data.userID,   
+    let status = "IN WAREHOUSE"
+    let attempt = 'false'
+    let reentry = 'false'
+    let reschedule = 'false'
+    let startCount = 0
+    let parcelStatus = {
+        statusDetail: status, 
+        dateUpdated: dateEntry,
+        updateBy: data.username, 
+        updateById: data.userID, 
     }
-    let fmx = new fmxDB({
-        consignment: data.consignment,
-        name: data.name,
-        contact: data.contact,
-        address: data.address,
-        area: data.area,
-        areaIndicator: data.areaIndicator,
-        product: data.formMETHOD,
+    let warehouse = new warehouseDB ({
+        //Main
+        trackingNumber: data.trackingNumber,
+        contactName: data.contactName,
+        contactNumber: data.contactNumber,
+        contactAddress: data.contactAddress,
+        patientNumber: data.patientNumber,
+        areaCode: data.areaCode,
+        serviceTag: data.serviceTag,
+        shelfCode: data.shelfCode,
+        fridgeItem: data.fridgeItem,
+        deliveryType: data.delvieryType,
+        paymentType: data.paymentType,
         value: data.value,
-        reEntry: "FALSE",
-        reason: data.reason,
+        status: data.status,
         remark: data.remark,
         note: data.note,
-        reSchedule: data.reSchedule,
-        dateArrive: date,
+        currentStatus: status,
+        service: data.service,
+        //Date
+        entryDate: date,
         dateEntry: dateEntry,
-        userName: data.username,
-        userID: data.userID,
-        count: 0,
+        //Extra
+        attempt: attempt,
+        reentry: reentry,
+        reschedule: reschedule,
+        count: startCount,
     })
-    fmx.history.push(history)
-    fmx.save((err)=>{
+    warehouse.history.push(parcelStatus)
+    warehouse.save(err=>{
         if (err) {
             console.log (err)
             res.flash('error', `Tracking number already exist | Require fields missing`)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
         }
         else{
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
             res.status(201).send()
+            res.redirect('/:services-in')
         }
     })
 })
@@ -218,52 +261,61 @@ const insertRunner = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let tracker = data.trackingNumber
     let status = "IN WAREHOUSE"
+    let attempt = 'false'
+    let reentry = 'false'
+    let reschedule = 'false'
+    let startCount = 0
     let parcelStatus = {
         statusDetail: status, 
-        dateUpdated: date,
+        dateUpdated: dateEntry,
         updateBy: data.username, 
         updateById: data.userID, 
-        updateByPos: data.userPos
     }
-    let runner = new runnerDB ({
-        trackingNumber: tracker,
-        
-        patientNumber: data.patientNum,
-        name: data.name,
-        contact: data.contact,
-        address: data.address,
-        area: data.area,
-        areaIndicator: data.areaLoc,
-        task: data.taskCB,
-        tag: data.zaloraTag,
-        product:data.formMETHOD,
+    let warehouse = new warehouseDB ({
+        //Main
+        trackingNumber: data.trackingNumber,
+        contactName: data.contactName,
+        contactNumber: data.contactNumber,
+        contactAddress: data.contactAddress,
+        patientNumber: data.patientNumber,
+        areaCode: data.areaCode,
+        serviceTag: data.serviceTag,
+        shelfCode: data.shelfCode,
+        fridgeItem: data.fridgeItem,
+        deliveryType: data.delvieryType,
+        paymentType: data.paymentType,
         value: data.value,
-        status: status,
-        reEntry: "FALSE",
-        reason: data.reason,
+        status: data.status,
         remark: data.remark,
         note: data.note,
-        attemp: "FALSE",
-        reSchedule: data.reSchedule,
-        dateArrive: date,
+        currentStatus: status,
+        service: data.service,
+        //Date
+        entryDate: date,
         dateEntry: dateEntry,
-        userName: data.username,
-        userID: data.userID,
-        userPos: data.userPos,
-        count: 0,
+        //Extra
+        attempt: attempt,
+        reentry: reentry,
+        reschedule: reschedule,
+        count: startCount,
     })
-    runner.history.push(parcelStatus)
-    runner.save(err=>{
+    warehouse.history.push(parcelStatus)
+    warehouse.save(err=>{
         if (err) {
             console.log (err)
             res.flash('error', `Tracking number already exist | Require fields missing`)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
         }
         else{
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
             res.status(201).send()
+            res.redirect('/:services-in')
         }
     })
 })
@@ -272,52 +324,61 @@ const insertPersonal = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let tracker = data.trackingNumber
     let status = "IN WAREHOUSE"
+    let attempt = 'false'
+    let reentry = 'false'
+    let reschedule = 'false'
+    let startCount = 0
     let parcelStatus = {
         statusDetail: status, 
-        dateUpdated: date,
+        dateUpdated: dateEntry,
         updateBy: data.username, 
         updateById: data.userID, 
-        updateByPos: data.userPos
     }
-    let personal = new personalDB ({
-        trackingNumber: tracker,
-        
-        patientNumber: data.patientNum,
-        name: data.name,
-        contact: data.contact,
-        address: data.address,
-        area: data.area,
-        areaIndicator: data.areaLoc,
-        task: data.taskCB,
-        tag: data.zaloraTag,
-        product:data.formMETHOD,
+    let warehouse = new warehouseDB ({
+        //Main
+        trackingNumber: data.trackingNumber,
+        contactName: data.contactName,
+        contactNumber: data.contactNumber,
+        contactAddress: data.contactAddress,
+        patientNumber: data.patientNumber,
+        areaCode: data.areaCode,
+        serviceTag: data.serviceTag,
+        shelfCode: data.shelfCode,
+        fridgeItem: data.fridgeItem,
+        deliveryType: data.delvieryType,
+        paymentType: data.paymentType,
         value: data.value,
-        status: status,
-        reEntry: "FALSE",
-        reason: data.reason,
+        status: data.status,
         remark: data.remark,
         note: data.note,
-        attemp: "FALSE",
-        reSchedule: data.reSchedule,
-        dateArrive: date,
+        currentStatus: status,
+        service: data.service,
+        //Date
+        entryDate: date,
         dateEntry: dateEntry,
-        userName: data.username,
-        userID: data.userID,
-        userPos: data.userPos,
-        count: 0,
+        //Extra
+        attempt: attempt,
+        reentry: reentry,
+        reschedule: reschedule,
+        count: startCount,
     })
-    personal.history.push(parcelStatus)
-    personal.save(err=>{
+    warehouse.history.push(parcelStatus)
+    warehouse.save(err=>{
         if (err) {
             console.log (err)
             res.flash('error', `Tracking number already exist | Require fields missing`)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
         }
         else{
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
             res.status(201).send()
+            res.redirect('/:services-in')
         }
     })
 })
@@ -340,22 +401,132 @@ const insertStock = ((req,res)=>{
         dateCreated: date,
     })
     stock.save(err=>{
-        if(err){
+        if (err) {
             console.log (err)
             res.flash('error', `Tracking number already exist | Require fields missing`)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
         }
         else{
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
             res.status(201).send()
+            res.redirect('/:services-in')
+        }
+    })
+})
+
+const insertPodGeneral = ((req,res)=>{
+    let date = moment().format("DD/MM/YYYY, h:mm:ss a")
+    let data = req.body
+    let podGeneralId
+    let podSequence = data.podSequence
+    let podService = data.service
+    /*if (podService == "ZAL"){
+        podGeneralId = 'GR/POD/ZAL:' + podSequence
+    }
+    else if (podService == 'FMX'){
+        podGeneralId = 'GR/POD/FMX:' + podSequence
+    }
+    else if (podService == 'GRP'){
+        podGeneralId = 'GR/POD/GRP:' + podSequence
+    }
+    else if (podService == 'RUN'){
+        podGeneralId = 'GBS/POD/RUN:' + podSequence
+    }
+    */
+    let pod = new podGeneralDB ({
+        podGeneralId: podGeneralId,
+        madeby: data.madeby,
+        deliveryArea: data.deliveryArea,
+        agentName: data.agentName,
+        deliveryDate: data.deliveryDate,
+        podSequence: podSequence,
+        numbers: data.numbers,
+        trackingNumber: data.trackingNumber,
+        contactName: data.contactName,
+        contactAddress: data.contactAddress,
+        contactNumber: data.contactNumber,
+        parcelValue: data.parcelValue,
+        PaymentMethod: data.PaymentMethod,
+        deliveryType: data.deliveryType,
+        createdAt: date,
+    })
+    pod.save((err,doc)=>{
+        if (err){
+            console.log (err)
+            //res.flash('error', `Tracking number already exist | Require fields missing`)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
+        }
+        else{
+            console.log('Status: 201 - success entry to database')
+            req.flash('success', `${data} has been added to the database.`)
+            res.status(201).send()
+            res.redirect('/success', {
+                title: 'POD Success',
+                response: `GR/POD/ZAL:${podSequence}`,
+                message: 'Successfully save the POD documents to database'
+            })
+        }
+    })
+})
+
+const insertPodPharmacy = ((req,res)=>{
+    let date = moment().format("DD/MM/YYYY, h:mm:ss a")
+    let data = req.body
+    let podSequence = data.podSequence
+    let podGeneralId = 'GR/POD/:' + podSequence
+    let pod = new podGeneralDB ({
+        podGeneralId: podGeneralId,
+        madeby: data.madeby,
+        deliveryArea: data.deliveryArea,
+        agentName: data.agentName,
+        deliveryDate: data.deliveryDate,
+        podSequence: podSequence,
+        numbers: data.numbers,
+        trackingNumber: data.trackingNumber,
+        contactName: data.contactName,
+        contactAddress: data.contactAddress,
+        contactNumber: data.contactNumber,
+        parcelValue: data.parcelValue,
+        PaymentMethod: data.PaymentMethod,
+        deliveryType: data.deliveryType,
+        createdAt: date,
+    })
+    pod.save((err,doc)=>{
+        if (err){
+            console.log (err)
+            //res.flash('error', `Tracking number already exist | Require fields missing`)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
+        }
+        else{
+            console.log('Status: 201 - success entry to database')
+            req.flash('success', `${data} has been added to the database.`)
+            res.status(201).send()
+            res.redirect('/success', {
+                title: 'POD Success',
+                response: `GR/POD/ZAL:${podSequence}`,
+                message: 'Successfully save the POD documents to database'
+            })
         }
     })
 })
 
 module.exports ={
     insertZalora,
-    insertRunner,
     insertPharmacy,
+    insertRunner,
     insertPersonal,
     insertGrp,
     insertFmx,

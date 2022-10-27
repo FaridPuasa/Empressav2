@@ -16,13 +16,12 @@
 
                 <!-- top navigation -->
                 <%- include('partials/topbar.ejs') %>
-
                 <!-- Begin Page Content -->
 
-				<%- include('partials/podGeneral.ejs') %>
-
                 <!-- content of page goes here -->
-
+               
+                <%- include('partials/zalorain.ejs') %>
+                
                 <!-- /.container-fluid -->
 
             </div>
@@ -46,27 +45,7 @@
     <!-- scripts goes here -->
     <%- include('partials/scripts.ejs') %>
 
-	<script>
-		function update() {
-			$('#clock').html(moment().format('Do MMMM YYYY | h:mm:ss a'));
-		}
-	
-		setInterval(update, 1000);
-	</script>
-
-<script>
-    $(function() {
-  var alert = $('div.alert[auto-close]');
-  alert.each(function() {
-    var that = $(this);
-    var time_period = that.attr('auto-close');
-    setTimeout(function() {
-      that.alert('close');
-    }, time_period);
-  });
-});
-</script>
+    <script src="js/zalorain.js"></script>
 
 </body>
 </html>
-

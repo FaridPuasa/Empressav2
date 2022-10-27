@@ -63,6 +63,16 @@ router.get('/pod/:service', (req,res)=>{
     )
 })
 
+router.get('/:services-in', (req,res)=>{
+    let services = req.params.services
+    console.log(services)
+    res.render('itemin', {
+        title: 'Item In',
+        moment: moment,
+
+    })
+})
+
 router.get('/zalora', (req,res) => {
     res.render('zalorain', {
         title: "Login",

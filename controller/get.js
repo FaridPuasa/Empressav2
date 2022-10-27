@@ -30,6 +30,24 @@ let getDashboard = (req,res)=>{
     })
 }
 
+let getInsertMoh = (req,res)=>{
+    res.render('iteminPharmacy',{
+        title: 'Item In',
+        moment: moment,
+        service: service,
+    })
+}
+
+let getItemList = (req,res)=>{
+    fmxDB.find().sort({$natural: -1}).next().then(
+        result =>{
+            console.log('All data retrieved')
+            res.render()
+        }
+    )
+}
+
+
 let getPodGeneral = (req,res)=>{
     let service = req.param.service
     podDB.find().sort({$natural: -1}).limit(1).next().then(
