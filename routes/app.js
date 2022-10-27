@@ -122,7 +122,12 @@ router.get('/:services-pod', (req,res)=>{
         })
     }
     else{
-        console.log('failed')
+        console.log('Error 404 - page not found')
+        res.render('error', {
+            title: '404',
+            response: '',
+            message: 'Page not found'
+        })
     }
 })
 
@@ -185,7 +190,12 @@ router.get('/:services-in', (req,res)=>{
         })
     }
     else{
-        console.log('failed')
+        console.log('Error 404 - page not found')
+        res.render('error', {
+            title: '404',
+            response: '',
+            message: 'Page not found'
+        })
     }
 })
 
@@ -248,7 +258,12 @@ router.get('/:services-list', (req,res)=>{
         })
     }
     else{
-        console.log('failed')
+        console.log('Error 404 - page not found')
+        res.render('error', {
+            title: '404',
+            response: '',
+            message: 'Page not found'
+        })
     }
 })
 
@@ -311,7 +326,12 @@ router.get('/:services-list', (req,res)=>{
         })
     }
     else{
-        console.log('failed')
+        console.log('Error 404 - page not found')
+        res.render('error', {
+            title: '404',
+            response: '',
+            message: 'Page not found'
+        })
     }
 })
 
@@ -374,14 +394,14 @@ router.get('/:services-list', (req,res)=>{
         })
     }
     else{
-        console.log('failed')
+        console.log('Error 404 - page not found')
+        res.render('error', {
+            title: '404',
+            response: '',
+            message: 'Page not found'
+        })
     }
 })
-
-
-router.get('/pod', )
-router.get('/podlist', )
-
 
 //post
 router.post('/dashboard', loginUser)
