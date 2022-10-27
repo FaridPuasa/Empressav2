@@ -63,13 +63,12 @@ router.get('/pod/:service', (req,res)=>{
     )
 })
 
-router.get('/:services-in', (req,res)=>{
+router.get('/:services-pod', (req,res)=>{
     let services = req.params.services
     console.log(services)
-    res.render('itemin', {
-        title: 'Item In',
+    res.render('pod',{
+        title: `${services} POD`,
         moment: moment,
-
     })
 })
 
