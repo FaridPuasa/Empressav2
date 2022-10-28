@@ -65,58 +65,59 @@ router.get('/pod/:service', (req,res)=>{
 
 router.get('/:services-pod', (req,res)=>{
     let services = req.params.services
+    let service = services.toUpperCase()
     console.log(services)
     if(services == 'moh'){
         res.render('pod',{
-            title: `${services} POD`,
+            title: `${service} POD`,
             partials: ('./partials/pod/moh'),
             moment: moment,
         })
     }
     else if(services == 'jpmc'){
         res.render('pod',{
-            title: `${services} POD`,
+            title: `${service} POD`,
             partials: ('./partials/pod/jpmc'),
             moment: moment,
         })
     }
-    else if(services == 'png'){
+    else if(services == 'panaga'){
         res.render('pod',{
-            title: `${services} POD`,
+            title: `${service} POD`,
             partials: ('./partials/pod/panaga'),
             moment: moment,
         })
     }
     else if(services == 'fmx'){
         res.render('pod',{
-            title: `${services} POD`,
+            title: `${service} POD`,
             partials: ('./partials/pod/fmx'),
             moment: moment,
         })
     }
     else if(services == 'zalora'){
         res.render('pod',{
-            title: `${services} POD`,
+            title: `${service} POD`,
             partials: ('./partials/pod/zalora'),
             moment: moment,
         })
     }else if(services == 'grp'){
         res.render('pod',{
-            title: `${services} POD`,
+            title: `${service} POD`,
             partials: ('./partials/pod/grp'),
             moment: moment,
         })
     }
     else if(services == 'runner'){
         res.render('pod',{
-            title: `${services} POD`,
+            title: `${service} POD`,
             partials: ('./partials/pod/runner'),
             moment: moment,
         })
     }
     else if(services == 'personal'){
         res.render('pod',{
-            title: `${services} POD`,
+            title: `${service} POD`,
             partials: ('./partials/pod/personal'),
             moment: moment,
         })
@@ -148,7 +149,7 @@ router.get('/:services-in', (req,res)=>{
             moment: moment,
         })
     }
-    else if(services == 'png'){
+    else if(services == 'panaga'){
         res.render('itemin',{
             title: `${services} In`,
             partials: ('./partials/itemin/panaga'),
@@ -216,7 +217,7 @@ router.get('/:services-list', (req,res)=>{
             moment: moment,
         })
     }
-    else if(services == 'png'){
+    else if(services == 'panaga'){
         res.render('list',{
             title: `${services} List`,
             partials: ('./partials/list/panaga'),
@@ -284,7 +285,7 @@ router.get('/:services-list', (req,res)=>{
             moment: moment,
         })
     }
-    else if(services == 'png'){
+    else if(services == 'panaga'){
         res.render('podlist',{
             title: `${services} List`,
             partials: ('./partials/podlist/panaga'),
@@ -341,55 +342,55 @@ router.get('/:services-list', (req,res)=>{
     if(services == 'moh'){
         res.render('export',{
             title: `${services} List`,
-            partials: ('./partials/export%2Dentry/moh'),
+            partials: ('./partials/export/moh'),
             moment: moment,
         })
     }
     else if(services == 'jpmc'){
         res.render('export',{
             title: `${services} List`,
-            partials: ('./partials/export%2Dentry/jpmc'),
+            partials: ('./partials/export/jpmc'),
             moment: moment,
         })
     }
-    else if(services == 'png'){
+    else if(services == 'panaga'){
         res.render('export',{
             title: `${services} List`,
-            partials: ('./partials/export%2Dentry/panaga'),
+            partials: ('./partials/export/panaga'),
             moment: moment,
         })
     }
     else if(services == 'fmx'){
         res.render('export',{
             title: `${services} List`,
-            partials: ('./partials/export%2Dentry/fmx'),
+            partials: ('./partials/export/fmx'),
             moment: moment,
         })
     }
     else if(services == 'zalora'){
         res.render('export',{
             title: `${services} List`,
-            partials: ('./partials/export%2Dentry/zalora'),
+            partials: ('./partials/export/zalora'),
             moment: moment,
         })
     }else if(services == 'grp'){
         res.render('export',{
             title: `${services} List`,
-            partials: ('./partials/export%2Dentry/grp'),
+            partials: ('./partials/export/grp'),
             moment: moment,
         })
     }
     else if(services == 'runner'){
         res.render('export',{
             title: `${services} List`,
-            partials: ('./partials/export%2Dentry/runner'),
+            partials: ('./partials/export/runner'),
             moment: moment,
         })
     }
     else if(services == 'personal'){
         res.render('export',{
             title: `${services} List`,
-            partials: ('./partials/export%2Dentry/personal'),
+            partials: ('./partials/export/personal'),
             moment: moment,
         })
     }
