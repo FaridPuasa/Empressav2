@@ -7,7 +7,7 @@ const string = {
 
 const podZaloraSchema  = new mongoose.Schema({
     podZaloraId: string,
-    podSequence: string,
+    podSequence: {type: Number},
     madeby: string,
     deliveryArea: string,
     agentName: string,

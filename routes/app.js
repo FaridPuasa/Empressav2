@@ -63,6 +63,7 @@ router.get('/pod/:service', (req,res)=>{
     )
 })
 
+const podDB = require('../models/podZalora')
 router.get('/:services-pod', (req,res)=>{
     let services = req.params.services
     let service = services.toUpperCase()
@@ -96,11 +97,33 @@ router.get('/:services-pod', (req,res)=>{
         })
     }
     else if(services == 'zalora'){
-        res.render('pod',{
-            title: `${service} POD`,
-            partials: ('./partials/pod/zalora'),
-            moment: moment,
-        })
+        podDB.find().sort({$natural: -1}).limit(1).then(
+            (result)=>{
+                if(result.podSequence == undefined || 0 || null){
+                    let sequence = 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/zalora'),
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+                else{
+                    let sequence = result.podSequence + 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/zalora'),
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+            },
+            (err)=>{
+                console.log("Error on POD:" + err)
+            }
+        )
     }else if(services == 'grp'){
         res.render('pod',{
             title: `${service} POD`,
