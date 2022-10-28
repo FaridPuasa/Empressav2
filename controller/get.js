@@ -47,7 +47,6 @@ let getItemList = (req,res)=>{
     )
 }
 
-
 let getPodGeneral = (req,res)=>{
     let service = req.param.service
     podDB.find().sort({$natural: -1}).limit(1).next().then(

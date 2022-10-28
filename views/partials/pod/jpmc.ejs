@@ -1,9 +1,9 @@
 <div class="container-fluid">
-   
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Proof of Delivery</h6>
+            <h6 class="m-0 font-weight-bold text-primary text-center"><%= service %> | PROOF OF DELIVERY</h6>
         </div>
 
         <div class="card-body">
@@ -22,7 +22,7 @@
                                             <img src="/img/gr_logo.png" class="rounded" alt="go_rush.png">
                                         </div>
                                     </th>
-                                    <th></th><th scope="col"></th>
+                                    <th></th>
                                     <th scope="col"></th>
                                 </tr>
                                 <!--2nd row header-->
@@ -51,8 +51,7 @@
                                         </select>
                                     </th>
                                     <th scope="col">GR/POD/JPMC:</th>
-                                    <th scope="col" colspan="2">seq<input type="hidden" class="form-control" name="podsequence" id="podsequence" aria-describedby="contactHelp" value="seq"></th>
-                                    <th scope="col"></th>
+                                    <th scope="col" colspan="2"><%= sequence %><input type="hidden" class="form-control" name="podsequence" id="podsequence" aria-describedby="contactHelp" value="<%= sequence %>"></th>                                    
                                 </tr>
                                 <!--3rd row header-->
                                 <tr>
@@ -85,7 +84,6 @@
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
-                                    <th scope="col"></th>
                                 </tr>
                                 <tr>
                                     <th scope="col" class="text-center">No.</th>
@@ -97,10 +95,8 @@
                                     <th scope="col" class="text-center">Customer Contact</th>
                                     <th scope="col" class="text-center">Value (BND)</th>
                                     <th scope="col" class="text-center">Payment Method</th>
-                                    <th scope="col" class="text-center">Delivery Type</th>
                                     <th scope="col" class="text-center">Success/Fail</th>
                                     <th scope="col" class="text-center">Remark</th>
-                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <!--Table Content-->
@@ -153,7 +149,6 @@
                                     </td>
                                     <td class="text-center">
                                     </td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr> 

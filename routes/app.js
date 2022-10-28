@@ -4,6 +4,15 @@
 //notifications
 //https://fjolt.com/article/javascript-notification-system-service-workers
 
+const mohPodDB = require ('../models/mohpod')
+const jpmcPodDB = require('../models/jpmcpod')
+const panagaPodDB = require('../models/panagapod')
+const zaloraPodDB = require('../models/zalorapod')
+const fmxPodDB = require('../models/fmxpod')
+const grpPodDB = require('../models/grppod')
+const runnerPodDB = require('../models/runnerpod')
+const personalPodDB = require('../models/personalpod')
+const warehouseDB = require('../models/warehouseInventory')
 const express = require('express');
 const router = express.Router();
 const moment = require('moment')
@@ -46,10 +55,31 @@ const { query } = require('express');
 
 //get
 router.get('/', (req,res)=>{
-    res.render('dashboard', {
+    res.render('login', {
         title: "Login",
         moment: moment,
     })
+})
+
+router.get('/dashboard', (req,res)=>{
+    let id = req.params.user
+    warehouseDB.aggregate([{
+        $group:{
+            _id: {service: '$service', currentStatus: '$currentStatus', area: '$area'},
+            count: {$sum:1}
+        }
+    }]).then(
+        (result)=>{
+            console.log(result)
+            res.render('dashboard', {
+                title: 'Dashboard',
+                result,
+            })
+        },
+        (err)=>{
+            console.log("Error on POD:" + err) 
+        }
+    )
 })
 
 router.get('/pod/:service', (req,res)=>{
@@ -58,43 +88,138 @@ router.get('/pod/:service', (req,res)=>{
             console.log(result)
         },
         (err)=>{
-            console.log("Error on POD:" + err)
+            console.log("Failed to append sequence: " + err)
         }
     )
 })
 
-const podDB = require('../models/podZalora')
 router.get('/:services-pod', (req,res)=>{
     let services = req.params.services
     let service = services.toUpperCase()
     console.log(services)
     if(services == 'moh'){
-        res.render('pod',{
-            title: `${service} POD`,
-            partials: ('./partials/pod/moh'),
-            moment: moment,
-        })
+        mohPodDB.find().sort({$natural: -1}).limit(1).then(
+            (result)=>{
+                if(result.podSequence == undefined || 0 || null){
+                    let sequence = 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/moh'),
+                        service: service,
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+                else{
+                    let sequence = result.podSequence + 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/moh'),
+                        service: service,
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+            },
+            (err)=>{
+                console.log("Failed to append sequence: " + err)
+            }
+        )
     }
     else if(services == 'jpmc'){
-        res.render('pod',{
-            title: `${service} POD`,
-            partials: ('./partials/pod/jpmc'),
-            moment: moment,
-        })
+        jpmcPodDB.find().sort({$natural: -1}).limit(1).then(
+            (result)=>{
+                if(result.podSequence == undefined || 0 || null){
+                    let sequence = 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/jpmc'),
+                        service: service,
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+                else{
+                    let sequence = result.podSequence + 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/jpmc'),
+                        service: service,
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+            },
+            (err)=>{
+                console.log("Failed to append sequence: " + err)
+            }
+        )
     }
     else if(services == 'panaga'){
-        res.render('pod',{
-            title: `${service} POD`,
-            partials: ('./partials/pod/panaga'),
-            moment: moment,
-        })
+        panagaPodDB.find().sort({$natural: -1}).limit(1).then(
+            (result)=>{
+                if(result.podSequence == undefined || 0 || null){
+                    let sequence = 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/panaga'),
+                        service: service,
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+                else{
+                    let sequence = result.podSequence + 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/panaga'),
+                        service: service,
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+            },
+            (err)=>{
+                console.log("Failed to append sequence: " + err)
+            }
+        )
     }
     else if(services == 'fmx'){
-        res.render('pod',{
-            title: `${service} POD`,
-            partials: ('./partials/pod/fmx'),
-            moment: moment,
-        })
+        fmxPodDB.find().sort({$natural: -1}).limit(1).then(
+            (result)=>{
+                if(result.podSequence == undefined || 0 || null){
+                    let sequence = 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/fmx'),
+                        service: service,
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+                else{
+                    let sequence = result.podSequence + 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/fmx'),
+                        service: service,
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+            },
+            (err)=>{
+                console.log("Failed to append sequence: " + err)
+            }
+        )
     }
     else if(services == 'zalora'){
         podDB.find().sort({$natural: -1}).limit(1).then(
@@ -105,6 +230,7 @@ router.get('/:services-pod', (req,res)=>{
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/zalora'),
+                        service: service,
                         sequence: sequence,
                         moment: moment,
                     })
@@ -115,35 +241,109 @@ router.get('/:services-pod', (req,res)=>{
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/zalora'),
+                        service: service,
                         sequence: sequence,
                         moment: moment,
                     })
                 }
             },
             (err)=>{
-                console.log("Error on POD:" + err)
+                console.log("Failed to append sequence: " + err)
             }
         )
-    }else if(services == 'grp'){
-        res.render('pod',{
-            title: `${service} POD`,
-            partials: ('./partials/pod/grp'),
-            moment: moment,
-        })
+    }
+    else if(services == 'grp'){
+        grpPodDB.find().sort({$natural: -1}).limit(1).then(
+            (result)=>{
+                if(result.podSequence == undefined || 0 || null){
+                    let sequence = 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/grp'),
+                        service: service,
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+                else{
+                    let sequence = result.podSequence + 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/grp'),
+                        service: service,
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+            },
+            (err)=>{
+                console.log("Failed to append sequence: " + err)
+            }
+        )
     }
     else if(services == 'runner'){
-        res.render('pod',{
-            title: `${service} POD`,
-            partials: ('./partials/pod/runner'),
-            moment: moment,
-        })
+        runnerPodDB.find().sort({$natural: -1}).limit(1).then(
+            (result)=>{
+                if(result.podSequence == undefined || 0 || null){
+                    let sequence = 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/runner'),
+                        service: service + ' SERVICES',
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+                else{
+                    let sequence = result.podSequence + 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/runner'),
+                        service: service + ' SERVICES',
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+            },
+            (err)=>{
+                console.log("Failed to append sequence: " + err)
+            }
+        )
     }
     else if(services == 'personal'){
-        res.render('pod',{
-            title: `${service} POD`,
-            partials: ('./partials/pod/personal'),
-            moment: moment,
-        })
+        personalPodDB.find().sort({$natural: -1}).limit(1).then(
+            (result)=>{
+                if(result.podSequence == undefined || 0 || null){
+                    let sequence = 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/personal'),
+                        service: service  + ' SHOPPING',
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+                else{
+                    let sequence = result.podSequence + 1
+                    console.log(result.podSequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/personal'),
+                        service: service + ' SHOPPING',
+                        sequence: sequence,
+                        moment: moment,
+                    })
+                }
+            },
+            (err)=>{
+                console.log("Failed to append sequence: " + err)
+            }
+        )
     }
     else{
         console.log('Error 404 - page not found')

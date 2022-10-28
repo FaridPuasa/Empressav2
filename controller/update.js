@@ -224,6 +224,326 @@ const updateFmx = ((req,res) => {
     })
 })
 
+const updateZaloraPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "DELIVERY IN PROGRESS", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if(err){
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+
+const updateFmxPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "DELIVERY IN PROGRESS", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if(err){
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+
+const updateGrpPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "DELIVERY IN PROGRESS", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if(err){
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+
+const updateRunnerPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "DELIVERY IN PROGRESS", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if(err){
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+
+const updatePersonalPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "DELIVERY IN PROGRESS", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if(err){
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+
+const updateMohPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "DELIVERY IN PROGRESS", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if(err){
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+
+const updateJpmcPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "DELIVERY IN PROGRESS", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if(err){
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+
+const updatePanagaPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "DELIVERY IN PROGRESS", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if(err){
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+
 module.exports = {
     updateFmx,
 }

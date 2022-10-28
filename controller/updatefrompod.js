@@ -1,11 +1,4 @@
-const zaloraDB = require('../models/zaloras')
-const pharmacyDB = require('../models/pharmacies')
-const grpDB = require('../models/grps')
-const runnerDB = require('../models/runners')
-const personalDB = require('../models/personals')
-const miscDB = require('../models/miscs')
-const fmxDB = require('../models/fmxs')
-const stockDB = require('../models/stocks')
+const warehouseDB = require('../models/warehouseInventory')
 const moment = require('moment')
 
 const insertZaloraPod = ((req,res)=>{
@@ -33,7 +26,7 @@ const insertZaloraPod = ((req,res)=>{
         }
         let option = {upsert: false, new: false}
         console.log(filter)
-        zaloraDB.findOneAndUpdate(filter, update, option, (err,result) => {
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
             if(err){
                 console.log(err)
                 console.log(`${tracker} failed to be updated.`)
@@ -601,7 +594,7 @@ if(checkbox == true){
         }
         let option = {upsert: false, new: false}
         console.log(filter)
-        zaloraDB.findOneAndUpdate(filter, update, option, (err,result) => {
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
             if(err){
                 console.log(err)
                 console.log(`${tracker} failed to be updated.`)

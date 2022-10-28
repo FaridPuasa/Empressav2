@@ -1,12 +1,9 @@
 <div class="container-fluid">
 
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">MOH Proof of Delivery</h1>
-   
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Proof of Delivery</h6>
+            <h6 class="m-0 font-weight-bold text-primary text-center"><%= service %> | PROOF OF DELIVERY</h6>
         </div>
 
         <div class="card-body">
@@ -54,8 +51,7 @@
                                         </select>
                                     </th>
                                     <th scope="col">GR/POD/MOH:</th>
-                                    <th scope="col" colspan="2">seq<input type="hidden" class="form-control" name="podsequence" id="podsequence" aria-describedby="contactHelp" value="seq"></th>
-                                    
+                                    <th scope="col" colspan="2"><%= sequence %><input type="hidden" class="form-control" name="podsequence" id="podsequence" aria-describedby="contactHelp" value="<%= sequence %>"></th>                                    
                                 </tr>
                                 <!--3rd row header-->
                                 <tr>

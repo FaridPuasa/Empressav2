@@ -1,7 +1,13 @@
 const warehouseDB = require('../models/warehouseInventory')
-const PodZaloraDB = require('../models/podZalora')
-//const podPharmacyDB = require('../models/podPharmacy')
 const stockDB = require('../models/stocks')
+const mohPodDB = require ('../models/mohpod')
+const jpmcPodDB = require('../models/jpmcpod')
+const panagaPodDB = require('../models/panagapod')
+const zaloraPodDB = require('../models/zalorapod')
+const fmxPodDB = require('../models/fmxpod')
+const grpPodDB = require('../models/grppod')
+const runnerPodDB = require('../models/runnerpod')
+const personalPodDB = require('../models/personalpod')
 const moment = require('moment')
 
 //All insert or new item controller
@@ -367,7 +373,6 @@ const insertPersonal = ((req,res)=>{
     warehouse.save(err=>{
         if (err) {
             console.log (err)
-            res.flash('error', `Tracking number already exist | Require fields missing`)
             res.render('error', {
                 errorcode: 'XXX',
                 response: 'Not Acceptable &#x1F62B;',
@@ -419,13 +424,41 @@ const insertStock = ((req,res)=>{
     })
 })
 
+//Start - create new pod section
 const insertPodZalora = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let podGeneralId = "GR/POD/ZAL: " + podSequence
-    let pod = new PodZaloraDB ({
-        podGeneralId: podGeneralId,
+    let pod_id = "GR/POD/ZAL: " + podSequence
+    let trackingNumber = data.trackingNumber
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+            if (err){
+                console.log(`Failed update: ${trackingNumber}`)
+                req.flash('error', `Failed to update: ${trackingNumber}`)
+            }
+            else{
+                console.log(`Successfully update: ${trackingNumber}`)
+                req.flash('success', `${trackingNumber} has been updated on the database.`)
+                res.status(201).send()
+            }
+        })
+    }
+    let pod = new zaloraPodDB ({
+        pod_id: pod_id,
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.agentName,
@@ -468,9 +501,36 @@ const insertPodFmx = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let podGeneralId = "GR/POD/FMX: " + podSequence
-    let pod = new PodFmxDB ({
-        podGeneralId: podGeneralId,
+    let pod_id = "GR/POD/FMX: " + podSequence
+    let trackingNumber = data.trackingNumber
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+            if (err){
+                console.log(`Failed update: ${trackingNumber}`)
+                req.flash('error', `Failed to update: ${trackingNumber}`)
+            }
+            else{
+                console.log(`Successfully update: ${trackingNumber}`)
+                req.flash('success', `${trackingNumber} has been updated on the database.`)
+                res.status(201).send()
+            }
+        })
+    }
+    let pod = new fmxPodDB ({
+        pod_id: pod_id,
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.agentName,
@@ -513,9 +573,36 @@ const insertPodGrp = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let podGeneralId = "GR/POD/GRP: " + podSequence
-    let pod = new PodGrpDB ({
-        podGeneralId: podGeneralId,
+    let pod_id = "GR/POD/GRP: " + podSequence
+    let trackingNumber = data.trackingNumber
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+            if (err){
+                console.log(`Failed update: ${trackingNumber}`)
+                req.flash('error', `Failed to update: ${trackingNumber}`)
+            }
+            else{
+                console.log(`Successfully update: ${trackingNumber}`)
+                req.flash('success', `${trackingNumber} has been updated on the database.`)
+                res.status(201).send()
+            }
+        })
+    }
+    let pod = new grpPodDB ({
+        pod_id: pod_id,
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.agentName,
@@ -558,9 +645,36 @@ const insertPodRunner = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let podGeneralId = "GR/POD/RUN: " + podSequence
-    let pod = new PodRunnerDB ({
-        podGeneralId: podGeneralId,
+    let pod_id = "GR/POD/RUN: " + podSequence
+    let trackingNumber = data.trackingNumber
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+            if (err){
+                console.log(`Failed update: ${trackingNumber}`)
+                req.flash('error', `Failed to update: ${trackingNumber}`)
+            }
+            else{
+                console.log(`Successfully update: ${trackingNumber}`)
+                req.flash('success', `${trackingNumber} has been updated on the database.`)
+                res.status(201).send()
+            }
+        })
+    }
+    let pod = new runnerPodDB ({
+        pod_id: pod_id,
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.agentName,
@@ -603,9 +717,37 @@ const insertPodPersonal = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let podGeneralId = "GR/POD/PS: " + podSequence
-    let pod = new PodPersonalDB ({
-        podGeneralId: podGeneralId,
+    let pod_id = "GR/POD/PS: " + podSequence
+    let trackingNumber = data.trackingNumber
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+            if (err){
+                console.log(`Failed update: ${trackingNumber}`)
+                req.flash('error', `Failed to update: ${trackingNumber}`)
+            }
+            else{
+                console.log(`Successfully update: ${trackingNumber}`)
+                req.flash('success', `${trackingNumber} has been updated on the database.`)
+                res.status(201).send()
+            }
+        })
+    }
+    let option = {upsert: false, new: false}
+    let pod = new personalPodDB ({
+        pod_id: pod_id,
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.agentName,
@@ -648,9 +790,37 @@ const insertPodMoh = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let podGeneralId = 'GR/POD/MOH:' + podSequence
-    let pod = new podMohDB ({
-        podGeneralId: podGeneralId,
+    let pod_id = 'GR/POD/MOH:' + podSequence
+    let trackingNumber = data.trackingNumber
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+            if (err){
+                console.log(`Failed update: ${trackingNumber}`)
+                req.flash('error', `Failed to update: ${trackingNumber}`)
+            }
+            else{
+                console.log(`Successfully update: ${trackingNumber}`)
+                req.flash('success', `${trackingNumber} has been updated on the database.`)
+                res.status(201).send()
+            }
+        })
+    }
+    let option = {upsert: false, new: false}
+    let pod = new mohPodDB ({
+        pod_id: pod_id,
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.agentName,
@@ -694,9 +864,37 @@ const insertPodJpmc = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let podGeneralId = 'GR/POD/JPMC:' + podSequence
-    let pod = new podJpmcDB ({
-        podGeneralId: podGeneralId,
+    let pod_id = 'GR/POD/JPMC:' + podSequence
+    let trackingNumber = data.trackingNumber
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+            if (err){
+                console.log(`Failed update: ${trackingNumber}`)
+                req.flash('error', `Failed to update: ${trackingNumber}`)
+            }
+            else{
+                console.log(`Successfully update: ${trackingNumber}`)
+                req.flash('success', `${trackingNumber} has been updated on the database.`)
+                res.status(201).send()
+            }
+        })
+    }
+    let option = {upsert: false, new: false}
+    let pod = new jpmcPodDB ({
+        pod_id: pod_id,
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.agentName,
@@ -739,9 +937,36 @@ const insertPodPanaga = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let podGeneralId = 'GR/POD/PNG:' + podSequence
-    let pod = new podJpmcDB ({
-        podGeneralId: podGeneralId,
+    let pod_id = 'GR/POD/PNG:' + podSequence
+    let trackingNumber = data.trackingNumber
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            $push: {
+                history: {
+                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+            if (err){
+                console.log(`Failed update: ${trackingNumber}`)
+                req.flash('error', `Failed to update: ${trackingNumber}`)
+            }
+            else{
+                console.log(`Successfully update: ${trackingNumber}`)
+                req.flash('success', `${trackingNumber} has been updated on the database.`)
+                res.status(201).send()
+            }
+        })
+    }
+    let pod = new panagaPodDB ({
+        pod_id: pod_id,
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.agentName,
@@ -779,6 +1004,7 @@ const insertPodPanaga = ((req,res)=>{
         }
     })
 })
+//End - create new pod section
 
 module.exports ={
     insertZalora,
