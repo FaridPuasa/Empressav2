@@ -425,73 +425,323 @@ router.get('/:services-in', (req,res)=>{
 
 router.get('/:services-list', (req,res)=>{
     let services = req.params.services
+    let list =[
+        {
+               'tracking': 'Andrei ',
+               'name': 'Masharin',
+               'type': 'Owner, Tenant',
+               'phone': '777-444-6556',
+               'value': '432',
+               'status': 'Los Alisos',
+               'address': '2400 Harbor Boulevard ',
+               'city': 'Costa Mesa',
+               'state': 'CA',
+               'age': '94454',
+       },
+       {
+               'tracking': 'Anje',
+               'name': 'Keizer',
+               'type': 'N/A',
+               'phone': '713-810-8418',
+               'value': '343',
+               'status': 'Cameron',
+               'address': '3848 Michael Street',
+               'city': 'Hendley',
+               'state': 'NE',
+               'age': '68946',
+       },
+       {
+               'tracking': 'Arina',
+               'name': 'Belomestnykh',
+               'type': 'Owner, Tenant',
+               'phone': '937-755-9651',
+               'value': '454',
+               'status': 'Fort Kent',
+               'address': '1918  Crim Lane',
+               'city': 'New Madison',
+               'state': 'OH',
+               'age': '45346',
+       },
+       {
+               'tracking': 'Darius',
+               'name': 'Cummings',
+               'type': 'N/A',
+               'phone': '937-755-9651',
+               'value': '123',
+               'status': 'Dennehotso',
+               'address': '3848  Michael Street',
+               'city': 'Costa Mesa',
+               'state': 'NE',
+               'age': '68946',
+       },
+       {
+               'tracking': 'Francisco',
+               'name': 'Maia',
+               'type': 'Owner, Tenant',
+               'phone': '937-755-9651',
+               'value': '565',
+               'status': 'Cameron',
+               'address': '3848 Michael Street',
+               'city': 'Hendley',
+               'state': 'NE',
+               'age': '45346',
+       },
+       {
+               'tracking': 'Chinelo',
+               'name': 'Chyke',
+               'type': 'N/A',
+               'phone': '937-755-9651',
+               'value': '545',
+               'status': 'Dennehotso',
+               'address': '3848 Michael Street',
+               'city': 'Costa Mesa',
+               'state': 'NE',
+               'age': '68946',
+       }, {
+               'tracking': 'Andrei ',
+               'name': 'Masharin',
+               'type': 'Owner, Tenant',
+               'phone': '777-444-6556',
+               'value': '432',
+               'status': 'Los Alisos',
+               'address': '2400 Harbor Boulevard ',
+               'city': 'Costa Mesa',
+               'state': 'CA',
+               'age': '94454',
+       },
+       {
+               'tracking': 'Anje',
+               'name': 'Keizer',
+               'type': 'N/A',
+               'phone': '713-810-8418',
+               'value': '343',
+               'status': 'Cameron',
+               'address': '3848 Michael Street',
+               'city': 'Hendley',
+               'state': 'NE',
+               'age': '68946',
+       },
+       {
+               'tracking': 'Arina',
+               'name': 'Belomestnykh',
+               'type': 'Owner, Tenant',
+               'phone': '937-755-9651',
+               'value': '454',
+               'status': 'Fort Kent',
+               'address': '1918  Crim Lane',
+               'city': 'New Madison',
+               'state': 'OH',
+               'age': '45346',
+       },
+       {
+               'tracking': 'Darius',
+               'name': 'Cummings',
+               'type': 'N/A',
+               'phone': '937-755-9651',
+               'value': '123',
+               'status': 'Dennehotso',
+               'address': '3848  Michael Street',
+               'city': 'Costa Mesa',
+               'state': 'NE',
+               'age': '68946',
+       },
+       {
+               'tracking': 'Francisco',
+               'name': 'Maia',
+               'type': 'Owner, Tenant',
+               'phone': '937-755-9651',
+               'value': '565',
+               'status': 'Cameron',
+               'address': '3848 Michael Street',
+               'city': 'Hendley',
+               'state': 'NE',
+               'age': '45346',
+       },
+       {
+               'tracking': 'Chinelo',
+               'name': 'Chyke',
+               'type': 'N/A',
+               'phone': '937-755-9651',
+               'value': '545',
+               'status': 'Dennehotso',
+               'address': '3848 Michael Street',
+               'city': 'Costa Mesa',
+               'state': 'NE',
+               'age': '68946',
+       }, {
+               'tracking': 'Andrei ',
+               'name': 'Masharin',
+               'type': 'Owner, Tenant',
+               'phone': '777-444-6556',
+               'value': '432',
+               'status': 'Los Alisos',
+               'address': '2400 Harbor Boulevard ',
+               'city': 'Costa Mesa',
+               'state': 'CA',
+               'age': '94454',
+       },
+       {
+               'tracking': 'Anje',
+               'name': 'Keizer',
+               'type': 'N/A',
+               'phone': '713-810-8418',
+               'value': '343',
+               'status': 'Cameron',
+               'address': '3848 Michael Street',
+               'city': 'Hendley',
+               'state': 'NE',
+               'age': '68946',
+       },
+       {
+               'tracking': 'Arina',
+               'name': 'Belomestnykh',
+               'type': 'Owner, Tenant',
+               'phone': '937-755-9651',
+               'value': '454',
+               'status': 'Fort Kent',
+               'address': '1918  Crim Lane',
+               'city': 'New Madison',
+               'state': 'OH',
+               'age': '45346',
+       },
+       {
+               'tracking': 'Darius',
+               'name': 'Cummings',
+               'type': 'N/A',
+               'phone': '937-755-9651',
+               'value': '123',
+               'status': 'Dennehotso',
+               'address': '3848  Michael Street',
+               'city': 'Costa Mesa',
+               'state': 'NE',
+               'age': '68946',
+       },
+       {
+               'tracking': 'Francisco',
+               'name': 'Maia',
+               'type': 'Owner, Tenant',
+               'phone': '937-755-9651',
+               'value': '565',
+               'status': 'Cameron',
+               'address': '3848 Michael Street',
+               'city': 'Hendley',
+               'state': 'NE',
+               'age': '45346',
+       },
+       {
+               'tracking': 'Francisco',
+               'name': 'Maia',
+               'type': 'Owner, Tenant',
+               'phone': '937-755-9651',
+               'value': '565',
+               'status': 'Cameron',
+               'address': '3848 Michael Street',
+               'city': 'Hendley',
+               'state': 'NE',
+               'age': '45346',
+       },
+       {
+               'tracking': 'Chinelo',
+               'name': 'Chyke',
+               'type': 'N/A',
+               'phone': '937-755-9651',
+               'value': '545',
+               'status': 'Dennehotso',
+               'address': '3848 Michael Street',
+               'city': 'Costa Mesa',
+               'state': 'NE',
+               'age': '68946',
+       }
+]
     console.log(services)
-    if(services == 'moh'){
-        res.render('list',{
-            title: `${services} List`,
-            partials: ('./partials/list/moh'),
-            moment: moment,
-        })
-    }
-    else if(services == 'jpmc'){
-        res.render('list',{
-            title: `${services} List`,
-            partials: ('./partials/list/jpmc'),
-            moment: moment,
-        })
-    }
-    else if(services == 'panaga'){
-        res.render('list',{
-            title: `${services} List`,
-            partials: ('./partials/list/panaga'),
-            moment: moment,
-        })
-    }
-    else if(services == 'fmx'){
-        res.render('list',{
-            title: `${services} List`,
-            partials: ('./partials/list/fmx'),
-            moment: moment,
-        })
-    }
-    else if(services == 'zalora'){
-        res.render('list',{
-            title: `${services} List`,
-            partials: ('./partials/list/zalora'),
-            moment: moment,
-        })
-    }else if(services == 'grp'){
-        res.render('list',{
-            title: `${services} List`,
-            partials: ('./partials/list/grp'),
-            moment: moment,
-        })
-    }
-    else if(services == 'runner'){
-        res.render('list',{
-            title: `${services} List`,
-            partials: ('./partials/list/runner'),
-            moment: moment,
-        })
-    }
-    else if(services == 'personal'){
-        res.render('list',{
-            title: `${services} List`,
-            partials: ('./partials/list/personal'),
-            moment: moment,
-        })
-    }
-    else{
-        console.log('Error 404 - page not found')
-        res.render('error', {
-            title: '404',
-            response: '',
-            message: 'Page not found'
-        })
-    }
+    warehouseDB.find().then(
+        (documents)=>{
+            
+            if(services == 'moh'){
+                res.render('list',{
+                    title: `${services} List`,
+                    partials: ('./partials/list/moh'),
+                    list: list,
+                    moment: moment,
+                })
+            }
+            else if(services == 'jpmc'){
+                res.render('list',{
+                    title: `${services} List`,
+                    partials: ('./partials/list/jpmc'),
+                    list: documents,
+                    moment: moment,
+                })
+            }
+            else if(services == 'panaga'){
+                res.render('list',{
+                    title: `${services} List`,
+                    partials: ('./partials/list/panaga'),
+                    list: documents,
+                    moment: moment,
+                })
+            }
+            else if(services == 'fmx'){
+                res.render('list',{
+                    title: `${services} List`,
+                    partials: ('./partials/list/fmx'),
+                    list: documents,
+                    moment: moment,
+                })
+            }
+            else if(services == 'zalora'){
+                res.render('list',{
+                    title: `${services} List`,
+                    partials: ('./partials/list/zalora'),
+                    list: documents,
+                    moment: moment,
+                })
+            }else if(services == 'grp'){
+                res.render('list',{
+                    title: `${services} List`,
+                    partials: ('./partials/list/grp'),
+                    list: documents,
+                    moment: moment,
+                })
+            }
+            else if(services == 'runner'){
+                res.render('list',{
+                    title: `${services} List`,
+                    partials: ('./partials/list/runner'),
+                    list: documents,
+                    moment: moment,
+                })
+            }
+            else if(services == 'personal'){
+                res.render('list',{
+                    title: `${services} List`,
+                    partials: ('./partials/list/personal'),
+                    list: documents,
+                    moment: moment,
+                })
+            }
+            else{
+                console.log('Error 404 - page not found')
+                res.render('error', {
+                    title: '404',
+                    response: '',
+                    message: 'Page not found'
+                })
+            }
+        },
+        (err)=>{
+            console.log(err)
+            console.log('Error 404 - page not found')
+                res.render('error', {
+                    title: '404',
+                    response: '',
+                    message: 'Page not found'
+                })
+        }
+    )
 })
 
-router.get('/:services-list', (req,res)=>{
+router.get('/:services-podlist', (req,res)=>{
     let services = req.params.services
     console.log(services)
     if(services == 'moh'){
@@ -559,73 +809,6 @@ router.get('/:services-list', (req,res)=>{
     }
 })
 
-router.get('/:services-list', (req,res)=>{
-    let services = req.params.services
-    console.log(services)
-    if(services == 'moh'){
-        res.render('export',{
-            title: `${services} List`,
-            partials: ('./partials/export/moh'),
-            moment: moment,
-        })
-    }
-    else if(services == 'jpmc'){
-        res.render('export',{
-            title: `${services} List`,
-            partials: ('./partials/export/jpmc'),
-            moment: moment,
-        })
-    }
-    else if(services == 'panaga'){
-        res.render('export',{
-            title: `${services} List`,
-            partials: ('./partials/export/panaga'),
-            moment: moment,
-        })
-    }
-    else if(services == 'fmx'){
-        res.render('export',{
-            title: `${services} List`,
-            partials: ('./partials/export/fmx'),
-            moment: moment,
-        })
-    }
-    else if(services == 'zalora'){
-        res.render('export',{
-            title: `${services} List`,
-            partials: ('./partials/export/zalora'),
-            moment: moment,
-        })
-    }else if(services == 'grp'){
-        res.render('export',{
-            title: `${services} List`,
-            partials: ('./partials/export/grp'),
-            moment: moment,
-        })
-    }
-    else if(services == 'runner'){
-        res.render('export',{
-            title: `${services} List`,
-            partials: ('./partials/export/runner'),
-            moment: moment,
-        })
-    }
-    else if(services == 'personal'){
-        res.render('export',{
-            title: `${services} List`,
-            partials: ('./partials/export/personal'),
-            moment: moment,
-        })
-    }
-    else{
-        console.log('Error 404 - page not found')
-        res.render('error', {
-            title: '404',
-            response: '',
-            message: 'Page not found'
-        })
-    }
-})
 
 //post
 router.post('/dashboard', loginUser)

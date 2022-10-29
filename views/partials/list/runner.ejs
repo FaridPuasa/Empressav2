@@ -3,7 +3,7 @@
     <!-- DataTales Example -->
 <div class="card shadow mb-4">
 <div class="card-header py-3">
-<h6 class="m-0 font-weight-bold text-primary">Proof of Delivery</h6>
+<h6 class="m-0 font-weight-bold text-primary text-center">ZALORA | INVENTORY LIST</h6>
 </div>
 
 <div class="card-body">
@@ -49,22 +49,23 @@
                     data-response-handler="responseHandler">
                 <thead>
                     <tr>
-                        <th data-field="fname" data-sortable="true">First Name</th>
-                        <th data-field="lname" data-sortable="true">Last Name</th>
-                        <th data-field="type" data-sortable="true">Type</th>
-                        <th data-field="phone" data-sortable="true">Phone</th>
-                        <th data-field="unit" data-sortable="true">Unit</th>
-                        <th data-field="community" data-sortable="true">Community</th>
-                        <th data-field="address" data-sortable="true">Address</th>
-                        <th data-field="city" data-sortable="true">City</th>
-                        <th data-field="state" data-sortable="true">State</th>
-                        <th data-field="zip" data-sortable="true">Zip</th>
-                        <th data-field="zip" data-sortable="true" data-visible="false">Lease Start Date</th>
-                        <th data-field="zip" data-sortable="true" data-visible="false">Lease End Date</th>
-                        <th data-field="zip" data-sortable="true" data-visible="false">Date Purchased</th>
+                        <th data-field="tracking" data-sortable="true">Tracking Number</th>
+                        <th data-field="name" data-sortable="true">Contact Name</th>
+                        <th data-field="address" data-sortable="true">Contact Address</th>
+                        <th data-field="phone" data-sortable="true">Contact Number</th>
+                        <th data-field="value" data-sortable="true">Item Value</th>
+                        <th data-field="age" data-sortable="true">Item Age</th>
+                        <th data-field="status" data-sortable="true">Item Status</th>
+                        <th data-field="entry" data-sortable="true" data-visible="false">Entry Date</th>
+                        <th data-field="expire" data-sortable="true" data-visible="false">Expire Date</th>
                         <th data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
                     </tr>
                 </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="10" class="text-center">No Data</td>
+                    </tr>
+                </tbody>
             </table>
         
             <input type="hidden" class="form-control form-control-user" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="POD">
