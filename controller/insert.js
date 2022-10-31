@@ -429,6 +429,7 @@ const insertPodZalora = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
+    let status_pod = "ON HOLD" 
     let pod_id = "GR/POD/ZAL: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
@@ -464,6 +465,7 @@ const insertPodZalora = ((req,res)=>{
         agentName: data.agentName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
+        podstatus: status_pod,
         numbers: data.numbers,
         trackingNumber: data.trackingNumber,
         contactName: data.contactName,
@@ -501,6 +503,7 @@ const insertPodFmx = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
+    let status_pod = "ON HOLD" 
     let pod_id = "GR/POD/FMX: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
@@ -536,6 +539,7 @@ const insertPodFmx = ((req,res)=>{
         agentName: data.agentName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
+        podstatus: status_pod,
         numbers: data.numbers,
         trackingNumber: data.trackingNumber,
         contactName: data.contactName,
@@ -573,6 +577,7 @@ const insertPodGrp = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
+    let status_pod = "ON HOLD" 
     let pod_id = "GR/POD/GRP: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
@@ -608,6 +613,7 @@ const insertPodGrp = ((req,res)=>{
         agentName: data.agentName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
+        podstatus: status_pod,
         numbers: data.numbers,
         trackingNumber: data.trackingNumber,
         contactName: data.contactName,
@@ -645,6 +651,7 @@ const insertPodRunner = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
+    let status_pod = "ON HOLD" 
     let pod_id = "GR/POD/RUN: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
@@ -680,6 +687,7 @@ const insertPodRunner = ((req,res)=>{
         agentName: data.agentName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
+        podstatus: status_pod,
         numbers: data.numbers,
         trackingNumber: data.trackingNumber,
         contactName: data.contactName,
@@ -717,6 +725,7 @@ const insertPodPersonal = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
+    let status_pod = "ON HOLD" 
     let pod_id = "GR/POD/PS: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
@@ -753,6 +762,7 @@ const insertPodPersonal = ((req,res)=>{
         agentName: data.agentName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
+        podstatus: status_pod,
         numbers: data.numbers,
         trackingNumber: data.trackingNumber,
         contactName: data.contactName,
@@ -790,6 +800,7 @@ const insertPodMoh = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
+    let status_pod = "ON HOLD" 
     let pod_id = 'GR/POD/MOH:' + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
@@ -826,6 +837,7 @@ const insertPodMoh = ((req,res)=>{
         agentName: data.agentName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
+        podstatus: status_pod,
         numbers: data.numbers,
         trackingNumber: data.trackingNumber,
         contactName: data.contactName,
@@ -864,6 +876,7 @@ const insertPodJpmc = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
+    let status_pod = "ON HOLD" 
     let pod_id = 'GR/POD/JPMC:' + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
@@ -900,6 +913,7 @@ const insertPodJpmc = ((req,res)=>{
         agentName: data.agentName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
+        podstatus: status_pod,
         numbers: data.numbers,
         trackingNumber: data.trackingNumber,
         contactName: data.contactName,
@@ -937,6 +951,7 @@ const insertPodPanaga = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
+    let status_pod = "ON HOLD" 
     let pod_id = 'GR/POD/PNG:' + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
@@ -972,6 +987,7 @@ const insertPodPanaga = ((req,res)=>{
         agentName: data.agentName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
+        podstatus: status_pod,
         numbers: data.numbers,
         trackingNumber: data.trackingNumber,
         contactName: data.contactName,

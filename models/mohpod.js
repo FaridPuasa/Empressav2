@@ -12,6 +12,7 @@ const mohpodSchema  = new mongoose.Schema({
     deliveryArea: string,
     agentName: string,
     deliveryDate: string,
+    podstatus: string,
     numbers: {type: [String]},
     trackingNumber: {type: [String]},
     fridge: {type: [Boolean]},
