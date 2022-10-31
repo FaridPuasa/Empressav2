@@ -1,16 +1,5 @@
-GET http://localhost:5000/tester
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRmFyaWQiLCJpYXQiOjE2NjcxOTU1ODIsImV4cCI6MTY2NzI4MTk4Mn0.j3mbJgEaRg3cnghD16qPhfBmHq1Al4HuZ0Mn86cjHv8
-
-###
-
-POST http://localhost:5000/test
-Content-Type: application/json
-
-{
-    "username": "Farid"
-}
-
-
+GET http://localhost:5000/post
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsImlhdCI6MTY2NzIwMzQ5MCwiZXhwIjoxNjY3MjAzNTAwfQ.Lg1jqvUDpjuYS-ZWldxVnss2ff2lwnZk_z_Dxrfyog8
 ###
 
 
@@ -18,5 +7,18 @@ POST http://localhost:5000/token
 Content-Type: application/json
 
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRmFyaWQiLCJpYXQiOjE2NjcxOTU0NTV9.IVVTREk0fY9F18BFqVxnvmEpaswx0IRvaL5g5k4zVLQ"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsImlhdCI6MTY2NzIwMzM3OX0.xuXYUrQPyvGTIaIiVW71-67RXHARqyu9zt-jqRNMjiY"
 }
+
+###
+
+POST http://localhost:5000/test
+Content-Type: application/json
+
+{
+    "username": "test"
+}
+
+
+###
+
