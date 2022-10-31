@@ -816,7 +816,7 @@ router.get('/restock_order', (req,res)=>{
 
 //GET Export page
 router.get('/export', (req,res)=>{
-    res.render('dashboard', {
+    res.render('export', {
         title: "Login",
         moment: moment,
     })
@@ -830,9 +830,9 @@ router.get('/user_register', (req,res)=>{
     })
 })
 
-let post = [
+let posts = [
     {
-        'username': 'test1',
+        'username': 'test',
         'post': "posting 1"
     },
     {
@@ -850,35 +850,45 @@ router.get('/export', (req,res)=>{
     })
 })
 
-router.get('/tester', authenticateToken, (req,res)=>{
-    req.json(post.filter(post => post.username == req.body.username))
+router.get('/post', authenticateToken, (req,res)=>{
+    res.json(posts.filter(post => post.username === req.user.name))
 })
+
+let refreshTokens = []
 
 router.post('/token', (req,res) =>{
     const refreshToken = req.body.token
+    if (refreshToken == null) return res.sendStatus(401)
+    if (!refreshToken.includes(refreshToken)) return res.sendStatus(403)
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err,user)=>{
+        if (err) return res.sendStatus(403)
+        const accessToken = generateAccessToken({name: user.name})
+        res.json({accessToken: accessToken})
+    })
 })
 
 router.post('/test', (req,res)=>{
     const username = req.body.username
     const user = {name: username}
     const accessToken = generateAccessToken(user)
-    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN)
-    console.log(process.env.ACCESS_TOKEN)
+    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+    refreshTokens.push(refreshToken)
+    //console.log(process.env.ACCESS_TOKEN_SECRET)
     console.log(accessToken)
-    res.json({accessToken: accessToken, refershToken: refreshToken, message: 'User Authorized'})
+    res.json({accessToken: accessToken, refreshToken: refreshToken })
 })
 
 function generateAccessToken(user){
-    return jwt.sign(user, process.env.ACCESS_TOKEN, { expiresIn: '1d'})
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10s'})
 }
 
 function authenticateToken(req,res,next){
     const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split('')[1]
+    const token = authHeader && authHeader.split(' ')[1]
     if (token == null) return res.sendStatus(401)
 
-    jwt.verify(token, process.env.ACCESS_TOKEN, (err,user)=>{
-        console.log(process.env.ACCESS_TOKEN)
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err,user)=>{
+        //console.log(process.env.ACCESS_TOKEN_SECRET)
         if (err) return res.sendStatus(403)
         req.user = user
         next()
