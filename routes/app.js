@@ -13,6 +13,7 @@ const grpPodDB = require('../models/grppod')
 const runnerPodDB = require('../models/runnerpod')
 const personalPodDB = require('../models/personalpod')
 const warehouseDB = require('../models/warehouseInventory')
+const jwt = require('jsonwebtoken')
 const express = require('express');
 const router = express.Router();
 const moment = require('moment')
@@ -24,6 +25,7 @@ const {
     deleteUser,
     loginUser,
 } = require('../controller/user')
+const { request } = require('http')
 /*const {
     insertExport,
     readExport,
@@ -53,7 +55,7 @@ const { query } = require('express');
     updateGrmy,
 } = require('../controller/grmy')*/
 
-//get
+//GET Login
 router.get('/', (req,res)=>{
     res.render('login', {
         title: "Login",
@@ -61,6 +63,7 @@ router.get('/', (req,res)=>{
     })
 })
 
+//GET Dashboard
 router.get('/dashboard', (req,res)=>{
     let id = req.params.user
     warehouseDB.aggregate([{
@@ -82,21 +85,11 @@ router.get('/dashboard', (req,res)=>{
     )
 })
 
-router.get('/pod/:service', (req,res)=>{
-    podDB.find().sort({$natural: -1}).limit(1).next().then(
-        (result)=>{
-            console.log(result)
-        },
-        (err)=>{
-            console.log("Failed to append sequence: " + err)
-        }
-    )
-})
-
+//GET Create POD
 router.get('/:services-pod', (req,res)=>{
     let services = req.params.services
     let service = services.toUpperCase()
-    console.log(services)
+    console.log(service)
     if(services == 'moh'){
         mohPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
@@ -355,6 +348,7 @@ router.get('/:services-pod', (req,res)=>{
     }
 })
 
+//GET Item In
 router.get('/:services-in', (req,res)=>{
     let services = req.params.services
     console.log(services)
@@ -423,6 +417,7 @@ router.get('/:services-in', (req,res)=>{
     }
 })
 
+//GET Item List
 router.get('/:services-list', (req,res)=>{
     let services = req.params.services
     let list =[
@@ -656,7 +651,6 @@ router.get('/:services-list', (req,res)=>{
     console.log(services)
     warehouseDB.find().then(
         (documents)=>{
-            
             if(services == 'moh'){
                 res.render('list',{
                     title: `${services} List`,
@@ -741,60 +735,62 @@ router.get('/:services-list', (req,res)=>{
     )
 })
 
+//GET Podlist
 router.get('/:services-podlist', (req,res)=>{
     let services = req.params.services
-    console.log(services)
+    let service = services.toUpperCase()
+    console.log(service)
     if(services == 'moh'){
         res.render('podlist',{
-            title: `${services} List`,
+            title: `${service} POD List`,
             partials: ('./partials/podlist/moh'),
             moment: moment,
         })
     }
     else if(services == 'jpmc'){
         res.render('podlist',{
-            title: `${services} List`,
+            title: `${service} POD List`,
             partials: ('./partials/podlist/jpmc'),
             moment: moment,
         })
     }
     else if(services == 'panaga'){
         res.render('podlist',{
-            title: `${services} List`,
+            title: `${service} POD List`,
             partials: ('./partials/podlist/panaga'),
             moment: moment,
         })
     }
     else if(services == 'fmx'){
         res.render('podlist',{
-            title: `${services} List`,
+            title: `${service} POD List`,
             partials: ('./partials/podlist/fmx'),
             moment: moment,
         })
     }
     else if(services == 'zalora'){
         res.render('podlist',{
-            title: `${services} List`,
+            title: `${service} POD List`,
             partials: ('./partials/podlist/zalora'),
             moment: moment,
         })
     }else if(services == 'grp'){
         res.render('podlist',{
-            title: `${services} List`,
+            title: `${service} POD List`,
             partials: ('./partials/podlist/grp'),
             moment: moment,
         })
     }
     else if(services == 'runner'){
         res.render('podlist',{
-            title: `${services} List`,
+            title: `${service} POD List`,
             partials: ('./partials/podlist/runner'),
             moment: moment,
         })
     }
     else if(services == 'personal'){
         res.render('podlist',{
-            title: `${services} List`,
+            title: `${service} POD List`,
             partials: ('./partials/podlist/personal'),
             moment: moment,
         })
@@ -809,6 +805,85 @@ router.get('/:services-podlist', (req,res)=>{
     }
 })
 
+//GET Restock Order
+router.get('/restock_order', (req,res)=>{
+    res.render('restock', {
+        title: "Restock Order",
+        moment: moment,
+        //need to automate serial number
+    })
+})
+
+//GET Export page
+router.get('/export', (req,res)=>{
+    res.render('dashboard', {
+        title: "Login",
+        moment: moment,
+    })
+})
+
+//GET New User
+router.get('/user_register', (req,res)=>{
+    res.render('register', {
+        title: "New User",
+        moment: moment,
+    })
+})
+
+let post = [
+    {
+        'username': 'test1',
+        'post': "posting 1"
+    },
+    {
+        'username': 'Farid',
+        'post': "posting 1000"
+    }
+]
+
+
+//GET User List
+router.get('/export', (req,res)=>{
+    res.render('dashboard', {
+        title: "Login",
+        moment: moment,
+    })
+})
+
+router.get('/tester', authenticateToken, (req,res)=>{
+    req.json(post.filter(post => post.username == req.body.username))
+})
+
+router.post('/token', (req,res) =>{
+    const refreshToken = req.body.token
+})
+
+router.post('/test', (req,res)=>{
+    const username = req.body.username
+    const user = {name: username}
+    const accessToken = generateAccessToken(user)
+    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN)
+    console.log(process.env.ACCESS_TOKEN)
+    console.log(accessToken)
+    res.json({accessToken: accessToken, refershToken: refreshToken, message: 'User Authorized'})
+})
+
+function generateAccessToken(user){
+    return jwt.sign(user, process.env.ACCESS_TOKEN, { expiresIn: '1d'})
+}
+
+function authenticateToken(req,res,next){
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split('')[1]
+    if (token == null) return res.sendStatus(401)
+
+    jwt.verify(token, process.env.ACCESS_TOKEN, (err,user)=>{
+        console.log(process.env.ACCESS_TOKEN)
+        if (err) return res.sendStatus(403)
+        req.user = user
+        next()
+    })
+}
 
 //post
 router.post('/dashboard', loginUser)
