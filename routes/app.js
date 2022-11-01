@@ -871,7 +871,7 @@ router.post('/test', (req,res)=>{
     const username = req.body.username
     const user = {name: username}
     const accessToken = generateAccessToken(user)
-    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '1d'})
     refreshTokens.push(refreshToken)
     //console.log(process.env.ACCESS_TOKEN_SECRET)
     console.log(accessToken)
@@ -879,7 +879,7 @@ router.post('/test', (req,res)=>{
 })
 
 function generateAccessToken(user){
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10s'})
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m'})
 }
 
 function authenticateToken(req,res,next){
