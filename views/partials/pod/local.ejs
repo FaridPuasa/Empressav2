@@ -1,0 +1,205 @@
+<div class="container-fluid">
+   
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Proof of Delivery</h6>
+        </div>
+
+        <div class="card-body">
+            <!-- Outer Row -->
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-12 col-md-9">
+                    <form class="user" method="POST" action="/itemInSuccess">
+                        <div class="table-responsive-xl">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <!--1st row header-->
+                                <tr>
+                                    <th scope="col" colspan="8">PROOF OF DELIVERY | LOCAL DELIVERY</th>
+                                    <th scope="col"></th>
+                                    <th scope="col" colsapn="1">
+                                        <div class="text-center">
+                                            <img src="/img/gr_logo.png" class="rounded" alt="go_rush.png">
+                                        </div>
+                                    </th>
+                                    <th></th>
+                                    <th scope="col"></th>
+                                </tr>
+                                <!--2nd row header-->
+                                <tr>
+                                    <th scope="col">Made By:</th>
+                                    <th scope="col" colspan="3">
+                                        <select class="form-control" name='madeby' id="area">
+                                            <option class="active">Marin</option>
+                                            <option>Fathin</option>
+                                        </select>
+                                    </th>
+                                    <th scope="col">Area of Delivery:</th>
+                                    <th scope="col" colspan="3">
+                                        <select class="form-control" name='deliveryArea' id="area">
+                                            <option class="active">Area Selection</option>
+                                            <option>BERAKAS 1</option>
+                                            <option>BERAKAS 2</option>
+                                            <option>JALAN TUTONG 1</option>
+                                            <option>JALAN TUTONG 2</option>
+                                            <option>JALAN TUTONG 3</option>
+                                            <option>GADONG 1</option>
+                                            <option>GADONG 2</option>
+                                            <option>TUTONG</option>
+                                            <option>BELAIT</option>
+                                            <option>TEMBURONG</option>
+                                        </select>
+                                    </th>
+                                    <th scope="col"></th>
+                                    <th scope="col">GR/POD/ZAL:</th>
+                                    <th scope="col" colspan="2"><%= sequence %><input type="hidden" class="form-control" name="podsequence" id="podsequence" aria-describedby="contactHelp" value="<%= sequence %>"></th>
+                                </tr>
+                                <!--3rd row header-->
+                                <tr>
+                                    <th scope="col">Dispatcher Name:</th>
+                                    <th scope="col" colspan="3">
+                                        <select name="agentName" id="agentName" style="border-radius: 5px;" class="form-control">
+                                            <option value="">Agent Selection</option>
+                                            <option value="994634">FD SOWDEQ</option>
+                                            <option value="997381">FD RAHIM</option>
+                                            <option value="1029275">FD AIMI</option>
+                                            <option value="1050947">FD HASBUL</option>
+                                            <option value="1071388">FD FADARUS</option>
+                                            <option value="1079095">FD HAMIDIN</option>
+                                            <option value="1113078">FD HANAFI</option>
+                                            <option value="1230427">FD FAEZ</option>
+                                            <option value="1254189">FD ZUL</option>
+                                            <option value="1130495">EFR HAJID</option>
+                                            <option value="1130524">EFR FAKHRIAH</option>
+                                            <option value="1268554">EFR GHAFUR</option>
+                                            <option value="1106491">EFR RASHID</option>
+                                            <option value="1105549">EFR NAZRY</option>
+                                            <option value="1124160">EFR HANIZAN</option>
+                                            <option value="996642">IFR ZIZAH</option>
+                                            <option value="977110">IFR NAN</option>
+                                            <option value="1268557">EFR KHAIRUL</option>
+                                        </select>
+                                    </th>
+                                    <th scope="col">Date of Delivery:</th>
+                                    <th scope="col" colspan="3"><input type="date" class="form-control" name="deliveryDate" id="deliveryDate" aria-describedby="contactHelp"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="text-center">No.</th>
+                                    <th scope="col" class="text-center">T/N</th>
+                                    <th scope="col" class="text-center">Item with me</th>
+                                    <th scope="col" class="text-center">Customer Name</th>
+                                    <th scope="col" class="text-center">Customer Address</th>
+                                    <th scope="col" class="text-center">Customer Contact</th>
+                                    <th scope="col" class="text-center">Value (BND)</th>
+                                    <th scope="col" class="text-center">Payment Method</th>
+                                    <th scope="col" class="text-center">Delivery Type</th>
+                                    <th scope="col" class="text-center">Success/Fail</th>
+                                    <th scope="col" class="text-center">Remark</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <!--Table Content-->
+                            <tbody>
+                                <tr>
+                                    <td class="text-center numbering">1.<input type="hidden" class="form-control" name="numebring" id="numbering" value="1."></td>
+                                    <td><input type="text" class="form-control" name="trackingNumber" id="trackingNumber" aria-describedby="trackingNumberHelp" placeholder="Enter Tracking Number"></td>
+                                    <td></td>
+                                    <td class="text-center">
+                                        <span id="name">Otto</span>
+                                        <input type="hidden" class="form-control" name="contactName" aria-describedby="nameHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <span id="address">@mdo</span>
+                                        <input type="hidden" class="form-control" name="contactAddress" aria-describedby="addressHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <span id="contact">XXX XXXX</span>
+                                        <input type="hidden" class="form-control" name="contactNumber" aria-describedby="contactHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <span id="value">$ XXX</span>
+                                        <input type="hidden" class="form-control" name="parcelValue" aria-describedby="valueHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <span id="paymentMethod">COD / BT</span>
+                                        <input type="hidden" class="form-control" name="paymentMethod" aria-describedby="valueHelp">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <!--Total Row-->
+                                <tr>
+                                    <td class="text-center numbering">Total Parcel</td>
+                                    <td id="totalParcel">XXXX</td>
+                                    <td></td>
+                                    <td class="text-center">
+                                        
+                                    </td>
+                                    <td class="text-center">
+                                       
+                                    </td>
+                                    <td class="text-center">
+                                        Total Amount:
+                                    </td>
+                                    <td class="text-center">
+                                        <span id="totalValue">$ XXX</span>
+                                        <input type="hidden" class="form-control" name="totalValue" id="totalValue" aria-describedby="totalValueHelp">
+                                    </td>
+                                    <td class="text-center">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                        <!--Second Table No automation required here-->
+                        <table class="table">
+                            <thead class="thead-light">
+                                <th colspan="6" class="text-center">OFFICIAL USE ONLY (CASH)</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Dispatcher:</td>
+                                    <td></td>
+                                    <td>Cash On Hand:</td>
+                                    <td></td>
+                                    <td>Date:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Operation Handler:</td>
+                                    <td></td>
+                                    <td>Cash On Hand:</td>
+                                    <td></td>
+                                    <td>Date:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Finance:</td>
+                                    <td></td>
+                                    <td>Cash On Hand:</td>
+                                    <td></td>
+                                    <td>Date:</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <input type="hidden" class="form-control form-control-user" name="method" id="method" aria-describedby="contactHelp" value="pod_JPMC">
+
+                        <!--<a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    

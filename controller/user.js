@@ -2,46 +2,75 @@ const userDB = require('../models/user')
 const moment = require('moment')
 const bcrypt = require('bcrypt')
 const flash = require('connect-flash')
+const { append } = require('express/lib/response')
+const router = require('../routes/app')
+const user = require('../models/user')
 
-const insertUser = ((req,res) => {
+/*
+Admin = 10
+Managers = 11
+Finance = 12
+User = 13
+*/
+
+/*
+Zalora = 100
+FMX = 101
+MOH = 200
+JPMC = 201
+Panaga = 202
+Local = 300
+Thermomix = 301
+Runner = 400
+personal = 401
+Misc = 500
+*/
+
+const roles = [10,11,12,13]
+const services = [100,101,200,201,202,300,301,400,401,500]
+
+const insertUser = ((req,res)=>{
+    let date = moment().format('DD/MM/YYYY')
     let data = req.body
     let name = data.name
-    let ic = data.icNumber
-    let user = new userDB ({
-        name: data.name,
-        password: data.password, //auto generated
-        position: data.position, //admin,GRP,Warehouse,CS,Dispatch
-        staffNumber: data.staffNumber,
+    let uid = data.uid
+    let user = new userDB({
+        name: name,
+        uid: uid,
+        password: data.password,
+        access: data.access,
         email: data.email,
         contact: data.contact,
-        office: data.office,
-        firstTime: "TRUE",
-        create: data.create,
-        update: data.update,
-        delete: data.delete,
-        pod: data.pod,
-        inventory: data.pod,
+        role: data.role,
+        service: data.services,
+        firsttime: 'true',
+        dateCreate: date
     })
-    user.save((err) => {
-        if (err){
+    user.save((err) =>{
+        if(err) {
             console.log(err)
-            res.render('error')
-        }else {
-            res.render ('success', {
-                head: "Account Created",
-                message: `Account for user ${name} successfuly created. Login ID ${ic}.`,
+            res.render('error', {
+                title: '404',
+                response: '',
+                message: 'Page not found'
             })
         }
+       else{
+            res.render ('success', {
+                title: 'success',
+                response: 'Account Created',
+                message: `Account for user ${name} successfuly created. Login ID ${uid}.`,
+            })
+       }
     })
 })
 
-const loginUser = ((req,res) => {
+const grantAccess = ((req,res)=>{
     let data = req.body
-    let icNumber = data.icNumber
+    let uid = data.uid
     let password = data.password
-
     console.log(req.sessionID)
-    userDB.authenticate(icNumber, password, (err,user) =>{
+    userDB.authenticate(uid, password, (err,user) =>{
         if (req.session.authenticated){
             console.log(req.session)
         }
@@ -51,26 +80,21 @@ const loginUser = ((req,res) => {
                 req.session.user = user
                 let currentUser = user
                 console.log(currentUser)
-
-                let firstTime = user.firstTime
-                let position = user.position
-                console.log(firstTime)
-                if (firstTime === "TRUE") {
-                    res.render('changepassword', {icNumber: icNumber})
+                let firsttime = user.firsttime
+                console.log(firsttime)
+                if (firsttime === "true") {
+                    res.render('changepassword', {uid: uid})
                 }
-                else if (firstTime === "FALSE") {
+                else if (firsttime === "false") {
                     res.render('dashboard',{
                         id: user._id,
                         name: user.name,
-                        icNumber: user.icNumber,
-                        position: user.position,
+                        uid: user.uid,
                         contact: user.contact,
-                        office: user.office,
-                        position: user.position
                     })
                 }
                 else{
-                    console.log("Failed to detect user status [Firsttimer == undefined]")
+                    console.log("Failed to detect user status [firsttimer == undefined]")
                     res.render('error')
                 }
             }
@@ -82,22 +106,45 @@ const loginUser = ((req,res) => {
     })
 })
 
-const readUser = ((req,res) => {
-    let filter = {}
-    userDB.find(filter, (err,result) => {
-        if (err){
-            console.log(err)
-            res.render('error')
-        }
-        else{
-            res.render('userlist')
-        }
+const updatePassword = (req,res) =>{
+    let data = req.body
+    let filter = data.uid
+    let update = {password: data.password}
+    bcrypt.hash(password,10,(err,hash)=>{
+        if(err) return console.log (err)
+        data.password = hash
+        userDB.findOneAndUpdate(filter,update,option,(err,result)=>{
+            if (err) return console.log (err)
+            res.render('/login', {
+                title: 'login',
+                moment: moment,
+            })
+        })
     })
+}
+
+const readUser = ((req,res) => {
+    userDB.find().then(
+        (documents)=>{
+            res.render('success',{
+                title: '',
+                response: '',
+                message: '',
+            })
+        },
+        (err)=>{
+            res.render('error', {
+                title: '401',
+                response: '',
+                message: '',
+            })
+        }
+    )
 })
 
 const updateUser = ((req,res) => {
     let data = req.body
-    let filter = {staffNumber: data.staffNumber}
+    let filter = {uid: data.uid}
     let option = {upsert: false, new: false}
     let update = {}
     userDB.findOneAndUpdate(filter, update, option, (err,docs) => {
@@ -120,7 +167,7 @@ const readLogin = ((req,res) => {
 
 const deleteUser = ((req,res) => {
     let data = req.body
-    let filter = {staffNumber: data.staffNumber}
+    let filter = {uid: data.uid}
     userDB.findOneAndDelete(filter, (err,docs) => {
         if (err){
             console.log(err)
@@ -137,6 +184,6 @@ module.exports = {
     readUser,
     updateUser,
     deleteUser,
-    loginUser,
+    //loginUser,
     readLogin,
 }

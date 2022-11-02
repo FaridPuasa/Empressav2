@@ -52,46 +52,103 @@ app.get('/login', (req,res)=>{
     res.json({message: 'user ready to login'})
 })
 
-
-
-
+function secure(req,res,next){
+    let loggedIn = req.session.loggedIn
+    console.log(req.session.loggedIn)
+    if(loggedIn === true){
+        next()
+    }
+    else{
+        res.redirect('/login')
+    }
+}
 
 app.post('/dashboard', (req,res)=>{
     let session = req.session
-    //console.log(session.id)
+    console.log(session.id)
+    session.loggedIn = true
     if(req.body.username === user.username){
-        setTimeout(()=> {
-            timer(session),
-            session.cookie.maxAge,
-            console.log('session starts')
-        })
-        res.json(session)
+        console.log(session.loggedIn)
+        res.status(200).json({user, loggedIn: session.loggedIn})
     }
     else{
         res.sendStatus(401)
     }
 })
 
-function timer(session){
-    session.destroy((err)=>{
-        if (err) return res.sendStatus(401)
-        res.writeHead(302, {
-            'Location':
-        })
-        window.location.href = 'http://localhost:6000/logout'
-    })
-}
-
+app.get('/boom', secure, (req,res)=>{
+    res.json({message: 'mr loba loba'})
+})
 
 app.get('/logout', (req,res)=>{
    let session = req.session
-   console.log(session.cookie.maxAge)
    session.destroy((err)=>{
     if (err) return res.sendStatus(400)
     res.json({message: 'user logged out'})
+    console.log('session destroy')
+    console.log(session)
    })
 })
 
 
 const PORT = process.env.PORT || 6000;
 server.listen(PORT, console.log(`Server start on ${PORT}`))
+
+
+/*
+let posts = [
+    {
+        'username': 'test',
+        'post': "posting 1"
+    },
+    {
+        'username': 'Farid',
+        'post': "posting 1000"
+    }
+]
+
+router.get('/post', authenticateToken, (req,res)=>{
+    res.json(posts.filter(post => post.username === req.user.name))
+})
+
+let refreshTokens = []
+
+router.post('/token', (req,res) =>{
+    const refreshToken = req.body.token
+    if (refreshToken == null) return res.sendStatus(401)
+    if (!refreshToken.includes(refreshToken)) return res.sendStatus(403)
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err,user)=>{
+        if (err) return res.sendStatus(403)
+        const accessToken = generateAccessToken({name: user.name})
+        res.json({accessToken: accessToken})
+    })
+})
+
+router.post('/test', (req,res)=>{
+    const username = req.body.username
+    const user = {name: username}
+    const accessToken = generateAccessToken(user)
+    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '1d'})
+    refreshTokens.push(refreshToken)
+    //console.log(process.env.ACCESS_TOKEN_SECRET)
+    console.log(accessToken)
+    res.json({accessToken: accessToken, refreshToken: refreshToken })
+})
+
+function generateAccessToken(user){
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m'})
+}
+
+function authenticateToken(req,res,next){
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if (token == null) return res.sendStatus(401)
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err,user)=>{
+        //console.log(process.env.ACCESS_TOKEN_SECRET)
+        if (err) return res.sendStatus(403)
+        req.user = user
+        next()
+    })
+}
+*/

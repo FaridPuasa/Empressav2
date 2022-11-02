@@ -29,5 +29,4 @@ const exportInventory = (req,res) =>{
 
 module.exports = {
     exportInventory,
-
 }

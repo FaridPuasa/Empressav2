@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const moment = require('moment')
 
 
 const reqString = {
@@ -7,16 +8,19 @@ const reqString = {
     require: true,
 }
 
+let date = moment().format('DD/MM/YYYY')
+
 const userSchema  = new mongoose.Schema({
     name: reqString,
+    uid: {type:String, required:true, unique:true},
     password: reqString,
-    position: reqString,
-    icNumber: {type:String, required:true, unique:true},
+    access: reqString,
     email: reqString,
     contact: reqString,
-    office: {type: String},
-    firstTime: reqString,
-    date: {type:Date, default: Date.now()}
+    role: reqString,
+    service: {type: [String]},
+    firsttime: reqString,
+    dateCreate: {type: Date, default: date},
 })
 
 userSchema.statics.authenticate = function(icNumber, password, callback){

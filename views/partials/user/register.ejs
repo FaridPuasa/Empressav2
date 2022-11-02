@@ -1,0 +1,143 @@
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <form class="user" method="POST" action="/itemInSuccess">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="p-5">
+
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">User Registration</h1>
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="Enter Name" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="uid" id="uid" aria-describedby="uidHelp" placeholder="Enter User ID" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="password" id="password" aria-describedby="passwordHelp" placeholder="Enter Password" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <a class="btn btn-primary" id="generate" onclick="genPassword()">Generate</a>
+                                        <a class="btn btn-primary" id="copy" onclick="copyPassword()">Copy</a>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="contact" id="contact" aria-describedby="contactHelp" placeholder="Enter Contact Number">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter Email">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <div class="p-5">
+                                    
+                                    <div class="">
+                                        <h1 class="h4 text-gray-900 mb-4">User Role</h1>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="form-control" name="roles" id="roles">
+                                            <option value="13">User</option>
+                                            <option value="12">Finance</option>
+                                            <option value="11">Managers</option>
+                                            <option value="10">Admin</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="">
+                                        <h1 class="h4 text-gray-900 mb-4">Services</h1>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="100" name="services" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">Zalora</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="101" name="services" id="flexCheckChecked">
+                                        <label class="form-check-label" for="flexCheckChecked">FMX</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="200" name="services" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">MOH</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="201" name="services" id="flexCheckChecked">
+                                        <label class="form-check-label" for="flexCheckChecked">JPMC</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="202" name="services" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">Panaga</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="300" name="services" id="flexCheckChecked">
+                                        <label class="form-check-label" for="flexCheckChecked">Local Delivery</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="301" name="services" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">Thermomix</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="400" name="services" id="flexCheckChecked">
+                                        <label class="form-check-label" for="flexCheckChecked">Runner Services</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="401" name="services" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">Personal Shopping</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="500" name="services" id="flexCheckChecked">
+                                        <label class="form-check-label" for="flexCheckChecked">Miscellaneous</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                
+                        </div>
+
+                        <!--Additional Information-->
+                        <input type="hidden" class="form-control form-control-user" name="value" id="value" aria-describedby="contactHelp">
+                        <input type="hidden" class="form-control form-control-user" name="zaloraTag" id="zaloraTag" aria-describedby="contactHelp">
+                        <input type="hidden" class="form-control form-control-user" name="areaLoc" id="areaLoc" aria-describedby="contactHelp">
+                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
+                        <input type="hidden" class="form-control form-control-user" name="dateArriveTemp" id="dateArriveTemp" aria-describedby="contactHelp">
+                        <input type="hidden" class="form-control form-control-user" name="areaCodeTemp" id="areaCodeTemp" aria-describedby="contactHelp">
+                        <!-- End of Information -->
+
+                        <input type="hidden" class="form-control form-control-user" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="ZALORA">
+
+                        <div class="row">
+                            <a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

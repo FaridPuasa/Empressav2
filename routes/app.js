@@ -55,7 +55,7 @@ const { query } = require('express');
     updateGrmy,
 } = require('../controller/grmy')*/
 
-//GET Login
+//GET Login //done
 router.get('/', (req,res)=>{
     res.render('login', {
         title: "Login",
@@ -63,7 +63,7 @@ router.get('/', (req,res)=>{
     })
 })
 
-//GET Dashboard
+//GET Dashboard //testing
 router.get('/dashboard', (req,res)=>{
     let id = req.params.user
     warehouseDB.aggregate([{
@@ -85,7 +85,7 @@ router.get('/dashboard', (req,res)=>{
     )
 })
 
-//GET Create POD
+//GET Create POD //awaiting syahmi action - authorization required
 router.get('/:services-pod', (req,res)=>{
     let services = req.params.services
     let service = services.toUpperCase()
@@ -348,7 +348,7 @@ router.get('/:services-pod', (req,res)=>{
     }
 })
 
-//GET Item In
+//GET Item In //awaiting syahmi action
 router.get('/:services-in', (req,res)=>{
     let services = req.params.services
     console.log(services)
@@ -417,7 +417,7 @@ router.get('/:services-in', (req,res)=>{
     }
 })
 
-//GET Item List
+//GET Item List //adding database into the loop
 router.get('/:services-list', (req,res)=>{
     let services = req.params.services
     let list =[
@@ -735,9 +735,10 @@ router.get('/:services-list', (req,res)=>{
     )
 })
 
-//GET Podlist
+//GET Podlist //done
 router.get('/:services-podlist', (req,res)=>{
     let services = req.params.services
+    let servicecode = req.params.servicecode
     let service = services.toUpperCase()
     console.log(service)
     if(services == 'moh'){
@@ -805,13 +806,40 @@ router.get('/:services-podlist', (req,res)=>{
     }
 })
 
-//GET Restock Order
+//GET Restock Order //done
 router.get('/restock_order', (req,res)=>{
-    res.render('restock', {
-        title: "Restock Order",
-        moment: moment,
-        //need to automate serial number
-    })
+    waybillDB.find().sort({$natural: -1}).limit(1).then(
+        (result)=>{
+            if(result.podSequence == undefined || 0 || null){
+                let sequence = 1
+                console.log(result.podSequence)
+                res.render('restockProof',{
+                    title: `BMF WAYBILL`,
+                    service: service,
+                    sequence: sequence,
+                    moment: moment,
+                })
+            }
+            else{
+                let sequence = result.podSequence + 1
+                console.log(result.podSequence)
+                res.render('restockProof',{
+                    title: `BMF WAYBILL`,
+                    service: service,
+                    sequence: sequence,
+                    moment: moment,
+                })
+            }
+        },
+        (err)=>{
+            console.log("Failed to append sequence: " + err)
+            res.render('error', {
+                title: '404',
+                response: '',
+                message: 'Page not found'
+            })
+        }
+    )
 })
 
 //GET Export page
@@ -822,81 +850,61 @@ router.get('/export', (req,res)=>{
     })
 })
 
-//GET New User
+//GET New User //done
 router.get('/user_register', (req,res)=>{
-    res.render('register', {
+    res.render('user', {
         title: "New User",
+        partials: './partials/user/register.ejs',
         moment: moment,
     })
 })
 
-let posts = [
-    {
-        'username': 'test',
-        'post': "posting 1"
-    },
-    {
-        'username': 'Farid',
-        'post': "posting 1000"
-    }
-]
+//GET Change Password //done
+router.get('/change-password', (req,res)=>{
+    res.render('user', {
+        title: "Change Password",
+        partials: './partials/user/changePassword.ejs',
+        moment: moment,
+    })
+})
 
+//GET Forgot Password //front-end
+router.get('/forgot-password', (req,res)=>{
+    res.render('user', {
+        title: "New User",
+        partials: './partials/user/forgotPassword.ejs',
+        moment: moment,
+    })
+})
 
-//GET User List
-router.get('/export', (req,res)=>{
+//GET User List //front-end
+router.get('/userlist', (req,res)=>{
+    userDB.find().then(
+        (documents)=>{
+            res.render('userlist', {
+                title: "User List",
+                documents,
+                moment: moment
+            })
+        },
+        (err)=>{
+            console.log(err)
+            res.render('error', {
+                title: '404',
+                response: '',
+                message: 'Page not found'
+            })
+        }
+    )
     res.render('dashboard', {
         title: "Login",
         moment: moment,
     })
 })
 
-router.get('/post', authenticateToken, (req,res)=>{
-    res.json(posts.filter(post => post.username === req.user.name))
-})
-
-let refreshTokens = []
-
-router.post('/token', (req,res) =>{
-    const refreshToken = req.body.token
-    if (refreshToken == null) return res.sendStatus(401)
-    if (!refreshToken.includes(refreshToken)) return res.sendStatus(403)
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err,user)=>{
-        if (err) return res.sendStatus(403)
-        const accessToken = generateAccessToken({name: user.name})
-        res.json({accessToken: accessToken})
-    })
-})
-
-router.post('/test', (req,res)=>{
-    const username = req.body.username
-    const user = {name: username}
-    const accessToken = generateAccessToken(user)
-    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '1d'})
-    refreshTokens.push(refreshToken)
-    //console.log(process.env.ACCESS_TOKEN_SECRET)
-    console.log(accessToken)
-    res.json({accessToken: accessToken, refreshToken: refreshToken })
-})
-
-function generateAccessToken(user){
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m'})
-}
-
-function authenticateToken(req,res,next){
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-    if (token == null) return res.sendStatus(401)
-
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err,user)=>{
-        //console.log(process.env.ACCESS_TOKEN_SECRET)
-        if (err) return res.sendStatus(403)
-        req.user = user
-        next()
-    })
-}
 
 //post
-router.post('/dashboard', loginUser)
+//router.post('/dashboard', loginUser)
 router.post('/register-success', insertUser)
 router.post('/sad', )
 router.post('/sat', )

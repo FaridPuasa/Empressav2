@@ -36,3 +36,6 @@ Content-Type: application/json
 ###
 GET http://localhost:6000/logout
 
+###
+GET http://localhost:6000/boom
+
