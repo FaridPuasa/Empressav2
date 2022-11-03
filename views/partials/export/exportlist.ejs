@@ -1,0 +1,79 @@
+<div class="container-fluid">
+
+    <!-- DataTales Example -->
+<div class="card shadow mb-4">
+<div class="card-header py-3">
+<h6 class="m-0 font-weight-bold text-primary text-center">ZALORA | INVENTORY LIST</h6>
+</div>
+
+<div class="card-body">
+<!-- Outer Row -->
+<div class="row justify-content-center">
+<div class="col-xl-10 col-lg-12 col-md-9">
+    <form class="user" method="POST" action="/itemInSuccess">
+        
+            <div id="toolbar">
+                <!--<div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-light btn-lg ">Excel Upload</button>
+                    <div class="dropdown-container">
+                        <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sliders-h"></i> Advance Search</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-list">
+                                    <input id="search_input" type="search" placeholder="Search states" class="dropdown-search"/>
+                                    <ul></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+
+                <table
+                    id="table"
+                    data-toolbar="#toolbar"
+                    data-search="true"
+                    data-show-refresh="true"
+                    data-show-toggle="true"
+                    data-show-fullscreen="true"
+                    data-show-columns="true"
+                    data-show-columns-toggle-all="true"
+                    data-detail-view="false"
+                    data-show-export="true"
+                    data-click-to-select="true"
+                    data-detail-formatter="detailFormatter"
+                    data-minimum-count-columns="2"
+                    data-show-pagination-switch="true"
+                    data-pagination="true"
+                    data-id-field="id"
+                    data-page-list="[10, 25, 50, 100, all]"
+                    data-show-footer="true"
+                    data-response-handler="responseHandler">
+                <thead>
+                    <tr>
+                        <th data-field="tracking" data-sortable="true">Tracking Number</th>
+                        <th data-field="name" data-sortable="true">Contact Name</th>
+                        <th data-field="address" data-sortable="true">Contact Address</th>
+                        <th data-field="phone" data-sortable="true">Contact Number</th>
+                        <th data-field="value" data-sortable="true">Item Value</th>
+                        <th data-field="age" data-sortable="true">Item Age</th>
+                        <th data-field="status" data-sortable="true">Item Status</th>
+                        <th data-field="entry" data-sortable="true" data-visible="false">Entry Date</th>
+                        <th data-field="expire" data-sortable="true" data-visible="false">Expire Date</th>
+                        <th data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="10" class="text-center">No Data</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <input type="hidden" class="form-control form-control-user" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="POD">
+
+        <!--<a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>-->
+        </div>
+    </form>
+</div>
+</div>
+</div>
+</div>

@@ -13,8 +13,10 @@ const grpPodDB = require('../models/grppod')
 const runnerPodDB = require('../models/runnerpod')
 const personalPodDB = require('../models/personalpod')
 const warehouseDB = require('../models/warehouseInventory')
+const waybillDB = require('../models/restock')
 const jwt = require('jsonwebtoken')
 const express = require('express');
+const session = require('express-session')
 const router = express.Router();
 const moment = require('moment')
 //calling controllers
@@ -349,8 +351,9 @@ router.get('/:services-pod', (req,res)=>{
 })
 
 //GET Item In //awaiting syahmi action
-router.get('/:services-in', (req,res)=>{
+router.get('/:services-in/:number', (req,res)=>{
     let services = req.params.services
+    let number = req.params.number
     console.log(services)
     if(services == 'moh'){
         res.render('itemin',{
@@ -813,9 +816,8 @@ router.get('/restock_order', (req,res)=>{
             if(result.podSequence == undefined || 0 || null){
                 let sequence = 1
                 console.log(result.podSequence)
-                res.render('restockProof',{
+                res.render('restock',{
                     title: `BMF WAYBILL`,
-                    service: service,
                     sequence: sequence,
                     moment: moment,
                 })
@@ -823,9 +825,8 @@ router.get('/restock_order', (req,res)=>{
             else{
                 let sequence = result.podSequence + 1
                 console.log(result.podSequence)
-                res.render('restockProof',{
+                res.render('restock',{
                     title: `BMF WAYBILL`,
-                    service: service,
                     sequence: sequence,
                     moment: moment,
                 })
@@ -846,6 +847,15 @@ router.get('/restock_order', (req,res)=>{
 router.get('/export', (req,res)=>{
     res.render('export', {
         title: "Login",
+        partials: './partials/export/entryexport.ejs',
+        moment: moment,
+    })
+})
+
+router.get('/exportlist', (req,res)=>{
+    res.render('export', {
+        title: "Login",
+        partials: './partials/export/exportlist.ejs',
         moment: moment,
     })
 })
@@ -899,6 +909,19 @@ router.get('/userlist', (req,res)=>{
     res.render('dashboard', {
         title: "Login",
         moment: moment,
+    })
+})
+
+//GET logout //front-end
+router.get('/logout', (req,res)=>{
+    let session = req.session
+    session.destroy((err)=>{
+        if (err) return res.sendStatus(400)
+        res.render('login', {
+            title: 'login',
+            moment: moment
+        })
+        console.log('session destroy')
     })
 })
 

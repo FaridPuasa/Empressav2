@@ -1,0 +1,385 @@
+<div class="container-fluid">
+   
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+
+        <div class="card-body">
+            <!-- Outer Row -->
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-12 col-md-9">
+                    <form class="user" method="POST" action="/itemInSuccess">
+                        <div class="table-responsive-xl">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <!--1st row header-->
+                                <tr>
+                                    <th scope="col" colspan="8">PROOF OF PICKUP</th>
+                                    <th scope="col"></th>
+                                    <th scope="col" colsapn="1">
+                                        <div class="text-center">
+                                            <img src="/public/img/gr_logo.png" class="rounded" alt="go_rush.png">
+                                        </div>
+                                    </th>
+                                    <th scope="col"></th>
+                                </tr>
+                                <!--2nd row header-->
+                                <tr>
+                                    <th scope="col">Prepared By:</th>
+                                    <th scope="col" colspan="3">
+                                        <select class="form-control" name='madeby' id="area">
+                                            <option class="active">Marin</option>
+                                            <option>Fathin</option>
+                                        </select>
+                                    </th>
+                                    <th scope="col">Area of Delivery:</th>
+                                    <th scope="col" colspan="3">
+                                        <select class="form-control" name='deliveryArea' id="area">
+                                            <option class="active">Area Selection</option>
+                                            <option>BERAKAS 1</option>
+                                            <option>BERAKAS 2</option>
+                                            <option>JALAN TUTONG 1</option>
+                                            <option>JALAN TUTONG 2</option>
+                                            <option>JALAN TUTONG 3</option>
+                                            <option>GADONG 1</option>
+                                            <option>GADONG 2</option>
+                                            <option>TUTONG</option>
+                                            <option>BELAIT</option>
+                                            <option>TEMBURONG</option>
+                                        </select>
+                                    </th>
+                                    <th scope="col"></th>
+                                    <th scope="col">GR/POP/:</th>
+                                    <th scope="col"><%= sequence %><input type="hidden" class="form-control" name="podsequence" id="podsequence" aria-describedby="contactHelp" value="<%= sequence %>"></th>
+
+                                </tr>
+                                <!--3rd row header-->
+                                <tr>
+                                    <th scope="col">Dispatcher Name:</th>
+                                    <th scope="col" colspan="3">
+                                        <select name="agentName" id="agentName" style="border-radius: 5px;" class="form-control">
+                                            <option value="">Agent Selection</option>
+                                            <option value="994634">FD SOWDEQ</option>
+                                            <option value="997381">FD RAHIM</option>
+                                            <option value="1029275">FD AIMI</option>
+                                            <option value="1050947">FD HASBUL</option>
+                                            <option value="1071388">FD FADARUS</option>
+                                            <option value="1079095">FD HAMIDIN</option>
+                                            <option value="1113078">FD HANAFI</option>
+                                            <option value="1230427">FD FAEZ</option>
+                                            <option value="1254189">FD ZUL</option>
+                                            <option value="1130495">EFR HAJID</option>
+                                            <option value="1130524">EFR FAKHRIAH</option>
+                                            <option value="1268554">EFR GHAFUR</option>
+                                            <option value="1106491">EFR RASHID</option>
+                                            <option value="1105549">EFR NAZRY</option>
+                                            <option value="1124160">EFR HANIZAN</option>
+                                            <option value="996642">IFR ZIZAH</option>
+                                            <option value="977110">IFR NAN</option>
+                                            <option value="1268557">EFR KHAIRUL</option>
+                                        </select>
+                                    </th>
+                                    <th scope="col">Date of Pickup:</th>
+                                    <th scope="col" colspan="3"><input type="date" class="form-control" name="deliveryDate" id="deliveryDate" aria-describedby="contactHelp"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="text-center">No.</th>
+                                    <th scope="col" class="text-center">Customer Name</th>
+                                    <th scope="col" class="text-center">Customer Contact</th>
+                                    <th scope="col" class="text-center">Customer Address</th>
+                                    <th scope="col" class="text-center">Quantity</th>
+                                    <th scope="col" class="text-center">Value (BND)</th>
+                                    <th scope="col" class="text-center">Payment Method</th>
+                                    <th scope="col" class="text-center">Remark</th>
+                                    <th scope="col" class="text-center">Customer Signature</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <!--Table Content-->
+                            <tbody>
+                                <tr>
+                                    <td class="text-center numbering">1.<input type="hidden" class="form-control" name="numebring" id="numbering" value="1."></td>
+                                    <td><input type="text" class="form-control" name="contactName" aria-describedby="nameHelp"></td>
+                                    <td class="text-center" >
+                                        <input type="text" class="form-control" name="contactNumber" aria-describedby="contactNumberHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="contactAddress" aria-describedby="addressHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="quantity" aria-describedby="quantityHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="value" aria-describedby="valueHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="payment" aria-describedby="paymentHelp">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center numbering">2.<input type="hidden" class="form-control" name="numebring" id="numbering" value="2."></td>
+                                    <td><input type="text" class="form-control" name="contactName" aria-describedby="nameHelp"></td>
+                                    <td class="text-center" >
+                                        <input type="text" class="form-control" name="contactNumber" aria-describedby="contactNumberHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="contactAddress" aria-describedby="addressHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="quantity" aria-describedby="quantityHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="value" aria-describedby="valueHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="payment" aria-describedby="paymentHelp">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center numbering">3.<input type="hidden" class="form-control" name="numebring" id="numbering" value="3."></td>
+                                    <td><input type="text" class="form-control" name="contactName" aria-describedby="nameHelp"></td>
+                                    <td class="text-center" >
+                                        <input type="text" class="form-control" name="contactNumber" aria-describedby="contactNumberHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="contactAddress" aria-describedby="addressHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="quantity" aria-describedby="quantityHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="value" aria-describedby="valueHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="payment" aria-describedby="paymentHelp">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center numbering">4.<input type="hidden" class="form-control" name="numebring" id="numbering" value="4."></td>
+                                    <td><input type="text" class="form-control" name="contactName" aria-describedby="nameHelp"></td>
+                                    <td class="text-center" >
+                                        <input type="text" class="form-control" name="contactNumber" aria-describedby="contactNumberHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="contactAddress" aria-describedby="addressHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="quantity" aria-describedby="quantityHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="value" aria-describedby="valueHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="payment" aria-describedby="paymentHelp">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center numbering">5.<input type="hidden" class="form-control" name="numebring" id="numbering" value="5."></td>
+                                    <td><input type="text" class="form-control" name="contactName" aria-describedby="nameHelp"></td>
+                                    <td class="text-center" >
+                                        <input type="text" class="form-control" name="contactNumber" aria-describedby="contactNumberHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="contactAddress" aria-describedby="addressHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="quantity" aria-describedby="quantityHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="value" aria-describedby="valueHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="payment" aria-describedby="paymentHelp">
+                                    </td>
+                                    <td></td>
+                                    <td contenteditable="true" name="name"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center numbering">6.<input type="hidden" class="form-control" name="numebring" id="numbering" value="6."></td>
+                                    <td><input type="text" class="form-control" name="contactName" aria-describedby="nameHelp"></td>
+                                    <td class="text-center" >
+                                        <input type="text" class="form-control" name="contactNumber" aria-describedby="contactNumberHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="contactAddress" aria-describedby="addressHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="quantity" aria-describedby="quantityHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="value" aria-describedby="valueHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="payment" aria-describedby="paymentHelp">
+                                    </td>
+                                    <td></td>
+                                    <td contenteditable="true" name="name"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center numbering">7.<input type="hidden" class="form-control" name="numebring" id="numbering" value="7."></td>
+                                    <td><input type="text" class="form-control" name="contactName" aria-describedby="nameHelp"></td>
+                                    <td class="text-center" >
+                                        <input type="text" class="form-control" name="contactNumber" aria-describedby="contactNumberHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="contactAddress" aria-describedby="addressHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="quantity" aria-describedby="quantityHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="value" aria-describedby="valueHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="payment" aria-describedby="paymentHelp">
+                                    </td>
+                                    <td></td>
+                                    <td contenteditable="true" name="name"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center numbering">8.<input type="hidden" class="form-control" name="numebring" id="numbering" value="8."></td>
+                                    <td><input type="text" class="form-control" name="contactName" aria-describedby="nameHelp"></td>
+                                    <td class="text-center" >
+                                        <input type="text" class="form-control" name="contactNumber" aria-describedby="contactNumberHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="contactAddress" aria-describedby="addressHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="quantity" aria-describedby="quantityHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="value" aria-describedby="valueHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="payment" aria-describedby="paymentHelp">
+                                    </td>
+                                    <td></td>
+                                    <td contenteditable="true" name="name"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center numbering">9.<input type="hidden" class="form-control" name="numebring" id="numbering" value="9."></td>
+                                    <td><input type="text" class="form-control" name="contactName" aria-describedby="nameHelp"></td>
+                                    <td class="text-center" >
+                                        <input type="text" class="form-control" name="contactNumber" aria-describedby="contactNumberHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="contactAddress" aria-describedby="addressHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="quantity" aria-describedby="quantityHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="value" aria-describedby="valueHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="payment" aria-describedby="paymentHelp">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center numbering">10.<input type="hidden" class="form-control" name="numebring" id="numbering" value="10."></td>
+                                    <td><input type="text" class="form-control" name="contactName" aria-describedby="nameHelp"></td>
+                                    <td class="text-center" >
+                                        <input type="text" class="form-control" name="contactNumber" aria-describedby="contactNumberHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="contactAddress" aria-describedby="addressHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="quantity" aria-describedby="quantityHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="value" aria-describedby="valueHelp">
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control" name="payment" aria-describedby="paymentHelp">
+                                    </td>
+                                    <td></td>
+                                    <td contenteditable="true" name="name"></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Customer Signature:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Customer Name:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Date:</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!--Second Table No automation required here-->
+                        <table class="table">
+                            <thead class="thead-light">
+                                <th colspan="6" class="text-center">OFFICIAL USE ONLY (CASH) If any</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Dispatcher:</td>
+                                    <td></td>
+                                    <td>Cash On Hand:</td>
+                                    <td></td>
+                                    <td>Date:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Operation Handler:</td>
+                                    <td></td>
+                                    <td>Cash On Hand:</td>
+                                    <td></td>
+                                    <td>Date:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Finance:</td>
+                                    <td></td>
+                                    <td>Cash On Hand:</td>
+                                    <td></td>
+                                    <td>Date:</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <input type="hidden" class="form-control form-control-user" name="method" id="method" aria-describedby="contactHelp" value="pod_JPMC">
+
+                        <!--<a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
