@@ -7,6 +7,7 @@ const layouts = require('express-ejs-layouts')
 const socketIO = require('socket.io')
 const http = require('http')
 const moment = require('moment')
+const flash = require('connect-flash')
 //Server setup
 let server = http.createServer(app)
 let io = socketIO(server)
@@ -23,6 +24,14 @@ app.use(express.urlencoded({extended:true}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.static('.'))
+app.use(flash());
+
+//Global varibales
+app.use(function (req, res, next) {
+    res.locals.message = req.flash()
+    next();
+});
+
 app.set('view engine', 'ejs')
 
 const mongoose = require('mongoose');

@@ -39,3 +39,17 @@ GET http://localhost:6000/logout
 ###
 GET http://localhost:6000/boom
 
+
+
+
+###
+GET http://localhost:5000/dashboard
+
+###
+GET http://localhost:5000/user_register
+
+###
+POST http://localhost:5000/success
+
+
+

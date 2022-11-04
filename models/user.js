@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const moment = require('moment')
+const moment = require('moment');
+const res = require("express/lib/response");
 
 
 const reqString = {
@@ -23,9 +24,9 @@ const userSchema  = new mongoose.Schema({
     dateCreate: {type: Date, default: date},
 })
 
-userSchema.statics.authenticate = function(icNumber, password, callback){
+userSchema.statics.authenticate = function(uid, password, callback){
     user.findOne({
-        icNumber:icNumber
+        uid
     }).exec(function(error,user){
         if(error){
             console.log(error)

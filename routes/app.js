@@ -19,15 +19,16 @@ const express = require('express');
 const session = require('express-session')
 const router = express.Router();
 const moment = require('moment')
-//calling controllers
+
+const { request } = require('http')
+//controller user
 const {
     insertUser,
-    readUser,
-    updateUser,
-    deleteUser,
-    loginUser,
+    grantAccess,
+    updatePassword,
 } = require('../controller/user')
-const { request } = require('http')
+
+
 /*const {
     insertExport,
     readExport,
@@ -61,10 +62,15 @@ const { query } = require('express');
 router.get('/', (req,res)=>{
     res.render('login', {
         title: "Login",
+        partials: './partials/user/login.ejs',
         moment: moment,
     })
 })
 
+//POST Login
+router.post('/dashboard', grantAccess)
+
+/*
 //GET Dashboard //testing
 router.get('/dashboard', (req,res)=>{
     let id = req.params.user
@@ -76,7 +82,7 @@ router.get('/dashboard', (req,res)=>{
     }]).then(
         (result)=>{
             console.log(result)
-            res.render('dashboard', {
+            res.status(200).render('dashboard', {
                 title: 'Dashboard',
                 result,
             })
@@ -85,7 +91,7 @@ router.get('/dashboard', (req,res)=>{
             console.log("Error on POD:" + err) 
         }
     )
-})
+})*/
 
 //GET Create POD //awaiting syahmi action - authorization required
 router.get('/:services-pod', (req,res)=>{
@@ -869,9 +875,15 @@ router.get('/user_register', (req,res)=>{
     })
 })
 
+//POST success
+router.post('/success', insertUser)
+
+//POST success
+router.post('/login', updatePassword)
+
 //GET Change Password //done
 router.get('/change-password', (req,res)=>{
-    res.render('user', {
+    res.render('login', {
         title: "Change Password",
         partials: './partials/user/changePassword.ejs',
         moment: moment,
@@ -880,8 +892,8 @@ router.get('/change-password', (req,res)=>{
 
 //GET Forgot Password //front-end
 router.get('/forgot-password', (req,res)=>{
-    res.render('user', {
-        title: "New User",
+    res.render('login', {
+        title: "Forgot Password",
         partials: './partials/user/forgotPassword.ejs',
         moment: moment,
     })
@@ -928,13 +940,5 @@ router.get('/logout', (req,res)=>{
 
 //post
 //router.post('/dashboard', loginUser)
-router.post('/register-success', insertUser)
-router.post('/sad', )
-router.post('/sat', )
-router.post('/fri', )
-
-readUser,
-updateUser,
-deleteUser,
 
 module.exports = router

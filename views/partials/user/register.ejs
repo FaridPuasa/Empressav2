@@ -7,7 +7,7 @@
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
-                    <form class="user" method="POST" action="/itemInSuccess">
+                    <form class="user" method="POST" action="/success">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="p-5">
@@ -66,53 +66,53 @@
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="100" name="services" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">Zalora</label>
+                                        <input class="form-check-input" type="checkbox" value="100" name="services" id="checkZalora">
+                                        <label class="form-check-label" for="checkZalora">Zalora</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="101" name="services" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">FMX</label>
+                                        <input class="form-check-input" type="checkbox" value="101" name="services" id="checkFmx">
+                                        <label class="form-check-label" for="checkFmx">FMX</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="200" name="services" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">MOH</label>
+                                        <input class="form-check-input" type="checkbox" value="200" name="services" id="checkMoh">
+                                        <label class="form-check-label" for="checkMoh">MOH</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="201" name="services" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">JPMC</label>
+                                        <input class="form-check-input" type="checkbox" value="201" name="services" id="checkJpmc">
+                                        <label class="form-check-label" for="checkJpmc">JPMC</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="202" name="services" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">Panaga</label>
+                                        <input class="form-check-input" type="checkbox" value="202" name="services" id="checkPanaga">
+                                        <label class="form-check-label" for="checkPanaga">Panaga</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="300" name="services" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">Local Delivery</label>
+                                        <input class="form-check-input" type="checkbox" value="300" name="services" id="checkLocal">
+                                        <label class="form-check-label" for="checkLocal">Local Delivery</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="301" name="services" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">Thermomix</label>
+                                        <input class="form-check-input" type="checkbox" value="301" name="services" id="checkThermomix">
+                                        <label class="form-check-label" for="checkThermomix">Thermomix</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="400" name="services" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">Runner Services</label>
+                                        <input class="form-check-input" type="checkbox" value="400" name="services" id="checkRunner">
+                                        <label class="form-check-label" for="checkRunner">Runner Services</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="401" name="services" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">Personal Shopping</label>
+                                        <input class="form-check-input" type="checkbox" value="401" name="services" id="checkPersonal">
+                                        <label class="form-check-label" for="checkPersonal">Personal Shopping</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="500" name="services" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">Miscellaneous</label>
+                                        <input class="form-check-input" type="checkbox" value="500" name="services" id="checkMisc">
+                                        <label class="form-check-label" for="checkMisc">Miscellaneous</label>
                                     </div>
 
                                 </div>
@@ -120,19 +120,12 @@
                 
                         </div>
 
-                        <!--Additional Information-->
-                        <input type="hidden" class="form-control form-control-user" name="value" id="value" aria-describedby="contactHelp">
-                        <input type="hidden" class="form-control form-control-user" name="zaloraTag" id="zaloraTag" aria-describedby="contactHelp">
-                        <input type="hidden" class="form-control form-control-user" name="areaLoc" id="areaLoc" aria-describedby="contactHelp">
-                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
-                        <input type="hidden" class="form-control form-control-user" name="dateArriveTemp" id="dateArriveTemp" aria-describedby="contactHelp">
-                        <input type="hidden" class="form-control form-control-user" name="areaCodeTemp" id="areaCodeTemp" aria-describedby="contactHelp">
                         <!-- End of Information -->
 
-                        <input type="hidden" class="form-control form-control-user" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="ZALORA">
+                        <input type="hidden" class="form-control form-control-user" name="formethod" id="formethod" value="userRegistration">
 
                         <div class="row">
-                            <a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>
+                            <button class="btn btn-primary btn-user btn-block">Submit</button>
                         </div>
 
                     </form>
