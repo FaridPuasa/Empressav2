@@ -76,26 +76,26 @@ const insertUser = ((req,res)=>{
     })
 })
 
+let currentUser = []
+
 const grantAccess = ((req,res)=>{
     let data = req.body
     let uid = data.uid
     let password = data.password
-    console.log(req.body)
+    //console.log(req.body)
     userDB.authenticate(uid, password, (err,user) =>{
         console.log(req.session.authenticated)
         if (req.session.authenticated){
             console.log(req.session.authenticated)
-            
         }
         else{
             if (user) {
                 console.log(req.sessionID)
                 req.session.authenticated = true
                 req.session.user = user
-                let currentUser = user
+                currentUser = user
                 console.log(currentUser)
                 let firsttime = user.firsttime
-                console.log(firsttime)
                 if (firsttime === "true") {
                     res.status(200).render('login', {
                         uid,
@@ -105,6 +105,7 @@ const grantAccess = ((req,res)=>{
                 }
                 else if (firsttime === "false") {
                     res.status(200).render('dashboard',{
+                        title: 'Dashboard',
                         id: user._id,
                         name: user.name,
                         uid: user.uid,
@@ -163,9 +164,10 @@ const readUser = ((req,res) => {
     userDB.find().then(
         (documents)=>{
             res.render('success',{
-                title: '',
-                response: '',
-                message: '',
+                title: 'Success',
+                response: `Password Changed`,
+                message: `Your password has been changed`,
+                link: '/',
             })
         },
         (err)=>{
@@ -173,6 +175,7 @@ const readUser = ((req,res) => {
                 title: '401',
                 response: '',
                 message: '',
+                link: '/',
             })
         }
     )

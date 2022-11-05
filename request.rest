@@ -43,7 +43,19 @@ GET http://localhost:6000/boom
 
 
 ###
-GET http://localhost:5000/dashboard
+GET http://localhost:5000/
+
+###
+POST http://localhost:5000/dashboard
+Content-Type: application/json
+
+{
+    "uid" : "211",
+    "password" : "F@rid207"
+}
+
+###
+GET http://localhost:5000/moh-list
 
 ###
 GET http://localhost:5000/user_register
