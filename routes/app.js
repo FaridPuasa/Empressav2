@@ -34,34 +34,27 @@ const {
     authService
 } = require('../controller/authorization')
 
-/*const {
-    insertExport,
-    readExport,
-} = require('../controller/export')*/
-/*const {
+const {
     insertZalora,
     insertPharmacy,
+    insertRunner,
+    insertPersonal,
     insertGrp,
-    readItem,
-    updateItemWH,
-    updateItemTC,
-    updateForOut,
-    updateSelfCollect,
-} = require('../controller/inventory')*/
-/*const {
-    insertPod,
-    insertOnePod,
-    insertTempPod,
-    insertPodByList,
-    readPod,
-} = require('../controller/pod');
-//const pod = require('../models/pod');
-const { query } = require('express');
-/*const {
-    insertGrmy,
-    readGrmy,
-    updateGrmy,
-} = require('../controller/grmy')*/
+    insertFmx,
+    insertLocal,
+    insertTmx,
+    insertStock,
+    insertPodFmx,
+    insertPodGrp,
+    insertPodJpmc,
+    insertPodLocal,
+    insertPodMoh,
+    insertPodPanaga,
+    insertPodPersonal,
+    insertPodRunner,
+    insertPodTmx,
+    insertPodZalora
+} = require('../controller/insert')
 
 //GET Login //done
 router.get('/', (req,res)=>{
@@ -105,6 +98,9 @@ router.get('/dashboard', (req,res)=>{
     )
 })*/
 
+router.post('/success-entry', insertZalora)
+router.post('/success-entry-pod', insertPodMoh)
+
 //GET Create POD //awaiting syahmi action - authorization required
 router.get('/:services-pod', (req,res)=>{
     let services = req.params.services
@@ -114,9 +110,9 @@ router.get('/:services-pod', (req,res)=>{
     if(services == 'moh'){
         mohPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podSequence == undefined || 0 || null){
+                console.log(result[0].podsequence)
+                if(result[0].podsequence == undefined || 0 || null){
                     let sequence = 1
-                    console.log(result.podSequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/moh'),
@@ -127,8 +123,7 @@ router.get('/:services-pod', (req,res)=>{
                     })
                 }
                 else{
-                    let sequence = result.podSequence + 1
-                    console.log(result.podSequence)
+                    let sequence = parseInt(result[0].podsequence) + 1
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/moh'),
@@ -147,9 +142,9 @@ router.get('/:services-pod', (req,res)=>{
     else if(services == 'jpmc'){
         jpmcPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podSequence == undefined || 0 || null){
+                if(result.podsequence == undefined || 0 || null){
                     let sequence = 1
-                    console.log(result.podSequence)
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/jpmc'),
@@ -160,8 +155,8 @@ router.get('/:services-pod', (req,res)=>{
                     })
                 }
                 else{
-                    let sequence = result.podSequence + 1
-                    console.log(result.podSequence)
+                    let sequence = result.podsequence + 1
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/jpmc'),
@@ -180,9 +175,9 @@ router.get('/:services-pod', (req,res)=>{
     else if(services == 'panaga'){
         panagaPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podSequence == undefined || 0 || null){
+                if(result.podsequence == undefined || 0 || null){
                     let sequence = 1
-                    console.log(result.podSequence)
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/panaga'),
@@ -193,8 +188,8 @@ router.get('/:services-pod', (req,res)=>{
                     })
                 }
                 else{
-                    let sequence = result.podSequence + 1
-                    console.log(result.podSequence)
+                    let sequence = result.podsequence + 1
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/panaga'),
@@ -213,9 +208,9 @@ router.get('/:services-pod', (req,res)=>{
     else if(services == 'fmx'){
         fmxPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podSequence == undefined || 0 || null){
+                if(result.podsequence == undefined || 0 || null){
                     let sequence = 1
-                    console.log(result.podSequence)
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/fmx'),
@@ -226,8 +221,8 @@ router.get('/:services-pod', (req,res)=>{
                     })
                 }
                 else{
-                    let sequence = result.podSequence + 1
-                    console.log(result.podSequence)
+                    let sequence = result.podsequence + 1
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/fmx'),
@@ -246,9 +241,9 @@ router.get('/:services-pod', (req,res)=>{
     else if(services == 'zalora'){
         podDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podSequence == undefined || 0 || null){
+                if(result.podsequence == undefined || 0 || null){
                     let sequence = 1
-                    console.log(result.podSequence)
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/zalora'),
@@ -259,8 +254,8 @@ router.get('/:services-pod', (req,res)=>{
                     })
                 }
                 else{
-                    let sequence = result.podSequence + 1
-                    console.log(result.podSequence)
+                    let sequence = result.podsequence + 1
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/zalora'),
@@ -279,9 +274,9 @@ router.get('/:services-pod', (req,res)=>{
     else if(services == 'grp'){
         grpPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podSequence == undefined || 0 || null){
+                if(result.podsequence == undefined || 0 || null){
                     let sequence = 1
-                    console.log(result.podSequence)
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/grp'),
@@ -292,8 +287,8 @@ router.get('/:services-pod', (req,res)=>{
                     })
                 }
                 else{
-                    let sequence = result.podSequence + 1
-                    console.log(result.podSequence)
+                    let sequence = result.podsequence + 1
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/grp'),
@@ -312,9 +307,9 @@ router.get('/:services-pod', (req,res)=>{
     else if(services == 'runner'){
         runnerPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podSequence == undefined || 0 || null){
+                if(result.podsequence == undefined || 0 || null){
                     let sequence = 1
-                    console.log(result.podSequence)
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/runner'),
@@ -325,8 +320,8 @@ router.get('/:services-pod', (req,res)=>{
                     })
                 }
                 else{
-                    let sequence = result.podSequence + 1
-                    console.log(result.podSequence)
+                    let sequence = result.podsequence + 1
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/runner'),
@@ -345,9 +340,9 @@ router.get('/:services-pod', (req,res)=>{
     else if(services == 'personal'){
         personalPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podSequence == undefined || 0 || null){
+                if(result.podsequence == undefined || 0 || null){
                     let sequence = 1
-                    console.log(result.podSequence)
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/personal'),
@@ -358,8 +353,8 @@ router.get('/:services-pod', (req,res)=>{
                     })
                 }
                 else{
-                    let sequence = result.podSequence + 1
-                    console.log(result.podSequence)
+                    let sequence = result.podsequence + 1
+                    console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/personal'),
@@ -731,20 +726,32 @@ router.get('/:services-list', (req,res)=>{
 router.get('/:services-podlist', (req,res)=>{
     let services = req.params.services
     let servicecode = req.params.servicecode
+    let user = currentUser[0]
     let service = services.toUpperCase()
     console.log(service)
     if(services == 'moh'){
-        res.render('podlist',{
-            title: `${service} POD List`,
-            partials: ('./partials/podlist/moh'),
-            moment: moment,
-        })
+        mohPodDB.find().sort().then(
+            (document)=>{
+                console.log(document)
+                res.render('podlist',{
+                    title: `${service} POD List`,
+                    partials: ('./partials/podlist/moh'),
+                    moment: moment,
+                    document,
+                    user
+                })
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
     }
     else if(services == 'jpmc'){
         res.render('podlist',{
             title: `${service} POD List`,
             partials: ('./partials/podlist/jpmc'),
             moment: moment,
+            user
         })
     }
     else if(services == 'panaga'){
@@ -752,6 +759,7 @@ router.get('/:services-podlist', (req,res)=>{
             title: `${service} POD List`,
             partials: ('./partials/podlist/panaga'),
             moment: moment,
+            user
         })
     }
     else if(services == 'fmx'){
@@ -759,6 +767,7 @@ router.get('/:services-podlist', (req,res)=>{
             title: `${service} POD List`,
             partials: ('./partials/podlist/fmx'),
             moment: moment,
+            user
         })
     }
     else if(services == 'zalora'){
@@ -766,12 +775,14 @@ router.get('/:services-podlist', (req,res)=>{
             title: `${service} POD List`,
             partials: ('./partials/podlist/zalora'),
             moment: moment,
+            user
         })
     }else if(services == 'grp'){
         res.render('podlist',{
             title: `${service} POD List`,
             partials: ('./partials/podlist/grp'),
             moment: moment,
+            user
         })
     }
     else if(services == 'runner'){
@@ -779,6 +790,7 @@ router.get('/:services-podlist', (req,res)=>{
             title: `${service} POD List`,
             partials: ('./partials/podlist/runner'),
             moment: moment,
+            user
         })
     }
     else if(services == 'personal'){
@@ -786,6 +798,7 @@ router.get('/:services-podlist', (req,res)=>{
             title: `${service} POD List`,
             partials: ('./partials/podlist/personal'),
             moment: moment,
+            user
         })
     }
     else{
@@ -802,9 +815,9 @@ router.get('/:services-podlist', (req,res)=>{
 router.get('/restock_order', (req,res)=>{
     waybillDB.find().sort({$natural: -1}).limit(1).then(
         (result)=>{
-            if(result.podSequence == undefined || 0 || null){
+            if(result.podsequence == undefined || 0 || null){
                 let sequence = 1
-                console.log(result.podSequence)
+                console.log(result.podsequence)
                 res.render('restock',{
                     title: `BMF WAYBILL`,
                     sequence: sequence,
@@ -812,8 +825,8 @@ router.get('/restock_order', (req,res)=>{
                 })
             }
             else{
-                let sequence = result.podSequence + 1
-                console.log(result.podSequence)
+                let sequence = result.podsequence + 1
+                console.log(result.podsequence)
                 res.render('restock',{
                     title: `BMF WAYBILL`,
                     sequence: sequence,

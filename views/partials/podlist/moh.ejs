@@ -17,6 +17,8 @@
                                     <tr>
                                         <th></th>
                                         <th>Pod ID</th>
+                                        <th>Made By</th>
+                                        <th>Dispatch</th>
                                         <th>Area</th>
                                         <th>Delivery Date</th>
                                         <th>Status</th>
@@ -31,10 +33,23 @@
                                                 </svg>
                                             </button>
                                         </td>
-                                        <td>GR/POD/ZAL: 1</td>
-                                        <td>BERAKAS 1</td>
-                                        <td>12/12/12</td>
-                                        <td>On Hold</td>
+                                        <%document.forEach(document=> {%>
+                                        <td><%= document.pod_id %></td>
+                                        <td><%= document.madeby %></td>
+                                        <td><%= document.agentName %></td>
+                                        <td><%= document.deliveryArea %></td>
+                                        <td><%= document.deliveryDate %></td>
+                                        <td>
+                                            <% if(document.podstatus == "P1"){%>
+                                                ON HOLD
+                                            <%}%>
+                                            <% if(document.podstatus == "P2"){%>
+                                                IN PROGRESS
+                                            <%}%>
+                                            <% if(document.podstatus == "P3"){%>
+                                                COMPLETE
+                                            <%}%>
+                                        </td>
                                         <form action="" method="">
                                             <td><a class="btn">Start Delivery</a></td>
                                         </form>
@@ -55,69 +70,38 @@
                                                             <th>Customer Contact</th>	
                                                             <th>Value (BND</th>	
                                                             <th>Payment Method</th>
+                                                            <th>Delivery Type</th>
                                                             <th>Success/Fail</th>		
                                                             <th>Remark</th>	
                                                         </tr>
                                                     </thead>	
                                                                         
                                                     <tbody>
+                                                        <% for(var i=0 ; i < document.numbers.length; i++) {%>
                                                         <tr data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
-                                                            <td>1</td>
-                                                            <td>XXX XXX XXX</td>
+                                                            <td><%= document.numbers[i] %></td>
+                                                            <td><%= document.trackingNumber[i] %></td>
                                                             <td></td>
-                                                            <td></td>
-                                                            <td>Ali Hassan</td>
-                                                            <td>Somewhere in berakas</td>
-                                                            <td>673 XXX XXXX</td>
-                                                            <td>674</td>
-                                                            <td>COD/BT</td>
-                                                            <td><button class="btn">Complete</button></td>
+                                                            <td><%= document.fridge[i] %></td>
+                                                            <td><%= document.contactName[i] %></td>
+                                                            <td><%= document.contactAddress[i] %></td>
+                                                            <td><%= document.contactNumber[i] %></td>
+                                                            <td><%= document.parcelValue[i] %></td>
+                                                            <td><%= document.PaymentMethod[i] %></td>
+                                                            <td><%= document.deliveryType[i] %></td>
+                                                            <td>
+                                                                <!--If complete button show-->
+                                                                <button class="btn">Complete</button>
+                                                            </td>
                                                             <td></td>
                                                         </tr>
-                                                        <tr data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
-                                                            <td>1</td>
-                                                            <td>XXX XXX XXX</td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td>Ali Hassan</td>
-                                                            <td>Somewhere in berakas</td>
-                                                            <td>673 XXX XXXX</td>
-                                                            <td>674</td>
-                                                            <td>COD/BT</td>
-                                                            <td><button class="btn">Complete</button></td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
-                                                            <td>1</td>
-                                                            <td>XXX XXX XXX</td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td>Ali Hassan</td>
-                                                            <td>Somewhere in berakas</td>
-                                                            <td>673 XXX XXXX</td>
-                                                            <td>674</td>
-                                                            <td>COD/BT</td>
-                                                            <td></td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
-                                                            <td>1</td>
-                                                            <td>XXX XXX XXX</td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td>Ali Hassan</td>
-                                                            <td>Somewhere in berakas</td>
-                                                            <td>673 XXX XXXX</td>
-                                                            <td>674</td>
-                                                            <td>COD/BT</td>
-                                                            <td></td>
-                                                            <td></td>
-                                                        </tr>
+                                                        <%}%>
                                                     </tbody>
                                                 </table>
                                             </div> 
                                         </td>
                                     </tr>
+                                    <%})%>
                                 </tbody>
                             </table>
                         </div>

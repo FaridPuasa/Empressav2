@@ -11,7 +11,7 @@
             <!-- Outer Row -->
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-12 col-md-9">
-                    <form class="user" method="POST" action="/itemInSuccess">
+                    <form class="user" method="POST" action="/success-entry-pod">
                         <div class="table-responsive-xl">
                             <table class="table">
                                 <thead class="thead-light">
@@ -20,7 +20,7 @@
                                         <th scope="col" colspan="9">PROOF OF DELIVERY | MOH</th>
                                         <th scope="col" colsapn="1">
                                             <div class="text-center">
-                                                <img src="/img/gr_logo.png" class="rounded" alt="go_rush.png">
+                                                <img src="/public/img/gr_logo.png" class="rounded" alt="go_rush.png">
                                             </div>
                                         </th>
                                         <th></th>
@@ -183,7 +183,7 @@
                             </div>
                             <button id="submitBtnfinal" class="btn btn-primary btn-block">Submit Final</button>
                             <input type="hidden" class="form-control form-control-user" name="method" id="method"
-                                aria-describedby="contactHelp" value="pod_JPMC">
+                                aria-describedby="contactHelp" value="pod_MOH">
                             <input type="hidden" class="form-control form-control-user" name="dispatcherName"
                                 id="dispatcherName" aria-describedby="contactHelp">
                             <input type="hidden" class="form-control form-control-user" name="dateTimeStart"
@@ -356,49 +356,41 @@
                                     numberInput.setAttribute("type", "text");
                                     numberInput.setAttribute("name", "numbers");
                                     numberInput.setAttribute("value", (countTN + 1) + ".");
-                                    numberInput.setAttribute("disabled", "true");
 
                                     let trackingNumberInput = document.createElement('input');
                                     trackingNumberInput.setAttribute("type", "text");
                                     trackingNumberInput.setAttribute("name", "trackingNumber");
                                     trackingNumberInput.setAttribute("value", json_responsetn.data[0].job_id);
-                                    trackingNumberInput.setAttribute("disabled", "true");
 
                                     let contactNameInput = document.createElement('input');
                                     contactNameInput.setAttribute("type", "text");
                                     contactNameInput.setAttribute("name", "contactName");
                                     contactNameInput.setAttribute("value", json_responsetn.data[0].customer_username);
-                                    contactNameInput.setAttribute("disabled", "true");
 
                                     let contactAddressInput = document.createElement('input');
                                     contactAddressInput.setAttribute("type", "text");
                                     contactAddressInput.setAttribute("name", "contactAddress");
                                     contactAddressInput.setAttribute("value", json_responsetn.data[0].job_address);
-                                    contactAddressInput.setAttribute("disabled", "true");
 
                                     let contactNumberInput = document.createElement('input');
                                     contactNumberInput.setAttribute("type", "text");
                                     contactNumberInput.setAttribute("name", "contactNumber");
                                     contactNumberInput.setAttribute("value", json_responsetn.data[0].customer_phone);
-                                    contactNumberInput.setAttribute("disabled", "true");
 
                                     let parcelValueInput = document.createElement('input');
                                     parcelValueInput.setAttribute("type", "text");
                                     parcelValueInput.setAttribute("name", "parcelValue");
                                     parcelValueInput.setAttribute("value", json_responsetn.data[0].custom_field[15].data);
-                                    parcelValueInput.setAttribute("disabled", "true");
 
                                     let PaymentMethodInput = document.createElement('input');
                                     PaymentMethodInput.setAttribute("type", "text");
                                     PaymentMethodInput.setAttribute("name", "PaymentMethod");
                                     PaymentMethodInput.setAttribute("value", json_responsetn.data[0].custom_field[11].data);
-                                    PaymentMethodInput.setAttribute("disabled", "true");
 
                                     let deliveryTypeInput = document.createElement('input');
                                     deliveryTypeInput.setAttribute("type", "text");
                                     deliveryTypeInput.setAttribute("name", "deliveryType");
                                     deliveryTypeInput.setAttribute("value", json_responsetn.data[0].custom_field[9].data);
-                                    deliveryTypeInput.setAttribute("disabled", "true");
 
                                     document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(numberInput);
                                     document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(trackingNumberInput);
@@ -726,7 +718,6 @@
                             fridgeItemInput.setAttribute("type", "text");
                             fridgeItemInput.setAttribute("name", "fridgeItem");
                             fridgeItemInput.setAttribute("value", "Yes");
-                            fridgeItemInput.setAttribute("disabled", "true");
 
                             document.getElementById("hiddenFridgeItemData").appendChild(fridgeItemInput);
                         }
@@ -735,7 +726,6 @@
                             fridgeItemInput.setAttribute("type", "text");
                             fridgeItemInput.setAttribute("name", "fridgeItem");
                             fridgeItemInput.setAttribute("value", "No");
-                            fridgeItemInput.setAttribute("disabled", "true");
 
                             document.getElementById("hiddenFridgeItemData").appendChild(fridgeItemInput);
                         }
