@@ -28,16 +28,16 @@ const insertZalora = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let status = "IN WAREHOUSE"
+    let status = "A1"
     let attempt = 'false'
     let reentry = 'false'
     let reschedule = 'false'
     let startCount = 0
     let parcelStatus = {
-        statusDetail: status, 
+        statusHistory: status, 
         dateUpdated: dateEntry,
         updateBy: data.username, 
-        updateById: data.userID, 
+        updateById: data.uid, 
     }
     let warehouse = new warehouseDB ({
         //Main
@@ -91,16 +91,16 @@ const insertPharmacy = ((req,res)=> {
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let status = "IN MEDICINE ROOM"
+    let status = "A2"
     let attempt = 'false'
     let reentry = 'false'
     let reschedule = 'false'
     let startCount = 0
     let parcelStatus = {
-        statusDetail: status, 
+        statusHistory: status, 
         dateUpdated: dateEntry,
         updateBy: data.username, 
-        updateById: data.userID, 
+        updateById: data.uid, 
     }
     let warehouse = new warehouseDB ({
         //Main
@@ -154,16 +154,16 @@ const insertGrp = ((req,res) =>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let status = "IN WAREHOUSE"
+    let status = "A1"
     let attempt = 'false'
     let reentry = 'false'
     let reschedule = 'false'
     let startCount = 0
     let parcelStatus = {
-        statusDetail: status, 
+        statusHistory: status, 
         dateUpdated: dateEntry,
         updateBy: data.username, 
-        updateById: data.userID, 
+        updateById: data.uid, 
     }
     let warehouse = new warehouseDB ({
         //Main
@@ -217,16 +217,16 @@ const insertFmx = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let status = "IN WAREHOUSE"
+    let status = "A1"
     let attempt = 'false'
     let reentry = 'false'
     let reschedule = 'false'
     let startCount = 0
     let parcelStatus = {
-        statusDetail: status, 
+        statusHistory: status, 
         dateUpdated: dateEntry,
         updateBy: data.username, 
-        updateById: data.userID, 
+        updateById: data.uid, 
     }
     let warehouse = new warehouseDB ({
         //Main
@@ -280,16 +280,16 @@ const insertRunner = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let status = "IN WAREHOUSE"
+    let status = "A1"
     let attempt = 'false'
     let reentry = 'false'
     let reschedule = 'false'
     let startCount = 0
     let parcelStatus = {
-        statusDetail: status, 
+        statusHistory: status, 
         dateUpdated: dateEntry,
         updateBy: data.username, 
-        updateById: data.userID, 
+        updateById: data.uid, 
     }
     let warehouse = new warehouseDB ({
         //Main
@@ -343,16 +343,16 @@ const insertPersonal = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let status = "IN WAREHOUSE"
+    let status = "A1"
     let attempt = 'false'
     let reentry = 'false'
     let reschedule = 'false'
     let startCount = 0
     let parcelStatus = {
-        statusDetail: status, 
+        statusHistory: status, 
         dateUpdated: dateEntry,
         updateBy: data.username, 
-        updateById: data.userID, 
+        updateById: data.uid, 
     }
     let warehouse = new warehouseDB ({
         //Main
@@ -405,16 +405,16 @@ const insertLocal = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let status = "IN WAREHOUSE"
+    let status = "A1"
     let attempt = 'false'
     let reentry = 'false'
     let reschedule = 'false'
     let startCount = 0
     let parcelStatus = {
-        statusDetail: status, 
+        statusHistory: status, 
         dateUpdated: dateEntry,
         updateBy: data.username, 
-        updateById: data.userID, 
+        updateById: data.uid, 
     }
     let warehouse = new warehouseDB ({
         //Main
@@ -467,16 +467,16 @@ const insertTmx = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
-    let status = "IN WAREHOUSE"
+    let status = "A1"
     let attempt = 'false'
     let reentry = 'false'
     let reschedule = 'false'
     let startCount = 0
     let parcelStatus = {
-        statusDetail: status, 
+        statusHistory: status, 
         dateUpdated: dateEntry,
         updateBy: data.username, 
-        updateById: data.userID, 
+        updateById: data.uid, 
     }
     let warehouse = new warehouseDB ({
         //Main
@@ -566,19 +566,19 @@ const insertPodZalora = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "ON HOLD" 
+    let status_pod = "P1" 
     let pod_id = "GR/POD/ZAL: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            status: "B", //need to find a way to change to delivery in progress
             $push: {
                 history: {
-                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    statusHistory: "B", 
                     dateUpdated: date,
                     updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateById: data.uid, 
                 }
             }
         }
@@ -640,19 +640,19 @@ const insertPodFmx = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "ON HOLD" 
+    let status_pod = "P1" 
     let pod_id = "GR/POD/FMX: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            status: "B", //need to find a way to change to delivery in progress
             $push: {
                 history: {
-                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    statusHistory: "B", 
                     dateUpdated: date,
                     updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateById: data.uid, 
                 }
             }
         }
@@ -714,19 +714,19 @@ const insertPodGrp = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "ON HOLD" 
+    let status_pod = "P1" 
     let pod_id = "GR/POD/GRP: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            status: "B", //need to find a way to change to delivery in progress
             $push: {
                 history: {
-                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    statusHistory: "B", 
                     dateUpdated: date,
                     updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateById: data.uid, 
                 }
             }
         }
@@ -788,19 +788,19 @@ const insertPodRunner = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "ON HOLD" 
+    let status_pod = "P1" 
     let pod_id = "GR/POD/RUN: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            status: "B", //need to find a way to change to delivery in progress
             $push: {
                 history: {
-                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    statusHistory: "B", 
                     dateUpdated: date,
                     updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateById: data.uid, 
                 }
             }
         }
@@ -862,19 +862,19 @@ const insertPodPersonal = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "ON HOLD" 
+    let status_pod = "P1" 
     let pod_id = "GR/POD/PS: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            status: "B", //need to find a way to change to delivery in progress
             $push: {
                 history: {
-                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    statusHistory: "B", 
                     dateUpdated: date,
                     updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateById: data.uid, 
                 }
             }
         }
@@ -937,19 +937,19 @@ const insertPodLocal = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "ON HOLD" 
+    let status_pod = "P1" 
     let pod_id = "GR/POD/PS: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            status: "B", //need to find a way to change to delivery in progress
             $push: {
                 history: {
-                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    statusHistory: "B", 
                     dateUpdated: date,
                     updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateById: data.uid, 
                 }
             }
         }
@@ -1012,19 +1012,19 @@ const insertPodTmx = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "ON HOLD" 
+    let status_pod = "P1" 
     let pod_id = "GR/POD/PS: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            status: "B", //need to find a way to change to delivery in progress
             $push: {
                 history: {
-                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    statusHistory: "B", 
                     dateUpdated: date,
                     updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateById: data.uid, 
                 }
             }
         }
@@ -1087,19 +1087,19 @@ const insertPodMoh = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "ON HOLD" 
+    let status_pod = "P1" 
     let pod_id = 'GR/POD/MOH:' + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            status: "B", //need to find a way to change to delivery in progress
             $push: {
                 history: {
-                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    statusHistory: "B", 
                     dateUpdated: date,
                     updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateById: data.uid, 
                 }
             }
         }
@@ -1163,19 +1163,19 @@ const insertPodJpmc = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "ON HOLD" 
+    let status_pod = "P1" 
     let pod_id = 'GR/POD/JPMC:' + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            status: "B", //need to find a way to change to delivery in progress
             $push: {
                 history: {
-                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    statusHistory: "B", 
                     dateUpdated: date,
                     updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateById: data.uid, 
                 }
             }
         }
@@ -1238,19 +1238,19 @@ const insertPodPanaga = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "ON HOLD" 
+    let status_pod = "P1" 
     let pod_id = 'GR/POD/PNG:' + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "SCHEDULED FOR DELIVERY", //need to find a way to change to delivery in progress
+            status: "B", //need to find a way to change to delivery in progress
             $push: {
                 history: {
-                    statusDetail: "SCHEDULED FOR DELIVERY", 
+                    statusHistory: "B", 
                     dateUpdated: date,
                     updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateById: data.uid, 
                 }
             }
         }

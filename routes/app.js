@@ -26,9 +26,13 @@ const {
     insertUser,
     grantAccess,
     updatePassword,
+    currentUser
 } = require('../controller/user')
-const user = require('../models/user')
 
+const {
+    authPage,
+    authService
+} = require('../controller/authorization')
 
 /*const {
     insertExport,
@@ -105,6 +109,7 @@ router.get('/dashboard', (req,res)=>{
 router.get('/:services-pod', (req,res)=>{
     let services = req.params.services
     let service = services.toUpperCase()
+    let user = currentUser[0]
     console.log(service)
     if(services == 'moh'){
         mohPodDB.find().sort({$natural: -1}).limit(1).then(
@@ -118,6 +123,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service,
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
                 else{
@@ -129,6 +135,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service,
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
             },
@@ -149,6 +156,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service,
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
                 else{
@@ -160,6 +168,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service,
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
             },
@@ -180,6 +189,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service,
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
                 else{
@@ -191,6 +201,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service,
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
             },
@@ -211,6 +222,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service,
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
                 else{
@@ -222,6 +234,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service,
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
             },
@@ -242,6 +255,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service,
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
                 else{
@@ -253,6 +267,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service,
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
             },
@@ -273,6 +288,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service,
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
                 else{
@@ -284,6 +300,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service,
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
             },
@@ -304,6 +321,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service + ' SERVICES',
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
                 else{
@@ -315,6 +333,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service + ' SERVICES',
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
             },
@@ -335,6 +354,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service  + ' SHOPPING',
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
                 else{
@@ -346,6 +366,7 @@ router.get('/:services-pod', (req,res)=>{
                         service: service + ' SHOPPING',
                         sequence: sequence,
                         moment: moment,
+                        user
                     })
                 }
             },
@@ -368,12 +389,14 @@ router.get('/:services-pod', (req,res)=>{
 router.get('/:services-in/:number', (req,res)=>{
     let services = req.params.services
     let number = req.params.number
+    let user = currentUser[0]
     console.log(services)
     if(services == 'moh'){
         res.render('itemin',{
             title: `${services} In`,
             partials: ('./partials/itemin/moh'),
             moment: moment,
+            user
         })
     }
     else if(services == 'jpmc'){
@@ -381,6 +404,7 @@ router.get('/:services-in/:number', (req,res)=>{
             title: `${services} In`,
             partials: ('./partials/itemin/jpmc'),
             moment: moment,
+            user
         })
     }
     else if(services == 'panaga'){
@@ -388,6 +412,7 @@ router.get('/:services-in/:number', (req,res)=>{
             title: `${services} In`,
             partials: ('./partials/itemin/panaga'),
             moment: moment,
+            user
         })
     }
     else if(services == 'fmx'){
@@ -395,6 +420,7 @@ router.get('/:services-in/:number', (req,res)=>{
             title: `${services} In`,
             partials: ('./partials/itemin/fmx'),
             moment: moment,
+            user
         })
     }
     else if(services == 'zalora'){
@@ -402,12 +428,14 @@ router.get('/:services-in/:number', (req,res)=>{
             title: `${services} In`,
             partials: ('./partials/itemin/zalora'),
             moment: moment,
+            user
         })
     }else if(services == 'grp'){
         res.render('itemin',{
             title: `${services} In`,
             partials: ('./partials/itemin/grp'),
             moment: moment,
+            user
         })
     }
     else if(services == 'runner'){
@@ -415,6 +443,7 @@ router.get('/:services-in/:number', (req,res)=>{
             title: `${services} In`,
             partials: ('./partials/itemin/runner'),
             moment: moment,
+            user
         })
     }
     else if(services == 'personal'){
@@ -422,6 +451,23 @@ router.get('/:services-in/:number', (req,res)=>{
             title: `${services} In`,
             partials: ('./partials/itemin/personal'),
             moment: moment,
+            user
+        })
+    }
+    else if(services == 'local'){
+        res.render('itemin',{
+            title: `${services} In`,
+            partials: ('./partials/itemin/local'),
+            moment: moment,
+            user
+        })
+    }
+    else if(services == 'tmx'){
+        res.render('itemin',{
+            title: `${services} In`,
+            partials: ('./partials/itemin/tmx'),
+            moment: moment,
+            user
         })
     }
     else{
@@ -434,9 +480,12 @@ router.get('/:services-in/:number', (req,res)=>{
     }
 })
 
+//let currentUser = user
+
 //GET Item List //adding database into the loop
 router.get('/:services-list', (req,res)=>{
     let services = req.params.services
+    let user = currentUser[0]
     let list =[
         {
             'tracking': 'Andrei ',
@@ -592,6 +641,7 @@ router.get('/:services-list', (req,res)=>{
                     partials: ('./partials/list/moh'),
                     list: list,
                     moment: moment,
+                    user,
                 })
             }
             else if(services == 'jpmc'){
@@ -600,6 +650,7 @@ router.get('/:services-list', (req,res)=>{
                     partials: ('./partials/list/jpmc'),
                     list: documents,
                     moment: moment,
+                    user,
                 })
             }
             else if(services == 'panaga'){
@@ -608,6 +659,7 @@ router.get('/:services-list', (req,res)=>{
                     partials: ('./partials/list/panaga'),
                     list: documents,
                     moment: moment,
+                    user,
                 })
             }
             else if(services == 'fmx'){
@@ -616,6 +668,7 @@ router.get('/:services-list', (req,res)=>{
                     partials: ('./partials/list/fmx'),
                     list: documents,
                     moment: moment,
+                    user,
                 })
             }
             else if(services == 'zalora'){
@@ -624,6 +677,7 @@ router.get('/:services-list', (req,res)=>{
                     partials: ('./partials/list/zalora'),
                     list: documents,
                     moment: moment,
+                    user,
                 })
             }else if(services == 'grp'){
                 res.render('list',{
@@ -631,6 +685,7 @@ router.get('/:services-list', (req,res)=>{
                     partials: ('./partials/list/grp'),
                     list: documents,
                     moment: moment,
+                    user,
                 })
             }
             else if(services == 'runner'){
@@ -639,6 +694,7 @@ router.get('/:services-list', (req,res)=>{
                     partials: ('./partials/list/runner'),
                     list: documents,
                     moment: moment,
+                    user,
                 })
             }
             else if(services == 'personal'){
@@ -647,6 +703,7 @@ router.get('/:services-list', (req,res)=>{
                     partials: ('./partials/list/personal'),
                     list: documents,
                     moment: moment,
+                    user,
                 })
             }
             else{
