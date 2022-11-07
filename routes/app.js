@@ -8,6 +8,8 @@ const mohPodDB = require ('../models/mohpod')
 const jpmcPodDB = require('../models/jpmcpod')
 const panagaPodDB = require('../models/panagapod')
 const zaloraPodDB = require('../models/zalorapod')
+const localPodDB = require('../models/localpod')
+const tmxPodDB = require('../models/tmxpod')
 const fmxPodDB = require('../models/fmxpod')
 const grpPodDB = require('../models/grppod')
 const runnerPodDB = require('../models/runnerpod')
@@ -339,6 +341,72 @@ router.get('/:services-pod', (req,res)=>{
     }
     else if(services == 'personal'){
         personalPodDB.find().sort({$natural: -1}).limit(1).then(
+            (result)=>{
+                if(result.podsequence == undefined || 0 || null){
+                    let sequence = 1
+                    console.log(result.podsequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/personal'),
+                        service: service  + ' SHOPPING',
+                        sequence: sequence,
+                        moment: moment,
+                        user
+                    })
+                }
+                else{
+                    let sequence = result.podsequence + 1
+                    console.log(result.podsequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/personal'),
+                        service: service + ' SHOPPING',
+                        sequence: sequence,
+                        moment: moment,
+                        user
+                    })
+                }
+            },
+            (err)=>{
+                console.log("Failed to append sequence: " + err)
+            }
+        )
+    }
+    else if(services == 'local'){
+        localPodDB.find().sort({$natural: -1}).limit(1).then(
+            (result)=>{
+                if(result.podsequence == undefined || 0 || null){
+                    let sequence = 1
+                    console.log(result.podsequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/personal'),
+                        service: service  + ' SHOPPING',
+                        sequence: sequence,
+                        moment: moment,
+                        user
+                    })
+                }
+                else{
+                    let sequence = result.podsequence + 1
+                    console.log(result.podsequence)
+                    res.render('pod',{
+                        title: `${service} POD`,
+                        partials: ('./partials/pod/personal'),
+                        service: service + ' SHOPPING',
+                        sequence: sequence,
+                        moment: moment,
+                        user
+                    })
+                }
+            },
+            (err)=>{
+                console.log("Failed to append sequence: " + err)
+            }
+        )
+    }
+    else if(services == 'tmx'){
+        tmxPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
                 if(result.podsequence == undefined || 0 || null){
                     let sequence = 1
