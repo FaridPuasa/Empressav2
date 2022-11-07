@@ -64,7 +64,7 @@ const inventorySchema  = new mongoose.Schema({
     userid: string,
     //history
     history: [{
-        statusDetail: string, 
+        statusHistory: string, 
         dateUpdated: string ,
         updateBy: string, 
         updateById: string, 

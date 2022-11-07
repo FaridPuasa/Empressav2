@@ -232,10 +232,10 @@ const updateZaloraPod = ((req,res) =>{
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            status: "C", //need to find a way to change to C
             $push: {
                 history: {
-                    statusDetail: "DELIVERY IN PROGRESS", 
+                    statusDetail: "C", 
                     dateUpdated: date,
                     updateBy: data.username, 
                     updateById: data.userID, 
@@ -272,10 +272,10 @@ const updateFmxPod = ((req,res) =>{
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            status: "C", //need to find a way to change to C
             $push: {
                 history: {
-                    statusDetail: "DELIVERY IN PROGRESS", 
+                    statusDetail: "C", 
                     dateUpdated: date,
                     updateBy: data.username, 
                     updateById: data.userID, 
@@ -312,10 +312,10 @@ const updateGrpPod = ((req,res) =>{
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            status: "C", //need to find a way to change to C
             $push: {
                 history: {
-                    statusDetail: "DELIVERY IN PROGRESS", 
+                    statusDetail: "C", 
                     dateUpdated: date,
                     updateBy: data.username, 
                     updateById: data.userID, 
@@ -352,10 +352,10 @@ const updateRunnerPod = ((req,res) =>{
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            status: "C", //need to find a way to change to C
             $push: {
                 history: {
-                    statusDetail: "DELIVERY IN PROGRESS", 
+                    statusDetail: "C", 
                     dateUpdated: date,
                     updateBy: data.username, 
                     updateById: data.userID, 
@@ -392,10 +392,10 @@ const updatePersonalPod = ((req,res) =>{
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            status: "C", //need to find a way to change to C
             $push: {
                 history: {
-                    statusDetail: "DELIVERY IN PROGRESS", 
+                    statusDetail: "C", 
                     dateUpdated: date,
                     updateBy: data.username, 
                     updateById: data.userID, 
@@ -432,10 +432,10 @@ const updateMohPod = ((req,res) =>{
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            status: "C", //need to find a way to change to C
             $push: {
                 history: {
-                    statusDetail: "DELIVERY IN PROGRESS", 
+                    statusDetail: "C", 
                     dateUpdated: date,
                     updateBy: data.username, 
                     updateById: data.userID, 
@@ -472,10 +472,10 @@ const updateJpmcPod = ((req,res) =>{
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            status: "C", //need to find a way to change to C
             $push: {
                 history: {
-                    statusDetail: "DELIVERY IN PROGRESS", 
+                    statusDetail: "C", 
                     dateUpdated: date,
                     updateBy: data.username, 
                     updateById: data.userID, 
@@ -512,10 +512,10 @@ const updatePanagaPod = ((req,res) =>{
     for (let i = 0; i < tracker.length; i++){
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            status: "DELIVERY IN PROGRESS", //need to find a way to change to delivery in progress
+            status: "C", //need to find a way to change to C
             $push: {
                 history: {
-                    statusDetail: "DELIVERY IN PROGRESS", 
+                    statusDetail: "C", 
                     dateUpdated: date,
                     updateBy: data.username, 
                     updateById: data.userID, 

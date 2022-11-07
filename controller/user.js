@@ -77,24 +77,21 @@ const insertUser = ((req,res)=>{
 })
 
 let currentUser = []
-
 const grantAccess = ((req,res)=>{
     let data = req.body
     let uid = data.uid
     let password = data.password
     //console.log(req.body)
     userDB.authenticate(uid, password, (err,user) =>{
-        console.log(req.session.authenticated)
+        //console.log(req.session.authenticated)
         if (req.session.authenticated){
-            console.log(req.session.authenticated)
+            //console.log(req.session.authenticated)
         }
         else{
             if (user) {
                 console.log(req.sessionID)
                 req.session.authenticated = true
                 req.session.user = user
-                currentUser = user
-                console.log(currentUser)
                 let firsttime = user.firsttime
                 if (firsttime === "true") {
                     res.status(200).render('login', {
@@ -107,10 +104,10 @@ const grantAccess = ((req,res)=>{
                     res.status(200).render('dashboard',{
                         title: 'Dashboard',
                         id: user._id,
-                        name: user.name,
-                        uid: user.uid,
-                        contact: user.contact,
+                        user,
                     })
+                    tempUser = user
+                    currentUser.push(tempUser)
                 }
                 else{
                     console.log("Failed to detect user status [firsttimer == undefined]")
@@ -222,6 +219,7 @@ module.exports = {
     insertUser,
     updatePassword,
     grantAccess,
+    currentUser,
 
     readUser,
     updateUser,

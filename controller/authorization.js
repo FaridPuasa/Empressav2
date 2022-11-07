@@ -1,7 +1,12 @@
+const {grantAccess,currentUser} = require ('../controller/user')
+let user = currentUser[0]
+
+console.log(user)
 const authPage = (permissions)=>{
     return (req,res,next)=>{
-        const userRole = req.body.userRole
-        if (permissions.includes(userRole)) return next()
+        const role = user.role
+        console.log(role)
+        if (permissions.includes(role)) return next()
         res.render('error', {
             title: '401',
             response: 'Unauthorized',
@@ -12,7 +17,7 @@ const authPage = (permissions)=>{
 
 const authService =  (req,res,next)=>{
     const serviceNumber = parseInt(req.params.number)
-    if(req.body.services.includes(serviceNumber)) return next()
+    if(user.services.includes(serviceNumber)) return next()
     res.render('error', {
         title: '401',
         response: 'Unauthorized',
