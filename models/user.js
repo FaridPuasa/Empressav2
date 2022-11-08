@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const moment = require('moment')
+const moment = require('moment');
+const res = require("express/lib/response");
 
 
 const reqString = {
@@ -23,10 +24,12 @@ const userSchema  = new mongoose.Schema({
     dateCreate: {type: Date, default: date},
 })
 
-userSchema.statics.authenticate = function(icNumber, password, callback){
+userSchema.statics.authenticate = function(uid, password, callback){
+    console.log("Mongo UID: " + uid)
     user.findOne({
-        icNumber:icNumber
+        uid
     }).exec(function(error,user){
+        console.log(user)
         if(error){
             console.log(error)
         } else if(!user){
@@ -56,6 +59,6 @@ userSchema.pre("save", function(next){
 });
 
 const user = mongoose.model("user", userSchema); 
-module.exports = user
 
+module.exports = user
 

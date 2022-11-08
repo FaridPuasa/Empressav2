@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const flash = require('connect-flash')
 const { append } = require('express/lib/response')
 const router = require('../routes/app')
-const user = require('../models/user')
+
 
 /*
 Admin = 10
@@ -34,6 +34,7 @@ const insertUser = ((req,res)=>{
     let data = req.body
     let name = data.name
     let uid = data.uid
+    console.log(data)
     let user = new userDB({
         name: name,
         uid: uid,
@@ -41,22 +42,32 @@ const insertUser = ((req,res)=>{
         access: data.access,
         email: data.email,
         contact: data.contact,
-        role: data.role,
+        role: data.roles,
         service: data.services,
         firsttime: 'true',
         dateCreate: date
     })
     user.save((err) =>{
         if(err) {
-            console.log(err)
-            res.render('error', {
-                title: '404',
-                response: '',
-                message: 'Page not found'
-            })
+            if (err.name === "MongoError" && err.code === 11000){
+                console.log(err)
+                res.render('error', {
+                    title: '11000',
+                    response: 'DB Error',
+                    message: 'No worries~ database detected duplication entry.'
+                })
+            }
+            else{
+                console.log(err)
+                res.render('error', {
+                    title: '406',
+                    response: 'Not Acceptable',
+                    message: `Entry didn't meet the requirements.`
+                })
+            }
         }
        else{
-            res.render ('success', {
+            res.status(200).render ('success', {
                 title: 'success',
                 response: 'Account Created',
                 message: `Account for user ${name} successfuly created. Login ID ${uid}.`,
@@ -65,59 +76,84 @@ const insertUser = ((req,res)=>{
     })
 })
 
+let currentUser = []
 const grantAccess = ((req,res)=>{
     let data = req.body
     let uid = data.uid
     let password = data.password
-    console.log(req.sessionID)
+    console.log(req.body)
     userDB.authenticate(uid, password, (err,user) =>{
+        //console.log(uid)
+        console.log(user)
+        //console.log(req.session.authenticated)
         if (req.session.authenticated){
-            console.log(req.session)
+            //console.log(req.session.authenticated)
         }
         else{
             if (user) {
                 req.session.authenticated = true
                 req.session.user = user
-                let currentUser = user
-                console.log(currentUser)
                 let firsttime = user.firsttime
-                console.log(firsttime)
                 if (firsttime === "true") {
-                    res.render('changepassword', {uid: uid})
+                    res.status(200).render('login', {
+                        uid,
+                        title: 'Change Password',
+                        partials: './partials/user/changepassword'
+                    })
                 }
                 else if (firsttime === "false") {
-                    res.render('dashboard',{
+                    res.status(200).render('dashboard',{
+                        title: 'Dashboard',
                         id: user._id,
-                        name: user.name,
-                        uid: user.uid,
-                        contact: user.contact,
+                        user,
                     })
+                    tempUser = user
+                    currentUser.push(tempUser)
                 }
                 else{
                     console.log("Failed to detect user status [firsttimer == undefined]")
-                    res.render('error')
+                    res.status(404).render('error',{
+                        title: '404',
+                        response: 'Not Found',
+                        message: 'No such user ID exists.'
+                    })
                 }
             }
             else {
-                console.log(err)
-                res.render('error')
+                //console.log(err)
+                res.status(404).render('error',{
+                    title: '401',
+                    response: 'Not authorized',
+                    message: 'You are not authorized.'
+                })
             }
+
+            //req.flash('error', `Please check your credentials.`)
+            //console.log('User credentials error')
+            //res.redirect('/')
+            //res.status(401)
         }
     })
 })
 
 const updatePassword = (req,res) =>{
     let data = req.body
-    let filter = data.uid
-    let update = {password: data.password}
+    let uid = data.uid
+    let password = data.password
+    console.log(req.body)
     bcrypt.hash(password,10,(err,hash)=>{
         if(err) return console.log (err)
         data.password = hash
+        let filter = {uid}
+        let update = {password: hash, firsttime: 'false'}
+        let option = {upsert: false, new: false}
         userDB.findOneAndUpdate(filter,update,option,(err,result)=>{
             if (err) return console.log (err)
-            res.render('/login', {
-                title: 'login',
-                moment: moment,
+            console.log(result)
+            res.render('success',{
+                title: '',
+                response: '',
+                message: '',
             })
         })
     })
@@ -127,9 +163,10 @@ const readUser = ((req,res) => {
     userDB.find().then(
         (documents)=>{
             res.render('success',{
-                title: '',
-                response: '',
-                message: '',
+                title: 'Success',
+                response: `Password Changed`,
+                message: `Your password has been changed`,
+                link: '/',
             })
         },
         (err)=>{
@@ -137,6 +174,7 @@ const readUser = ((req,res) => {
                 title: '401',
                 response: '',
                 message: '',
+                link: '/',
             })
         }
     )
@@ -181,6 +219,10 @@ const deleteUser = ((req,res) => {
 
 module.exports = {
     insertUser,
+    updatePassword,
+    grantAccess,
+    currentUser,
+
     readUser,
     updateUser,
     deleteUser,

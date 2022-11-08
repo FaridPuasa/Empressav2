@@ -1,0 +1,79 @@
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <form class="user" method="POST" action="/itemInSuccess">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="p-5">
+
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Item In</h1>
+                                    </div>
+                                
+                                    <div class="form-group" id="trackingNumberArea">
+                                        <input type="text" class="form-control" name="trackingNumber" id="trackingNumber" aria-describedby="trackingNumberHelp" placeholder="Enter Tracking Number" onkeyup="checkTrackingNum(this, 'trackingNum')" maxlength="9">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <p class="text-center">Shelf Code:</p>
+                                        <input type="hidden" class="form-control form-control-user" name="shelfCode" id="shelfCode" aria-describedby="areaCodeHelp">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Parcel Details</h1>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h5 class="text-center" id="customerName">Customer Name</h5>
+                                        <input type="hidden" class="form-control form-control-user" name="name" id="name" aria-describedby="nameHelp">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h5 class="text-center" id="customerAddress">Customer Address</h5>
+                                        <input type="hidden" class="form-control form-control-user" name="address" id="address" aria-describedby="addressrHelp">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h5 class="text-center" id="customerContact">Customer contact</h5>
+                                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
+                                    </div>
+                                </div>
+                            </div>
+                
+                        </div>
+
+                        <!--Additional Information-->
+                        <input type="hidden" class="form-control form-control-user" name="uid" id="uid" value="<%= user.uid %>"> <!-- User ID -->
+                        <input type="hidden" class="form-control form-control-user" name="username" id="username" value="<%= user.name %>"> <!-- username -->
+                        <input type="hidden" class="form-control form-control-user" name="serviceTag" id="serviceTag" value="">
+                        <input type="hidden" class="form-control form-control-user" name="deliveryType" id="deliveryType" value="">
+                        <input type="hidden" class="form-control form-control-user" name="paymentType" id="paymentType" value="">
+                        <input type="hidden" class="form-control form-control-user" name="value" id="value" value="">
+                        <input type="hidden" class="form-control form-control-user" name="note" id="note" value="">
+                        <input type="hidden" class="form-control form-control-user" name="remark" id="remark" value="">
+                        <!-- End of Information -->
+
+                        <input type="hidden" class="form-control form-control-user" name="service" id="service" value="RUNNER">
+
+                        <div class="row">
+                            <button class="btn btn-primary btn-user btn-block">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
