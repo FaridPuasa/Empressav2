@@ -14,7 +14,6 @@ const runnerPodDB = require('../models/runnerpod')
 const personalPodDB = require('../models/personalpod')
 const warehouseDB = require('../models/warehouseInventory')
 const waybillDB = require('../models/restock')
-const jwt = require('jsonwebtoken')
 const express = require('express');
 const session = require('express-session')
 const router = express.Router();
