@@ -61,6 +61,7 @@ const {
 const {updateMohPodStatus} = require('../controller/update')
 
 router.post('/success-POD', updateMohPodStatus)
+router.post('/success-in-moh', insertPharmacy)
 
 //GET Login //done
 router.get('/', (req,res)=>{
@@ -81,18 +82,22 @@ router.get('/success', (req,res)=>{
 //POST Login
 router.post('/dashboard', grantAccess)
 
-/*
+
 //GET Dashboard //testing
 router.get('/dashboard', (req,res)=>{
-    let id = req.params.user
+    //let id = req.params.user
     warehouseDB.aggregate([{
         $group:{
-            _id: {service: '$service', currentStatus: '$currentStatus', area: '$area'},
+            _id: {service: '$service', currentStatus: '$currentStatus', areaCode: '$areaCode'},
             count: {$sum:1}
         }
     }]).then(
         (result)=>{
             console.log(result)
+            /*for(i=0;i<result.length;i++){
+                console.log(result[i]._id.service)
+                
+            }*/
             res.status(200).render('dashboard', {
                 title: 'Dashboard',
                 result,
@@ -102,7 +107,7 @@ router.get('/dashboard', (req,res)=>{
             console.log("Error on POD:" + err) 
         }
     )
-})*/
+})
 
 router.post('/success-entry', insertZalora)
 router.post('/success-entry-pod', insertPodMoh)
@@ -701,11 +706,12 @@ router.get('/:services-list', (req,res)=>{
     console.log(services)
     warehouseDB.find().then(
         (documents)=>{
-            if(services == 'moh'){
+            console.log(documents[0].service)
+            if(services == 'moh' && documents[0].service == 'MOH'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/moh'),
-                    list: list,
+                    list: documents,
                     moment: moment,
                     user,
                 })

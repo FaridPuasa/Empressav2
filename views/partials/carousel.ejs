@@ -1,3 +1,5 @@
+
+<% for(let i = 0; i < result.length; i++){ %>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval = "10000">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -230,17 +232,22 @@
                     <div class="col-sm-4">
                         <div class="card">
                             <div class="card-body">
+                                <% if(result[i]._id.areaCode === "B1"){ %> 
                                 <h5 class="card-title">CODE: BERAKAS 1</h5>
                                 <table>
                                     <tr>
                                         <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                        
                                         <td>&nbsp;&nbsp;&nbsp;&nbsp;50 - Delivery In Progress</td>
                                     </tr>
                                     <tr>
+                                    <% if(result[i]._id.currentStatus === "A2"){ %> }
                                         <td><i class="fas fa-circle" style="color: green;"></i></td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;50 - In Medicine Room</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - In Medicine Room</td>
+                                    <% } %>
                                     </tr>
                                 </table>
+                                <% } %>
                             </div>
                         </div>
                     </div>
@@ -882,3 +889,4 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+<% } %>
