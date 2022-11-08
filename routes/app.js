@@ -449,9 +449,8 @@ router.get('/:services-pod', (req,res)=>{
 })
 
 //GET Item In //awaiting syahmi action
-router.get('/:services-in/:number', (req,res)=>{
+router.get('/:services-in', (req,res)=>{
     let services = req.params.services
-    let number = req.params.number
     let user = currentUser[0]
     console.log(services)
     if(services == 'moh'){
@@ -815,18 +814,27 @@ router.get('/:services-podlist', (req,res)=>{
         )
     }
     else if(services == 'jpmc'){
-        res.render('podlist',{
-            title: `${service} POD List`,
-            partials: ('./partials/podlist/jpmc'),
-            moment: moment,
-            user
-        })
+        jpmcPodDB.find().sort().then(
+            (document)=>{
+                res.render('podlist',{
+                    title: `${service} POD List`,
+                    partials: ('./partials/podlist/jpmc'),
+                    moment: moment,
+                    document,
+                    user
+                })
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
     }
     else if(services == 'panaga'){
         res.render('podlist',{
             title: `${service} POD List`,
             partials: ('./partials/podlist/panaga'),
             moment: moment,
+            document,
             user
         })
     }
@@ -835,6 +843,7 @@ router.get('/:services-podlist', (req,res)=>{
             title: `${service} POD List`,
             partials: ('./partials/podlist/fmx'),
             moment: moment,
+            document,
             user
         })
     }
@@ -843,6 +852,7 @@ router.get('/:services-podlist', (req,res)=>{
             title: `${service} POD List`,
             partials: ('./partials/podlist/zalora'),
             moment: moment,
+            document,
             user
         })
     }else if(services == 'grp'){
@@ -850,6 +860,7 @@ router.get('/:services-podlist', (req,res)=>{
             title: `${service} POD List`,
             partials: ('./partials/podlist/grp'),
             moment: moment,
+            document,
             user
         })
     }
@@ -866,6 +877,7 @@ router.get('/:services-podlist', (req,res)=>{
             title: `${service} POD List`,
             partials: ('./partials/podlist/personal'),
             moment: moment,
+            document,
             user
         })
     }

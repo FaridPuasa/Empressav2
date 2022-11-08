@@ -25,6 +25,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <%document.forEach(document=> {%>
                                     <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
                                         <td>
                                             <button class="btn btn-default btn-xs">
@@ -33,7 +34,6 @@
                                                 </svg>
                                             </button>
                                         </td>
-                                        <%document.forEach(document=> {%>
                                         <td><%= document.pod_id %></td>
                                         <td><%= document.madeby %></td>
                                         <td><%= document.agentName %></td>
