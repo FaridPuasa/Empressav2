@@ -5,9 +5,9 @@ const string = {
     type: String,
 }
 
-const mohpodSchema  = new mongoose.Schema({
+const localpodSchema  = new mongoose.Schema({
     pod_id: string,
-    podsequence: string,
+    podSequence: {type: Number},
     madeby: string,
     deliveryArea: string,
     agentName: string,
@@ -15,13 +15,12 @@ const mohpodSchema  = new mongoose.Schema({
     podstatus: string,
     numbers: {type: [String]},
     trackingNumber: {type: [String]},
-    fridge: {type: [String]},
     contactName: {type: [String]},
     contactNumber: {type: [String]},
     contactAddress: {type: [String]},
     parcelValue: {type: [String]},
-    PaymentMethod: {type: [String]},
+    paymentMethod: {type: [String]},
     deliveryType: {type: [String]},
 })
 
-module.exports = mongoose.model('moh_pods', mohpodSchema)
+module.exports = mongoose.model('locals_pods', localpodSchema)
