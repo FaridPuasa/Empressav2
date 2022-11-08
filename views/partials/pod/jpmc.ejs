@@ -172,7 +172,11 @@
                                 <div class="col">
                                     <a id="donePodButton" class="btn btn-primary btn-block">Done</a>
                                 </div>
-
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="text-primary text-center fw-bold" id="loadingSubmit">Please wait...</p>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col">
@@ -195,7 +199,6 @@
                                 <div class="row" id="hiddenFridgeItemData">
                                 </div>
                             </div>
-                            <!--<a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>-->
                         </div>
                     </form>
                 </div>
@@ -285,16 +288,16 @@
                                     row_data_customerContact.setAttribute('scope', 'col');
 
                                     let row_data_valueBND = document.createElement('td');
-                                    row_data_valueBND.innerHTML = json_responsetn.data[0].custom_field[15].data;
+                                    row_data_valueBND.innerHTML = json_responsetn.data[0].custom_field[12].data;
                                     row_data_valueBND.setAttribute('scope', 'col');
                                     row_data_valueBND.setAttribute('name', 'cashValueRow');
 
                                     let row_data_paymentMethod = document.createElement('td');
-                                    row_data_paymentMethod.innerHTML = json_responsetn.data[0].custom_field[11].data;
+                                    row_data_paymentMethod.innerHTML = json_responsetn.data[0].custom_field[3].data;
                                     row_data_paymentMethod.setAttribute('scope', 'col');
 
                                     let row_data_deliveryType = document.createElement('td');
-                                    row_data_deliveryType.innerHTML = json_responsetn.data[0].custom_field[9].data;
+                                    row_data_deliveryType.innerHTML = json_responsetn.data[0].custom_field[4].data;
                                     row_data_deliveryType.setAttribute('scope', 'col');
 
                                     let row_data_empty1 = document.createElement('td');
@@ -380,17 +383,17 @@
                                     let parcelValueInput = document.createElement('input');
                                     parcelValueInput.setAttribute("type", "text");
                                     parcelValueInput.setAttribute("name", "parcelValue");
-                                    parcelValueInput.setAttribute("value", json_responsetn.data[0].custom_field[15].data);
+                                    parcelValueInput.setAttribute("value", json_responsetn.data[0].custom_field[12].data);
 
                                     let PaymentMethodInput = document.createElement('input');
                                     PaymentMethodInput.setAttribute("type", "text");
                                     PaymentMethodInput.setAttribute("name", "PaymentMethod");
-                                    PaymentMethodInput.setAttribute("value", json_responsetn.data[0].custom_field[11].data);
+                                    PaymentMethodInput.setAttribute("value", json_responsetn.data[0].custom_field[3].data);
 
                                     let deliveryTypeInput = document.createElement('input');
                                     deliveryTypeInput.setAttribute("type", "text");
                                     deliveryTypeInput.setAttribute("name", "deliveryType");
-                                    deliveryTypeInput.setAttribute("value", json_responsetn.data[0].custom_field[9].data);
+                                    deliveryTypeInput.setAttribute("value", json_responsetn.data[0].custom_field[4].data);
 
                                     document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(numberInput);
                                     document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(trackingNumberInput);
@@ -403,7 +406,7 @@
 
                                     countTN = countTN + 1;
 
-                                    document.getElementById("deleteRow").style.visibility = "visible";
+                                    $("#deleteRow").fadeIn();
 
                                     countContent = countContent + 1;
                                     printDone = 1;
@@ -502,11 +505,11 @@
                 $("#duplicateinput").hide();
                 $("#hiddenFormData").hide();
 
-                document.getElementById("donePodButton").style.visibility = "hidden";
-                document.getElementById("scanAgain").style.visibility = "hidden";
-                document.getElementById("deleteRow").style.visibility = "hidden";
-                document.getElementById("submitBtn").style.visibility = "hidden";
-                document.getElementById("submitBtnfinal").style.visibility = "hidden";
+                $("#donePodButton").hide();
+                $("#scanAgain").hide();
+                $("#deleteRow").hide();
+                $("#submitBtn").hide();
+                $("#submitBtnfinal").hide();
 
                 document.getElementById("submitPodInfoButton").addEventListener("click", createPODTemplate);
                 document.getElementById("donePodButton").addEventListener("click", donePod);
@@ -535,14 +538,13 @@
                         document.getElementById("dateTimeStart").value = document.getElementById("deliveryDate").value + ' ' + "08:00:00";
                         document.getElementById("dateTimeClose").value = document.getElementById("deliveryDate").value + ' ' + "22:00:00";
 
-                        document.getElementById("submitPodInfoButton").style.visibility = "hidden";
-                        document.getElementById("deleteRow").style.visibility = "hidden";
-                        document.getElementById("donePodButton").style.visibility = "visible";
-                        document.getElementById("scanAgain").style.visibility = "hidden";
-                        document.getElementById("submitBtn").style.visibility = "hidden";
+                        $("#submitPodInfoButton").hide();
+                        $("#deleteRow").hide();
+                        $("#donePodButton").fadeIn();
+                        $("#scanAgain").hide();
+                        $("#submitBtn").hide();
 
                         document.getElementById("trackingNumberTemp").disabled = false;
-
                         document.getElementById("trackingNumberTemp").focus();
                     }
                 }
@@ -589,19 +591,19 @@
 
                     document.getElementById("taskBody").style.textAlign = "center";
 
-                    document.getElementById("donePodButton").style.visibility = "hidden";
-                    document.getElementById("deleteRow").style.visibility = "hidden";
-                    document.getElementById("scanAgain").style.visibility = "visible";
-                    document.getElementById("submitBtn").style.visibility = "visible";
+                    $("#donePodButton").hide();
+                    $("#deleteRow").hide();
+                    $("#scanAgain").fadeIn();
+                    $("#submitBtn").fadeIn();
                 }
 
                 function scanAgain() {
-                    document.getElementById("donePodButton").style.visibility = "visible";
-                    document.getElementById("scanAgain").style.visibility = "hidden";
-                    document.getElementById("submitBtn").style.visibility = "hidden";
+                    $("#donePodButton").fadeIn();
+                    $("#scanAgain").hide();
+                    $("#submitBtn").hide();
 
                     if (countTN > 0) {
-                        document.getElementById("deleteRow").style.visibility = "visible";
+                        $("#deleteRow").fadeIn();
                     }
 
                     document.getElementById("taskRowFinal").remove();
@@ -693,9 +695,8 @@
                             document.getElementsByName("trackingNumberRow")[(countTN)].appendChild(trackingNumberInputTemp);
 
                             if (countTN == 0) {
-                                document.getElementById("deleteRow").style.visibility = "hidden";
+                                $("#deleteRow").hide();
                             }
-
                             document.getElementById("trackingNumberTemp").focus();
                         }
                     };
@@ -712,6 +713,9 @@
                 }
 
                 function submitForm() {
+                    $("#scanAgain").hide();
+                    $("#submitBtn").hide();
+                    $("#loadingSubmit").fadeIn();
                     for (let i = 0; i < document.getElementsByName('fridgeItemCheck').length; i++) {
                         if (document.getElementsByName('fridgeItemCheck')[i].checked == true) {
                             let fridgeItemInput = document.createElement('input');
