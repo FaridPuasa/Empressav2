@@ -944,10 +944,12 @@ router.get('/exportlist', (req,res)=>{
 
 //GET New User //done
 router.get('/user_register', (req,res)=>{
+    let user = currentUser[0]
     res.render('user', {
         title: "New User",
         partials: './partials/user/register.ejs',
         moment: moment,
+        user
     })
 })
 
@@ -1012,7 +1014,6 @@ router.get('/logout', (req,res)=>{
         console.log('session destroy')
     })
 })
-
 
 //post
 //router.post('/dashboard', loginUser)
