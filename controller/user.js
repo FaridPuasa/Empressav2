@@ -107,8 +107,8 @@ const grantAccess = ((req,res)=>{
                         id: user._id,
                         user,
                     })
-                    //tempUser = user
-                    //currentUser.push(tempUser)
+                    tempUser = user
+                    currentUser.push(tempUser)
                 }
                 else{
                     console.log("Failed to detect user status [firsttimer == undefined]")
@@ -147,11 +147,7 @@ const updatePassword = (req,res) =>{
         let filter = {uid}
         let update = {password: hash, firsttime: 'false'}
         let option = {upsert: false, new: false}
-        //console.log(hash)
-        
         userDB.findOneAndUpdate(filter,update,option,(err,result)=>{
-            console.log(filter)
-            //console.log(update)
             if (err) return console.log (err)
             console.log(result)
             res.render('success',{
