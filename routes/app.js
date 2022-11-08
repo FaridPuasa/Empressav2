@@ -58,6 +58,10 @@ const {
     insertPodZalora
 } = require('../controller/insert')
 
+const {updateMohPodStatus} = require('../controller/update')
+
+router.post('/success-POD', updateMohPodStatus)
+
 //GET Login //done
 router.get('/', (req,res)=>{
     res.render('login', {

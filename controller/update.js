@@ -1,12 +1,6 @@
-const zaloraDB = require('../models/zaloras')
-const pharmacyDB = require('../models/pharmacies')
-const grpDB = require('../models/grps')
-const runnerDB = require('../models/runners')
-const personalDB = require('../models/personals')
-const miscDB = require('../models/miscs')
-const fmxDB = require('../models/fmxs')
-const stockDB = require('../models/stocks')
+const flash = require('connect-flash')
 const moment = require('moment')
+const mohpod = require('../models/mohpod')
 
 const updateZalora = ((req,res) => {
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
@@ -464,6 +458,27 @@ const updateMohPod = ((req,res) =>{
     }
 })
 
+const updateMohPodStatus = ((req,res)=>{
+    let data = req.body
+    let pod_id = data.pod_id
+    let podstatus = data.pod_status
+    let filter = {pod_id}
+    let update = {podstatus}
+    let option = {upsert: false, new: false}
+    mohpod.findOneAndUpdate(filter,update,option,(err,docs)=>{
+        if(err) {
+            req.flash('error', `Failed to update POD status.`)
+            res.redirect('/moh-podlist')
+        }
+        else{
+            req.flash('success', `POD status updated.`)
+            res.redirect('/moh-podlist')
+            console.log(docs)
+            console.log("POD status change to " + podstatus)
+        }
+    })
+})
+
 const updateJpmcPod = ((req,res) =>{
     let data = req.body
     let date =  moment().format("DD/MM/YYYY")
@@ -546,4 +561,5 @@ const updatePanagaPod = ((req,res) =>{
 
 module.exports = {
     updateFmx,
+    updateMohPodStatus
 }
