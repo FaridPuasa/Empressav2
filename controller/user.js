@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const flash = require('connect-flash')
 const { append } = require('express/lib/response')
 const router = require('../routes/app')
-const user = require('../models/user')
+
 
 /*
 Admin = 10
@@ -81,15 +81,16 @@ const grantAccess = ((req,res)=>{
     let data = req.body
     let uid = data.uid
     let password = data.password
-    //console.log(req.body)
+    console.log(req.body)
     userDB.authenticate(uid, password, (err,user) =>{
+        //console.log(uid)
+        console.log(user)
         //console.log(req.session.authenticated)
         if (req.session.authenticated){
             //console.log(req.session.authenticated)
         }
         else{
             if (user) {
-                console.log(req.sessionID)
                 req.session.authenticated = true
                 req.session.user = user
                 let firsttime = user.firsttime
@@ -106,8 +107,8 @@ const grantAccess = ((req,res)=>{
                         id: user._id,
                         user,
                     })
-                    tempUser = user
-                    currentUser.push(tempUser)
+                    //tempUser = user
+                    //currentUser.push(tempUser)
                 }
                 else{
                     console.log("Failed to detect user status [firsttimer == undefined]")
@@ -119,7 +120,7 @@ const grantAccess = ((req,res)=>{
                 }
             }
             else {
-                console.log(err)
+                //console.log(err)
                 res.status(404).render('error',{
                     title: '401',
                     response: 'Not authorized',
@@ -137,15 +138,20 @@ const grantAccess = ((req,res)=>{
 
 const updatePassword = (req,res) =>{
     let data = req.body
-    let filter = data.uid
+    let uid = data.uid
     let password = data.password
     console.log(req.body)
     bcrypt.hash(password,10,(err,hash)=>{
         if(err) return console.log (err)
         data.password = hash
+        let filter = {uid}
         let update = {password: hash, firsttime: 'false'}
-        let option = {upsert: false, new:false}
+        let option = {upsert: false, new: false}
+        //console.log(hash)
+        
         userDB.findOneAndUpdate(filter,update,option,(err,result)=>{
+            console.log(filter)
+            //console.log(update)
             if (err) return console.log (err)
             console.log(result)
             res.render('success',{

@@ -25,9 +25,11 @@ const userSchema  = new mongoose.Schema({
 })
 
 userSchema.statics.authenticate = function(uid, password, callback){
+    console.log("Mongo UID: " + uid)
     user.findOne({
         uid
     }).exec(function(error,user){
+        console.log(user)
         if(error){
             console.log(error)
         } else if(!user){
@@ -57,6 +59,6 @@ userSchema.pre("save", function(next){
 });
 
 const user = mongoose.model("user", userSchema); 
-module.exports = user
 
+module.exports = user
 
