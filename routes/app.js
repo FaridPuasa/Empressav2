@@ -85,18 +85,30 @@ router.post('/dashboard', grantAccess)
 //GET Dashboard //testing
 router.get('/dashboard', (req,res)=>{
     //let id = req.params.user
-    warehouseDB.aggregate([{
-        $group:{
-            _id: {service: '$service', currentStatus: '$currentStatus', areaCode: '$areaCode'},
-            count: {$sum:1}
-        }
-    }]).then(
+/*
+    $group:{
+        _id: {service: '$service', currentStatus: '$currentStatus', areaCode: '$areaCode'},
+        count: {$sum:1}
+    }
+*/
+    warehouseDB.aggregate([{ 
+            $group:{
+                _id: {service: '$service', currentStatus: '$currentStatus', areaCode: '$areaCode'},
+                count: { $sum:{$cond: {if: {$gt: ["$currentStatus", null]}, then: 1, else: 0}}}
+            }
+        }]).then(
         (result)=>{
             console.log(result)
-            /*for(i=0;i<result.length;i++){
-                console.log(result[i]._id.service)
-                
-            }*/
+            for(i=0;i<result.length;i++){
+                if(result[i]._id.service == "MOH" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "B"){  
+                    if(result[i].count){
+                        console.log(result[i].count)
+                    }
+                    else{
+                        console.log(0)
+                    }
+                }
+            }
             res.status(200).render('dashboard', {
                 title: 'Dashboard',
                 result,
