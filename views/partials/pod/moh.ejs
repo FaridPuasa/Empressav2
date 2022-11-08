@@ -175,6 +175,11 @@
                             </div>
                             <div class="row">
                                 <div class="col">
+                                    <p class="text-primary text-center fw-bold" id="loadingSubmit">Please wait...</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
                                     <a id="scanAgain" class="btn btn-info btn-block">Scan Again</a>
                                 </div>
                                 <div class="col">
@@ -194,8 +199,6 @@
                                 <div class="row" id="hiddenFridgeItemData">
                                 </div>
                             </div>
-
-                            <!--<a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>-->
                         </div>
                     </form>
                 </div>
@@ -403,7 +406,7 @@
 
                                     countTN = countTN + 1;
 
-                                    document.getElementById("deleteRow").style.visibility = "visible";
+                                    $("#deleteRow").fadeIn();
 
                                     countContent = countContent + 1;
                                     printDone = 1;
@@ -498,15 +501,16 @@
             document.addEventListener("DOMContentLoaded", function (event) {
                 document.getElementById("trackingNumberTemp").disabled = true;
                 $("#loadingTN").hide();
+                $("#loadingSubmit").hide();
                 $("#wronginput").hide();
                 $("#duplicateinput").hide();
                 $("#hiddenFormData").hide();
 
-                document.getElementById("donePodButton").style.visibility = "hidden";
-                document.getElementById("scanAgain").style.visibility = "hidden";
-                document.getElementById("deleteRow").style.visibility = "hidden";
-                document.getElementById("submitBtn").style.visibility = "hidden";
-                document.getElementById("submitBtnfinal").style.visibility = "hidden";
+                $("#donePodButton").hide();
+                $("#scanAgain").hide();
+                $("#deleteRow").hide();
+                $("#submitBtn").hide();
+                $("#submitBtnfinal").hide();
 
                 document.getElementById("submitPodInfoButton").addEventListener("click", createPODTemplate);
                 document.getElementById("donePodButton").addEventListener("click", donePod);
@@ -535,14 +539,13 @@
                         document.getElementById("dateTimeStart").value = document.getElementById("deliveryDate").value + ' ' + "08:00:00";
                         document.getElementById("dateTimeClose").value = document.getElementById("deliveryDate").value + ' ' + "22:00:00";
 
-                        document.getElementById("submitPodInfoButton").style.visibility = "hidden";
-                        document.getElementById("deleteRow").style.visibility = "hidden";
-                        document.getElementById("donePodButton").style.visibility = "visible";
-                        document.getElementById("scanAgain").style.visibility = "hidden";
-                        document.getElementById("submitBtn").style.visibility = "hidden";
+                        $("#submitPodInfoButton").hide();
+                        $("#deleteRow").hide();
+                        $("#donePodButton").fadeIn();
+                        $("#scanAgain").hide();
+                        $("#submitBtn").hide();
 
                         document.getElementById("trackingNumberTemp").disabled = false;
-
                         document.getElementById("trackingNumberTemp").focus();
                     }
                 }
@@ -589,19 +592,19 @@
 
                     document.getElementById("taskBody").style.textAlign = "center";
 
-                    document.getElementById("donePodButton").style.visibility = "hidden";
-                    document.getElementById("deleteRow").style.visibility = "hidden";
-                    document.getElementById("scanAgain").style.visibility = "visible";
-                    document.getElementById("submitBtn").style.visibility = "visible";
+                    $("#donePodButton").hide();
+                    $("#deleteRow").hide();
+                    $("#scanAgain").fadeIn();
+                    $("#submitBtn").fadeIn();
                 }
 
                 function scanAgain() {
-                    document.getElementById("donePodButton").style.visibility = "visible";
-                    document.getElementById("scanAgain").style.visibility = "hidden";
-                    document.getElementById("submitBtn").style.visibility = "hidden";
+                    $("#donePodButton").fadeIn();
+                    $("#scanAgain").hide();
+                    $("#submitBtn").hide();
 
                     if (countTN > 0) {
-                        document.getElementById("deleteRow").style.visibility = "visible";
+                        $("#deleteRow").fadeIn();
                     }
 
                     document.getElementById("taskRowFinal").remove();
@@ -693,9 +696,8 @@
                             document.getElementsByName("trackingNumberRow")[(countTN)].appendChild(trackingNumberInputTemp);
 
                             if (countTN == 0) {
-                                document.getElementById("deleteRow").style.visibility = "hidden";
+                                $("#deleteRow").hide();
                             }
-
                             document.getElementById("trackingNumberTemp").focus();
                         }
                     };
@@ -712,6 +714,9 @@
                 }
 
                 function submitForm() {
+                    $("#scanAgain").hide();
+                    $("#submitBtn").hide();
+                    $("#loadingSubmit").fadeIn();
                     for (let i = 0; i < document.getElementsByName('fridgeItemCheck').length; i++) {
                         if (document.getElementsByName('fridgeItemCheck')[i].checked == true) {
                             let fridgeItemInput = document.createElement('input');
