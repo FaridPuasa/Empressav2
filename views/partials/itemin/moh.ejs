@@ -32,14 +32,14 @@
 
                                     <div class="form-group">
                                         <p class="text-center">Area Code:</p>
-                                        <p class="text-center fw-bold" id="areaDisplay">test</p>
+                                        <p class="text-center fw-bold" id="areaDisplay">-</p>
                                         <input type="hidden" class="form-control form-control-user" name="areaCode"
                                             id="areaCode" value="" aria-describedby="areaCodeHelp">
                                     </div>
 
                                     <div class="form-group">
                                         <p class="text-center">Patient Number:</p>
-                                        <p class="text-center fw-bold" id="patientNumDisplay">test</p>
+                                        <p class="text-center fw-bold" id="patientNumDisplay">-</p>
                                         <input type="hidden" class="form-control form-control-user" name="patientNumber"
                                             id="patientNumber" value="">
                                     </div>
@@ -55,21 +55,21 @@
 
                                     <div class="form-group">
                                         <h5 class="text-center" id="customerName">Customer Name</h5>
-                                        <p class="text-center fw-bold" id="nameDisplay">test</p>
+                                        <p class="text-center fw-bold" id="nameDisplay">-</p>
                                         <input type="hidden" class="form-control form-control-user" name="name"
                                             id="name" aria-describedby="nameHelp">
                                     </div>
 
                                     <div class="form-group">
                                         <h5 class="text-center" id="customerAddress">Customer Address</h5>
-                                        <p class="text-center fw-bold" id="addressDisplay">test</p>
+                                        <p class="text-center fw-bold" id="addressDisplay">-</p>
                                         <input type="hidden" class="form-control form-control-user" name="address"
                                             id="address" aria-describedby="addressrHelp">
                                     </div>
 
                                     <div class="form-group">
                                         <h5 class="text-center" id="customerContact">Customer contact</h5>
-                                        <p class="text-center fw-bold" id="contactDisplay">test</p>
+                                        <p class="text-center fw-bold" id="contactDisplay">-</p>
                                         <input type="hidden" class="form-control form-control-user" name="contact"
                                             id="contact" aria-describedby="contactHelp">
                                     </div>
@@ -83,7 +83,7 @@
                         <input type="hidden" class="form-control form-control-user" name="username" id="username"
                             value="<%= user.name %>"> <!-- username -->
                         <input type="hidden" class="form-control form-control-user" name="serviceTag" id="serviceTag"
-                            value="">
+                            value="MOH">
                         <input type="hidden" class="form-control form-control-user" name="deliveryType"
                             id="deliveryType" value="">
                         <input type="hidden" class="form-control form-control-user" name="paymentType" id="paymentType"
@@ -525,8 +525,6 @@
                             }
 
                             document.getElementById("remark").value = json_responsetn.data[0].custom_field[10].data;
-
-                            document.getElementById("serviceTag").value = "MOH";
 
                             document.getElementById("trackingNumber").readOnly = true;
 
