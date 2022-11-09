@@ -16,6 +16,7 @@ const runnerPodDB = require('../models/runnerpod')
 const personalPodDB = require('../models/personalpod')
 const warehouseDB = require('../models/warehouseInventory')
 const waybillDB = require('../models/restock')
+const userDB = require('../models/user')
 const express = require('express');
 const session = require('express-session')
 const router = express.Router();
@@ -61,6 +62,16 @@ const {updateMohPodStatus} = require('../controller/update')
 
 router.post('/success-POD', updateMohPodStatus)
 router.post('/success-in-moh', insertPharmacy)
+
+router.get('/in_stock', (req,res)=>{
+    let user = currentUser[0]
+    res.render('itemin', {
+        title: "Item In",
+        partials: './partials/itemin/newinventory.ejs',
+        moment: moment,
+        user,
+    })
+})
 
 //GET Login //done
 router.get('/', (req,res)=>{
@@ -963,6 +974,10 @@ router.get('/exportlist', (req,res)=>{
     })
 })
 
+const {exportInventory} = require('../controller/export')
+
+router.post('/exportlist', exportInventory)
+
 //GET New User //done
 router.get('/user_register', (req,res)=>{
     let user = currentUser[0]
@@ -1002,8 +1017,9 @@ router.get('/forgot-password', (req,res)=>{
 router.get('/userlist', (req,res)=>{
     userDB.find().then(
         (documents)=>{
-            res.render('userlist', {
+            res.render('user', {
                 title: "User List",
+                partials: "./partials/user/list.ejs",
                 documents,
                 moment: moment
             })
@@ -1017,10 +1033,6 @@ router.get('/userlist', (req,res)=>{
             })
         }
     )
-    res.render('dashboard', {
-        title: "Login",
-        moment: moment,
-    })
 })
 
 //GET logout //front-end
