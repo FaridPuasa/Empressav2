@@ -9,7 +9,7 @@
                     <!-- Nested Row within Card Body -->
                     <form class="user" method="POST" action="/newInventory">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="p-5">
 
                                     <div class="text-center">
@@ -62,36 +62,43 @@
                                         <input type="text" class="form-control" name="productSalePrice" id="productSalePrice" aria-describedby="productSalePrice" placeholder="Enter Product Sale Price">
                                     </div>
 
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="p-5">
-
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Product Variety</h1>
                                     </div>
-                                    
-                                    <div class="form-group" id="varietyType">
-                                        <select class="form-control" name="varietyType" id="varietyType">
-                                            <option class="active">Variety Type</option>
-                                            <option value="Size">Size</option>
-                                            <option value="Colour">Colour</option>
-                                            <option value="Flavour">Flavour</option>
-                                            <option value="Size & Colour">Size & Colour</option>
-                                        </select>
-                                    </div>
 
-                                    <div class="form-group" id="variety">
-                                        <input type="text" class="form-control" name="variety" id="variety" aria-describedby="variety" placeholder="Enter Product Variety">
-                                    </div>
+                                    <table class="table">
+                                        <thead>
+                                            <th scope="col" class="text-center">Color</th>
+                                            <th scope="col" class="text-center">Size</th>
+                                            <th scope="col" class="text-center">Quantity</th>
+                                        </thead>
+                                        <tbody id="newRow">
+                                            <tr id="row">
+                                                <td>
+                                                    <input type="text" class="form-control" name="productColor" id="productColor" placeholder="Enter Product Color">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="productSize" id="productSize" placeholder="Enter Product Size">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Enter Quantity">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
-                                    <div class="form-group" id="varietyQuantity">
-                                        <input type="text" class="form-control" name="varietyQuantity" id="varietyQuantity" aria-describedby="varietyQuantity" placeholder="Enter Variety Quantity">
+                                    <div class="d-flex justify-content-center">
+                                        <a class="btn btn-primary m-3" onclick="addTextInput()">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                            </svg>
+                                        </a>
+                                        <a class="btn btn-danger m-3" onclick="removeRow()">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                                            </svg>
+                                        </a>
                                     </div>
-
-                                    <span id="newRow"></span>
-                                    <a class="btn btn-primary" onclick="addTextInput()">Add Input</a>
                                 </div>
                             </div>
                 
