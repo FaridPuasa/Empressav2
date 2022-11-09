@@ -16,7 +16,6 @@ const runnerPodDB = require('../models/runnerpod')
 const personalPodDB = require('../models/personalpod')
 const warehouseDB = require('../models/warehouseInventory')
 const waybillDB = require('../models/restock')
-const jwt = require('jsonwebtoken')
 const express = require('express');
 const session = require('express-session')
 const router = express.Router();
@@ -61,6 +60,7 @@ const {
 const {updateMohPodStatus} = require('../controller/update')
 
 router.post('/success-POD', updateMohPodStatus)
+router.post('/success-in-moh', insertPharmacy)
 
 //GET Login //done
 router.get('/', (req,res)=>{
@@ -81,18 +81,34 @@ router.get('/success', (req,res)=>{
 //POST Login
 router.post('/dashboard', grantAccess)
 
-/*
+
 //GET Dashboard //testing
 router.get('/dashboard', (req,res)=>{
-    let id = req.params.user
-    warehouseDB.aggregate([{
-        $group:{
-            _id: {service: '$service', currentStatus: '$currentStatus', area: '$area'},
-            count: {$sum:1}
-        }
-    }]).then(
+    //let id = req.params.user
+/*
+    $group:{
+        _id: {service: '$service', currentStatus: '$currentStatus', areaCode: '$areaCode'},
+        count: {$sum:1}
+    }
+*/
+    warehouseDB.aggregate([{ 
+            $group:{
+                _id: {service: '$service', currentStatus: '$currentStatus', areaCode: '$areaCode'},
+                count: { $sum:{$cond: {if: {$gt: ["$currentStatus", null]}, then: 1, else: 0}}}
+            }
+        }]).then(
         (result)=>{
             console.log(result)
+            for(i=0;i<result.length;i++){
+                if(result[i]._id.service == "MOH" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "B"){  
+                    if(result[i].count){
+                        console.log(result[i].count)
+                    }
+                    else{
+                        console.log(0)
+                    }
+                }
+            }
             res.status(200).render('dashboard', {
                 title: 'Dashboard',
                 result,
@@ -102,7 +118,7 @@ router.get('/dashboard', (req,res)=>{
             console.log("Error on POD:" + err) 
         }
     )
-})*/
+})
 
 router.post('/success-entry', insertZalora)
 router.post('/success-entry-pod', insertPodMoh)
@@ -701,11 +717,12 @@ router.get('/:services-list', (req,res)=>{
     console.log(services)
     warehouseDB.find().then(
         (documents)=>{
-            if(services == 'moh'){
+            console.log(documents[0].service)
+            if(services == 'moh' && documents[0].service == 'MOH'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/moh'),
-                    list: list,
+                    list: documents,
                     moment: moment,
                     user,
                 })

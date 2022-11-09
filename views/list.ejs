@@ -123,11 +123,19 @@
             var data = JSON.parse(listing) //testing required
             //console.log(data)
             for(i=0; i<data.length; i++){ //change the value to date
-                    let start = data[i].value
-                    let end = 100
-                    let age = start - end
-                    console.log(age)
-                    data[i].age = age
+                let start = data[i].dateEntry
+                let end = moment().format('DD/MM/YYYY')
+                let dif = Math.abs(new Date(end) - new Date(start))
+                let d = dif/(1000*3600*24)
+                data[i].age = d +" days"
+
+                let status = data[i].currentStatus
+                if(status == "A2"){
+                    data[i].currentStatus = "IN MEDICINE ROOM"
+                }
+
+                let expire = moment(data[i].mohExpire).format('DD/MM/YYYY')
+                data[i].mohExpire = expire
             }
             $table.bootstrapTable({data: data})
             $table.bootstrapTable('updateFormatText', 'formatShowingRows', 'Showing')

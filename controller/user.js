@@ -1,4 +1,5 @@
 const userDB = require('../models/user')
+const warehouseDB = require('../models/warehouseInventory')
 const moment = require('moment')
 const bcrypt = require('bcrypt')
 const flash = require('connect-flash')
@@ -102,11 +103,35 @@ const grantAccess = ((req,res)=>{
                     })
                 }
                 else if (firsttime === "false") {
-                    res.status(200).render('dashboard',{
-                        title: 'Dashboard',
-                        id: user._id,
-                        user,
-                    })
+                    warehouseDB.aggregate([{ 
+                        $group:{
+                            _id: {service: '$service', currentStatus: '$currentStatus', areaCode: '$areaCode'},
+                            count: { $sum:{$cond: {if: {$gt: ["$currentStatus", null]}, then: 1, else: 0}}}
+                        }
+                    }]).then(
+                    (result)=>{
+                        console.log(result)
+                        for(i=0;i<result.length;i++){
+                            if(result[i]._id.service == "MOH" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "B"){  
+                                if(result[i].count){
+                                    console.log(result[i].count)
+                                }
+                                else{
+                                    console.log(0)
+                                }
+                            }
+                        }
+                        res.status(200).render('dashboard',{
+                            title: 'Dashboard',
+                            id: user._id,
+                            result,
+                            user,
+                        })
+                    },
+                    (err)=>{
+                        console.log("Error on POD:" + err) 
+                    }
+                )
                     tempUser = user
                     currentUser.push(tempUser)
                 }

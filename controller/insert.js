@@ -13,14 +13,14 @@ const localPodDB = require('../models/localpod')
 const moment = require('moment')
 
 /*
-IN WAREHOUSE = A1
-IN MEDICINE ROOM = A2
-RE-ENTRY = A3
-SCHEDULE FOR DELIVERY = B
-DELIVERY IN PROGRESS = C
-SUCCESSFUL DELIVERY = D1
-FAILED DELIVERY = D2
-CANCELLED DELIVERY = D3
+    IN WAREHOUSE = A1
+    IN MEDICINE ROOM = A2
+    RE-ENTRY = A3
+    SCHEDULE FOR DELIVERY = B
+    DELIVERY IN PROGRESS = C
+    SUCCESSFUL DELIVERY = D1
+    FAILED DELIVERY = D2
+    CANCELLED DELIVERY = D3
 */
 
 //All insert or new item controller
@@ -142,10 +142,10 @@ const insertPharmacy = ((req,res)=> {
             })
         }
         else{
+            let services = req.params.services
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
-            res.status(201).send()
-            res.redirect('/:services-in')
+            res.status(200).redirect('/moh-in')
         }
     })
 })

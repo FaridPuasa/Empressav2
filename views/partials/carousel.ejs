@@ -1,3 +1,5 @@
+
+
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval = "10000">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -225,22 +227,53 @@
         <div class="carousel-item">
             <!-- MOH Begin -->
             <div class="container" >
+                
                 <h1 class="text-center">MOH Pharmacy</h1>
                 <div class="row my-3">
                     <div class="col-sm-4">
                         <div class="card">
                             <div class="card-body">
+                                
+                                    
                                 <h5 class="card-title">CODE: BERAKAS 1</h5>
                                 <table>
                                     <tr>
-                                        <td><i class="fas fa-circle" style="color: purple;"></i></td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;50 - Delivery In Progress</td>
+                                        <% for(let i = 0; i < result.length; i++){ %>
+                                            <% if(result[i]._id.service == "MOH" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "A2"){ %>
+                                                <td><i class="fas fa-circle" style="color: green;"></i></td>
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - In Medicine Room</td>
+                                            <% } %>
+                                        <% } %>
                                     </tr>
                                     <tr>
-                                        <td><i class="fas fa-circle" style="color: green;"></i></td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;50 - In Medicine Room</td>
+                                        <% for(let i = 0; i < result.length; i++){ %>
+                                            <% if(result[i]._id.service == "MOH" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "B"){ %>
+                                                <td><i class="fas fa-circle" style="color: blue;"></i></td>
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Schedule For Delivery</td>
+                                            <% } %>
+                                        <% } %>
                                     </tr>
+                                   
+                                    <tr>
+                                        <% for(let i = 0; i < result.length; i++){ %>
+                                            <% if(result[i]._id.service == "MOH" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "C"){ %>
+                                                <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Delivery In Progress</td>
+                                            <% } %>
+                                        <% } %>
+                                    </tr>
+
+                                    <tr>
+                                        <% for(let i = 0; i < result.length; i++){ %>
+                                            <% if(result[i]._id.service == "MOH" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "C"){ %>
+                                                <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Delivery In Progress</td>
+                                            <% } %>
+                                        <% } %>
+                                    </tr>
+                                   
                                 </table>
+                                
                             </div>
                         </div>
                     </div>
@@ -882,3 +915,4 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+
