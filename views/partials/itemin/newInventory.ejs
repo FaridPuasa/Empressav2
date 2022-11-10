@@ -16,15 +16,17 @@
                                         <h1 class="h4 text-gray-900 mb-4">New Inventory</h1>
                                     </div>
 
+                                    <input type="hidden" class="form-control" name="sequence" id="sequence" aria-describedby="sequence" value="<%= sequence %>">
+
                                     <div class="form-group">
                                         <label for="productBrand">Product Brand</label>
-                                        <input type="text" class="form-control" name="productBrand" id="productBrand" aria-describedby="productBrand">
+                                        <input type="text" class="form-control" name="productBrand" id="productBrand" aria-describedby="productBrand" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="entity">Product Entity</label>
-                                        <select class="form-control" name="productEntity" id="entity">
-                                            <option value=""></option>
+                                        <select class="form-control" name="productEntity" id="entity" required>
+                                            <option></option>
                                             <option value="GBS">Go Belistore</option>
                                             <option value="BMF">Bruneian Made Finest</option>
                                         </select>
@@ -32,12 +34,13 @@
 
                                     <div class="form-group">
                                         <label for="productName">Product Name</label>
-                                        <input type="text" class="form-control" name="productName" id="productName" aria-describedby="productName">
+                                        <input type="text" class="form-control" name="productName" id="productName" aria-describedby="productName" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="productCategory">Product Category</label>
-                                        <select class="form-control" name="productCategory" id="productCategory">
+                                        <select class="form-control" name="productCategory" id="productCategory" required>
+                                            <option></option>
                                             <option value="food">Food & Beverages</option>
                                             <option value="perfume">Perfume</option>
                                             <option value="kids">Kids Clothing</option>
@@ -54,46 +57,53 @@
                                     </div>
                                       
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="productOther" id="productOther" aria-describedby="productOther" placeholder="Enter Product Other">
+                                        <input type="text" class="form-control" name="productOther" id="productOther" aria-describedby="productOther" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="productQuantity">Product Quantity</label>
-                                        <input type="text" class="form-control" name="productQuantity" id="productQuantity"  aria-describedby="productQuantity" placeholder="Enter Product Quantity">
-                                        <span class="qtyWarn"></span>
+                                        <input type="text" class="form-control" name="productQuantity" id="productQuantity"  aria-describedby="productQuantity" required>
+                                        <span id="qtyWarn"></span>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="productPrice">Product Price</label>
-                                        <input type="text" class="form-control" name="productPrice" id="productPrice" aria-describedby="productPrice" placeholder="Enter Product Price">
+                                        <input type="text" class="form-control" name="productPrice" id="productPrice" aria-describedby="productPrice" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="productSalePrice">Product Sale Price</label>
-                                        <input type="text" class="form-control" name="productSalePrice" id="productSalePrice" aria-describedby="productSalePrice" placeholder="Enter Product Sale Price">
+                                        <input type="text" class="form-control" name="productSalePrice" id="productSalePrice" aria-describedby="productSalePrice" required>
                                     </div>
 
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Product Variety</h1>
+                                        <h1 class="h4 text-gray-900 my-4">Product Variety</h1>
                                     </div>
 
                                     <table class="table">
                                         <thead>
                                             <th scope="col" class="text-center">Color</th>
                                             <th scope="col" class="text-center">Size</th>
+                                            <th scope="col" class="text-center">Flavour</th>
+                                            <th scope="col" class="text-center">Scent</th>
                                             <th scope="col" class="text-center">Quantity</th>
                                         </thead>
                                         <tbody id="newRow">
                                             <tr id="row">
                                                 <td>
-                                                    <input type="text" class="form-control" name="productColor" id="productColor" placeholder="Enter Product Color">
+                                                    <input type="text" class="form-control" name="productColor" id="productColor">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" name="productSize" id="productSize" placeholder="Enter Product Size">
+                                                    <input type="text" class="form-control" name="productSize" id="productSize">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control quantity" name="quantity" id="quantity" placeholder="Enter Quantity" onkeyup="testcal()">
-                                                    <span class="qtyWarn"></span>
+                                                    <input type="text" class="form-control" name="productFlavour" id="productFlavour">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="productScent" id="productScent">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control quantity" name="quantity" id="quantity" onkeyup="testcal()">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -125,7 +135,7 @@
                         <input type="hidden" class="form-control form-control-user" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="NEWINVENTORY">
 
                         <div class="row">
-                            <button class="btn btn-primary btn-user btn-block">Submit</button>
+                            <button class="btn btn-primary btn-user btn-block" id="submitBtn">Submit</button>
                         </div>
 
                     </form>
