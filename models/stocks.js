@@ -6,17 +6,16 @@ const string = {
 }
 
 const instockpodSchema  = new mongoose.Schema({
-    productBrand: string,
-    productName: string,
-    productDescription: string,
     productEntity: string,
+    productName: string,
     productCategory: string,
+    productOther: string,
     productQuantity: string,
     productPrice: string,
     productSalePrice: string,
-    productVarietyType: string,
-    productVariety: {type: [String]},
-    productVarietyQuantity: {type: [String]},
+    productColor: {type: [String]},
+    productSize: {type: [String]},
+    quantity: {type: [String]},
     uid: string,
     name: string,
     dateCreated: string,

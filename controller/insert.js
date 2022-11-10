@@ -526,20 +526,21 @@ const insertTmx = ((req,res)=>{
 })
 
 const insertStock = ((req,res)=>{
-    let date = moment().format("DD/MM/YYYY, h:mm:ss a")
+    let date = moment().format("DD/MM/YYYY")
     let data = req.body
     let stock = new stockDB({
-        productBrand: data.productBrand,
-        productName: data.productName,
-        productDescription: data.productDescription,
         productEntity: data.productEntity,
+        productName: data.productName,
         productCategory: data.productCategory,
+        productOther: data.productOther,
         productQuantity: data.productQuantity,
         productPrice: data.productPrice,
         productSalePrice: data.productSalePrice,
-        productVariety: data.productVariety,
-        productVarietyQuantity: data.productVarietyQuantity,
-        createdBy: data.createdBy,
+        productColor:data.productColor,
+        productSize: data.productSize,
+        quantity: data.quantity,
+        uid: data.uid,
+        name: data.name,
         dateCreated: date,
     })
     stock.save(err=>{
@@ -553,10 +554,9 @@ const insertStock = ((req,res)=>{
             })
         }
         else{
-            console.log('Status: 201 - success entry to database')
+            console.log('Status: 200 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
-            res.status(201).send()
-            res.redirect('/:services-in')
+            res.status(200).redirect('/in_stock')
         }
     })
 })

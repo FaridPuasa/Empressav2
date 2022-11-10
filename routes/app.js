@@ -62,6 +62,7 @@ const {updateMohPodStatus} = require('../controller/update')
 
 router.post('/success-POD', updateMohPodStatus)
 router.post('/success-in-moh', insertPharmacy)
+router.post('/success-instock', insertStock)
 
 router.get('/in_stock', (req,res)=>{
     let user = currentUser[0]

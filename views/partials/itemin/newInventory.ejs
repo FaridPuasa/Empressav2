@@ -7,7 +7,7 @@
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
-                    <form class="user" method="POST" action="/newInventory">
+                    <form class="user" method="POST" action="/success-instock">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="p-5">
@@ -16,21 +16,28 @@
                                         <h1 class="h4 text-gray-900 mb-4">New Inventory</h1>
                                     </div>
 
-                                    <div class="form-group" id="entity">
-                                        <select class="form-control" name="entity" id="entity">
-                                            <option class="active">Product For</option>
-                                            <option>Go Belistore</option>
-                                            <option>Bruneian Made Finest</option>
+                                    <div class="form-group">
+                                        <label for="productBrand">Product Brand</label>
+                                        <input type="text" class="form-control" name="productBrand" id="productBrand" aria-describedby="productBrand">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="entity">Product Entity</label>
+                                        <select class="form-control" name="productEntity" id="entity">
+                                            <option value=""></option>
+                                            <option value="GBS">Go Belistore</option>
+                                            <option value="BMF">Bruneian Made Finest</option>
                                         </select>
                                     </div>
 
-                                    <div class="form-group" id="productName">
-                                        <input type="text" class="form-control" name="productName" id="productName" aria-describedby="productName" placeholder="Enter Product Name">
+                                    <div class="form-group">
+                                        <label for="productName">Product Name</label>
+                                        <input type="text" class="form-control" name="productName" id="productName" aria-describedby="productName">
                                     </div>
 
-                                    <div class="form-group" id="category">
+                                    <div class="form-group">
+                                        <label for="productCategory">Product Category</label>
                                         <select class="form-control" name="productCategory" id="productCategory">
-                                            <option class="active">Variety Type</option>
                                             <option value="food">Food & Beverages</option>
                                             <option value="perfume">Perfume</option>
                                             <option value="kids">Kids Clothing</option>
@@ -46,19 +53,23 @@
                                         </select>
                                     </div>
                                       
-                                    <div class="form-group" id="productOther">
+                                    <div class="form-group">
                                         <input type="text" class="form-control" name="productOther" id="productOther" aria-describedby="productOther" placeholder="Enter Product Other">
                                     </div>
 
-                                    <div class="form-group" id="productQuantity">
-                                        <input type="text" class="form-control" name="productQuantity" id="productQuantity" aria-describedby="productQuantity" placeholder="Enter Product Quantity">
+                                    <div class="form-group">
+                                        <label for="productQuantity">Product Quantity</label>
+                                        <input type="text" class="form-control" name="productQuantity" id="productQuantity"  aria-describedby="productQuantity" placeholder="Enter Product Quantity">
+                                        <span class="qtyWarn"></span>
                                     </div>
 
-                                    <div class="form-group" id="productPrice">
+                                    <div class="form-group">
+                                        <label for="productPrice">Product Price</label>
                                         <input type="text" class="form-control" name="productPrice" id="productPrice" aria-describedby="productPrice" placeholder="Enter Product Price">
                                     </div>
 
-                                    <div class="form-group" id="productSalePrice">
+                                    <div class="form-group">
+                                        <label for="productSalePrice">Product Sale Price</label>
                                         <input type="text" class="form-control" name="productSalePrice" id="productSalePrice" aria-describedby="productSalePrice" placeholder="Enter Product Sale Price">
                                     </div>
 
@@ -81,7 +92,8 @@
                                                     <input type="text" class="form-control" name="productSize" id="productSize" placeholder="Enter Product Size">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Enter Quantity">
+                                                    <input type="text" class="form-control quantity" name="quantity" id="quantity" placeholder="Enter Quantity" onkeyup="testcal()">
+                                                    <span class="qtyWarn"></span>
                                                 </td>
                                             </tr>
                                         </tbody>
