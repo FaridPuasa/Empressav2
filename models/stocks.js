@@ -6,6 +6,7 @@ const string = {
 }
 
 const instockpodSchema  = new mongoose.Schema({
+    sequence: string,
     productEntity: string,
     productName: string,
     productCategory: string,

@@ -16,6 +16,7 @@ const runnerPodDB = require('../models/runnerpod')
 const personalPodDB = require('../models/personalpod')
 const warehouseDB = require('../models/warehouseInventory')
 const waybillDB = require('../models/restock')
+const stockDB = require('../models/stocks')
 const userDB = require('../models/user')
 const express = require('express');
 const session = require('express-session')
@@ -65,13 +66,42 @@ router.post('/success-in-moh', insertPharmacy)
 router.post('/success-instock', insertStock)
 
 router.get('/in_stock', (req,res)=>{
-    let user = currentUser[0]
-    res.render('itemin', {
-        title: "Item In",
-        partials: './partials/itemin/newinventory.ejs',
-        moment: moment,
-        user,
-    })
+    stockDB.find().sort({$natural: -1}).limit(1).then(
+        (result)=>{
+            console.log(result)
+            //console.log(result[0].sequence)
+            if(result[0].sequence == undefined || 0 || null){
+                console.log("if")
+                let sequence = 1
+                let user = currentUser[0]
+                res.render('itemin', {
+                    title: "Item In",
+                    partials: './partials/itemin/newinventory.ejs',
+                    moment: moment,
+                    sequence: sequence,
+                    user,
+                })
+            }
+            else{
+                console.log("else")
+                //console.log(parseInt(result[0].sequence))
+                let sequence = parseInt(result[0].sequence) + 1 
+                console.log(sequence)
+                let user = currentUser[0]
+                res.render('itemin', {
+                    title: "Item In",
+                    partials: './partials/itemin/newinventory.ejs',
+                    moment: moment,
+                    sequence: sequence,
+                    user,
+                })
+            }
+        },
+        (err)=>{
+            console.log(err)
+        }
+    )
+    
 })
 
 //GET Login //done
