@@ -109,14 +109,11 @@ let qt = document.getElementById("quantity").addEventListener('change', function
     })
 } */
 
-
 function testcal(){
-    let total = 0
-    console.log("start calculate");
-    //console.log("start calculate");
+    var total = 0;
     for (let i = 0; i < document.getElementsByName("quantity").length; i++) {
-        let newtotal = total + parseInt(document.getElementsByName("quantity")[i].value);
-        console.log(newtotal);
+        total = total + parseInt(document.getElementsByName("quantity")[i].value);
+        console.log(total);
+        document.getElementById("tempTotal").value = total;
     }
 }
-
