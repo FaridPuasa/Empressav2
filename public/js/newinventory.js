@@ -14,9 +14,11 @@ function addTextInput() {
     let row = document.getElementById("newRow")
     
     let tableRow = document.createElement("tr")
+    let tableCol_1 = document.createElement("td")
     let tableCol_2 = document.createElement("td")
     let tableCol_3 = document.createElement("td")
     let tableCol_4 = document.createElement("td")
+    let tableCol_5 = document.createElement("td")
 
     /*
     let numbers = document.createElement("input")
@@ -35,43 +37,43 @@ function addTextInput() {
     productColor.className = "form-control"
     productColor.name = "productColor"
     productColor.id = "productColor" 
-    productColor.placeholder = "Enter Product Color"
-    
 
     let productSize = document.createElement("input")
     productColor.type = "text"
     productSize.className = "form-control"
     productSize.name = "productSize"
     productSize.id = "productSize" 
-    productSize.placeholder = "Enter Product Size"
-    
-  
-    /*let i = (document.getElementsByName("quantity").length -1 )
-    let qty = "quantity" + i
 
-    document.getElementsByName("quantity").length*/
+    let productFlavour = document.createElement("input")
+    productFlavour.type = "text"
+    productFlavour.className = "form-control"
+    productFlavour.name = "productFlavour"
+    productFlavour.id = "productFlavour" 
+
+    let productScent = document.createElement("input")
+    productScent.type = "text"
+    productScent.className = "form-control"
+    productScent.name = "productScent"
+    productScent.id = "productScent" 
 
     let quantity = document.createElement("input")
     quantity.type = "text"
     quantity.className = "form-control quantity"
     quantity.name = "quantity"
     quantity.id = "quantity" + document.getElementsByName("quantity").length
-    quantity.placeholder = "Enter Quantity";
     quantity.setAttribute('onkeyup','testcal()');
-   
-
-    let span = document.createElement("span")
-    span.className = "qtyWarn"
     
-   
-    tableCol_2.appendChild(productColor)
-    tableCol_3.appendChild(productSize)
-    tableCol_4.appendChild(quantity)
-    tableCol_4.appendChild(span)
+    tableCol_1.appendChild(productColor)
+    tableCol_2.appendChild(productSize)
+    tableCol_3.appendChild(productFlavour)
+    tableCol_4.appendChild(productScent)
+    tableCol_5.appendChild(quantity)
 
+    tableRow.appendChild(tableCol_1)
     tableRow.appendChild(tableCol_2)
     tableRow.appendChild(tableCol_3)
     tableRow.appendChild(tableCol_4)
+    tableRow.appendChild(tableCol_5)
 
     row.appendChild(tableRow)
     i++
@@ -108,6 +110,7 @@ let qt = document.getElementById("quantity").addEventListener('change', function
     console.log(total);
     })
 } */
+document.getElementById("submitBtn").style.display = 'none'
 
 function testcal(){
     var total = 0;
@@ -115,5 +118,17 @@ function testcal(){
         total = total + parseInt(document.getElementsByName("quantity")[i].value);
         console.log(total);
         document.getElementById("tempTotal").value = total;
+    }
+
+    if(document.getElementById("tempTotal").value != document.getElementById("productQuantity").value){
+        document.getElementById('qtyWarn').style.color = 'red';
+        document.getElementById('qtyWarn').innerHTML
+        = '☒ Total quantity not match';
+        document.getElementById("submitBtn").style.display = 'none'
+    }else{
+        document.getElementById('qtyWarn').style.color = 'green';
+        document.getElementById('qtyWarn').innerHTML =
+            '🗹  Total quantity match'
+        document.getElementById("submitBtn").style.display = 'block'
     }
 }

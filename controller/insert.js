@@ -528,7 +528,11 @@ const insertTmx = ((req,res)=>{
 const insertStock = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY")
     let data = req.body
+    let sequence = data.sequence
+    let product_id = "GR/INSTOCK: " + sequence
     let stock = new stockDB({
+        product_id: product_id,
+        sequence: sequence,
         productEntity: data.productEntity,
         productName: data.productName,
         productCategory: data.productCategory,
