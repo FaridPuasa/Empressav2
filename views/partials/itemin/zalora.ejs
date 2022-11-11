@@ -541,7 +541,7 @@
 
                             document.getElementById("paymentType").value = "";
 
-                            document.getElementById("value").value = "";
+                            document.getElementById("value").value = json_responsetn.data[0].job_description;
 
                             for (let i = 0; i < json_responsetn.data[0].task_history.length; i++) {
                                 if (json_responsetn.data[0].task_history[i].type == "text_added") {
