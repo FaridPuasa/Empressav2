@@ -33,6 +33,11 @@ const exportInventory = (req,res) =>{
         (result)=>{
             console.log('Successfully extracted required data.')
             console.log(result)
+            res.render('list', {
+                title: 'Extraction Error',
+                partials: './partials/list/export',
+                list: result,
+            })
         },
         (err)=>{
             console.log('Failed to extract required data.')

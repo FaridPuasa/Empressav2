@@ -130,11 +130,14 @@
             var data = JSON.parse(listing) //testing required
             //console.log(data)
             for(i=0; i<data.length; i++){ //change the value to date
-                let start = data[i].dateEntry
-                let end = moment().format('DD/MM/YYYY')
-                let dif = Math.abs(new Date(end) - new Date(start))
+                let start = moment(data[i].dateEntry).format('MM/DD/YYYY')
+                let end = moment().format('MM/DD/YYYY')
+                console.log(new Date(end))
+                console.log(moment(data[i].dateEntry).format('MM/DD/YYYY'))
+                let dif = new Date(end) - new Date(start)
                 let d = dif/(1000*3600*24)
                 data[i].age = d +" days"
+                console.log( data[i].age)
 
                 let status = data[i].currentStatus
                 if(status == "A2"){
