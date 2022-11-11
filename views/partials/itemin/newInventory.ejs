@@ -128,11 +128,13 @@
 
                         <!--Additional Information-->
 
-                        <input type="hidden" class="form-control form-control-user" name="tempTotal" id="tempTotal" aria-describedby="contactHelp">
+                        <input type="hidden" class="form-control form-control-user" name="tempTotal" id="tempTotal">
+                        <input type="hidden" class="form-control form-control-user" name="uid" id="uid" value="<%= user.uid %>">
+                        <input type="hidden" class="form-control form-control-user" name="name" id="name" value="<%= user.name %>">
                         
                         <!-- End of Information -->
 
-                        <input type="hidden" class="form-control form-control-user" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="NEWINVENTORY">
+                        <input type="hidden" class="form-control form-control-user" name="formmethod" id="formmethod" value="NEWINVENTORY">
 
                         <div class="row">
                             <button class="btn btn-primary btn-user btn-block" id="submitBtn">Submit</button>
