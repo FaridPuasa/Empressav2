@@ -104,6 +104,23 @@ router.get('/in_stock', (req,res)=>{
     
 })
 
+router.get('/inventory-list', (req,res)=>{
+    stockDB.find().then(
+        (result)=>{
+            console.log(result)
+            res.render('list', {
+                title: "Inventory",
+                partials: './partials/list/inventory.ejs',
+                moment: moment, 
+                list: result,
+            })
+        },
+        (err)=>{
+
+        }
+    )
+})
+
 //GET Login //done
 router.get('/', (req,res)=>{
     res.render('login', {

@@ -6,7 +6,7 @@ const string = {
 }
 
 const panagapodSchema  = new mongoose.Schema({
-    pod_id: string,
+    pod_id: {type:String, required:true, unique:true},
     podSequence: string,
     madeby: string,
     deliveryArea: string,

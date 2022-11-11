@@ -6,7 +6,7 @@ const string = {
 }
 
 const mohpodSchema  = new mongoose.Schema({
-    pod_id: string,
+    pod_id: {type:String, required:true, unique:true},
     podsequence: string,
     madeby: string,
     deliveryArea: string,

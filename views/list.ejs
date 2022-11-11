@@ -48,6 +48,8 @@
 
     <script src="/public/js/data.js"></script>
     <script>
+        let listing = '<%- JSON.stringify(list) %>'
+
         var $table = $('#table')
         var $remove = $('#remove')
         var selections = []
@@ -74,21 +76,25 @@
         }
       
         function operateFormatter(value, row, index) {
+            for(i=0; i < listing.length; i++){
             return [
                 `<button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-ellipsis-h"></i>
                 </button>`
                 ,
-                `<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                
+                    `<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal${i}" href="#">Details</a>
                 </div>`
+                
             ].join('')
+            }
         }
-      
+        
+        /*
         window.operateEvents = {
             'click .like': function (e, value, row, index) {
-                alert('You click like action, row: ' + JSON.stringify(row))
+                console.log('You click like action, row: ' + JSON.stringify(row))
             },
             'click .remove': function (e, value, row, index) {
                 $table.bootstrapTable('remove', {
@@ -96,7 +102,7 @@
                 values: [row.id]
                 })
             }
-        }
+        }*/
       
         // function totalTextFormatter(data) {
         //   return 'Total'
@@ -116,9 +122,10 @@
         // }
       
        var $table = $('#table')
+       
       
         $(function() {
-            let listing = '<%- JSON.stringify(list) %>'
+            
             //console.log(listing)
             var data = JSON.parse(listing) //testing required
             //console.log(data)

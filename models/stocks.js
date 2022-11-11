@@ -6,8 +6,10 @@ const string = {
 }
 
 const instockpodSchema  = new mongoose.Schema({
+    product_id: {type:String, required:true, unique:true},
     sequence: string,
     productEntity: string,
+    productBrand: string,
     productName: string,
     productCategory: string,
     productOther: string,
@@ -16,6 +18,8 @@ const instockpodSchema  = new mongoose.Schema({
     productSalePrice: string,
     productColor: {type: [String]},
     productSize: {type: [String]},
+    productFlavour: {type: [String]},
+    productScent: {type: [String]},
     quantity: {type: [String]},
     uid: string,
     name: string,

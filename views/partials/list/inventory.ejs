@@ -1,0 +1,122 @@
+<div class="container-fluid">
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary text-center">ZALORA | INVENTORY LIST</h6>
+        </div>
+
+        <div class="card-body">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <form class="user" method="POST" action="/itemInSuccess">
+                    
+                        <div id="toolbar">
+                            <!--<div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-light btn-lg ">Excel Upload</button>
+                                <div class="dropdown-container">
+                                    <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sliders-h"></i> Advance Search</button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-list">
+                                                <input id="search_input" type="search" placeholder="Search states" class="dropdown-search"/>
+                                                <ul></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
+
+                            <table
+                                id="table"
+                                data-toolbar="#toolbar"
+                                data-search="true"
+                                data-show-refresh="true"
+                                data-show-toggle="true"
+                                data-show-fullscreen="true"
+                                data-show-columns="true"
+                                data-show-columns-toggle-all="true"
+                                data-detail-view="false"
+                                data-show-export="true"
+                                data-click-to-select="true"
+                                data-detail-formatter="detailFormatter"
+                                data-minimum-count-columns="2"
+                                data-show-pagination-switch="true"
+                                data-pagination="true"
+                                data-id-field="id"
+                                data-page-list="[10, 25, 50, 100, all]"
+                                data-show-footer="true"
+                                data-response-handler="responseHandler">
+                            <thead>
+                                <tr>
+                                    <th data-field="product_id" data-sortable="true">Product Id</th>
+                                    <th data-field="productEntity" data-sortable="true">Product Entity</th>
+                                    <th data-field="productBrand" data-sortable="true">Product Brand</th>
+                                    <th data-field="productName" data-sortable="true">Product Name</th>
+                                    <th data-field="productQuantity" data-sortable="true">Product Quantity</th>
+                                    <th data-field="productPrice" data-sortable="true">Product Price</th>
+                                    <th data-field="productSalePrice" data-sortable="true">Selling Price</th>
+                                    <th data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td colspan="10" class="text-center">No Data</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<% list.forEach((list,index)=> { %>
+<div class="modal fade" id="exampleModal<%= index %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+            <h5 class="modal-title" id="exampleModalLabel">Product ID: <%= list.product_id %></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+
+            <div class="modal-body">
+                <table class="table">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Colours</th>
+                            <th>Size</th>
+                            <th>Falvour</th>
+                            <th>Scent</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="text-center">
+                        <% for(let i=0 ; i < list.productColor.length; i++) {%>
+                        <tr>
+                            <td><%= list.productColor[i] %></td>
+                            <td><%= list.productSize[i] %></td>
+                            <td><%= list.productFlavour[i] %></td>
+                            <td><%= list.productScent[i] %></td>
+                            <td><%= list.quantity[i] %></td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<% }) %>
