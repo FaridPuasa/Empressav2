@@ -30,7 +30,9 @@
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
                                 </div>
                             <% } %>
-                            <table class="table table-condensed table-striped text-center">
+                            <% for(let k = 0; k < document.length ; k++){ %>
+                            <div class="tab tableFrist" id="tab<%= k %>">
+                            <table class="table table-condensed table-striped text-center tableFrist">
                                 <thead>
                                     <tr>
                                         <th></th>
@@ -52,12 +54,12 @@
                                                 </svg>
                                             </button>
                                         </td>
-                                        <td><%= document.pod_id %></td>
-                                        <td><%= document.madeby %></td>
-                                        <td><%= document.agentName %></td>
-                                        <td><%= document.deliveryArea %></td>
-                                        <td><%= document.deliveryDate %></td>
-                                        <td>
+                                        <td class="podid"><%= document.pod_id %></td>
+                                        <td class="madeby"><%= document.madeby %></td>
+                                        <td class="agentName"><%= document.agentName %></td>
+                                        <td class="deliveryArea"><%= document.deliveryArea %></td>
+                                        <td class="deliveryDate"><%= document.deliveryDate %></td>
+                                        <td class="podstatus">
                                             <% if(document.podstatus == "P1"){%>
                                                 ON HOLD
                                             <%}%>
@@ -84,11 +86,12 @@
                                             <%}%>
                                         </form>
                                     </tr>
+                                </div>
                                         
                                     <tr>
                                         <td colspan="12" class="hiddenRow">
                                             <div class="accordian-body collapse" id="demo1"> 
-                                                <div id="areaToPrint<%= index %>">
+                                                <div class="inner" id="inner<%= k %>">
                                                 <table class="table table-striped table-bordered">
                                                     <thead>
                                                         <tr class="info">
@@ -129,15 +132,51 @@
                                                         <%}%>
                                                     </tbody>
                                                 </table>
-                                                <button class="btn btn-primary" onclick="">Print</button>
+                                                </div>
+
+                                                <div class="footer" id="footer<%= k %>">
+                                                <table class="table">
+                                                    <thead class="thead-light">
+                                                        <th colspan="9" class="text-center">OFFICIAL USE ONLY (CASH)</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="1">Dispatcher:</td>
+                                                            <td colspan="2"></td>
+                                                            <td colspan="1">Cash On Hand:</td>
+                                                            <td colspan="2"></td>
+                                                            <td colspan="1">Date:</td>
+                                                            <td colspan="2"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="1">Operation Handler:</td>
+                                                            <td colspan="2"></td>
+                                                            <td colspan="1">Cash On Hand:</td>
+                                                            <td colspan="2"></td>
+                                                            <td colspan="1">Date:</td>
+                                                            <td colspan="2"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="1">Finance:</td>
+                                                            <td colspan="2"></td>
+                                                            <td colspan="1">Cash On Hand:</td>
+                                                            <td colspan="2"></td>
+                                                            <td colspan="1">Date:</td>
+                                                            <td colspan="2"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                </div>
+
+                                                <button class="btn btn-primary" onclick="createPDF()">Print</button>
                                                 </div>
                                             </div> 
                                         </td>
                                     </tr>
-                                    
                                     <%})%>
                                 </tbody>
                             </table>
+                            <% } %>
                         </div>
                     </div>
                 </div>

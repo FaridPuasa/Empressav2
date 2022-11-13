@@ -559,6 +559,258 @@ const updatePanagaPod = ((req,res) =>{
     }
 })
 
+const updateZaloraOut = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    let option = {upsert: false, new: false}
+    let update = {
+        currentStatus: "D2", 
+        $push:{
+            history: {
+                statusDetail: "D2", 
+                dateUpdated: date,
+                updateBy: data.updateById, 
+                updateById: data.uid, 
+            }
+        }
+    }
+    console.log(filter)
+    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+        if(err){
+            console.log(err)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
+        }
+        else {
+            console.log(result)
+            res.render('sucess', {
+                response: 'Successfuly updated',
+                message: 'Congratulations~ All tracking number has been updated.'
+            })
+        }
+    })
+})
+
+const updateFmxOut = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    let option = {upsert: false, new: false}
+    let update = {
+        currentStatus: "D2", 
+        $push:{
+            history: {
+                statusDetail: "D2", 
+                dateUpdated: date,
+                updateBy: data.username, 
+                updateById: data.userID, 
+            }
+        }
+    }
+    console.log(filter)
+    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+        if(err){
+            console.log(err)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
+        }
+        else {
+            console.log(result)
+            res.render('sucess', {
+                response: 'Successfuly updated',
+                message: 'Congratulations~ All tracking number has been updated.'
+            })
+        }
+    })
+})
+
+const updatePharmacyOut = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    let option = {upsert: false, new: false}
+    let update = {
+        currentStatus: "D2", 
+        $push:{
+            history: {
+                statusDetail: "D2", 
+                dateUpdated: date,
+                updateBy: data.username, 
+                updateById: data.userID, 
+            }
+        }
+    }
+    console.log(filter)
+    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+        if(err){
+            console.log(err)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
+        }
+        else {
+            console.log(result)
+            res.render('sucess', {
+                response: 'Successfuly updated',
+                message: 'Congratulations~ All tracking number has been updated.'
+            })
+        }
+    })
+})
+
+const updateTmxOut = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    let option = {upsert: false, new: false}
+    let update = {
+        currentStatus: "D2", 
+        $push:{
+            history: {
+                statusDetail: "D2", 
+                dateUpdated: date,
+                updateBy: data.username, 
+                updateById: data.userID, 
+            }
+        }
+    }
+    console.log(filter)
+    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+        if(err){
+            console.log(err)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
+        }
+        else {
+            console.log(result)
+            res.render('sucess', {
+                response: 'Successfuly updated',
+                message: 'Congratulations~ All tracking number has been updated.'
+            })
+        }
+    })
+})
+
+const updateRunnerOut = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    let option = {upsert: false, new: false}
+    let update = {
+        currentStatus: "D2", 
+        $push:{
+            history: {
+                statusDetail: "D2", 
+                dateUpdated: date,
+                updateBy: data.username, 
+                updateById: data.userID, 
+            }
+        }
+    }
+    console.log(filter)
+    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+        if(err){
+            console.log(err)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
+        }
+        else {
+            console.log(result)
+            res.render('sucess', {
+                response: 'Successfuly updated',
+                message: 'Congratulations~ All tracking number has been updated.'
+            })
+        }
+    })
+})
+
+const updateLocalOut = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    let option = {upsert: false, new: false}
+    let update = {
+        currentStatus: "D2", 
+        $push:{
+            history: {
+                statusDetail: "D2", 
+                dateUpdated: date,
+                updateBy: data.username, 
+                updateById: data.userID, 
+            }
+        }
+    }
+    console.log(filter)
+    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+        if(err){
+            console.log(err)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
+        }
+        else {
+            console.log(result)
+            res.render('sucess', {
+                response: 'Successfuly updated',
+                message: 'Congratulations~ All tracking number has been updated.'
+            })
+        }
+    })
+})
+
+const updatePersonalOut = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    let option = {upsert: false, new: false}
+    let update = {
+        currentStatus: "D2", 
+        $push:{
+            history: {
+                statusDetail: "D2", 
+                dateUpdated: date,
+                updateBy: data.username, 
+                updateById: data.userID, 
+            }
+        }
+    }
+    console.log(filter)
+    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+        if(err){
+            console.log(err)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
+        }
+        else {
+            console.log(result)
+            res.render('sucess', {
+                response: 'Successfuly updated',
+                message: 'Congratulations~ All tracking number has been updated.'
+            })
+        }
+    })
+})
+
 module.exports = {
     updateFmx,
     updateMohPodStatus

@@ -44,6 +44,127 @@
 
     <!-- scripts goes here -->
     <%- include('partials/scripts.ejs') %>
+
+    <script>
+        function createPDF() {
+            console.log('activate')
+            let length = document.getElementsByClassName('tab').length
+            console.log(length)
+            for(let i = 0; i < length; i++){
+                let sTable = document.getElementsByClassName('tab')[i].innerHTML;
+                let innerTable = document.getElementsByClassName('inner')[i].innerHTML;
+                let footerTable = document.getElementsByClassName('footer')[i].innerHTML;
+
+                let style = "<style>";
+                style = style + ".btn {display: none;}";
+                style = style + "table {width: 100%;font: 17px Calibri;}";
+                style = style + "table, th, td {border: 1px solid black; border-collapse: collapse; padding: 2px 3px; text-align: center;}";
+                style = style + ".text-left {text-align: left;}";
+                style = style + "</style>";
+                
+
+                let podid = document.getElementsByClassName("podid")[i].innerHTML
+                let madeby = document.getElementsByClassName("madeby")[i].innerHTML
+                let agentName = document.getElementsByClassName("agentName")[i].innerHTML
+                let deliveryArea = document.getElementsByClassName("deliveryArea")[i].innerHTML
+                let deliveryDate = document.getElementsByClassName("deliveryDate")[i].innerHTML
+                let podstatus = document.getElementsByClassName("podstatus")[i].innerHTML
+                console.log(podid)
+                // CREATE A WINDOW OBJECT.
+                let win = window.open('', '', 'height=700,width=700');
+
+                win.document.write('<html><head>');
+                win.document.write('<title>Profile</title>');   // <title> FOR PDF HEADER.
+                win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+                win.document.write('<link href="/public/css/sb-admin-2.min.css" rel="stylesheet">');   
+                win.document.write('</head>');
+                win.document.write('<body>');
+                win.document.write('<div class="container">');
+                win.document.write('<table class="table table-bordered">')
+                win.document.write('</br>')
+                win.document.write('<thead>')
+                win.document.write('<tr>')
+                win.document.write('<th>')
+                win.document.write('POD REF')
+                win.document.write('</th>')
+                win.document.write('<th>')
+                win.document.write('Made By')
+                win.document.write('</th>')
+                win.document.write('<th>')
+                win.document.write('Dispatcher')
+                win.document.write('</th>')
+                win.document.write('<th>')
+                win.document.write('Delivery Area')
+                win.document.write('</th>')
+                win.document.write('<th>')
+                win.document.write('Delivery Date')
+                win.document.write('</th>')
+                win.document.write('<th>')
+                win.document.write('POD Status')
+                win.document.write('</th>')
+                win.document.write('</tr>')
+                win.document.write('</thead>')
+                win.document.write('<tbody>')
+                win.document.write('<tr>')
+                win.document.write('<td>')
+                win.document.write(podid)
+                win.document.write('</td>')
+                win.document.write('<td>')
+                win.document.write(madeby)
+                win.document.write('</td>')
+                win.document.write('<td>')
+                win.document.write(agentName)
+                win.document.write('</td>')
+                win.document.write('<td>')
+                win.document.write(deliveryArea)
+                win.document.write('</td>')
+                win.document.write('<td>')
+                win.document.write(deliveryDate)
+                win.document.write('</td>')
+                win.document.write('<td>')
+                win.document.write(podstatus)
+                win.document.write('</td>')
+                win.document.write('</tr>')
+                win.document.write('</tbody>')
+                win.document.write('</table>')    
+                //win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+                win.document.write('</br>')
+                win.document.write(innerTable);
+                win.document.write('</br>')
+                win.document.write(`
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="6">Offical Use Only (Cash Only)</th>
+                            </tr>
+                         </thead class="thead-light">
+                         <tbody>
+                            <tr>
+                                <td class="text-left">Dispatcher:</td>
+                                <td class="text-left">Cash On Hand:</td>
+                                <td class="text-left">Date:</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Operation Handler:</td>
+                                <td class="text-left">Cash On Hand:</td>
+                                <td class="text-left">Date:</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Finance:</td>
+                                <td class="text-left">Cash On Hand:</td>
+                                <td class="text-left">Date:</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `)         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+                win.document.write('</div></body></html>');
+                win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+                win.print();    // PRINT THE CONTENTS.
+            }
+        
+    }
+    </script>
     
 </body>
 </html>

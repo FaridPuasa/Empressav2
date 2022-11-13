@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        html, body {
+            width: 100%;
+            height:100%;
+            }
+
+            body {
+                background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+                background-size: 400% 400%;
+                animation: gradient 2s ease infinite;
+            }
+
+            @keyframes gradient {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+    </style>
+
+    <%- include('partials/head.ejs') %>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- sidebar navigation -->
+        <%- include('partials/sidebar.ejs') %>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- top navigation -->
+                <%- include('partials/topbar.ejs') %>
+
+                <!-- Begin Page Content -->
+
+				<%- include(partials) %>
+
+                <!-- content of page goes here -->
+
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <%- include('partials/footer.ejs') %>
+
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <%- include('partials/logoutModal.ejs') %>
+
+    <!-- scripts goes here -->
+    <%- include('partials/scripts.ejs') %>
+
+</body>
+</html>
+

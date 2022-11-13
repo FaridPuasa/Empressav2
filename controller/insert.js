@@ -19,8 +19,9 @@ const moment = require('moment')
     SCHEDULE FOR DELIVERY = B
     DELIVERY IN PROGRESS = C
     SUCCESSFUL DELIVERY = D1
-    FAILED DELIVERY = D2
-    CANCELLED DELIVERY = D3
+    SELF COLLECT = D2
+    FAILED DELIVERY = D3
+    CANCELLED DELIVERY = D4
 */
 
 //All insert or new item controller

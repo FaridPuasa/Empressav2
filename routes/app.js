@@ -65,6 +65,17 @@ router.post('/success-POD', updateMohPodStatus)
 router.post('/success-in-moh', insertPharmacy)
 router.post('/success-instock', insertStock)
 
+router.get('/self-collect', (req,res)=>{
+    let user = currentUser[0]
+    console.log(user.uid)
+    res.render('selfcollect',{
+        title: "Self Collect",
+        partials: './partials/selfcollect/selfcollect.ejs',
+        moment,
+        user
+    })
+})
+
 router.get('/in_stock', (req,res)=>{
     stockDB.find().sort({$natural: -1}).limit(1).then(
         (result)=>{
@@ -144,12 +155,6 @@ router.post('/dashboard', grantAccess)
 //GET Dashboard //testing
 router.get('/dashboard', (req,res)=>{
     //let id = req.params.user
-/*
-    $group:{
-        _id: {service: '$service', currentStatus: '$currentStatus', areaCode: '$areaCode'},
-        count: {$sum:1}
-    }
-*/
     warehouseDB.aggregate([{ 
             $group:{
                 _id: {service: '$service', currentStatus: '$currentStatus', areaCode: '$areaCode'},
@@ -627,152 +632,6 @@ router.get('/:services-in', (req,res)=>{
 router.get('/:services-list', (req,res)=>{
     let services = req.params.services
     let user = currentUser[0]
-    let list =[
-        {
-            'tracking': 'Andrei ',
-            'name': 'Masharin',
-            'type': 'Owner, Tenant',
-            'phone': '777-444-6556',
-            'value': '432',
-            'status': 'Los Alisos',
-            'address': '2400 Harbor Boulevard ',
-            'city': 'Costa Mesa',
-            'state': 'CA',
-            'age': '94454',
-       },
-       {
-            'tracking': 'Anje',
-            'name': 'Keizer',
-            'type': 'N/A',
-            'phone': '713-810-8418',
-            'value': '343',
-            'status': 'Cameron',
-            'address': '3848 Michael Street',
-            'city': 'Hendley',
-            'state': 'NE',
-            'age': '68946',
-       },
-        {
-            'tracking': 'Arina',
-            'name': 'Belomestnykh',
-            'type': 'Owner, Tenant',
-            'phone': '937-755-9651',
-            'value': '454',
-            'status': 'Fort Kent',
-            'address': '1918  Crim Lane',
-            'city': 'New Madison',
-            'state': 'OH',
-            'age': '45346',
-       },
-       {
-            'tracking': 'Darius',
-            'name': 'Cummings',
-            'type': 'N/A',
-            'phone': '937-755-9651',
-            'value': '123',
-            'status': 'Dennehotso',
-            'address': '3848  Michael Street',
-            'city': 'Costa Mesa',
-            'state': 'NE',
-            'age': '68946',
-       },
-       {
-            'tracking': 'Francisco',
-            'name': 'Maia',
-            'type': 'Owner, Tenant',
-            'phone': '937-755-9651',
-            'value': '565',
-            'status': 'Cameron',
-            'address': '3848 Michael Street',
-            'city': 'Hendley',
-            'state': 'NE',
-            'age': '45346',
-       },
-       {
-            'tracking': 'Chinelo',
-            'name': 'Chyke',
-            'type': 'N/A',
-            'phone': '937-755-9651',
-            'value': '545',
-            'status': 'Dennehotso',
-            'address': '3848 Michael Street',
-            'city': 'Costa Mesa',
-            'state': 'NE',
-            'age': '68946',
-       }, 
-       {
-            'tracking': 'Andrei ',
-            'name': 'Masharin',
-            'type': 'Owner, Tenant',
-            'phone': '777-444-6556',
-            'value': '432',
-            'status': 'Los Alisos',
-            'address': '2400 Harbor Boulevard ',
-            'city': 'Costa Mesa',
-            'state': 'CA',
-            'age': '94454',
-       },
-       {
-            'tracking': 'Anje',
-            'name': 'Keizer',
-            'type': 'N/A',
-            'phone': '713-810-8418',
-            'value': '343',
-            'status': 'Cameron',
-            'address': '3848 Michael Street',
-            'city': 'Hendley',
-            'state': 'NE',
-            'age': '68946',
-       },
-        {
-            'tracking': 'Arina',
-            'name': 'Belomestnykh',
-            'type': 'Owner, Tenant',
-            'phone': '937-755-9651',
-            'value': '454',
-            'status': 'Fort Kent',
-            'address': '1918  Crim Lane',
-            'city': 'New Madison',
-            'state': 'OH',
-            'age': '45346',
-       },
-       {
-            'tracking': 'Darius',
-            'name': 'Cummings',
-            'type': 'N/A',
-            'phone': '937-755-9651',
-            'value': '123',
-            'status': 'Dennehotso',
-            'address': '3848  Michael Street',
-            'city': 'Costa Mesa',
-            'state': 'NE',
-            'age': '68946',
-       },
-       {
-            'tracking': 'Francisco',
-            'name': 'Maia',
-            'type': 'Owner, Tenant',
-            'phone': '937-755-9651',
-            'value': '565',
-            'status': 'Cameron',
-            'address': '3848 Michael Street',
-            'city': 'Hendley',
-            'state': 'NE',
-            'age': '45346',
-       },
-       {
-            'tracking': 'Chinelo',
-            'name': 'Chyke',
-            'type': 'N/A',
-            'phone': '937-755-9651',
-            'value': '545',
-            'status': 'Dennehotso',
-            'address': '3848 Michael Street',
-            'city': 'Costa Mesa',
-            'state': 'NE',
-            'age': '68946',
-       }, 
-]
     console.log(services)
     warehouseDB.find().then(
         (documents)=>{
