@@ -896,7 +896,7 @@ router.get('/summary', (req,res)=>{
 router.get('/exportlist', (req,res)=>{
     res.render('export', {
         title: "Export List",
-        partials: './partials/list/export.ejs',
+        partials: './partials/export/exportlist.ejs',
         moment: moment,
         list: list
     })

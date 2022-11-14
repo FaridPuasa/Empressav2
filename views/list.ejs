@@ -134,7 +134,7 @@
             //console.log(listing)
             var data = JSON.parse(listing) //testing required
             //console.log(data)
-            /*for(i=0; i<data.length; i++){ //change the value to date
+            for(i=0; i<data.length; i++){ //change the value to date
                 let start = moment(data[i].dateEntry).format('MM/DD/YYYY')
                 let end = moment().format('MM/DD/YYYY')
                 console.log(new Date(end))
@@ -151,12 +151,18 @@
 
                 let expire = moment(data[i].mohExpire).format('DD/MM/YYYY')
                 data[i].mohExpire = expire
-            }*/
-
-            console.log(data.trackingNumber.length)
-            for(i=0; i<data.trackingNumber.length; i++){
-                
             }
+
+            for(i=0; i<data.length; i++){ //change the value to date
+                for(j=0; j<data[i].trackingNumber.length; j++){ //change the value to date
+                    
+                    console.log(data[i].trackingNumber[j])
+                }
+            }
+
+            
+            
+            
             $table.bootstrapTable({data: data})
             $table.bootstrapTable('updateFormatText', 'formatShowingRows', 'Showing')
         })

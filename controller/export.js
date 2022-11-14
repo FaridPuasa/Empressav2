@@ -102,10 +102,10 @@ const exportPodSummary = (req,res) =>{
         (result)=>{
             console.log('Successfully extracted required data.')
             console.log(result)
-            res.render('list', {
+            res.render('finance', {
                 title: 'Extraction Error',
-                partials: './partials/list/export',
-                list: result,
+                partials: './partials/export/exportlist.ejs',
+                result,
             })
         },
         (err)=>{
