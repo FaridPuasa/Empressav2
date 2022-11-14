@@ -122,13 +122,11 @@ function testcal(){
 
     if(document.getElementById("tempTotal").value != document.getElementById("productQuantity").value){
         document.getElementById('qtyWarn').style.color = 'red';
-        document.getElementById('qtyWarn').innerHTML
-        = '☒ Total quantity not match';
+        document.getElementById('qtyWarn').innerHTML = '☒ Total quantity not match';
         document.getElementById("submitBtn").style.display = 'none'
     }else{
         document.getElementById('qtyWarn').style.color = 'green';
-        document.getElementById('qtyWarn').innerHTML =
-            '🗹  Total quantity match'
+        document.getElementById('qtyWarn').innerHTML = '🗹  Total quantity match'
         document.getElementById("submitBtn").style.display = 'block'
     }
 }

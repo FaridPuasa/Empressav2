@@ -834,9 +834,10 @@ router.get('/:services-podlist', (req,res)=>{
 router.get('/restock_order', (req,res)=>{
     waybillDB.find().sort({$natural: -1}).limit(1).then(
         (result)=>{
-            if(result.podsequence == undefined || 0 || null){
+            console.log(result)
+            if(result == undefined || 0 || null){
                 let sequence = 1
-                console.log(result.podsequence)
+                //console.log(result.sequence)
                 res.render('restock',{
                     title: `BMF WAYBILL`,
                     sequence: sequence,
@@ -844,8 +845,8 @@ router.get('/restock_order', (req,res)=>{
                 })
             }
             else{
-                let sequence = result.podsequence + 1
-                console.log(result.podsequence)
+                let sequence = result.sequence + 1
+                console.log(result.sequence)
                 res.render('restock',{
                     title: `BMF WAYBILL`,
                     sequence: sequence,
@@ -867,23 +868,44 @@ router.get('/restock_order', (req,res)=>{
 //GET Export page
 router.get('/export', (req,res)=>{
     res.render('export', {
-        title: "Login",
+        title: "Export Inventory",
         partials: './partials/export/entryexport.ejs',
         moment: moment,
     })
 })
 
-router.get('/exportlist', (req,res)=>{
+router.get('/export-finance', (req,res)=>{
     res.render('export', {
-        title: "Login",
-        partials: './partials/export/exportlist.ejs',
+        title: "POD Summary",
+        partials: './partials/export/finance.ejs',
         moment: moment,
     })
 })
 
-const {exportInventory} = require('../controller/export')
+router.get('/summary', (req,res)=>{
+    res.render('export', {
+        title: "Summary",
+        partials: './partials/export/exportlist.ejs',
+        moment: moment,
+        list
+    })
+})
+
+
+
+router.get('/exportlist', (req,res)=>{
+    res.render('export', {
+        title: "Export List",
+        partials: './partials/list/export.ejs',
+        moment: moment,
+        list: list
+    })
+})
+
+const {exportInventory, exportPodSummary} = require('../controller/export')
 
 router.post('/exportlist', exportInventory)
+router.post('/summary-success', exportPodSummary)
 
 //GET New User //done
 router.get('/user_register', (req,res)=>{

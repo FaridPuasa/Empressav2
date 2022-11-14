@@ -7,7 +7,7 @@ const string = {
 
 const restockpodSchema  = new mongoose.Schema({
     restock_id: {type:String, required:true, unique:true},
-    podSequence: {type: Number},
+    sequence: {type: Number},
     madeby: string,
     deliveryArea: string,
     agentName: string,
@@ -20,7 +20,6 @@ const restockpodSchema  = new mongoose.Schema({
     contactAddress: {type: [String]},
     parcelValue: {type: [String]},
     paymentMethod: {type: [String]},
-    deliveryType: {type: [String]},
 })
 
 module.exports = mongoose.model('restocks', restockpodSchema)
