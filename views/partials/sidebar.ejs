@@ -264,7 +264,14 @@
     
     <!-- Divider -->
     <hr class="sidebar-divider">
-
+    <% function roleCheck(){ %>
+        let user = <%= user %>
+        let role = <%= user.role %>
+        if (role == "10"){
+            document.getElementById("admin").style = "none"
+        }
+   <% } %>
+    <div id="admin" onload="roleCehck()">
     <!-- Heading -->
     <div class="sidebar-heading">
         ADMIN
@@ -289,9 +296,10 @@
             <span>User List</span>
         </a>
     </li>
-
+    
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+    </div>
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

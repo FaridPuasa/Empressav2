@@ -891,7 +891,35 @@ router.get('/summary', (req,res)=>{
     })
 })
 
+const pickupDB = require ('../models/pickup')
+router.get('/pickup_order', (req,res)=>{
+    pickupDB.find().sort({$natural: -1}).limit(1).then(
+        (result)=>{
+            console.log(result.sequence)
+            if(result.sequence == undefined || 0 || null){
+                let sequence = 1
+                console.log("IF: "+ sequence)
+                res.render('pickup',{
+                    title: "Pickup Order",
+                    moment: moment,
+                    sequence
+                })
+            }
+            else{
+                let sequence = parseInt(result.sequence) + 1
+                console.log("ELSE: "+ sequence)
+                res.render('pickup',{
+                    title: "Pickup Order",
+                    moment: moment,
+                    sequence
+                })
+            }
+        },
+        (err)=>{
 
+        }
+    )
+})
 
 router.get('/exportlist', (req,res)=>{
     res.render('export', {

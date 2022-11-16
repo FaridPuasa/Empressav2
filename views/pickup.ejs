@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('partials/head.ejs') %>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- sidebar navigation -->
+        <%- include('partials/sidebar.ejs') %>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- top navigation -->
+                <%- include('partials/topbar.ejs') %>
+
+                <!-- Begin Page Content -->
+
+                <%- include('partials/others/pickup.ejs') %>
+
+                <!-- content of page goes here -->
+
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <%- include('partials/footer.ejs') %>
+
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <%- include('partials/logoutModal.ejs') %>
+
+    <!-- scripts goes here -->
+    <%- include('partials/scripts.ejs') %>
+
+	
+
+<script>
+    $(function() {
+  var alert = $('div.alert[auto-close]');
+  alert.each(function() {
+    var that = $(this);
+    var time_period = that.attr('auto-close');
+    setTimeout(function() {
+      that.alert('close');
+    }, time_period);
+  });
+});
+</script>
+
+<script>
+    function addTextInput(){
+        console.log('start')
+        let i = 0
+        let k
+        for (i; i < document.getElementsByClassName('appendRow').length ; i++){
+            k = i + 2
+        }
+
+        let row = document.getElementById("newRow")
+        
+        let tableRow = document.createElement("tr")
+        tableRow.className = "appendRow"
+        let tableCol_1 = document.createElement("td")
+        let tableCol_2 = document.createElement("td")
+        let tableCol_3 = document.createElement("td")
+        let tableCol_4 = document.createElement("td")
+        let tableCol_5 = document.createElement("td")
+        let tableCol_6 = document.createElement("td")
+
+        tableRow.id = "row" + k
+
+        let numbers = document.createElement("input")
+        numbers.type = "hidden"
+        numbers.className = "form-control numbers"
+        numbers.name = "numbering"
+        numbers.value = k + "."
+
+        let numbering = document.createElement("span")
+        numbering.innerHTML = k + "."
+
+        let productName = document.createElement("input")
+        productName.type = "text"
+        productName.className = "form-control"
+        productName.name = "productName"
+        productName.placeholder = "Product Name"
+        productName.id = "productName" + k
+
+        let restockQuantity = document.createElement("input")
+        restockQuantity.type = "text"
+        restockQuantity.className = "form-control"
+        restockQuantity.name = "restockQuantity"
+        restockQuantity.placeholder = "Restock Quantity"
+        restockQuantity.id = "restockQuantity"  + k
+
+        let div_1 = document.createElement("div")
+        div_1.className = "form-group"
+
+        let select_1 = document.createElement("select")
+        select_1.className = "form-control"
+        select_1.name = "productBrand"
+
+        let optionListData_1 = new Option("Product Brand", "value")
+        div_1.appendChild(select_1)
+        select_1.appendChild(optionListData_1)
+        select_1.appendChild(new Option('Natural Bar','Natural Bar'))
+        select_1.appendChild(new Option('Neat','Neat'))
+        select_1.appendChild(new Option('M2victoria','M2victoria'))
+        select_1.appendChild(new Option('Volco Venture','Volco Venture'))
+
+        let div_2 = document.createElement('div')
+        div_2.className = "form-group"
+
+        let select_2 = document.createElement('select')
+        select_2.className = "form-control"
+        select_2.name = "productType"
+
+        let optionListData_2 = new Option('Product Type', "value")
+        div_2.appendChild(select_2)
+        select_2.appendChild(optionListData_2)
+        select_2.appendChild(new Option("Food & Beverages","food"))
+        select_2.appendChild(new Option("Perfume","perfume"))
+        select_2.appendChild(new Option("Kids Clothing","kids"))
+        select_2.appendChild(new Option("Male clothing","male"))
+        select_2.appendChild(new Option("Female Clothing","female"))
+        select_2.appendChild(new Option("Shoes","shoe"))
+        select_2.appendChild(new Option("Stationary","stationary"))
+        
+        tableCol_1.appendChild(numbers)
+        tableCol_1.appendChild(numbering)
+        tableCol_2.appendChild(div_1)
+        tableCol_3.appendChild(productName)
+        tableCol_4.appendChild(div_2)
+        tableCol_5.appendChild(restockQuantity)
+        
+        tableRow.appendChild(tableCol_1)
+        tableRow.appendChild(tableCol_2)
+        tableRow.appendChild(tableCol_3)
+        tableRow.appendChild(tableCol_4)
+        tableRow.appendChild(tableCol_5)
+        tableRow.appendChild(tableCol_6)
+        row.appendChild(tableRow)
+    }
+
+    function removeRow(){
+        let l = document.getElementsByClassName('appendRow').length
+        let id = "row" + l
+        let row = document.getElementById(id)
+        row.remove()
+    }
+</script>
+
+</body>
+</html>
