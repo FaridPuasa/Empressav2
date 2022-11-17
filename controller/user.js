@@ -242,12 +242,36 @@ const deleteUser = ((req,res) => {
     })
 })
 
+const authPage = (permissions)=>{
+    return (req,res,next)=>{
+        const role = user.role
+        console.log(role)
+        if (permissions.includes(role)) return next()
+        res.render('error', {
+            title: '401',
+            response: 'Unauthorized',
+            message: 'You are not authorized'
+        })
+    }
+}
+
+const authService =  (req,res,next)=>{
+    const serviceNumber = parseInt(req.params.number)
+    if(currentUser[0].services.includes(serviceNumber)) return next()
+    res.render('error', {
+        title: '401',
+        response: 'Unauthorized',
+        message: 'You are not authorized'
+    })
+}
+
 module.exports = {
     insertUser,
     updatePassword,
     grantAccess,
     currentUser,
-
+    authPage,
+    authService,
     readUser,
     updateUser,
     deleteUser,
