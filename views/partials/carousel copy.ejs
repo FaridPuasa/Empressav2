@@ -1,98 +1,3 @@
-<style>
-    * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --nav-bg: #212121;
-  --nav-logo: #fff;
-  --nav-link: #9e9e9e;
-  --nav-link-hover: #212121;
-  --nav-btn: #424242;
-}
-
-body {
-  background-color: #424242;
-}
-
-.nav-logo {
-  font-weight: bold;
-  font-size: 1.1em;
-  color: var(--nav-logo);
-  text-decoration: none;
-}
-
-.nav-list {
-  list-style: none;
-}
-
-.nav-list li {
-  display: inline-block;
-  margin-left: 1em;
-}
-
-.nav-list a {
-  color: var(--nav-link);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.nav-list a:hover {
-  color: var(--nav-link-hover);
-}
-
-/* Navbar 3 */
-.nav-3 {
-  justify-content: space-between;
-}
-
-/* Contact button */
-.nav-btn {
-  background-color: var(--nav-btn);
-  border: none;
-  color: #252525;
-  padding: 10px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-</style>
-<div class="container-fluid my-5 d-flex justify-content-center font-italic">
-    <nav class="nav nav-3 mx-auto">
-        <ul class="nav-list">
-          <li>
-            <a href="#MOH-anchor">MOH Pharmacy</a>
-          </li>
-          <li>
-            <a href="#">JPMC Pharmacy</a>
-          </li>
-          <li>
-            <a href="#">Panaga Pharmacy</a>
-          </li>
-          <li>
-            <a href="#FMX-anchor">FMX</a>
-          </li>
-          <li>
-            <a href="#">Thermomix</a>
-          </li>
-          <li>
-            <a href="#">Go Rush Plus</a>
-          </li>
-          <li>
-            <a href="#">Local Delivery</a>
-          </li>
-          <li>
-            <a href="#">Runner Service</a>
-          </li>
-          <li>
-            <a href="#">Personal Shopping</a>
-          </li>
-        </ul>
-    </nav>
-</div>
-
-
 <div class="container-fluid my-5">
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -480,7 +385,7 @@ body {
             </div>
             <div class="carousel-item" data-bs-interval="10000">
                 <!-- MOH Begin -->
-                <div class="container">
+                <div class="container" id="MOH-anchor">
                     
                     <h1 class="text-center">MOH Pharmacy</h1>
                     <div class="row my-3">
