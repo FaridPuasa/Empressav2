@@ -1005,6 +1005,15 @@ router.get('/logout', (req,res)=>{
     })
 })
 
+router.get('/newagent', (req,res)=>{
+    res.render('user', {
+        title: 'new agent',
+        partials: './partials/user/newagent.ejs',
+        moment,
+   
+    })
+})
+
 //post
 //router.post('/dashboard', loginUser)
 
