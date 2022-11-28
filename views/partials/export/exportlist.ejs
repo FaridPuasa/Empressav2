@@ -11,7 +11,7 @@
 <div class="row justify-content-center">
 <div class="col-xl-10 col-lg-12 col-md-9">
     <form class="user" method="POST" action="/itemInSuccess">
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Driver Name</th>
@@ -26,7 +26,7 @@
                     <th>Value (BND)</th>
                     <th>Payment Method</th>
                     <th>Remarks</th>
-                    <th>Received By</th>
+                    <th>Payment Confirmed</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,7 +35,7 @@
                         <tr>
                             <td><%= result.agentName %></td>
                             <td><%= result.deliveryDate %></td>
-                            <td></td>
+                            <td><%= service %></td>
                             <td><%= result.trackingNumber[i] %></td>
                             <td></td>
                             <td><%= result.contactName[i] %></td>
@@ -44,6 +44,8 @@
                             <td><%= result.deliveryType[i] %></td>
                             <td><%= result.parcelValue[i] %></td>
                             <td><%= result.PaymentMethod[i] %></td>
+                            <td></td>
+                            <td><!-- payment confirm --></td>
                         </tr>
                     <% } %>
                 <% }) %>

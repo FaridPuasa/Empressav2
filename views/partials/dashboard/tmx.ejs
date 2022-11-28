@@ -1,0 +1,370 @@
+<!-- TMX Begin -->
+<div class="container">
+    <h1 class="text-center">Thermomix</h1>
+    <div class="row my-3">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CODE: BERAKAS 1</h5>
+                    <table>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "A2"){ %>
+                                    <td><i class="fas fa-circle" style="color: green;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - In Medicine Room</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "B"){ %>
+                                    <td><i class="fas fa-circle" style="color: blue;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Schedule For Delivery</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "C"){ %>
+                                    <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Delivery In Progress</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CODE: BERAKAS 2</h5>
+                    <table>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "B2" && result[i]._id.currentStatus == "A2"){ %>
+                                    <td><i class="fas fa-circle" style="color: green;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - In Medicine Room</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "B2" && result[i]._id.currentStatus == "B"){ %>
+                                    <td><i class="fas fa-circle" style="color: blue;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Schedule For Delivery</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "B2" && result[i]._id.currentStatus == "C"){ %>
+                                    <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Delivery In Progress</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CODE: GADONG 1</h5>
+                    <table>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "G1" && result[i]._id.currentStatus == "A2"){ %>
+                                    <td><i class="fas fa-circle" style="color: green;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - In Medicine Room</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "G1" && result[i]._id.currentStatus == "B"){ %>
+                                    <td><i class="fas fa-circle" style="color: blue;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Schedule For Delivery</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "G1" && result[i]._id.currentStatus == "C"){ %>
+                                    <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Delivery In Progress</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CODE: GADONG 2</h5>
+                    <table>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "G2" && result[i]._id.currentStatus == "A2"){ %>
+                                    <td><i class="fas fa-circle" style="color: green;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - In Medicine Room</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "G2" && result[i]._id.currentStatus == "B"){ %>
+                                    <td><i class="fas fa-circle" style="color: blue;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Schedule For Delivery</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "G2" && result[i]._id.currentStatus == "C"){ %>
+                                    <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Delivery In Progress</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CODE: JALAN TUTONG 1</h5>
+                    <table>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "JT1" && result[i]._id.currentStatus == "A2"){ %>
+                                    <td><i class="fas fa-circle" style="color: green;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - In Medicine Room</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "JT1" && result[i]._id.currentStatus == "B"){ %>
+                                    <td><i class="fas fa-circle" style="color: blue;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Schedule For Delivery</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "JT1" && result[i]._id.currentStatus == "C"){ %>
+                                    <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Delivery In Progress</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CODE: JALAN TUTONG 2</h5>
+                    <table>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "JT2" && result[i]._id.currentStatus == "A2"){ %>
+                                    <td><i class="fas fa-circle" style="color: green;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - In Medicine Room</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "JT2" && result[i]._id.currentStatus == "B"){ %>
+                                    <td><i class="fas fa-circle" style="color: blue;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Schedule For Delivery</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "JT2" && result[i]._id.currentStatus == "C"){ %>
+                                    <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Delivery In Progress</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CODE: JALAN TUTONG 3</h5>
+                    <table>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "JT3" && result[i]._id.currentStatus == "A2"){ %>
+                                    <td><i class="fas fa-circle" style="color: green;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - In Medicine Room</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "JT3" && result[i]._id.currentStatus == "B"){ %>
+                                    <td><i class="fas fa-circle" style="color: blue;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Schedule For Delivery</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "JT3" && result[i]._id.currentStatus == "C"){ %>
+                                    <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Delivery In Progress</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CODE: KUALA BELAIT</h5>
+                    <table>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "BELAIT" && result[i]._id.currentStatus == "A2"){ %>
+                                    <td><i class="fas fa-circle" style="color: green;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - In Medicine Room</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "BELAIT" && result[i]._id.currentStatus == "B"){ %>
+                                    <td><i class="fas fa-circle" style="color: blue;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Schedule For Delivery</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "BELAIT" && result[i]._id.currentStatus == "C"){ %>
+                                    <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Delivery In Progress</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CODE: TUTONG</h5>
+                    <table>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "TUTONG" && result[i]._id.currentStatus == "A2"){ %>
+                                    <td><i class="fas fa-circle" style="color: green;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - In Medicine Room</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "TUTONG" && result[i]._id.currentStatus == "B"){ %>
+                                    <td><i class="fas fa-circle" style="color: blue;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Schedule For Delivery</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "TUTONG" && result[i]._id.currentStatus == "C"){ %>
+                                    <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Delivery In Progress</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-sm-4 align-self-center">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CODE: TEMBURONG</h5>
+                    <table>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "TEMBURONG" && result[i]._id.currentStatus == "A2"){ %>
+                                    <td><i class="fas fa-circle" style="color: green;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - In Medicine Room</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "TEMBURONG" && result[i]._id.currentStatus == "B"){ %>
+                                    <td><i class="fas fa-circle" style="color: blue;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Schedule For Delivery</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <tr>
+                            <% for(let i = 0; i < result.length; i++){ %>
+                                <% if(result[i]._id.service == "TMX" && result[i]._id.areaCode == "TEMBURONG" && result[i]._id.currentStatus == "C"){ %>
+                                    <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= result[i].count %> - Delivery In Progress</td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 align-self-center">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CODE: SELF COLLECT</h5>
+                    <table>
+                        <tr>
+                            <td><i class="fas fa-circle" style="color: purple;"></i></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;50 - Collected</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-circle" style="color: green;"></i></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;50 - In Medicine Room</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- TMX End -->

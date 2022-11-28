@@ -3,7 +3,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary text-center">Proof of Pickup</h6>
+            <h6 class="m-0 font-weight-bold text-primary text-center"></h6>
         </div>
 
         <div class="card-body">
@@ -15,7 +15,7 @@
                             <table class="table">
                                 <thead class="thead-light text-center">
                                     <tr>
-                                        <th scope="col" colspan="4">Go Rush Express Pickup Order</th>
+                                        <th scope="col" colspan="6"><h3>Go Rush Express Pickup Order</h3></th>
                                         <th scope="col" colspan="2">
                                             <div class="text-center">
                                                 <img src="./public/img/gr_logo.png" class="rounded" alt="go_rush.png">
@@ -23,7 +23,7 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <th>Date:</th>
+                                        <th colspan="2">Date:</th>
                                         <th><input type="date" class="form-control" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value=""></th>
                                         <th>Location:</th>
                                         <th><input type="text" class="form-control" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value=""></th>
@@ -33,9 +33,10 @@
                                             </span>
                                         </th>
                                         <th><input type="hidden" class="form-control" name="sequence" id="sequence" aria-describedby="contactHelp" value="<%= sequence %>"></th>
+                                        <th></th>
                                     </tr>
                                     <tr>
-                                        <th>Made by:</th>
+                                        <th colspan="2">Made by:</th>
                                         <th>
                                             <select class="form-control" name='madeby' id="area">
                                                 <option class="active">Marin</option>
@@ -46,52 +47,42 @@
                                         <th><input type="text" class="form-control" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value=""></th>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                     </tr>
                                     <tr>
                                         <th>NO.</th>
-                                        <th>Product Brand</th>
-                                        <th>Product Name</th>
-                                        <th>Product Type</th>
-                                        <th>Restock Quantity</th>
-                                        <th>Quantity Before Restocking</th>  
+                                        <th>Services</th>
+                                        <th>Customer Name</th>
+                                        <th>Customer Address</th>
+                                        <th>Customer Contact</th>
+                                        <th>Quantity</th>
+                                        <th>Item Value</th>
+                                        <th>Payment</th>      
                                     </tr>
                                 </thead>
                                 <tbody id="newRow">
                                     <tr class = "appendRow">
-                                        <td>1.<input type="hidden" class="form-control" name="numbering" id="productBrand" aria-describedby="contactHelp" value="1."></td>
+                                        <td>1.<input type="hidden" class="form-control" name="numbering" id="numbering" aria-describedby="contactHelp" value="1."></td>
                                         <td>
                                             <div class="form-group" id="brand">
-                                                <select class="form-control" name="productBrand" id="productBrand">
-                                                    <option class="active">Product Bránd</option>
-                                                    <option value="Natural Bar">Natural Bar</option>
-                                                    <option value="Neat">Neat</option>
-                                                    <option value="M2victoria">M2victoria</option>
-                                                    <option value="Volco Venture">Volco Venture</option>
-                                                    <option value="others">Others</option>
+                                                <select class="form-control" name="serviceType" id="serviceType">
+                                                    <option class="active" value="moh">MOH</option>
+                                                    <option value="jpmc">JPMC/PJSC</option>
+                                                    <option value="panaga">Panaga</option>
+                                                    <option value="bmf">Brunei Made Finest</option>
+                                                    <option value="runner">Runner Service</option>
+                                                    <option value="personal">Personal Shopping</option>
+                                                    <option value="local">Local Delivery</option>
+                                                    <option value="tmx">Thermomix</option>
+                                                    <option value="fmx">FMX</option>
                                                 </select>
                                             </div>
                                         </td>
-                                        <td><input type="text" class="form-control" name="productName" id="productName" aria-describedby="contactHelp" placeholder="Product Name" value=""></td>
-                                        <td>
-                                            <div class="form-group" id="category">
-                                                <select class="form-control" name="productCategory" id="productCategory">
-                                                    <option class="active">Product Type</option>
-                                                    <option value="food">Food & Beverages</option>
-                                                    <option value="perfume">Perfume</option>
-                                                    <option value="kids">Kids Clothing</option>
-                                                    <option value="male">Male Clothing</option>
-                                                    <option value="female">Female Clothing</option>
-                                                    <option value="shoe">Shoes</option>
-                                                    <option value="stationary">Stationary</option>
-                                                    <option value="sports">Sports Equipments</option>
-                                                    <option value="apparel">Apparel</option>
-                                                    <option value="home">Home & Living</option>
-                                                    <option value="cosmetics">Beauty & Cosmetics</option>
-                                                    <option value="others">Others</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td><input type="text" class="form-control" name="restockQuantity" id="restockQuantity" aria-describedby="restockQuantityHelp" placeholder="Restock Quantity" value=""></td>
+                                        <td><input type="text" class="form-control" name="name" id="name" aria-describedby="contactHelp" placeholder="Customer Name"></td>
+                                        <td><input type="text" class="form-control" name="address" id="address" aria-describedby="contactHelp" placeholder="Customer Address"></td>
+                                        <td><input type="text" class="form-control" name="contact" id="contact" aria-describedby="contactHelp" placeholder="Customer Contact"></td>
+                                        <td><input type="text" class="form-control" name="quantity" id="quantity" aria-describedby="contactHelp" placeholder="Quantity"></td>
+                                        <td><input type="text" class="form-control" name="value" id="value" aria-describedby="contactHelp" placeholder="Item Value"></td>
                                         <td></td>
                                     </tr>
                                 </tbody>

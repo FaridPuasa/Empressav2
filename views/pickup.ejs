@@ -80,6 +80,8 @@
         let tableCol_4 = document.createElement("td")
         let tableCol_5 = document.createElement("td")
         let tableCol_6 = document.createElement("td")
+        let tableCol_7 = document.createElement("td")
+        let tableCol_8 = document.createElement("td")
 
         tableRow.id = "row" + k
 
@@ -92,59 +94,68 @@
         let numbering = document.createElement("span")
         numbering.innerHTML = k + "."
 
-        let productName = document.createElement("input")
-        productName.type = "text"
-        productName.className = "form-control"
-        productName.name = "productName"
-        productName.placeholder = "Product Name"
-        productName.id = "productName" + k
+        let customerName = document.createElement("input")
+        customerName.type = "text"
+        customerName.className = "form-control"
+        customerName.name = "customerName"
+        customerName.placeholder = "Customer Name"
+        customerName.id = "customerName" + k
 
-        let restockQuantity = document.createElement("input")
-        restockQuantity.type = "text"
-        restockQuantity.className = "form-control"
-        restockQuantity.name = "restockQuantity"
-        restockQuantity.placeholder = "Restock Quantity"
-        restockQuantity.id = "restockQuantity"  + k
+        let customerAddress = document.createElement("input")
+        customerAddress.type = "text"
+        customerAddress.className = "form-control"
+        customerAddress.name = "customerAddress"
+        customerAddress.placeholder = "Customer Address"
+        customerAddress.id = "customerAddress"  + k
+
+        let customerContact = document.createElement("input")
+        customerContact.type = "text"
+        customerContact.className = "form-control"
+        customerContact.name = "customerContact"
+        customerContact.placeholder = "Customer Contact"
+        customerContact.id = "customerContact"  + k
+
+        let quantity = document.createElement("input")
+        quantity.type = "text"
+        quantity.className = "form-control"
+        quantity.name = "quantity"
+        quantity.placeholder = "Quantity"
+        quantity.id = "quantity"  + k
+
+        let value = document.createElement("input")
+        value.type = "text"
+        value.className = "form-control"
+        value.name = "value"
+        value.placeholder = "Item Value"
+        value.id = "value"  + k
 
         let div_1 = document.createElement("div")
         div_1.className = "form-group"
 
         let select_1 = document.createElement("select")
         select_1.className = "form-control"
-        select_1.name = "productBrand"
+        select_1.name = "serviceType"
 
-        let optionListData_1 = new Option("Product Brand", "value")
+        let optionListData_1 = new Option("MOH", "moh")
         div_1.appendChild(select_1)
         select_1.appendChild(optionListData_1)
-        select_1.appendChild(new Option('Natural Bar','Natural Bar'))
-        select_1.appendChild(new Option('Neat','Neat'))
-        select_1.appendChild(new Option('M2victoria','M2victoria'))
-        select_1.appendChild(new Option('Volco Venture','Volco Venture'))
+        select_1.appendChild(new Option('JPMC/PJSC','jpmc'))
+        select_1.appendChild(new Option('Panaga','panaga'))
+        select_1.appendChild(new Option('Brunei Made Finest','bmf'))
+        select_1.appendChild(new Option('Runner Services','runner'))
+        select_1.appendChild(new Option('Personal Shopping','personal'))
+        select_1.appendChild(new Option('Local Delivery','local'))
+        select_1.appendChild(new Option('Thermomix','tmx'))
+        select_1.appendChild(new Option('FMX','fmx'))
 
-        let div_2 = document.createElement('div')
-        div_2.className = "form-group"
-
-        let select_2 = document.createElement('select')
-        select_2.className = "form-control"
-        select_2.name = "productType"
-
-        let optionListData_2 = new Option('Product Type', "value")
-        div_2.appendChild(select_2)
-        select_2.appendChild(optionListData_2)
-        select_2.appendChild(new Option("Food & Beverages","food"))
-        select_2.appendChild(new Option("Perfume","perfume"))
-        select_2.appendChild(new Option("Kids Clothing","kids"))
-        select_2.appendChild(new Option("Male clothing","male"))
-        select_2.appendChild(new Option("Female Clothing","female"))
-        select_2.appendChild(new Option("Shoes","shoe"))
-        select_2.appendChild(new Option("Stationary","stationary"))
-        
         tableCol_1.appendChild(numbers)
         tableCol_1.appendChild(numbering)
         tableCol_2.appendChild(div_1)
-        tableCol_3.appendChild(productName)
-        tableCol_4.appendChild(div_2)
-        tableCol_5.appendChild(restockQuantity)
+        tableCol_3.appendChild(customerName)
+        tableCol_4.appendChild(customerAddress)
+        tableCol_5.appendChild(customerContact)
+        tableCol_6.appendChild(quantity)
+        tableCol_7.appendChild(value)
         
         tableRow.appendChild(tableCol_1)
         tableRow.appendChild(tableCol_2)
@@ -152,6 +163,8 @@
         tableRow.appendChild(tableCol_4)
         tableRow.appendChild(tableCol_5)
         tableRow.appendChild(tableCol_6)
+        tableRow.appendChild(tableCol_7)
+        tableRow.appendChild(tableCol_8)
         row.appendChild(tableRow)
     }
 

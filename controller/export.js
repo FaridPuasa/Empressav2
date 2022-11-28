@@ -70,7 +70,7 @@ const exportPodSummary = (req,res) =>{
     let status = data.currentStatus
     let end = moment(data.enddate).format('DD/MM/YYYY')
     let start = moment(data.startdate).format('DD/MM/YYYY')
-    let service
+    let service = services.toUpperCase()
     let currentStatus
     let database
 
@@ -84,7 +84,39 @@ const exportPodSummary = (req,res) =>{
         database = jpmcPodDB
     }
 
-    console.log("Finance Summary For: " + database.find())
+    if(services == "panaga"){
+        database = panagaPodDB
+    }
+
+    if(services == "local"){
+        database = localPodDB
+    }
+
+    if(services == "tmx"){
+        database = tmxPodDB
+    }
+
+    if(services == "fmx"){
+        database = fmxPodDB
+    }
+
+    if(services == "grp"){
+        database = grpPodDB
+    }
+
+    if(services == "runner"){
+        database = runnerPodDB
+    }
+
+    if(services == "personal"){
+        database = personalPodDB
+    }
+
+    if(services == "zalora"){
+        database = zaloraPodDB
+    }
+
+    console.log("Finance Summary For: " + database)
     
     if (status == "*"){
         currentStatus = {$in: ["A1","A2","A3","B","C","D1","D2","D3","D4"]}
@@ -103,8 +135,9 @@ const exportPodSummary = (req,res) =>{
             console.log('Successfully extracted required data.')
             console.log(result)
             res.render('finance', {
-                title: 'Extraction Error',
+                title: 'Finance Summary',
                 partials: './partials/export/exportlist.ejs',
+                service,
                 result,
             })
         },
