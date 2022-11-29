@@ -14,18 +14,16 @@
                 <div class="col-xl-10 col-lg-12 col-md-9">
                     <form class="user" method="POST" action="/itemInSuccess">
                         <div class="table-responsive-xl">
-                            <table class="table">
+                            <table class="table table-condensed table-striped text-center">
                                 <thead class="thead-light">
                                     <!--1st row header-->
                                     <tr>
-                                        <th scope="col" colspan="9">PROOF OF DELIVERY | JPMC</th>
-                                        <th scope="col" colsapn="1">
+                                        <th scope="col" colspan="9">PROOF OF DELIVERY | PNG</th>
+                                        <th scope="col" colspan="3">
                                             <div class="text-center">
                                                 <img src="/public/img/gr_logo.png" class="rounded" alt="go_rush.png">
                                             </div>
                                         </th>
-                                        <th></th>
-                                        <th scope="col"></th>
                                     </tr>
                                     <!--2nd row header-->
                                     <tr>
@@ -52,13 +50,13 @@
                                                 <option value="TEMBURONG">TEMBURONG</option>
                                             </select>
                                         </th>
+                                        <th scope="col"></th>
                                         <th scope="col">GR/POD/PNG:</th>
-                                        <th scope="col" colspan="2">
+                                        <th scope="col">
                                             <%= sequence %><input type="hidden" class="form-control" name="podsequence"
                                                     id="podsequence" aria-describedby="contactHelp"
                                                     value="<%= sequence %>">
                                         </th>
-                                        <th scope="col"></th>
                                     </tr>
                                     <!--3rd row header-->
                                     <tr>
@@ -190,7 +188,7 @@
                             </div>
                             <button id="submitBtnfinal" class="btn btn-primary btn-block">Submit Final</button>
                             <input type="hidden" class="form-control form-control-user" name="method" id="method"
-                                aria-describedby="contactHelp" value="pod_JPMC">
+                                aria-describedby="contactHelp" value="pod_PNG">
                             <input type="hidden" class="form-control form-control-user" name="dispatcherName"
                                 id="dispatcherName" aria-describedby="contactHelp">
                             <input type="hidden" class="form-control form-control-user" name="dateTimeStart"

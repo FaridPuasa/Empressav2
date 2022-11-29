@@ -13,18 +13,16 @@
                 <div class="col-xl-10 col-lg-12 col-md-9">
                     <form class="user" method="POST" action="/success-entry-pod">
                         <div class="table-responsive-xl">
-                            <table class="table">
+                            <table class="table table-condensed table-striped text-center">
                                 <thead class="thead-light">
                                     <!--1st row header-->
                                     <tr>
                                         <th scope="col" colspan="9">PROOF OF DELIVERY | MOH</th>
-                                        <th scope="col" colsapn="1">
+                                        <th scope="col" colspan="3">
                                             <div class="text-center">
                                                 <img src="/public/img/gr_logo.png" class="rounded" alt="go_rush.png">
                                             </div>
                                         </th>
-                                        <th></th>
-                                        <th scope="col"></th>
                                     </tr>
                                     <!--2nd row header-->
                                     <tr>
@@ -51,8 +49,9 @@
                                                 <option value="TEMBURONG">TEMBURONG</option>
                                             </select>
                                         </th>
+                                        <th scope="col"></th>
                                         <th scope="col">GR/POD/MOH:</th>
-                                        <th scope="col" colspan="2">
+                                        <th scope="col">
                                             <%= sequence %><input type="hidden" class="form-control" name="podsequence"
                                                     id="podsequence" aria-describedby="contactHelp"
                                                     value="<%= sequence %>">
@@ -171,7 +170,6 @@
                                 <div class="col">
                                     <a id="donePodButton" class="btn btn-primary btn-block">Done</a>
                                 </div>
-
                             </div>
                             <div class="row">
                                 <div class="col">
@@ -303,6 +301,7 @@
 
                                     let row_data_empty1 = document.createElement('td');
                                     row_data_empty1.setAttribute('scope', 'col');
+                                    row_data_empty1.setAttribute('colspan', '2');
 
                                     let taskRow = document.createElement('tr');
                                     taskRow.setAttribute("name", "taskRow");
