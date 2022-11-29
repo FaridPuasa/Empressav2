@@ -82,13 +82,11 @@ const grantAccess = ((req,res)=>{
     let data = req.body
     let uid = data.uid
     let password = data.password
-    console.log(req.body)
+    console.log(req.sessionID)
     userDB.authenticate(uid, password, (err,user) =>{
-        //console.log(uid)
-        console.log(user)
-        //console.log(req.session.authenticated)
+        //console.log(user)
         if (req.session.authenticated){
-            //console.log(req.session.authenticated)
+            res.json(req.session)
         }
         else{
             if (user) {
@@ -101,6 +99,7 @@ const grantAccess = ((req,res)=>{
                         title: 'Change Password',
                         partials: './partials/user/changepassword'
                     })
+                    console.log(req.session)
                 }
                 else if (firsttime === "false") {
                     warehouseDB.aggregate([{ 
@@ -110,8 +109,8 @@ const grantAccess = ((req,res)=>{
                         }
                     }]).then(
                     (result)=>{
-                        console.log(result)
-                        for(i=0;i<result.length;i++){
+                        console.log(req.session)
+                        /*for(i=0;i<result.length;i++){
                             if(result[i]._id.service == "MOH" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "B"){  
                                 if(result[i].count){
                                     console.log(result[i].count)
@@ -120,7 +119,7 @@ const grantAccess = ((req,res)=>{
                                     console.log(0)
                                 }
                             }
-                        }
+                        }*/
                         res.status(200).render('dashboard',{
                             title: 'Dashboard',
                             id: user._id,

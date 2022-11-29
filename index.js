@@ -8,6 +8,7 @@ const socketIO = require('socket.io')
 const http = require('http')
 const moment = require('moment')
 const flash = require('connect-flash')
+const store = new session.MemoryStore
 //Server setup
 let server = http.createServer(app)
 let io = socketIO(server)
@@ -17,7 +18,8 @@ app.use(session({
     secret: 'Unknown Value',
     cookie: {maxAge: 2000},
     saveUninitialized: false,
-    resave: true
+    resave: false,
+    store
 }))
 
 app.use(express.urlencoded({extended:true}))
@@ -28,6 +30,7 @@ app.use(flash());
 
 //Global varibales
 app.use(function (req, res, next) {
+    console.log(store)
     res.locals.message = req.flash()
     next();
 });

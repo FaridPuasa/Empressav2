@@ -126,15 +126,15 @@
         <div id="collapsePodList" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">services</h6>
-                <a class="collapse-item" href="/moh-podlist">MOH</a>
-                <a class="collapse-item" href="/jpmc-podlist">JPMC</a>
-                <a class="collapse-item" href="/panaga-podlist">Panaga</a>
-                <a class="collapse-item" href="/fmx-podlist">FMX</a>
-                <a class="collapse-item" href="/grp-podlist">GRP</a>
-                <a class="collapse-item" href="/tmx-podlist">Thermomix</a>
-                <a class="collapse-item" href="/local-podlist">Local Delivery</a>
-                <a class="collapse-item" href="/runner-podlist">Runner Service</a>
-                <a class="collapse-item" href="/personal-podlist">Personal Shopping</a>
+                <% if (user.service.includes(200)){ %> <a class="collapse-item" href="/moh-podlist">MOH</a> <% } %>
+                <% if (user.service.includes(201)){ %> <a class="collapse-item" href="/jpmc-podlist">JPMC</a> <% } %>
+                <% if (user.service.includes(202)){ %> <a class="collapse-item" href="/panaga-podlist">Panaga</a> <% } %>
+                <% if (user.service.includes(101)){ %> <a class="collapse-item" href="/fmx-podlist">FMX</a> <% } %>
+                <% if (user.service.includes(600)){ %> <a class="collapse-item" href="/grp-podlist">GRP</a> <% } %>
+                <% if (user.service.includes(301)){ %> <a class="collapse-item" href="/tmx-podlist">Thermomix</a> <% } %>
+                <% if (user.service.includes(300)){ %> <a class="collapse-item" href="/local-podlist">Local Delivery</a> <% } %>
+                <% if (user.service.includes(400)){ %> <a class="collapse-item" href="/runner-podlist">Runner Service</a> <% } %>
+                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/personal-podlist">Personal Shopping</a> <% } %>
             </div>
         </div>
     </li>
@@ -262,16 +262,10 @@
         </a>
     </li>
     
+   
     <!-- Divider -->
     <hr class="sidebar-divider">
-    <% function roleCheck(){ %>
-        let user = <%= user %>
-        let role = <%= user.role %>
-        if (role == "10"){
-            document.getElementById("admin").style = "none"
-        }
-   <% } %>
-    <div id="admin" onload="roleCehck()">
+    <% if (user.role == "11" || user.role == "10") { %>
     <!-- Heading -->
     <div class="sidebar-heading">
         ADMIN
@@ -296,10 +290,10 @@
             <span>User List</span>
         </a>
     </li>
-    
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-    </div>
+    <% } %>
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
