@@ -15,14 +15,26 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Item In</h1>
                                     </div>
-                                
+
                                     <div class="form-group" id="trackingNumberArea">
-                                        <input type="text" class="form-control text-center" name="trackingNumber" id="trackingNumber" aria-describedby="trackingNumberHelp" placeholder="Enter Tracking Number" onkeyup="checkTrackingNum(this, 'trackingNum')" maxlength="9">
+                                        <input type="text" class="form-control text-center" name="trackingNumber"
+                                            id="trackingNumber" aria-describedby="trackingNumberHelp"
+                                            placeholder="Enter Tracking Number"
+                                            onkeyup="checkTrackingNum(this, 'trackingNum')" maxlength="9">
+                                    </div>
+
+                                    <div class="row" id="alertBody">
+                                        <p class="text-primary text-center fw-bold" id="loadingTN">Please wait...</p>
+                                        <p class="text-danger text-center fw-bold" id="wronginput">Wrong Tracking
+                                            Number, please
+                                            try again</p>
                                     </div>
 
                                     <div class="form-group">
                                         <p class="text-center">Shelf Code:</p>
-                                        <input type="hidden" class="form-control form-control-user" name="shelfCode" id="shelfCode" aria-describedby="areaCodeHelp">
+                                        <p class="text-center fw-bold" id="shelfDisplay">-</p>
+                                        <input type="hidden" class="form-control form-control-user" name="shelfCode"
+                                            id="shelfCode" aria-describedby="areaCodeHelp">
                                     </div>
 
                                 </div>
@@ -37,38 +49,52 @@
 
                                     <div class="form-group">
                                         <h5 class="text-center" id="customerName">Customer Name</h5>
-                                        <input type="hidden" class="form-control form-control-user" name="name" id="name" aria-describedby="nameHelp">
+                                        <p class="text-center fw-bold" id="nameDisplay">-</p>
+                                        <input type="hidden" class="form-control form-control-user" name="name"
+                                            id="name" aria-describedby="nameHelp">
                                     </div>
 
                                     <div class="form-group">
                                         <h5 class="text-center" id="customerAddress">Customer Address</h5>
-                                        <input type="hidden" class="form-control form-control-user" name="address" id="address" aria-describedby="addressrHelp">
+                                        <p class="text-center fw-bold" id="addressDisplay">-</p>
+                                        <input type="hidden" class="form-control form-control-user" name="address"
+                                            id="address" aria-describedby="addressrHelp">
                                     </div>
 
                                     <div class="form-group">
                                         <h5 class="text-center" id="customerContact">Customer contact</h5>
-                                        <input type="hidden" class="form-control form-control-user" name="contact" id="contact" aria-describedby="contactHelp">
+                                        <p class="text-center fw-bold" id="contactDisplay">-</p>
+                                        <input type="hidden" class="form-control form-control-user" name="contact"
+                                            id="contact" aria-describedby="contactHelp">
                                     </div>
                                 </div>
                             </div>
-                
+
                         </div>
 
                         <!--Additional Information-->
-                        <input type="hidden" class="form-control form-control-user" name="uid" id="uid" value="<%= user.uid %>"> <!-- User ID -->
-                        <input type="hidden" class="form-control form-control-user" name="username" id="username" value="<%= user.name %>"> <!-- username -->
-                        <input type="hidden" class="form-control form-control-user" name="serviceTag" id="serviceTag" value="">
-                        <input type="hidden" class="form-control form-control-user" name="deliveryType" id="deliveryType" value="">
-                        <input type="hidden" class="form-control form-control-user" name="paymentType" id="paymentType" value="">
+                        <input type="hidden" class="form-control form-control-user" name="uid" id="uid"
+                            value="<%= user.uid %>"> <!-- User ID -->
+                        <input type="hidden" class="form-control form-control-user" name="username" id="username"
+                            value="<%= user.name %>"> <!-- username -->
+                        <input type="hidden" class="form-control form-control-user" name="serviceTag" id="serviceTag"
+                            value="RUNNER">
+                        <input type="hidden" class="form-control form-control-user" name="deliveryType"
+                            id="deliveryType" value="">
+                        <input type="hidden" class="form-control form-control-user" name="paymentType" id="paymentType"
+                            value="">
                         <input type="hidden" class="form-control form-control-user" name="value" id="value" value="">
                         <input type="hidden" class="form-control form-control-user" name="note" id="note" value="">
                         <input type="hidden" class="form-control form-control-user" name="remark" id="remark" value="">
                         <!-- End of Information -->
 
-                        <input type="hidden" class="form-control form-control-user" name="service" id="service" value="RUNNER">
+                        <input type="hidden" class="form-control form-control-user" name="service" id="service"
+                            value="RUNNER">
 
                         <div class="row">
-                            <button class="btn btn-primary btn-user btn-block">Submit</button>
+                            <a id="submitBtn" class="btn btn-primary btn-user btn-block">Submit</a>
+                            <button id="submitBtnfinal" class="btn btn-primary btn-block">Submit Final</button>
+                            <p class="text-primary text-center fw-bold" id="loadingSubmit">Please wait...</p>
                         </div>
 
                     </form>
@@ -76,4 +102,131 @@
             </div>
         </div>
     </div>
+    <script>
+        function delaySubmit() {
+            document.getElementById('submitBtn').click();
+        }
+
+        function checkTrackingNum(field, autoMove) {
+            if (field.value.length >= field.maxLength) {
+                $('#submitBtnfinal').attr('disabled', true);
+                var trackingNumTemp = document.getElementById("trackingNumber").value.trim()
+                document.getElementById("trackingNumber").value = trackingNumTemp;
+                document.getElementById("trackingNumber").readOnly = true;
+
+                $("#wronginput").hide();
+                $("#loadingTN").fadeIn();
+
+                var request = new XMLHttpRequest();
+                request.open('POST', 'https://api.tookanapp.com/v2/get_job_details');
+                request.setRequestHeader('Content-Type', 'application/json');
+
+                request.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        console.log('Status:', this.status);
+                        console.log('Headers:', this.getAllResponseHeaders());
+                        console.log('Body:', this.responseText);
+
+                        responsetn = this.responseText;
+                        json_responsetn = JSON.parse(responsetn);
+
+                        if (json_responsetn.status != 404) {
+                            document.getElementById("name").value = json_responsetn.data[0].customer_username;
+                            document.getElementById("nameDisplay").innerHTML = json_responsetn.data[0].customer_username;
+
+                            document.getElementById("shelfCode").value = json_responsetn.data[0].customer_username.charAt(0).toUpperCase();
+                            document.getElementById("shelfDisplay").innerHTML = json_responsetn.data[0].customer_username.charAt(0).toUpperCase();
+
+                            document.getElementById("address").value = json_responsetn.data[0].job_address;
+                            document.getElementById("addressDisplay").innerHTML = json_responsetn.data[0].job_address;
+
+                            document.getElementById("contact").value = json_responsetn.data[0].customer_phone;
+                            document.getElementById("contactDisplay").innerHTML = json_responsetn.data[0].customer_phone;
+
+                            /* document.getElementById("deliveryType").value = json_responsetn.data[0].custom_field[9].data;
+
+                            document.getElementById("paymentType").value = json_responsetn.data[0].custom_field[11].data;
+
+                            document.getElementById("value").value = json_responsetn.data[0].custom_field[15].data; */
+
+                            for (let i = 0; i < json_responsetn.data[0].task_history.length; i++) {
+                                if (json_responsetn.data[0].task_history[i].type == "text_added") {
+                                    document.getElementById("note").value = json_responsetn.data[0].task_history[i].description;
+                                }
+                            }
+
+                            /* document.getElementById("remark").value = json_responsetn.data[0].custom_field[10].data; */
+
+                            document.getElementById("trackingNumber").readOnly = true;
+
+                            $("#loadingTN").hide();
+                            $("#submitBtn").fadeIn();
+
+                            /* setTimeout(delaySubmit, 5000); */
+                        }
+
+                        if (json_responsetn.status == 404) {
+                            document.getElementById("trackingNumber").readOnly = false;
+                            document.getElementById("trackingNumber").value = "";
+                            $("#loadingTN").hide();
+                            $("#wronginput").fadeIn();
+                            document.getElementById("trackingNumber").focus();
+                        }
+                    }
+                };
+
+                var body = {
+                    'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+                    'job_ids': [trackingNumTemp],
+                    'include_task_history': 1
+                };
+                request.send(JSON.stringify(body));
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            $("#submitBtn").hide();
+            $("#submitBtnfinal").hide();
+            $("#loadingTN").hide();
+            $("#wronginput").hide();
+            $("#loadingSubmit").hide();
+
+            document.getElementById("submitBtn").addEventListener("click", submitForm);
+
+            document.getElementById("trackingNumber").focus();
+
+            function submitForm() {
+                $("#submitBtn").hide();
+                $("#loadingSubmit").fadeIn();
+
+                var request = new XMLHttpRequest();
+
+                request.open('POST', 'https://api.tookanapp.com/v2/assign_task');
+
+                request.setRequestHeader('Content-Type', 'application/json');
+
+                request.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        console.log('Status:', this.status);
+                        console.log('Headers:', this.getAllResponseHeaders());
+                        console.log('Body:', this.responseText);
+
+                        $('#submitBtnfinal').attr('disabled', false);
+
+                        document.getElementById('submitBtnfinal').click();
+                    }
+                };
+
+                var body = {
+                    'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+                    'job_id': document.getElementById("trackingNumber").value,
+                    'fleet_id': '1479219',
+                    'team_id': '921691',
+                    'job_status': '7'
+                };
+
+                request.send(JSON.stringify(body));
+            }
+        });
+    </script>
 </div>

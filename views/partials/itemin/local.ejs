@@ -501,8 +501,8 @@
                             document.getElementById("address").value = json_responsetn.data[0].job_address;
                             document.getElementById("addressDisplay").innerHTML = json_responsetn.data[0].job_address;
 
-                            document.getElementById("contact").value = json_responsetn.data[0].customer_phone;
-                            document.getElementById("contactDisplay").innerHTML = json_responsetn.data[0].customer_phone;
+                            document.getElementById("contact").value = json_responsetn.data[0].custom_field[3].data;
+                            document.getElementById("contactDisplay").innerHTML = json_responsetn.data[0].custom_field[3].data;
 
                             document.getElementById("deliveryType").value = json_responsetn.data[0].custom_field[7].data;
 
@@ -523,7 +523,7 @@
                             $("#loadingTN").hide();
                             $("#submitBtn").fadeIn();
 
-                            setTimeout(delaySubmit, 5000);
+                            /* setTimeout(delaySubmit, 5000); */
                         }
 
                         if (json_responsetn.status == 404) {
