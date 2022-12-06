@@ -163,6 +163,7 @@ router.get('/dashboard', (req,res)=>{
         }]).then(
         (result)=>{
             console.log(result)
+            /*
             for(i=0;i<result.length;i++){
                 if(result[i]._id.service == "MOH" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "B"){  
                     if(result[i].count){
@@ -173,6 +174,7 @@ router.get('/dashboard', (req,res)=>{
                     }
                 }
             }
+            */
             res.status(200).render('dashboard', {
                 title: 'Dashboard',
                 result,

@@ -1,0 +1,105 @@
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <form class="user" method="POST" action="/success-in-moh">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="p-5">
+
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Item Details</h1>
+                                    </div>
+
+                                    <div class="form-group" id="trackingNumberArea">
+                                        <input type="text" class="form-control text-center" name="trackingNumber" id="trackingNumber" aria-describedby="trackingNumberHelp" placeholder="Enter Tracking Number">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="entity">Item Entity</label>
+                                        <select class="form-control" name="entity" id="entity" required>
+                                            <option></option>
+                                            <option value="GGL">Globex</option>
+                                            <option value="DCN">DC-Nusantara</option>
+                                            <option value="BVC">Blu-Vortex</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control text-center" name="value" id="value" aria-describedby="valueHelp" placeholder="Enter Value">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control text-center" name="handler" id="handler" aria-describedby="handlerHelp" placeholder="Enter Handler's Name">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control text-center" name="remark" id="remark" aria-describedby="handlerHelp" placeholder="Enter Remark">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <input type="text" class="form-control text-center" name="zone" id="zone" aria-describedby="zoneHelp" placeholder="Enter Storing Zone">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control text-center" name="shelfCode" id="shelfCode" aria-describedby="shelfCodeHelp" placeholder="Enter Storing Shelf Code">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Customer Details</h1>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="name" id="name" aria-describedby="nameHelp" placeholder="Enter Customer Name">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="contact" id="contact" aria-describedby="unitHelp" placeholder="Enter Customer Contact">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="unit" id="unit" aria-describedby="unitHelp" placeholder="Enter Unit / House Number">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="jalan" id="jalan" aria-describedby="jalanHelp" placeholder="Enter Jalan">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="kampong" id="kampong" aria-describedby="kampongHelp" placeholder="Enter Kampong">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="simpang" id="simpang" aria-describedby="simpangHelp" placeholder="Enter Simpang">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="postal" id="postal" aria-describedby="postalHelp" placeholder="Enter Postal Code">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Additional Information-->
+                        
+                        <!-- End of Information -->
+
+                        <input type="hidden" class="form-control form-control-user" name="service" id="service" value="misc">
+
+                        <div class="row">
+                            <a id="submitBtn" class="btn btn-primary btn-user btn-block">Submit</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
