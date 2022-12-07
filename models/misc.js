@@ -23,6 +23,7 @@ const miscSchema  = new mongoose.Schema({
     postal: string,
     entity: string,
     shelfCode: string,
+    zone: string,
     value: string,
     handler: string,
     remark: string,

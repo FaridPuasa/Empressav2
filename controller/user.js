@@ -28,7 +28,7 @@ Misc = 500
 */
 
 const roles = [10,11,12,13]
-const services = [100,101,200,201,202,300,301,400,401,500]
+const services = [100,101,200,201,202,300,301,400,401,402,500]
 
 const insertUser = ((req,res)=>{
     let date = moment().format('DD/MM/YYYY')

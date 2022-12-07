@@ -33,6 +33,7 @@ const inventorySchema  = new mongoose.Schema({
     areaCode: string,
     serviceTag: string,
     shelfCode: string,
+    zone: string,
     fridgeItem: string,
     deliveryType: string,
     paymentType: string,

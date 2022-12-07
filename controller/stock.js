@@ -2,31 +2,41 @@ const stockDB = require('../models/stocks')
 const moment = require('moment')
 
 const insertStock = ((req,res)=>{
-    let date = moment().format("DD/MM/YYYY, h:mm:ss a")
+    let date = moment().format("DD/MM/YYYY")
     let data = req.body
+    let sequence = data.sequence
+    let product_id = "GR/INS: " + sequence
     let stock = new stockDB({
-        productBrand: data.productBrand,
-        productName: data.productName,
-        productDescription: data.productDescription,
+        product_id: product_id,
+        sequence: sequence,
         productEntity: data.productEntity,
+        productName: data.productName,
         productCategory: data.productCategory,
+        productOther: data.productOther,
         productQuantity: data.productQuantity,
         productPrice: data.productPrice,
         productSalePrice: data.productSalePrice,
-        productVariety: data.productVariety,
-        productVarietyQuantity: data.productVarietyQuantity,
-        createdBy: data.createdBy,
+        productColor:data.productColor,
+        productSize: data.productSize,
+        quantity: data.quantity,
+        uid: data.uid,
+        name: data.name,
         dateCreated: date,
     })
     stock.save(err=>{
-        if(err){
+        if (err) {
             console.log (err)
             res.flash('error', `Tracking number already exist | Require fields missing`)
+            res.render('error', {
+                errorcode: 'XXX',
+                response: 'Not Acceptable &#x1F62B;',
+                message: 'No worries~ database detected duplication of tracking number.'
+            })
         }
         else{
-            console.log('Status: 201 - success entry to database')
+            console.log('Status: 200 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
-            res.status(201).send()
+            res.status(200).redirect('/in_stock')
         }
     })
 })
