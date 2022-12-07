@@ -186,7 +186,7 @@ const updateGrpPod = ((req,res) =>{
                 })
             }
             else {
-                console.log(result)
+                console.log(result.count)           
                 res.render('sucess', {
                     response: 'Successfuly updated',
                     message: 'Congratulations~ All tracking number has been updated.'
