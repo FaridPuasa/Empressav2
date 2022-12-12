@@ -119,7 +119,7 @@ const insertPodTmx = ((req,res)=>{
         pod_id: pod_id,
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
-        agentName: data.agentName,
+        agentName: data.dispatcherName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
         podstatus: status_pod,

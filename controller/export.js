@@ -69,7 +69,6 @@ const exportInventory = (req,res) =>{
 
 const exportPodSummary = (req,res) =>{
     let data = req.body
-    console.log(data)
     let services = data.service
     let status = data.currentStatus
     let end = moment(data.enddate).format('DD/MM/YYYY')
@@ -132,16 +131,19 @@ const exportPodSummary = (req,res) =>{
     console.log(end)
     console.log(start)
     let filter = {
-        $gte: {dateEntry: data.start},
-        $lte: {dateEntry: data.end},
+        deliveryDate: {
+            $gte: {start},
+            $lte: {end},
+        } 
     }
-    database.find(filter).sort({trackingNumber: 1}).then(
+    console.log(filter)
+    mohPodDB.find(filter).then(
         (result)=>{
             console.log('Successfully extracted required data.')
-            console.log(result)
+            //console.log(result)
             res.render('finance', {
                 title: 'Finance Summary',
-                partials: './partials/export/exportlist.ejs',
+                partials: './partials/export/financebyservice.ejs',
                 service,
                 result,
                 user

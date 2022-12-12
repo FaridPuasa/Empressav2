@@ -143,8 +143,53 @@
                 data[i].age = d +" days"
                 console.log( data[i].age)
                 let status = data[i].currentStatus
+
+                /*
+                    IN WAREHOUSE = A1
+                    IN MEDICINE ROOM = A2
+                    RE-ENTRY = A3
+                    SCHEDULE FOR DELIVERY = B
+                    DELIVERY IN PROGRESS = C
+                    SUCCESSFUL DELIVERY = D1
+                    SELF COLLECT = D2
+                    FAILED DELIVERY = D3
+                    CANCELLED DELIVERY = D4
+                */
+
+                if(status == "A1"){
+                    data[i].currentStatus = "IN WAREHOUSE"
+                }
+
                 if(status == "A2"){
                     data[i].currentStatus = "IN MEDICINE ROOM"
+                }
+
+                if(status == "A3"){
+                    data[i].currentStatus = "RE-ENTRY"
+                }
+
+                if(status == "B"){
+                    data[i].currentStatus = "SCHEDULE FOR DELVIERY"
+                }
+
+                if(status == "C"){
+                    data[i].currentStatus = "DELIVERY IN PROGRESS"
+                }
+
+                if(status == "D1"){
+                    data[i].currentStatus = "SUCCESSFUL DELIVERY"
+                }
+
+                if(status == "D2"){
+                    data[i].currentStatus = "SELF COLLECT"
+                }
+
+                if(status == "D3"){
+                    data[i].currentStatus = "FAILED DELIVERY"
+                }
+
+                if(status == "D4"){
+                    data[i].currentStatus = "CANCELLED DELIVERY"
                 }
 
                 let expire = moment(data[i].mohExpire).format('DD/MM/YYYY')

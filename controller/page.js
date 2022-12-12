@@ -49,8 +49,8 @@ const service = (req,res) =>{
     if(services == 'moh'){
         mohPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                console.log(result[0].podsequence)
-                if(result[0].podsequence == undefined || 0 || null){
+                //console.log(result[0].podsequence)
+                if(result.length == 0){
                     let sequence = 1
                     res.render('pod',{
                         title: `${service} POD`,
@@ -81,9 +81,10 @@ const service = (req,res) =>{
     else if(services == 'jpmc'){
         jpmcPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podsequence == undefined || 0 || null){
+                console.log(result)
+                if(result.length == 0){
                     let sequence = 1
-                    console.log(result.podsequence)
+                    console.log(result.podSequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/jpmc'),
@@ -94,8 +95,8 @@ const service = (req,res) =>{
                     })
                 }
                 else{
-                    let sequence = result.podsequence + 1
-                    console.log(result.podsequence)
+                    let sequence = parseInt(result[0].podsequence) + 1
+                    console.log(result.podSequence)
                     res.render('pod',{
                         title: `${service} POD`,
                         partials: ('./partials/pod/jpmc'),
@@ -114,7 +115,7 @@ const service = (req,res) =>{
     else if(services == 'panaga'){
         panagaPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podsequence == undefined || 0 || null){
+                if(result.length == 0){
                     let sequence = 1
                     console.log(result.podsequence)
                     res.render('pod',{
@@ -127,7 +128,7 @@ const service = (req,res) =>{
                     })
                 }
                 else{
-                    let sequence = result.podsequence + 1
+                    let sequence = parseInt(result[0].podsequence) + 1
                     console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
@@ -147,7 +148,7 @@ const service = (req,res) =>{
     else if(services == 'fmx'){
         fmxPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podsequence == undefined || 0 || null){
+                if(result.length == 0){
                     let sequence = 1
                     console.log(result.podsequence)
                     res.render('pod',{
@@ -160,7 +161,7 @@ const service = (req,res) =>{
                     })
                 }
                 else{
-                    let sequence = result.podsequence + 1
+                    let sequence = parseInt(result[0].podsequence) + 1
                     console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
@@ -180,7 +181,7 @@ const service = (req,res) =>{
     else if(services == 'zalora'){
         zaloraPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podsequence == undefined || 0 || null){
+                if(result.length == 0){
                     let sequence = 1
                     console.log(result.podsequence)
                     res.render('pod',{
@@ -193,7 +194,7 @@ const service = (req,res) =>{
                     })
                 }
                 else{
-                    let sequence = result.podsequence + 1
+                    let sequence = parseInt(result[0].podsequence) + 1
                     console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
@@ -213,7 +214,7 @@ const service = (req,res) =>{
     else if(services == 'grp'){
         grpPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podsequence == undefined || 0 || null){
+                if(result.length == 0){
                     let sequence = 1
                     console.log(result.podsequence)
                     res.render('pod',{
@@ -226,7 +227,7 @@ const service = (req,res) =>{
                     })
                 }
                 else{
-                    let sequence = result.podsequence + 1
+                    let sequence = parseInt(result[0].podsequence) + 1
                     console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
@@ -246,7 +247,7 @@ const service = (req,res) =>{
     else if(services == 'runner'){
         runnerPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podsequence == undefined || 0 || null){
+                if(result.length == 0){
                     let sequence = 1
                     console.log(result.podsequence)
                     res.render('pod',{
@@ -259,7 +260,7 @@ const service = (req,res) =>{
                     })
                 }
                 else{
-                    let sequence = result.podsequence + 1
+                    let sequence = parseInt(result[0].podsequence) + 1
                     console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
@@ -279,7 +280,7 @@ const service = (req,res) =>{
     else if(services == 'personal'){
         personalPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podsequence == undefined || 0 || null){
+                if(result.length == 0){
                     let sequence = 1
                     console.log(result.podsequence)
                     res.render('pod',{
@@ -292,7 +293,7 @@ const service = (req,res) =>{
                     })
                 }
                 else{
-                    let sequence = result.podsequence + 1
+                    let sequence = parseInt(result[0].podsequence) + 1
                     console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
@@ -312,7 +313,7 @@ const service = (req,res) =>{
     else if(services == 'local'){
         localPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podsequence == undefined || 0 || null){
+                if(result.length == 0){
                     let sequence = 1
                     console.log(result.podsequence)
                     res.render('pod',{
@@ -325,7 +326,7 @@ const service = (req,res) =>{
                     })
                 }
                 else{
-                    let sequence = result.podsequence + 1
+                    let sequence = parseInt(result[0].podsequence) + 1
                     console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
@@ -345,7 +346,7 @@ const service = (req,res) =>{
     else if(services == 'tmx'){
         tmxPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.podsequence == undefined || 0 || null){
+                if(result.length == 0){
                     let sequence = 1
                     console.log(result.podsequence)
                     res.render('pod',{
@@ -358,7 +359,7 @@ const service = (req,res) =>{
                     })
                 }
                 else{
-                    let sequence = result.podsequence + 1
+                    let sequence = parseInt(result[0].podsequence) + 1
                     console.log(result.podsequence)
                     res.render('pod',{
                         title: `${service} POD`,
@@ -397,14 +398,13 @@ const self = (req,res) =>{
 }
 
 const instock = (req,res) =>{
+    let user = currentUser[0]
     stockDB.find().sort({$natural: -1}).limit(1).then(
         (result)=>{
             console.log(result)
             //console.log(result[0].sequence)
-            if(result[0].sequence == undefined || 0 || null){
-                console.log("if")
+            if(result.length == 0){
                 let sequence = 1
-                let user = currentUser[0]
                 res.render('itemin', {
                     title: "Item In",
                     partials: './partials/itemin/newinventory.ejs',
@@ -414,11 +414,8 @@ const instock = (req,res) =>{
                 })
             }
             else{
-                console.log("else")
-                //console.log(parseInt(result[0].sequence))
                 let sequence = parseInt(result[0].sequence) + 1 
                 console.log(sequence)
-                let user = currentUser[0]
                 res.render('itemin', {
                     title: "Item In",
                     partials: './partials/itemin/newinventory.ejs',
@@ -552,7 +549,6 @@ const itemList = (req,res) =>{
         (documents)=>{
             console.log(documents)
             if(services == 'moh' && documents[0].service == 'MOH'){
-                console.log(obj)
                 console.log(documents[0])
                 res.render('list',{
                     title: `${services} List`,
@@ -571,7 +567,7 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'panaga' && documents[0].service == 'MOH'){
+            else if(services == 'panaga' && documents[0].service == 'PANAGA'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/panaga'),
@@ -680,9 +676,34 @@ const podList = (req,res)=> {
     else if(services == 'jpmc'){
         jpmcPodDB.find().sort().then(
             (document)=>{
+                if (document == []){
+                    res.render('error', {
+                        title: '404',
+                        response: '',
+                        message: 'Page not found'
+                    })
+                }
+                else{
+                    res.render('podlist',{
+                        title: `${service} POD List`,
+                        partials: ('./partials/podlist/jpmc'),
+                        moment: moment,
+                        document,
+                        user
+                    })
+                }
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
+    }
+    else if(services == 'panaga'){
+        panagaPodDB.find().sort().then(
+            (document)=>{
                 res.render('podlist',{
                     title: `${service} POD List`,
-                    partials: ('./partials/podlist/jpmc'),
+                    partials: ('./partials/podlist/panaga'),
                     moment: moment,
                     document,
                     user
@@ -693,88 +714,117 @@ const podList = (req,res)=> {
             }
         )
     }
-    else if(services == 'panaga'){
-        (document)=>{
-            res.render('podlist',{
-                title: `${service} POD List`,
-                partials: ('./partials/podlist/panaga'),
-                moment: moment,
-                document,
-                user
-            })
-        },
-        (err)=>{
-            console.log(err)
-        }
-    }
     else if(services == 'fmx'){
-        (document)=>{
-            res.render('podlist',{
-                title: `${service} POD List`,
-                partials: ('./partials/podlist/fmx'),
-                moment: moment,
-                document,
-                user
-            })
-        },
-        (err)=>{
-            console.log(err)
-        }
+        fmxPodDB.find().sort().then(
+            (document)=>{
+                res.render('podlist',{
+                    title: `${service} POD List`,
+                    partials: ('./partials/podlist/fmx'),
+                    moment: moment,
+                    document,
+                    user
+                })
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
     }
     else if(services == 'zalora'){
-        (document)=>{
-            res.render('podlist',{
-                title: `${service} POD List`,
-                partials: ('./partials/podlist/zalora'),
-                moment: moment,
-                document,
-                user
-            })
-        },
-        (err)=>{
-            console.log(err)
-        }
-    }else if(services == 'grp'){
-        (document)=>{
-            res.render('podlist',{
-                title: `${service} POD List`,
-                partials: ('./partials/podlist/grp'),
-                moment: moment,
-                document,
-                user
-            })
-        },
-        (err)=>{
-            console.log(err)
-        }
+        zaloraPodDB.find().sort().then(
+            (document)=>{
+                res.render('podlist',{
+                    title: `${service} POD List`,
+                    partials: ('./partials/podlist/zalora'),
+                    moment: moment,
+                    document,
+                    user
+                })
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
+    }
+    else if(services == 'grp'){
+        grpPodDB.find().sort().then(
+            (document)=>{
+                res.render('podlist',{
+                    title: `${service} POD List`,
+                    partials: ('./partials/podlist/grp'),
+                    moment: moment,
+                    document,
+                    user
+                })
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
     }
     else if(services == 'runner'){
-        (document)=>{
-            res.render('podlist',{
-                title: `${service} POD List`,
-                partials: ('./partials/podlist/runner'),
-                moment: moment,
-                document,
-                user
-            })
-        },
-        (err)=>{
-            console.log(err)
-        }
+        runnerPodDB.find().sort().then(
+            (document)=>{
+                res.render('podlist',{
+                    title: `${service} POD List`,
+                    partials: ('./partials/podlist/runner'),
+                    moment: moment,
+                    document,
+                    user
+                })
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
     }
     else if(services == 'personal'){
-        (document)=>{
-            res.render('podlist',{
-                title: `${service} POD List`,
-                partials: ('./partials/podlist/personal'),
-                moment: moment,
-                document,
-                user
-            })
-        },
-        (err)=>{
-            console.log(err)
-        }
+        personalPodDB.find().sort().then(
+            (document)=>{
+                res.render('podlist',{
+                    title: `${service} POD List`,
+                    partials: ('./partials/podlist/personal'),
+                    moment: moment,
+                    document,
+                    user
+                })
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
+    }
+    else if(services == 'tmx'){
+        personalPodDB.find().sort().then(
+            (document)=>{
+                res.render('podlist',{
+                    title: `${service} POD List`,
+                    partials: ('./partials/podlist/tmx'),
+                    moment: moment,
+                    document,
+                    user
+                })
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
+    }
+    else if(services == 'local'){
+        personalPodDB.find().sort().then(
+            (document)=>{
+                res.render('podlist',{
+                    title: `${service} POD List`,
+                    partials: ('./partials/podlist/local'),
+                    moment: moment,
+                    document,
+                    user
+                })
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
     }
     else{
         console.log('Error 404 - page not found')
@@ -791,7 +841,7 @@ const restockForm = (req,res)=> {
     waybillDB.find().sort({$natural: -1}).limit(1).then(
         (result)=>{
             console.log(result)
-            if(result == undefined || 0 || null){
+            if(result.length == 0){
                 let sequence = 1
                 //console.log(result.sequence)
                 res.render('restock',{
@@ -849,7 +899,7 @@ const pickupForm = (req,res)=> {
     pickupDB.find().sort({$natural: -1}).limit(1).then(
         (result)=>{
             console.log(result.sequence)
-            if(result.sequence == undefined || 0 || null){
+            if(result.length == 0){
                 let sequence = 1
                 console.log("IF: "+ sequence)
                 res.render('pickup',{
@@ -903,10 +953,12 @@ const passwordForgot = (req,res)=> {
 }
 
 const driversRegister = (req,res)=> {
+    let user = currentUser[0]
     res.render('user', {
         title: 'new agent',
         partials: './partials/user/newagent.ejs',
         moment,
+        user
     })
 }
 

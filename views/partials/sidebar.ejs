@@ -35,7 +35,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        OPERATIONS
+        OPERATIONS IN
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
@@ -50,27 +50,20 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Services:</h6>
-                <a class="collapse-item" href="/moh-in">MOH</a>
-                <a class="collapse-item" href="/jpmc-in">JPMC</a>
-                <a class="collapse-item" href="/panaga-in">Panaga</a>
-                <a class="collapse-item" href="/fmx-in">FMX</a>
-                <a class="collapse-item" href="/grp-in">GRP</a>
-                <a class="collapse-item" href="/runner-in">Runner</a>
-                <a class="collapse-item" href="/personal-in">Personal Shopping</a>
-                <!--<a class="collapse-item" href="/zalroa">Zalora</a>-->
+                <% if (user.service.includes(200)){ %> <a class="collapse-item" href="/moh-in">MOH</a> <% } %>
+                <% if (user.service.includes(201)){ %> <a class="collapse-item" href="/jpmc-in">JPMC</a> <% } %>
+                <% if (user.service.includes(202)){ %> <a class="collapse-item" href="/panaga-in">Panaga</a> <% } %>
+                <% if (user.service.includes(100)){ %> <a class="collapse-item" href="/zalora-in">Zalora</a> <% } %>
+                <% if (user.service.includes(101)){ %> <a class="collapse-item" href="/fmx-in">FMX</a> <% } %>
+                <% if (user.service.includes(600)){ %> <a class="collapse-item" href="/grp-in">GRP</a> <% } %>
+                <% if (user.service.includes(301)){ %> <a class="collapse-item" href="/tmx-in">Thermomix</a> <% } %>
+                <% if (user.service.includes(300)){ %> <a class="collapse-item" href="/local-in">Local Delivery</a> <% } %>
+                <% if (user.service.includes(400)){ %> <a class="collapse-item" href="/runner-in">Runner Service</a> <% } %>
+                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/personal-in">Personal Shopping</a> <% } %>
+                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/misc-in">Miscellaneous</a> <% } %>
+                
             </div>
         </div>
-    </li>
-
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="/self-collect">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-down" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
-                <path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
-            </svg>
-            <span>Self Collection</span>
-        </a>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
@@ -80,6 +73,25 @@
                 <path d="M2.5 0a.5.5 0 0 1 .5.5V2h10V.5a.5.5 0 0 1 1 0v15a.5.5 0 0 1-1 0V15H3v.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zM3 14h10v-3H3v3zm0-4h10V7H3v3zm0-4h10V3H3v3z"/>
             </svg>
             <span>Instock</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        OPERATIONS OUT
+    </div>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="/self-collect">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
+                <path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+            </svg>
+            <span>Self Collection</span>
         </a>
     </li>
 
@@ -102,15 +114,17 @@
         <div id="collapseList" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">services</h6>
-                <a class="collapse-item" href="/moh-list">MOH</a>
-                <a class="collapse-item" href="/jpmc-list">JPMC</a>
-                <a class="collapse-item" href="/panaga-list">Panaga</a>
-                <a class="collapse-item" href="/fmx-list">FMX</a>
-                <a class="collapse-item" href="/tmx-list">Thermomix</a>
-                <a class="collapse-item" href="/local-list">Local Delivery</a>
-                <a class="collapse-item" href="/grp-list">Go Rush Plus</a>
-                <a class="collapse-item" href="/runner-list">Runner Service</a>
-                <a class="collapse-item" href="/personal-list">Personal Shopping</a>
+                <% if (user.service.includes(200)){ %> <a class="collapse-item" href="/moh-list">MOH</a> <% } %>
+                <% if (user.service.includes(201)){ %> <a class="collapse-item" href="/jpmc-list">JPMC</a> <% } %>
+                <% if (user.service.includes(202)){ %> <a class="collapse-item" href="/panaga-list">Panaga</a> <% } %>
+                <% if (user.service.includes(100)){ %> <a class="collapse-item" href="/zalora-list">Zalora</a> <% } %>
+                <% if (user.service.includes(101)){ %> <a class="collapse-item" href="/fmx-list">FMX</a> <% } %>
+                <% if (user.service.includes(600)){ %> <a class="collapse-item" href="/grp-list">GRP</a> <% } %>
+                <% if (user.service.includes(301)){ %> <a class="collapse-item" href="/tmx-list">Thermomix</a> <% } %>
+                <% if (user.service.includes(300)){ %> <a class="collapse-item" href="/local-list">Local Delivery</a> <% } %>
+                <% if (user.service.includes(400)){ %> <a class="collapse-item" href="/runner-list">Runner Service</a> <% } %>
+                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/personal-list">Personal Shopping</a> <% } %>
+                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/misc-list">Miscellaneous</a> <% } %>
             </div>
         </div>
     </li>
@@ -129,12 +143,14 @@
                 <% if (user.service.includes(200)){ %> <a class="collapse-item" href="/moh-podlist">MOH</a> <% } %>
                 <% if (user.service.includes(201)){ %> <a class="collapse-item" href="/jpmc-podlist">JPMC</a> <% } %>
                 <% if (user.service.includes(202)){ %> <a class="collapse-item" href="/panaga-podlist">Panaga</a> <% } %>
+                <% if (user.service.includes(100)){ %> <a class="collapse-item" href="/zalora-podlist">Zalora</a> <% } %>
                 <% if (user.service.includes(101)){ %> <a class="collapse-item" href="/fmx-podlist">FMX</a> <% } %>
                 <% if (user.service.includes(600)){ %> <a class="collapse-item" href="/grp-podlist">GRP</a> <% } %>
                 <% if (user.service.includes(301)){ %> <a class="collapse-item" href="/tmx-podlist">Thermomix</a> <% } %>
                 <% if (user.service.includes(300)){ %> <a class="collapse-item" href="/local-podlist">Local Delivery</a> <% } %>
                 <% if (user.service.includes(400)){ %> <a class="collapse-item" href="/runner-podlist">Runner Service</a> <% } %>
                 <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/personal-podlist">Personal Shopping</a> <% } %>
+                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/misc-podlist">Miscellaneous</a> <% } %>
             </div>
         </div>
     </li>
@@ -169,15 +185,17 @@
         <div id="collapsePod" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">services</h6>
-                <a class="collapse-item" href="/moh-pod">MOH</a>
-                <a class="collapse-item" href="/jpmc-pod">JPMC</a>
-                <a class="collapse-item" href="/panaga-pod">Panaga</a>
-                <a class="collapse-item" href="/fmx-pod">FMX</a>
-                <a class="collapse-item" href="/grp-pod">GRP</a>
-                <a class="collapse-item" href="/tmx-pod">Thermomix</a>
-                <a class="collapse-item" href="/local-pod">Local Delivery</a>
-                <a class="collapse-item" href="/runner-pod">Runner Service</a>
-                <a class="collapse-item" href="/personal-pod">Personal Shopping</a>
+                <% if (user.service.includes(200)){ %> <a class="collapse-item" href="/moh-pod">MOH</a> <% } %>
+                <% if (user.service.includes(201)){ %> <a class="collapse-item" href="/jpmc-pod">JPMC</a> <% } %>
+                <% if (user.service.includes(202)){ %> <a class="collapse-item" href="/panaga-pod">Panaga</a> <% } %>
+                <% if (user.service.includes(100)){ %> <a class="collapse-item" href="/zalora-podlist">Zalora</a> <% } %>
+                <% if (user.service.includes(101)){ %> <a class="collapse-item" href="/fmx-pod">FMX</a> <% } %>
+                <% if (user.service.includes(600)){ %> <a class="collapse-item" href="/grp-pod">GRP</a> <% } %>
+                <% if (user.service.includes(301)){ %> <a class="collapse-item" href="/tmx-pod">Thermomix</a> <% } %>
+                <% if (user.service.includes(300)){ %> <a class="collapse-item" href="/local-pod">Local Delivery</a> <% } %>
+                <% if (user.service.includes(400)){ %> <a class="collapse-item" href="/runner-pod">Runner Service</a> <% } %>
+                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/personal-pod">Personal Shopping</a> <% } %>
+                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/misc-pod">Miscellaneous</a> <% } %>
             </div>
         </div>
     </li>
@@ -185,9 +203,9 @@
     <!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link" href="/restock_order">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
-                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
-                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+                <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
+                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
             </svg>
             <span>Restock Order</span>
         </a>
@@ -196,15 +214,22 @@
     <!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link" href="/pickup_order">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
-                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
-                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+                <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
+                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
             </svg>
             <span>Pickup Order</span>
         </a>
     </li>
 
-    <!-- Nav Item - Charts -->
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Exports
+    </div>
+
+    <!-- Nav Item - Reports -->
     <li class="nav-item">
         <a class="nav-link" href="/export" aria-expanded="true">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  width="16" height="16" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 502 502" fill="currentColor" xml:space="preserve">
@@ -229,11 +254,18 @@
                     </g>
                 </g>
                 </svg>
-            <span>Export</span>
+            <span>Export Item</span>
         </a>
     </li>
 
-    <!-- Nav Item - Charts -->
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Finance
+    </div>
+
+    <!-- Nav Item - Finance -->
     <li class="nav-item">
         <a class="nav-link" href="/export-finance" aria-expanded="true">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  width="16" height="16" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 502 502" fill="currentColor" xml:space="preserve">
@@ -258,7 +290,7 @@
                     </g>
                 </g>
                 </svg>
-            <span>Finance Summary</span>
+            <span>Summary by service</span>
         </a>
     </li>
     
@@ -283,11 +315,29 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link" href="/newagent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+            </svg>
+            <span>New Driver</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link" href="/userlist">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
                 <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
             </svg>
             <span>User List</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/newagent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+            </svg>
+            <span>New Driver</span>
         </a>
     </li>
 

@@ -114,7 +114,6 @@ const insertPodPersonal = ((req,res)=>{
             }
         })
     }
-    let option = {upsert: false, new: false}
     let pod = new personalPodDB ({
         pod_id: pod_id,
         madeby: data.madeby,

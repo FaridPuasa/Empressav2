@@ -77,10 +77,11 @@
                                                         <% for(let i=0 ; i < document.productColor.length; i++) {%>
                                                         <tr data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
                                                             <td><%= index %>"."</td>
-                                                            <td><%= document.productColor[i] %></td>
-                                                            <td><%= document.productSize[i] %></td>
-                                                            
-                                                            <td><%= document.quantity[i] %></td>
+                                                            <td><%= list.productColor[i] %></td>
+                                                            <td><%= list.productSize[i] %></td>
+                                                            <td><%= list.productFlavour[i] %></td>
+                                                            <td><%= list.productScent[i] %></td>
+                                                            <td><%= list.quantity[i] %></td>
                                                         </tr>
                                                         <%}%>
                                                     </tbody>

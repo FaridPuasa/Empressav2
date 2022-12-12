@@ -3,7 +3,7 @@
     <!-- DataTales Example -->
 <div class="card shadow mb-4">
 <div class="card-header py-3">
-<h6 class="m-0 font-weight-bold text-primary text-center">Finance Summary</h6>
+<h6 class="m-0 font-weight-bold text-primary text-center">Finance Summary for </h6>
 </div>
 
 <div class="card-body">
@@ -32,9 +32,9 @@
             <tbody>
                 <% result.forEach(result=>{ %>
                     <% for(let i = 0; i < result.trackingNumber.length; i++){ %>
-                        <tr>
-                            <td><%= result.agentName %></td>
-                            <td><%= result.deliveryDate %></td>
+                        <tr class="rowNumber">
+                            <td name="dispatch"><%= result.agentName %><input type="hidden" name="disp" value="<%= result.agentName %>"></td>
+                            <td name="date"><%= result.deliveryDate %></td>
                             <td><%= service %></td>
                             <td><%= result.trackingNumber[i] %></td>
                             <td></td>
@@ -42,8 +42,8 @@
                             <td><%= result.contactAddress[i] %></td>
                             <td><%= result.contactNumber[i] %></td>
                             <td><%= result.deliveryType[i] %></td>
-                            <td><%= result.parcelValue[i] %></td>
-                            <td><%= result.PaymentMethod[i] %></td>
+                            <td id=" price<%= [i] %>"><%= result.parcelValue[i] %><input type="hidden" id="val<%= [i] %>" value="<%= result.parcelValue[i] %>"></td>
+                            <td name="method"><%= result.PaymentMethod[i] %></td>
                             <td></td>
                             <td><!-- payment confirm --></td>
                         </tr>
@@ -53,7 +53,38 @@
         </table>
         <input type="hidden" class="form-control form-control-user" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value="POD">
     </form>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Drivers</th>
+                <th>Cash</th>
+                <th>BIBD</th>
+                <th>Baiduri</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="date"></td>
+                <td id="drivers"></td>
+                <td id="cash"></td>
+                <td id="bibd"></td>
+                <td id="baiduri"></td>
+                <td id="total"></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 </div>
 </div>
 </div>
+
+<script>
+
+    for(i=0; i < document.getElementsByClassName('rowNumber').length; i++){
+        let driver = document.getElementById('val[i]')
+        console.log(driver)
+    }
+</script>

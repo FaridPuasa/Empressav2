@@ -5,7 +5,7 @@ const insertStock = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY")
     let data = req.body
     let sequence = data.sequence
-    let product_id = "GR/INS: " + sequence
+    let product_id = "INS# " + sequence
     let stock = new stockDB({
         product_id: product_id,
         sequence: sequence,
@@ -43,7 +43,7 @@ const insertStock = ((req,res)=>{
 
 const readStock = ((req,res)=>{
     let id = req.params._id
-    let product = req.params.product || "ZALORA"
+    //let product = req.params.product || "ZALORA"
     let position = currentUser.position
     stockDB
         .find({product: product})
