@@ -740,6 +740,8 @@ const updatePanaga = ((req,res) => {
 })
 //End - Update Panaga Edit Details
 
+
+
 module.exports = {
     insertPharmacy,
     insertPodMoh,

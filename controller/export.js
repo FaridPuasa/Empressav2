@@ -11,6 +11,7 @@ const personalPodDB = require('../models/personalpod')
 const warehouseDB = require('../models/warehouseInventory')
 const waybillDB = require('../models/restock')
 const moment = require('moment')
+const { currentUser } = require('../controller/user')
 
 const exportInventory = (req,res) =>{
     let data = req.body
@@ -19,6 +20,7 @@ const exportInventory = (req,res) =>{
     let status = data.currentStatus
     let end = moment(data.enddate).format('DD/MM/YYYY')
     let start = moment(data.startdate).format('DD/MM/YYYY')
+    let user = currentUser[0]
     let service
     let currentStatus
     if (services == "*"){
@@ -48,6 +50,7 @@ const exportInventory = (req,res) =>{
                 title: 'Extraction Error',
                 partials: './partials/list/export',
                 list: result,
+                user
             })
         },
         (err)=>{
@@ -57,7 +60,8 @@ const exportInventory = (req,res) =>{
                 title: 'Extraction Error',
                 error_code: '',
                 response: '',
-                message: ''
+                message: '',
+                user
             })
         }
     )
@@ -71,6 +75,7 @@ const exportPodSummary = (req,res) =>{
     let end = moment(data.enddate).format('DD/MM/YYYY')
     let start = moment(data.startdate).format('DD/MM/YYYY')
     let service = services.toUpperCase()
+    let user = currentUser[0]
     let currentStatus
     let database
 
@@ -139,6 +144,7 @@ const exportPodSummary = (req,res) =>{
                 partials: './partials/export/exportlist.ejs',
                 service,
                 result,
+                user
             })
         },
         (err)=>{
@@ -148,7 +154,8 @@ const exportPodSummary = (req,res) =>{
                 title: 'Extraction Error',
                 error_code: '',
                 response: '',
-                message: ''
+                message: '',
+                user
             })
         }
     )

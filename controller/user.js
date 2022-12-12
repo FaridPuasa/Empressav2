@@ -110,16 +110,6 @@ const grantAccess = ((req,res)=>{
                     }]).then(
                     (result)=>{
                         console.log(req.session)
-                        /*for(i=0;i<result.length;i++){
-                            if(result[i]._id.service == "MOH" && result[i]._id.areaCode == "B1" && result[i]._id.currentStatus == "B"){  
-                                if(result[i].count){
-                                    console.log(result[i].count)
-                                }
-                                else{
-                                    console.log(0)
-                                }
-                            }
-                        }*/
                         res.status(200).render('dashboard',{
                             title: 'Dashboard',
                             id: user._id,
@@ -241,39 +231,35 @@ const deleteUser = ((req,res) => {
     })
 })
 
-const authPage = (permissions)=>{
-    return (req,res,next)=>{
-        const role = user.role
-        console.log(role)
-        if (permissions.includes(role)) return next()
-        res.render('error', {
-            title: '401',
-            response: 'Unauthorized',
-            message: 'You are not authorized'
-        })
-    }
-}
-
-const authService =  (req,res,next)=>{
-    const serviceNumber = parseInt(req.params.number)
-    if(currentUser[0].services.includes(serviceNumber)) return next()
-    res.render('error', {
-        title: '401',
-        response: 'Unauthorized',
-        message: 'You are not authorized'
-    })
-}
+const userList = ((req,res)=>{
+    userDB.find().then(
+        (documents)=>{
+            res.render('user', {
+                title: "User List",
+                partials: "./partials/user/list.ejs",
+                documents,
+                moment: moment
+            })
+        },
+        (err)=>{
+            console.log(err)
+            res.render('error', {
+                title: '404',
+                response: '',
+                message: 'Page not found'
+            })
+        }
+    )
+})
 
 module.exports = {
     insertUser,
     updatePassword,
     grantAccess,
     currentUser,
-    authPage,
-    authService,
     readUser,
     updateUser,
     deleteUser,
-    //loginUser,
     readLogin,
+    userList
 }

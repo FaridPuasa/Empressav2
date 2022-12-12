@@ -24,13 +24,13 @@ app.use(session({
 
 app.use(express.urlencoded({extended:true}))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static('.'))
 app.use(flash());
 
 //Global varibales
 app.use(function (req, res, next) {
-    console.log(store)
+    //console.log(store)
     res.locals.message = req.flash()
     next();
 });

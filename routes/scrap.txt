@@ -1,0 +1,64 @@
+//console.log("Service Type: " + documents[0].service)
+                //console.log("Expire: " + documents[0].mohExpire)
+                //console.log("Tracking: " + documents[1].trackingNumber)
+               /*let obj = {}
+                for (i=0; i<documents.length; i++){
+                    console.log("Tracking: " + documents[i].trackingNumber)
+                    let start = moment(documents[i].mohExpire).format('MM/DD/YYYY')
+                    let end = moment().format('MM/DD/YYYY')
+                    console.log("Date Today: " + new Date(end))
+                    console.log("Date Expire: " + moment(documents[i].mohExpire).format('MM/DD/YYYY'))
+                    let dif = new Date(start) - new Date(end)
+                    let d = dif/(1000*3600*24)
+                    if(d < 0){
+                        d = "X1"
+                        obj.age = d
+                        console.log(obj.age)
+                        //console.log(age)
+                    }
+                    else{
+                        obj.age = d
+                        //console.log(age + " days")
+                    }
+                    //obj.push(documents)
+                }
+                console.log(obj)
+                console.log(documents[0])
+                */
+
+        (document)=>{
+
+        },
+        (err)=>{
+            console.log(err)
+        }
+
+
+        router.get('/summary', (req,res)=>{
+    let user = currentUser[0]
+    res.render('export', {
+        title: "Summary",
+        partials: './partials/export/exportlist.ejs',
+        moment: moment,
+        
+        user
+    })
+})
+
+const itemExport = (req,res)=> {
+    let user = currentUser[0]
+    res.render('export', {
+        title: "Export List",
+        partials: './partials/export/exportlist.ejs',
+        moment: moment,
+        list: list,
+        user
+    })
+}
+
+router.get('/success', (req,res)=>{
+    res.render('success',{
+        response: '',
+        message: '',
+    })
+})

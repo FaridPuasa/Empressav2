@@ -128,7 +128,6 @@
       
        var $table = $('#table')
        
-      
         $(function() {
             
             //console.log(listing)
@@ -143,7 +142,6 @@
                 let d = dif/(1000*3600*24)
                 data[i].age = d +" days"
                 console.log( data[i].age)
-
                 let status = data[i].currentStatus
                 if(status == "A2"){
                     data[i].currentStatus = "IN MEDICINE ROOM"
@@ -159,10 +157,6 @@
                     console.log(data[i].trackingNumber[j])
                 }
             }
-
-            
-            
-            
             $table.bootstrapTable({data: data})
             $table.bootstrapTable('updateFormatText', 'formatShowingRows', 'Showing')
         })
