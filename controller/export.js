@@ -27,20 +27,27 @@ const exportInventory = (req,res) =>{
         service = {$in: ["MOH","JPMC","PANAGA","FMX","LOCAL","RUNNER","PERSONAL","TMX","ZALORA","GRP"]}
     }
     else{
-        service = data.service.toUpperCase()
+        service = {$all: [data.service.toUpperCase()]}
     }
     if (status == "*"){
         currentStatus = {$in: ["A1","A2","A3","B","C","D1","D2","D3","D4"]}
     }
     else{
-        currentStatus = data.currentStatus
+        currentStatus = {$all: [data.currentStatus]}
     }
     console.log(end)
     console.log(start)
     let filter = {
-        $gte: {dateEntry: data.start},
-        $lte: {dateEntry: data.end},
-        $or: [{service: service,currentStatus: currentStatus}]
+        $and: [
+            {
+                dateEntry: {
+                    $gte: start,
+                    $lte: end
+                }, 
+                service: service,
+                currentStatus: currentStatus
+            }
+        ]
     }
     warehouseDB.find(filter).sort({trackingNumber: 1}).then(
         (result)=>{
@@ -71,8 +78,8 @@ const exportPodSummary = (req,res) =>{
     let data = req.body
     let services = data.service
     let status = data.currentStatus
-    let end = moment(data.enddate).format('DD/MM/YYYY')
-    let start = moment(data.startdate).format('DD/MM/YYYY')
+    let end = data.enddate
+    let start = data.startdate
     let service = services.toUpperCase()
     let user = currentUser[0]
     let currentStatus
@@ -132,15 +139,16 @@ const exportPodSummary = (req,res) =>{
     console.log(start)
     let filter = {
         deliveryDate: {
-            $gte: {start},
-            $lte: {end},
+            $gte: start, 
+            $lte: end
         } 
     }
     console.log(filter)
-    mohPodDB.find(filter).then(
+    database.find(filter).then(
         (result)=>{
             console.log('Successfully extracted required data.')
-            //console.log(result)
+            console.log(result[0])
+            
             res.render('finance', {
                 title: 'Finance Summary',
                 partials: './partials/export/financebyservice.ejs',

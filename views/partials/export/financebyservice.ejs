@@ -82,9 +82,11 @@
 </div>
 
 <script>
-
+    console.log(document.getElementsByName('formMETHOD').innertHTML)
+    console.log(document.getElementsByClassName('rowNumber').length)
     for(i=0; i < document.getElementsByClassName('rowNumber').length; i++){
-        let driver = document.getElementById('val[i]')
+        
+        let driver = document.getElementById('price[i]')
         console.log(driver)
     }
 </script>
