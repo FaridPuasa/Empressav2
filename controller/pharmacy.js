@@ -58,6 +58,7 @@ const insertPharmacy = ((req,res)=> {
         //Date
         entryDate: date,
         dateEntry: dateEntry,
+        lastUpdate: dateEntry,
         //Extra
         attempt: attempt,
         reentry: reentry,
@@ -99,6 +100,9 @@ const insertPodMoh = ((req,res)=>{
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
             status: "B", //need to find a way to change to delivery in progress
+            lastUpdate: date,
+            did: data.agentName,
+            driver: data.dispatcherName,
             $push: {
                 history: {
                     statusHistory: "B", 
@@ -126,6 +130,7 @@ const insertPodMoh = ((req,res)=>{
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.dispatcherName,
+        did: data.agentName,
         deliveryDate: data.deliveryDate,
         podsequence,
         podstatus: status_pod,
@@ -176,6 +181,9 @@ const insertPodJpmc = ((req,res)=>{
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
             status: "B", //need to find a way to change to delivery in progress
+            lastUpdate: date,
+            did: data.agentName,
+            driver: data.dispatcherName,
             $push: {
                 history: {
                     statusHistory: "B", 
@@ -204,6 +212,7 @@ const insertPodJpmc = ((req,res)=>{
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.dispatcherName,
+        did: data.agentName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
         podstatus: status_pod,
@@ -253,6 +262,9 @@ const insertPodPanaga = ((req,res)=>{
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
             status: "B", //need to find a way to change to delivery in progress
+            lastUpdate: date,
+            did: data.agentName,
+            driver: data.dispatcherName,
             $push: {
                 history: {
                     statusHistory: "B", 
@@ -280,6 +292,7 @@ const insertPodPanaga = ((req,res)=>{
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.dispatcherName,
+        did: data.agentName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
         podstatus: status_pod,
@@ -327,6 +340,7 @@ const updateMohPod = ((req,res) =>{
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
             status: "C", //need to find a way to change to C
+            lastUpdate: date,
             $push: {
                 history: {
                     statusDetail: "C", 
@@ -430,6 +444,7 @@ const updateJpmcPod = ((req,res) =>{
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
             status: "C", //need to find a way to change to C
+            lastUpdate: date,
             $push: {
                 history: {
                     statusDetail: "C", 
@@ -533,6 +548,7 @@ const updatePanagaPod = ((req,res) =>{
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
             status: "C", //need to find a way to change to C
+            lastUpdate: date,
             $push: {
                 history: {
                     statusDetail: "C", 

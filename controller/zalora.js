@@ -55,6 +55,7 @@ const insertZalora = ((req,res)=>{
         //Date
         entryDate: date,
         dateEntry: dateEntry,
+        lastUpdate: dateEntry,
         //Extra
         attempt: attempt,
         reentry: reentry,
@@ -92,6 +93,9 @@ const insertPodZalora = ((req,res)=>{
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
             status: "B", //need to find a way to change to delivery in progress
+            lastUpdate: date,
+            driver: data.dispatcherName,
+            did: data.agentName,
             $push: {
                 history: {
                     statusHistory: "B", 
@@ -119,6 +123,7 @@ const insertPodZalora = ((req,res)=>{
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.dispatcherName,
+        did: data.agentName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
         podstatus: status_pod,
@@ -164,6 +169,7 @@ const updateZaloraPod = ((req,res) =>{
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
             status: "C", //need to find a way to change to C
+            lastUpdate: date,
             $push: {
                 history: {
                     statusDetail: "C", 
