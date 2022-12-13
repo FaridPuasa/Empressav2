@@ -11,7 +11,7 @@ const grppodSchema  = new mongoose.Schema({
     madeby: string,
     deliveryArea: string,
     agentName: string,
-    dispatcherName: string,
+    did: string,
     deliveryDate: string,
     podstatus: string,
     numbers: {type: [String]},

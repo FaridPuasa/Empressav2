@@ -56,6 +56,7 @@ const insertFmx = ((req,res)=>{
         //Date
         entryDate: date,
         dateEntry: dateEntry,
+        lastUpdate: dateEntry,
         //Extra
         attempt: attempt,
         reentry: reentry,
@@ -93,6 +94,9 @@ const insertPodFmx = ((req,res)=>{
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
             status: "B", //need to find a way to change to delivery in progress
+            lastUpdate: date,
+            did: data.agentName,
+            driver: data.dispatcherName,
             $push: {
                 history: {
                     statusHistory: "B", 
@@ -120,6 +124,7 @@ const insertPodFmx = ((req,res)=>{
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
         agentName: data.dispatcherName,
+        did: data.agentName,
         deliveryDate: data.deliveryDate,
         podSequence: podSequence,
         podstatus: status_pod,
@@ -165,6 +170,7 @@ const updateFmxPod = ((req,res) =>{
         let filter = {trackingNumber: trackingNumber[i]}
         let update = {
             status: "C", //need to find a way to change to C
+            lastUpdate: date,
             $push: {
                 history: {
                     statusDetail: "C", 

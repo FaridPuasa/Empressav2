@@ -46,6 +46,7 @@ const inventorySchema  = new mongoose.Schema({
     //Date
     entryDate: entryDate,
     dateEntry: string,
+    lastUpdate: string,
     fmxExpire: fmx,
     grpExpire: grp,
     mohExpire: moh,
@@ -63,6 +64,9 @@ const inventorySchema  = new mongoose.Schema({
     //Handler Details
     username: string,
     userid: string,
+    //Dispatch Details
+    driver: string,
+    did: string,
     //history
     history: [{
         statusHistory: string, 

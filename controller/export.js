@@ -54,7 +54,7 @@ const exportInventory = (req,res) =>{
             console.log('Successfully extracted required data.')
             console.log(result)
             res.render('list', {
-                title: 'Extraction Error',
+                title: 'Extraction Success',
                 partials: './partials/list/export',
                 list: result,
                 user

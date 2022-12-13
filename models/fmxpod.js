@@ -11,6 +11,7 @@ const fmxpodSchema  = new mongoose.Schema({
     madeby: string,
     deliveryArea: string,
     agentName: string,
+    did: string,
     deliveryDate: string,
     podstatus: string,
     numbers: {type: [String]},
