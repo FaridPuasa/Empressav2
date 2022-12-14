@@ -13,6 +13,7 @@ const waybillDB = require('../models/restock')
 const stockDB = require('../models/stocks')
 const pickupDB = require ('../models/pickup')
 const userDB = require('../models/user')
+const agentDB = require('../models/agent')
 let moment = require('moment')
 const { currentUser } = require('../controller/user')
 
@@ -50,28 +51,38 @@ const service = (req,res) =>{
         mohPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
                 //console.log(result[0].podsequence)
-                if(result.length == 0){
-                    let sequence = 1
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/moh'),
-                        service: service,
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
-                else{
-                    let sequence = parseInt(result[0].podsequence) + 1
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/moh'),
-                        service: service,
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
+                agentDB.find().then(
+                    (document)=> {
+                        console.log(document)
+                        if(result.length == 0){
+                            let sequence = 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/moh'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                        else{
+                            let sequence = parseInt(result[0].podsequence) + 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/moh'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                    },
+                    (err)=> {
+                        console.log("Failed to get agent list: " + err)
+                    }
+                )
             },
             (err)=>{
                 console.log("Failed to append sequence: " + err)

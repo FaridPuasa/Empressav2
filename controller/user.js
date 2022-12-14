@@ -1,4 +1,5 @@
 const userDB = require('../models/user')
+const agentDB = require('../models/agent')
 const warehouseDB = require('../models/warehouseInventory')
 const moment = require('moment')
 const bcrypt = require('bcrypt')
@@ -50,7 +51,7 @@ const insertUser = ((req,res)=>{
     })
     user.save((err) =>{
         if(err) {
-            if (err.name === "MongoError" && err.code === 11000){
+            if (err.name === "MongoServerError" && err.code === 11000){
                 console.log(err)
                 res.render('error', {
                     title: '11000',
@@ -232,13 +233,15 @@ const deleteUser = ((req,res) => {
 })
 
 const userList = ((req,res)=>{
+    let user = currentUser[0]
     userDB.find().then(
         (documents)=>{
             res.render('user', {
                 title: "User List",
                 partials: "./partials/user/list.ejs",
                 documents,
-                moment: moment
+                moment: moment,
+                user
             })
         },
         (err)=>{
@@ -252,6 +255,75 @@ const userList = ((req,res)=>{
     )
 })
 
+const insertAgent = (req,res)=> {
+    let user = currentUser[0]
+    let date = moment().format('DD/MM/YYYY')
+    let data = req.body
+    let agentName = data.agentName
+    let agent = new agentDB({
+        aid: data.aid,
+        agentName: agentName,
+        agentType: data.agentType,
+        contact: data.contact,
+        email: data.email,
+        brand: data.brand,
+        model: data.model,
+        registration: data.registration,
+        color: data.color,
+        dateCreated: date,
+    })
+    agent.save((err) =>{
+        if(err) {
+            if (err.name === "MongoServerError" && err.code === 11000){
+                console.log(err)
+                res.render('error', {
+                    title: '11000',
+                    response: 'DB Error',
+                    message: 'No worries~ database detected duplication entry.'
+                })
+            }
+            else{
+                console.log(err)
+                res.render('error', {
+                    title: '406',
+                    response: 'Not Acceptable',
+                    message: `Entry didn't meet the requirements.`
+                })
+            }
+        }
+        else{
+                res.status(200).render ('success', {
+                    title: 'success',
+                    response: 'Agent Added',
+                    message: `Agent ${agentName} successfuly created.`,
+                })
+        }
+    })
+}
+
+const readAgent = (req,res)=> {
+    let user = currentUser[0]
+    agentDB.find().then(
+        (documents)=>{
+            res.render('user', {
+                title: "User List",
+                partials: "./partials/user/list.ejs",
+                documents,
+                moment: moment,
+                user
+            })
+        },
+        (err)=>{
+            console.log(err)
+            res.render('error', {
+                title: '404',
+                response: '',
+                message: 'Page not found'
+            })
+        }
+    )
+}
+
 module.exports = {
     insertUser,
     updatePassword,
@@ -261,5 +333,7 @@ module.exports = {
     updateUser,
     deleteUser,
     readLogin,
-    userList
+    userList,
+    insertAgent,
+    readAgent
 }

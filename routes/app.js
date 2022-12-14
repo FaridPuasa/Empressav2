@@ -27,7 +27,9 @@ const {
     updateUser,
     deleteUser,
     readLogin,
-    userList
+    userList,
+    insertAgent,
+    readAgent
 } = require('../controller/user')
 
 const {
@@ -201,5 +203,7 @@ router.get('/userlist', userList)
 router.get('/logout', logout)
 
 router.get('/newagent', driversRegister)
+router.post('/success-agent', insertAgent)
+router.get('/agentlist', readAgent)
 
 module.exports = router
