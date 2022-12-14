@@ -193,16 +193,16 @@ router.get('/:services-podlist', podList)//POD List by services page
 
 //Create POD
 router.get('/:services-pod', service)//POD form page by services page
-router.post('/success-entry-pod', insertPodMoh)//Save POD to DB MOH
-router.post('/success-entry-pod', insertPodJpmc)//Save POD to DB JPMC
-router.post('/success-entry-pod', insertPodPanaga)//Save POD to DB PANAGA
-router.post('/success-entry-pod', insertPodLocal)//Save POD to DB LOCAL
-router.post('/success-entry-pod', insertPodZalora)//Save POD to DB ZALORA
-router.post('/success-entry-pod', insertPodTmx)//Save POD to DB TMX
-router.post('/success-entry-pod', insertPodFmx)//Save POD to DB FMX
-router.post('/success-entry-pod', insertPodRunner)//Save POD to DB RUNNER
-router.post('/success-entry-pod', insertPodPersonal)//Save POD to DB PERSONAL
-router.post('/success-entry-pod', insertPodGrp)//Save POD to DB GRP
+router.post('/success-pod-moh', insertPodMoh)//Save POD to DB MOH
+router.post('/success-pod-jpmc', insertPodJpmc)//Save POD to DB JPMC
+router.post('/success-pod-panaga', insertPodPanaga)//Save POD to DB PANAGA
+router.post('/success-pod-local', insertPodLocal)//Save POD to DB LOCAL
+router.post('/success-pod-zalora', insertPodZalora)//Save POD to DB ZALORA
+router.post('/success-pod-tmx', insertPodTmx)//Save POD to DB TMX
+router.post('/success-pod-fmx', insertPodFmx)//Save POD to DB FMX
+router.post('/success-pod-runner', insertPodRunner)//Save POD to DB RUNNER
+router.post('/success-pod-personal', insertPodPersonal)//Save POD to DB PERSONAL
+router.post('/success-pod-grp', insertPodGrp)//Save POD to DB GRP
 
 //Selfcollection
 router.get('/self-collect', self)//Self collect page
@@ -221,11 +221,11 @@ router.post('/success-POD', updateGrpPodStatus)//After POD status update
 
 //Restock (BMF)
 router.get('/restock_order', restockForm)
-router.post('/',)
+router.post('/success-ro',)
 
 //Pickup 
 router.get('/pickup_order', pickupForm)
-router.post('/',)
+router.post('/success-po',)
 
 //
 
