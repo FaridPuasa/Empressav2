@@ -137,73 +137,96 @@ const {
     passwordForgot,
     driversRegister,
     logout,
-    login
+    login,
+    wellousPage,
+    miscPage
 } = require('../controller/page')
 
+const { selfCollect } = require('../controller/withdraw')
 
-router.post('/success-POD', updateMohPodStatus)
-router.post('/success-in-moh', insertPharmacy)
-router.post('/success-instock', insertStock)
-router.get('/self-collect', self)
-router.get('/in_stock', instock)
-router.get('/inventory-list', inventoryList)
+//User and Login
+router.get('/', login)//Landing Page
+router.get('/dashboard', dashboard)//Dashboard from nav bar
+router.get('/user_register', register)//User Registration page
+router.get('/change-password', passwordChange)//recheck
+router.get('/forgot-password', passwordForgot)//recheck
+router.get('/userlist', userList)//User list page
+router.get('/logout', logout)//Logout from system
+router.post('/dashboard', grantAccess)//After Login
+router.post('/success', insertUser)//After new user register
+router.post('/login', updatePassword)//After change password
 
-//GET Login //done
-router.get('/', login)
+//Agent
+router.get('/newagent', driversRegister)//Agent Page
+router.get('/agentlist', readAgent)//Agent list page
+router.post('/success-agent', insertAgent)//Success page for agent register
 
-//POST Login
-router.post('/dashboard', grantAccess)
-router.get('/dashboard', dashboard)
+//Extraction of Data
+router.get('/export', exportForm)//Export Page
+router.get('/export-finance', financeForm)//Finance Export Page
+router.post('/exportlist', exportInventory)//
+router.post('/summary-success', exportPodSummary)//
 
-router.post('/success-entry', insertZalora)
-router.post('/success-entry-pod', insertPodMoh)
+//Item Entry
+router.get('/:services-in', serviceIn)//Item In by services page
+router.get('/in_stock', instock)//Item entry for instock items
+router.get('/wellous', wellousPage)//Item entry for Wellous
+router.get('/misc', miscPage)//Item entry for Miscellaneous
+router.post('/success-entry-zalora', insertZalora)//ZALORA Save to Warehouse DB
+router.post('/success-entry-pharmacy', insertPharmacy)//MOH,JPMC,PANAGA Save to Warehouse DB
+router.post('/success-entry-local', insertLocal)//LOCAL Save to Warehouse DB
+router.post('/success-entry-tmx', insertTmx)//TMX Save to Warehouse DB
+router.post('/success-entry-fmx', insertFmx)//FMX Save to Warehouse DB
+router.post('/success-entry-grp', insertGrp)//GRP Save to Warehouse DB
+router.post('/success-entry-runner', insertRunner)//RUNNER Save to Warehouse DB
+router.post('/success-entry-personal', insertPersonal)//PERSONAL Save to Warehouse DB
+router.post('/success-entry-wellous')// WELLOUS save to wellous DB
+router.post('/success-entry-misc')//MISC save to misc DB
+router.post('/success-instock', insertStock)//INSTOCK save to inventory DB
 
-//GET Create POD 
-router.get('/:services-pod', service)
+//Item List 
+router.get('/:services-list', itemList)//Item list by services page
+router.get('/inventory-list', inventoryList)//Item list for instock 
 
-//GET Item In 
-router.get('/:services-in', serviceIn )
+//POD List
+router.get('/:services-podlist', podList)//POD List by services page
 
-//GET Item List 
-router.get('/:services-list', itemList)
+//Create POD
+router.get('/:services-pod', service)//POD form page by services page
+router.post('/success-entry-pod', insertPodMoh)//Save POD to DB MOH
+router.post('/success-entry-pod', insertPodJpmc)//Save POD to DB JPMC
+router.post('/success-entry-pod', insertPodPanaga)//Save POD to DB PANAGA
+router.post('/success-entry-pod', insertPodLocal)//Save POD to DB LOCAL
+router.post('/success-entry-pod', insertPodZalora)//Save POD to DB ZALORA
+router.post('/success-entry-pod', insertPodTmx)//Save POD to DB TMX
+router.post('/success-entry-pod', insertPodFmx)//Save POD to DB FMX
+router.post('/success-entry-pod', insertPodRunner)//Save POD to DB RUNNER
+router.post('/success-entry-pod', insertPodPersonal)//Save POD to DB PERSONAL
+router.post('/success-entry-pod', insertPodGrp)//Save POD to DB GRP
 
-//GET Podlist 
-router.get('/:services-podlist', podList)
+//Selfcollection
+router.get('/self-collect', self)//Self collect page
 
-//GET Restock Order 
+//POD Status
+router.post('/success-POD', updateMohPodStatus)//After POD status update
+router.post('/success-POD', updateJpmcPodStatus)//After POD status update
+router.post('/success-POD', updatePanagaPodStatus)//After POD status update
+router.post('/success-POD', updateLocalPodStatus)//After POD status update
+router.post('/success-POD', updateZaloraPodStatus)//After POD status update
+router.post('/success-POD', updateFmxPodStatus)//After POD status update
+router.post('/success-POD', updateTmxPodStatus)//After POD status update
+router.post('/success-POD', updateRunnerPodStatus)//After POD status update
+router.post('/success-POD', updatePersonalPodStatus)//After POD status update
+router.post('/success-POD', updateGrpPodStatus)//After POD status update
+
+//Restock (BMF)
 router.get('/restock_order', restockForm)
+router.post('/',)
 
-//GET Export
-router.get('/export', exportForm)
-router.get('/export-finance', financeForm)
+//Pickup 
 router.get('/pickup_order', pickupForm)
-//POST Export
-router.post('/exportlist', exportInventory)
-router.post('/summary-success', exportPodSummary)
+router.post('/',)
 
-//GET New User 
-router.get('/user_register', register)
-
-//POST success
-router.post('/success', insertUser)
-
-//POST success
-router.post('/login', updatePassword)
-
-//GET Change Password 
-router.get('/change-password', passwordChange)
-
-//GET Forgot Password 
-router.get('/forgot-password', passwordForgot)
-
-//GET User List 
-router.get('/userlist', userList)
-
-//GET logout 
-router.get('/logout', logout)
-
-router.get('/newagent', driversRegister)
-router.post('/success-agent', insertAgent)
-router.get('/agentlist', readAgent)
+//
 
 module.exports = router

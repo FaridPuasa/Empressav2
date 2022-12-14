@@ -993,6 +993,26 @@ const login = (req,res)=> {
     })
 }
 
+const miscPage = (req,res)=> {
+    let user = currentUser[0]
+    res.render('itemin', {
+        title: "Miscellaneous",
+        partials: "./partials/itemin/misc.ejs",
+        moment: moment,
+        user
+    })
+}
+
+const wellousPage = (req,res)=> {
+    let user = currentUser[0]
+    res.render('itemin', {
+        title: "Wellous",
+        partials: "./partials/itemin/wellous.ejs",
+        moment: moment,
+        user
+    })
+}
+
 module.exports = {
     dashboard,
     service,
@@ -1011,5 +1031,7 @@ module.exports = {
     passwordForgot,
     driversRegister,
     logout,
-    login
+    login,
+    miscPage,
+    wellousPage
 }

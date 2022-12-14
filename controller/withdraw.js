@@ -49,6 +49,10 @@ const itemWithdraw = ((req,res)=> {
             console.log(err)
             console.log(`${tracker} failed to be updated.`)
             res.flash('error', `Failed to update ${tracker}`)
+            res.redirect('/:service-out',{
+                name: currentUser.name,
+                icNumber: currentUser.icNumber,
+            })
         } 
         else {
             console.log('update success')
@@ -63,8 +67,40 @@ const itemWithdraw = ((req,res)=> {
     })
 })
 
-
+const selfCollect = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let filter = data.trackingNumber
+    let option = {upsert: false, new: false}
+    let update = {
+        currentStatus: "D2",
+        lastUpdate: date,
+        $push:{
+            history: {
+                statusDetail: "D2", 
+                dateUpdated: date,
+                updateBy: data.updateById, 
+                updateById: data.uid, 
+            }
+        }
+    }
+    console.log(filter)
+    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+        if(err){
+            console.log(err)
+            res.flash('error', `${tracker} failed to update to DB.`)
+            res.redirect('/self-collect')
+        }
+        else {
+            console.log(result)
+            res.flash('success', `${tracker} has been updated.`)
+            res.redirect('/self-collect')
+        }
+    })
+})
 
 module.exports = {
     itemWithdraw,
+    selfCollect,
+    
 }
