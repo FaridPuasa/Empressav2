@@ -174,10 +174,15 @@
 
                                                     <div class="d-flex justify-content-center ">
                                                         <% if (user.role == "12" || user.role == "10") { %>
-                                                        <button class="btn btn-primary">submit</button>
+                                                            <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
+                                                            <input type="hidden" name="pod_status" value="F">
+                                                            <button class="btn btn-primary">submit</button>
                                                         <% } %>
+
                                                         <% if (user.role == "11" || user.role == "13" || user.role == "10" ) { %>
-                                                        <button class="btn btn-success mx-2" onclick="createPDF()">Print</button>
+                                                            <% if (pod_status != "F" ) { %>
+                                                                <a class="btn btn-success mx-2" onclick="createPDF()">Print</a>
+                                                            <% } %>
                                                         <% } %>
                                                     </div>
                                                 
