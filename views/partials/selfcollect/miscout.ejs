@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="container w-50">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <form class="user" method="POST" action="/login">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">ITEM OUT MISCELLANEOUS</h1>
+                                </div>
+
+                                <input type="hidden" name="uid" value="<%= user.uid %>">
+                            
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="trackingNumber" id="trackingNumber" placeholder="Enter Tracking Number" >
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Additional Information-->
+                    <input type="hidden" class="form-control form-control-user" name="updateById" value="<%= user.name %>">
+                    <input type="hidden" class="form-control form-control-user" name="formmethod" id="formmethod" value="Out Miscellaneous">
+
+                    <div class="d-flex justify-content-center mb-5">
+                        <button class="btn btn-primary">submit</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

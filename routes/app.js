@@ -152,8 +152,14 @@ const {
     logout,
     login,
     wellousPage,
-    miscPage
+    miscPage,
+    miscPageOut
 } = require('../controller/page')
+
+const {
+    insertMisc,
+    withdrawMisc
+} = require('../controller/misc')
 
 const { selfCollect } = require('../controller/withdraw')
 
@@ -182,11 +188,12 @@ router.post('/exportlist', exportInventory)//
 router.post('/success-fin-service', exportFinanceSummary)//
 router.post('/success-fin-drivers', exportFinanceSummary)//
 
-//Item Entry
+//Item Entry & Exit
 router.get('/:services-in', serviceIn)//Item In by services page
 router.get('/in_stock', instock)//Item entry for instock items
 router.get('/wellous', wellousPage)//Item entry for Wellous
 router.get('/misc', miscPage)//Item entry for Miscellaneous
+router.get('/misc-out', miscPageOut)//Item exit for Miscellaneous
 router.post('/success-entry-zalora', insertZalora)//ZALORA Save to Warehouse DB
 router.post('/success-entry-pharmacy', insertPharmacy)//MOH,JPMC,PANAGA Save to Warehouse DB
 router.post('/success-entry-local', insertLocal)//LOCAL Save to Warehouse DB
@@ -196,8 +203,10 @@ router.post('/success-entry-grp', insertGrp)//GRP Save to Warehouse DB
 router.post('/success-entry-runner', insertRunner)//RUNNER Save to Warehouse DB
 router.post('/success-entry-personal', insertPersonal)//PERSONAL Save to Warehouse DB
 router.post('/success-entry-wellous')// WELLOUS save to wellous DB
-router.post('/success-entry-misc')//MISC save to misc DB
+router.post('/success-entry-misc', insertMisc)//MISC save to misc DB
 router.post('/success-instock', insertStock)//INSTOCK save to inventory DB
+router.post('/success-collection', selfCollect)//Update self collect
+router.post('/success-miscellaneous-out', withdrawMisc)//Update misc out
 
 //Item List 
 router.get('/:services-list', itemList)//Item list by services page

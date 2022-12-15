@@ -1,6 +1,23 @@
 const miscDB = require('../models/misc')
 const moment = require('moment')
 
+/*
+    IN WAREHOUSE = A1
+    IN MEDICINE ROOM = A2
+    RE-ENTRY = A3
+    SCHEDULE FOR DELIVERY = B
+    DELIVERY IN PROGRESS = C
+    SUCCESSFUL DELIVERY = D1
+    SELF COLLECT = D2
+    FAILED DELIVERY = D3
+    CANCELLED DELIVERY = D4
+    OUT FROM WAREHOUSE = D5
+*/
+
+/*
+    Service code = 101
+*/
+
 const insertMisc = (req,res)=> {
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
@@ -66,7 +83,39 @@ const insertMisc = (req,res)=> {
     })
 }
 
+const withdrawMisc = (req,res)=> {
+    let date = moment().format("DD/MM/YYYY, h:mm:ss a")
+    let data = req.body
+    let filter = {trackingNumber: data.trackingNumber}
+    let update = {
+        currentStatus: "D5",
+        lastUpdate: date,
+            $push: {
+                history: {
+                    statusDetail: "A1", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+    }
+    let option = {upsert: false, new: false}
+    miscDB.findOneAndUpdate(filter,update,option, (err,docs)=>{
+        if(err) {
+            console.log(err)
+            req.flash('error', `Failed to update.`)
+            res.redirect('/misc-out')
+        }
+        else{
+            req.flash('success', `Update successful`)
+            res.redirect('/misc-out')
+            console.log(docs)
+            console.log("Miscellaneous item updated.")
+        }
+    })
+}
+
 module.exports = {
     insertMisc,
-
+    withdrawMisc
 }

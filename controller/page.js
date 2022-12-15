@@ -955,6 +955,43 @@ const restockForm = (req,res)=> {
     )
 }
 
+const restockRecord = (req,res)=> {
+    let user = currentUser[0]
+    waybillDB.find().sort().then(
+        (result)=>{
+            res.render('podlist',{
+                title: `Restock Waybill`,
+                partials: ('./partials/podlist/local'),
+                moment: moment,
+                result,
+                user
+            })
+        },
+        (err)=> {
+
+        }
+    )
+}
+
+const pickupRecord = (req,res)=> {
+    let user = currentUser[0]
+    pickupDB.find().sort().then(
+        (result)=>{
+            res.render('podlist',{
+                title: `Pickup Waybill`,
+                partials: ('./partials/podlist/local'),
+                moment: moment,
+                result,
+                user
+            })
+        },
+        (err)=> {
+            
+        }
+    )
+}
+
+
 const exportForm = (req,res) =>{
     let user = currentUser[0]
     res.render('export', {
@@ -1091,6 +1128,16 @@ const miscPage = (req,res)=> {
     })
 }
 
+const miscPageOut = (req,res)=> {
+    let user = currentUser[0]
+    res.render('selfcollect', {
+        title: "Miscellaneous Out",
+        partials: "./partials/selfcollect/miscout.ejs",
+        moment: moment,
+        user
+    })
+}
+
 const wellousPage = (req,res)=> {
     let user = currentUser[0]
     res.render('itemin', {
@@ -1122,5 +1169,8 @@ module.exports = {
     logout,
     login,
     miscPage,
-    wellousPage
+    miscPageOut,
+    wellousPage,
+    pickupRecord,
+    restockRecord,
 }
