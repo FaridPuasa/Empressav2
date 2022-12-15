@@ -44,6 +44,7 @@ const insertRunner = ((req,res)=>{
         areaCode: data.areaCode,
         serviceTag: data.serviceTag,
         shelfCode: data.shelfCode,
+        zone: data.zone,
         fridgeItem: data.fridgeItem,
         deliveryType: data.delvieryType,
         paymentType: data.paymentType,
