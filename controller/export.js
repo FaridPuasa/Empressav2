@@ -150,10 +150,9 @@ const exportPodSummary = (req,res) =>{
         (result)=>{
             console.log('Successfully extracted required data.')
             console.log(result[0])
-            
             res.render('finance', {
                 title: 'Finance Summary',
-                partials: './partials/export/financebyservice.ejs',
+                partials: './partials/export/reconService.ejs',
                 service,
                 result,
                 user
@@ -172,6 +171,11 @@ const exportPodSummary = (req,res) =>{
         }
     )
 }
+
+const reconService = (req,res)=> {
+    
+}
+
 
 module.exports = {
     exportInventory,

@@ -37,6 +37,7 @@ const inventorySchema  = new mongoose.Schema({
     fridgeItem: string,
     deliveryType: string,
     paymentType: string,
+    paymentStatus: string,
     value: string,
     service: string,
     status: string,
