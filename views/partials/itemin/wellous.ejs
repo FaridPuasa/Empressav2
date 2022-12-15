@@ -23,9 +23,8 @@
 
                                     <div class="form-group">
                                         <label for="productBrand">Product Brand</label>
-                                        <select name="productBrand" id="productBrand" style="border-radius: 5px;"
-                                            class="form-control">
-                                            <option value>Agent Selection</option>
+                                        <select name="productBrand" id="productBrand" style="border-radius: 5px;" class="form-control" onChange="dynamic()">
+                                            <option value></option>
                                             <option value="AEMIS">AEMIS</option>
                                             <option value="BIO-SERIES">Bio Series</option>
                                             <option value="BOLDBLACK">Boldblack</option>
@@ -40,8 +39,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="productBrand">Product Model</label>
-                                        <input type="text" class="form-control" name="productModel" id="productModel" aria-describedby="productModel" required>
+                                        <label for="productModel">Product Model</label>
+                                        <select name="productModel" id="productModel" style="border-radius: 5px;" class="form-control">
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
@@ -67,13 +67,12 @@
                         <!--Additional Information-->
                         <input type="hidden" class="form-control form-control-user" name="uid" id="uid" value="<%= user.uid %>">
                         <input type="hidden" class="form-control form-control-user" name="name" id="name" value="<%= user.name %>">
-                        
                         <!-- End of Information -->
 
                         <input type="hidden" class="form-control form-control-user" name="formmethod" id="formmethod" value="wellous">
 
-                        <div class="row">
-                            <button class="btn btn-primary btn-user btn-block" id="submitBtn">Submit</button>
+                        <div class="d-flex justify-content-center mb-5">
+                            <button class="btn btn-primary">submit</button>
                         </div>
 
                     </form>
@@ -82,3 +81,5 @@
         </div>
     </div>
 </div>
+
+

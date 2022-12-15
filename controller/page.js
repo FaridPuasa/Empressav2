@@ -92,31 +92,38 @@ const service = (req,res) =>{
     else if(services == 'jpmc'){
         jpmcPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                console.log(result)
-                if(result.length == 0){
-                    let sequence = 1
-                    console.log(result.podSequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/jpmc'),
-                        service: service,
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
-                else{
-                    let sequence = parseInt(result[0].podsequence) + 1
-                    console.log(result.podSequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/jpmc'),
-                        service: service,
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
+                agentDB.find().then(
+                    (document)=> {
+                        console.log(document)
+                        if(result.length == 0){
+                            let sequence = 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/jpmc'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                        else{
+                            let sequence = parseInt(result[0].podsequence) + 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/jpmc'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                    },
+                    (err)=> {
+                        console.log("Failed to get agent list: " + err)
+                    }
+                )
             },
             (err)=>{
                 console.log("Failed to append sequence: " + err)
@@ -126,30 +133,38 @@ const service = (req,res) =>{
     else if(services == 'panaga'){
         panagaPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.length == 0){
-                    let sequence = 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/panaga'),
-                        service: service,
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
-                else{
-                    let sequence = parseInt(result[0].podsequence) + 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/panaga'),
-                        service: service,
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
+                agentDB.find().then(
+                    (document)=> {
+                        console.log(document)
+                        if(result.length == 0){
+                            let sequence = 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/panaga'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                        else{
+                            let sequence = parseInt(result[0].podsequence) + 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/panaga'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                    },
+                    (err)=> {
+                        console.log("Failed to get agent list: " + err)
+                    }
+                )
             },
             (err)=>{
                 console.log("Failed to append sequence: " + err)
@@ -159,30 +174,38 @@ const service = (req,res) =>{
     else if(services == 'fmx'){
         fmxPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.length == 0){
-                    let sequence = 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/fmx'),
-                        service: service,
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
-                else{
-                    let sequence = parseInt(result[0].podsequence) + 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/fmx'),
-                        service: service,
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
+                agentDB.find().then(
+                    (document)=> {
+                        console.log(document)
+                        if(result.length == 0){
+                            let sequence = 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/fmx'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                        else{
+                            let sequence = parseInt(result[0].podsequence) + 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/fmx'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                    },
+                    (err)=> {
+                        console.log("Failed to get agent list: " + err)
+                    }
+                )
             },
             (err)=>{
                 console.log("Failed to append sequence: " + err)
@@ -192,30 +215,38 @@ const service = (req,res) =>{
     else if(services == 'zalora'){
         zaloraPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.length == 0){
-                    let sequence = 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/zalora'),
-                        service: service,
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
-                else{
-                    let sequence = parseInt(result[0].podsequence) + 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/zalora'),
-                        service: service,
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
+                agentDB.find().then(
+                    (document)=> {
+                        console.log(document)
+                        if(result.length == 0){
+                            let sequence = 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/zalora'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                        else{
+                            let sequence = parseInt(result[0].podsequence) + 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/zalora'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                    },
+                    (err)=> {
+                        console.log("Failed to get agent list: " + err)
+                    }
+                )
             },
             (err)=>{
                 console.log("Failed to append sequence: " + err)
@@ -225,30 +256,38 @@ const service = (req,res) =>{
     else if(services == 'grp'){
         grpPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.length == 0){
-                    let sequence = 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/grp'),
-                        service: service,
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
-                else{
-                    let sequence = parseInt(result[0].podsequence) + 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/grp'),
-                        service: service,
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
+                agentDB.find().then(
+                    (document)=> {
+                        console.log(document)
+                        if(result.length == 0){
+                            let sequence = 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/grp'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                        else{
+                            let sequence = parseInt(result[0].podsequence) + 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/grp'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                    },
+                    (err)=> {
+                        console.log("Failed to get agent list: " + err)
+                    }
+                )
             },
             (err)=>{
                 console.log("Failed to append sequence: " + err)
@@ -258,30 +297,38 @@ const service = (req,res) =>{
     else if(services == 'runner'){
         runnerPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.length == 0){
-                    let sequence = 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/runner'),
-                        service: service + ' SERVICES',
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
-                else{
-                    let sequence = parseInt(result[0].podsequence) + 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/runner'),
-                        service: service + ' SERVICES',
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
+                agentDB.find().then(
+                    (document)=> {
+                        console.log(document)
+                        if(result.length == 0){
+                            let sequence = 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/runner'),
+                                service: service + ' SERVICES',
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                        else{
+                            let sequence = parseInt(result[0].podsequence) + 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/runner'),
+                                service: service + ' SERVICES',
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                    },
+                    (err)=> {
+                        console.log("Failed to get agent list: " + err)
+                    }
+                )
             },
             (err)=>{
                 console.log("Failed to append sequence: " + err)
@@ -291,30 +338,38 @@ const service = (req,res) =>{
     else if(services == 'personal'){
         personalPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.length == 0){
-                    let sequence = 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/personal'),
-                        service: service  + ' SHOPPING',
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
-                else{
-                    let sequence = parseInt(result[0].podsequence) + 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/personal'),
-                        service: service + ' SHOPPING',
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
+                agentDB.find().then(
+                    (document)=> {
+                        console.log(document)
+                        if(result.length == 0){
+                            let sequence = 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/personal'),
+                                service: service + ' SHOPPING',
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                        else{
+                            let sequence = parseInt(result[0].podsequence) + 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/personal'),
+                                service: service + ' SHOPPING',
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                    },
+                    (err)=> {
+                        console.log("Failed to get agent list: " + err)
+                    }
+                )
             },
             (err)=>{
                 console.log("Failed to append sequence: " + err)
@@ -324,30 +379,38 @@ const service = (req,res) =>{
     else if(services == 'local'){
         localPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.length == 0){
-                    let sequence = 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/personal'),
-                        service: service  + ' SHOPPING',
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
-                else{
-                    let sequence = parseInt(result[0].podsequence) + 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/personal'),
-                        service: service + ' SHOPPING',
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
+                agentDB.find().then(
+                    (document)=> {
+                        console.log(document)
+                        if(result.length == 0){
+                            let sequence = 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/local'),
+                                service: service + ' DELIVERY',
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                        else{
+                            let sequence = parseInt(result[0].podsequence) + 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/local'),
+                                service: service + ' DELIVERY',
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                    },
+                    (err)=> {
+                        console.log("Failed to get agent list: " + err)
+                    }
+                )
             },
             (err)=>{
                 console.log("Failed to append sequence: " + err)
@@ -357,30 +420,38 @@ const service = (req,res) =>{
     else if(services == 'tmx'){
         tmxPodDB.find().sort({$natural: -1}).limit(1).then(
             (result)=>{
-                if(result.length == 0){
-                    let sequence = 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/personal'),
-                        service: service  + ' SHOPPING',
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
-                else{
-                    let sequence = parseInt(result[0].podsequence) + 1
-                    console.log(result.podsequence)
-                    res.render('pod',{
-                        title: `${service} POD`,
-                        partials: ('./partials/pod/personal'),
-                        service: service + ' SHOPPING',
-                        sequence: sequence,
-                        moment: moment,
-                        user
-                    })
-                }
+                agentDB.find().then(
+                    (document)=> {
+                        console.log(document)
+                        if(result.length == 0){
+                            let sequence = 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/tmx'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                        else{
+                            let sequence = parseInt(result[0].podsequence) + 1
+                            res.render('pod',{
+                                title: `${service} POD`,
+                                partials: ('./partials/pod/tmx'),
+                                service: service,
+                                sequence: sequence,
+                                moment: moment,
+                                user,
+                                document
+                            })
+                        }
+                    },
+                    (err)=> {
+                        console.log("Failed to get agent list: " + err)
+                    }
+                )
             },
             (err)=>{
                 console.log("Failed to append sequence: " + err)

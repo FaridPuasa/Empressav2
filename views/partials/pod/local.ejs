@@ -52,33 +52,19 @@
                                         </select>
                                     </th>
                                     <th scope="col"></th>
-                                    <th scope="col">GR/POD/ZAL:</th>
+                                    <th scope="col">GR/POD/LOC:</th>
                                     <th scope="col" colspan="2"><%= sequence %><input type="hidden" class="form-control" name="podsequence" id="podsequence" aria-describedby="contactHelp" value="<%= sequence %>"></th>
                                 </tr>
                                 <!--3rd row header-->
                                 <tr>
                                     <th scope="col">Dispatcher Name:</th>
                                     <th scope="col" colspan="3">
-                                        <select name="agentName" id="agentName" style="border-radius: 5px;" class="form-control">
-                                            <option value="">Agent Selection</option>
-                                            <option value="994634">FD SOWDEQ</option>
-                                            <option value="997381">FD RAHIM</option>
-                                            <option value="1029275">FD AIMI</option>
-                                            <option value="1050947">FD HASBUL</option>
-                                            <option value="1071388">FD FADARUS</option>
-                                            <option value="1079095">FD HAMIDIN</option>
-                                            <option value="1113078">FD HANAFI</option>
-                                            <option value="1230427">FD FAEZ</option>
-                                            <option value="1254189">FD ZUL</option>
-                                            <option value="1130495">EFR HAJID</option>
-                                            <option value="1130524">EFR FAKHRIAH</option>
-                                            <option value="1268554">EFR GHAFUR</option>
-                                            <option value="1106491">EFR RASHID</option>
-                                            <option value="1105549">EFR NAZRY</option>
-                                            <option value="1124160">EFR HANIZAN</option>
-                                            <option value="996642">IFR ZIZAH</option>
-                                            <option value="977110">IFR NAN</option>
-                                            <option value="1268557">EFR KHAIRUL</option>
+                                        <select name="agentName" id="agentName" style="border-radius: 5px;"
+                                                class="form-control">
+                                                <option value>Agent Selection</option>
+                                                <% document.forEach((document,index)=> { %>
+                                                <option value="<%= document.aid %>>"><%= document.agentType %> <%= document.agentName %></option>
+                                                <% }) %>
                                         </select>
                                     </th>
                                     <th scope="col">Date of Delivery:</th>
