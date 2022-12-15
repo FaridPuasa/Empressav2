@@ -1,9 +1,9 @@
 <div class="container-fluid">
-   
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Proof of Delivery</h6>
+            <h6 class="m-0 font-weight-bold text-primary text-center">Proof of Delivery</h6>
         </div>
 
         <div class="card-body">
@@ -12,180 +12,680 @@
                 <div class="col-xl-10 col-lg-12 col-md-9">
                     <form class="user" method="POST" action="/itemInSuccess">
                         <div class="table-responsive-xl">
-                        <table class="table">
-                            <thead class="thead-light">
-                                <!--1st row header-->
-                                <tr>
-                                    <th scope="col" colspan="8">PROOF OF DELIVERY | ZALORA</th>
-                                    <th scope="col"></th>
-                                    <th scope="col" colsapn="1">
-                                        <div class="text-center">
-                                            <img src="/public/img/gr_logo.png" class="rounded" alt="go_rush.png">
-                                        </div>
-                                    </th>
-                                    <th></th>
-                                    <th scope="col"></th>
-                                </tr>
-                                <!--2nd row header-->
-                                <tr>
-                                    <th scope="col">Made By:</th>
-                                    <th scope="col" colspan="3">
-                                        <select class="form-control" name='madeby' id="area">
-                                            <option class="active">Marin</option>
-                                            <option>Fathin</option>
-                                        </select>
-                                    </th>
-                                    <th scope="col">Area of Delivery:</th>
-                                    <th scope="col" colspan="3">
-                                        <select class="form-control" name='deliveryArea' id="area">
-                                            <option class="active">Area Selection</option>
-                                            <option>BERAKAS 1</option>
-                                            <option>BERAKAS 2</option>
-                                            <option>JALAN TUTONG 1</option>
-                                            <option>JALAN TUTONG 2</option>
-                                            <option>JALAN TUTONG 3</option>
-                                            <option>GADONG 1</option>
-                                            <option>GADONG 2</option>
-                                            <option>TUTONG</option>
-                                            <option>BELAIT</option>
-                                            <option>TEMBURONG</option>
-                                        </select>
-                                    </th>
-                                    <th scope="col"></th>
-                                    <th scope="col">GR/POD/ZAL:</th>
-                                    <th scope="col" colspan="2"><%= sequence %><input type="hidden" class="form-control" name="podsequence" id="podsequence" aria-describedby="contactHelp" value="<%= sequence %>"></th>
-                                </tr>
-                                <!--3rd row header-->
-                                <tr>
-                                    <th scope="col">Dispatcher Name:</th>
-                                    <th scope="col" colspan="3">
-                                        <select name="agentName" id="agentName" style="border-radius: 5px;"
+                            <table class="table table-condensed table-striped text-center">
+                                <thead class="thead-light">
+                                    <!--1st row header-->
+                                    <tr>
+                                        <th scope="col" colspan="8">PROOF OF DELIVERY | ZALORA</th>
+                                        <th scope="col" colspan="3">
+                                            <div class="text-center">
+                                                <img src="/public/img/gr_logo.png" class="rounded" alt="go_rush.png">
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <!--2nd row header-->
+                                    <tr>
+                                        <th scope="col">Made By:</th>
+                                        <th scope="col" colspan="3">
+                                            <select class="form-control" name='madeby' id="area">
+                                                <option class="active">Marin</option>
+                                                <option>Fathin</option>
+                                            </select>
+                                        </th>
+                                        <th scope="col">Area of Delivery:</th>
+                                        <th scope="col" colspan="3">
+                                            <select class="form-control" name='deliveryArea' id="area">
+                                                <option class="active">Area Selection</option>
+                                                <option value="B1">BERAKAS 1</option>
+                                                <option value="B2">BERAKAS 2</option>
+                                                <option value="JT1">JALAN TUTONG 1</option>
+                                                <option value="JT2">JALAN TUTONG 2</option>
+                                                <option value="JT3">JALAN TUTONG 3</option>
+                                                <option value="G1">GADONG 1</option>
+                                                <option value="G1">GADONG 2</option>
+                                                <option value="TUTONG">TUTONG</option>
+                                                <option value="BELAIT">BELAIT</option>
+                                                <option value="TEMBURONG">TEMBURONG</option>
+                                            </select>
+                                        </th>
+                                        <th scope="col"></th>
+                                        <th scope="col">GR/POD/ZAL:</th>
+                                        <th scope="col">
+                                            <%= sequence %><input type="hidden" class="form-control" name="podsequence"
+                                                    id="podsequence" aria-describedby="contactHelp"
+                                                    value="<%= sequence %>">
+                                        </th>
+                                    </tr>
+                                    <!--3rd row header-->
+                                    <tr>
+                                        <th scope="col">Dispatcher Name:</th>
+                                        <th scope="col" colspan="3">
+                                            <select name="agentName" id="agentName" style="border-radius: 5px;"
                                                 class="form-control">
                                                 <option value>Agent Selection</option>
                                                 <% document.forEach((document,index)=> { %>
-                                                <option value="<%= document.aid %>>"><%= document.agentType %> <%= document.agentName %></option>
-                                                <% }) %>
-                                        </select>
-                                    </th>
-                                    <th scope="col">Date of Delivery:</th>
-                                    <th scope="col" colspan="3"><input type="date" class="form-control" name="deliveryDate" id="deliveryDate" aria-describedby="contactHelp"></th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                </tr>
-                                <tr>
-                                    <th scope="col" class="text-center">No.</th>
-                                    <th scope="col" class="text-center">T/N</th>
-                                    <th scope="col" class="text-center">Item with me</th>
-                                    <th scope="col" class="text-center">Customer Name</th>
-                                    <th scope="col" class="text-center">Customer Address</th>
-                                    <th scope="col" class="text-center">Customer Contact</th>
-                                    <th scope="col" class="text-center">Value (BND)</th>
-                                    <th scope="col" class="text-center">Payment Method</th>
-                                    <th scope="col" class="text-center">Delivery Type</th>
-                                    <th scope="col" class="text-center">Success/Fail</th>
-                                    <th scope="col" class="text-center">Remark</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <!--Table Content-->
-                            <tbody>
-                                <tr>
-                                    <td class="text-center numbering">1.<input type="hidden" class="form-control" name="numebring" id="numbering" value="1."></td>
-                                    <td><input type="text" class="form-control" name="trackingNumber" id="trackingNumber" aria-describedby="trackingNumberHelp" placeholder="Enter Tracking Number"></td>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <span id="name">Otto</span>
-                                        <input type="hidden" class="form-control" name="contactName" aria-describedby="nameHelp">
-                                    </td>
-                                    <td class="text-center">
-                                        <span id="address">@mdo</span>
-                                        <input type="hidden" class="form-control" name="contactAddress" aria-describedby="addressHelp">
-                                    </td>
-                                    <td class="text-center">
-                                        <span id="contact">XXX XXXX</span>
-                                        <input type="hidden" class="form-control" name="contactNumber" aria-describedby="contactHelp">
-                                    </td>
-                                    <td class="text-center">
-                                        <span id="value">$ XXX</span>
-                                        <input type="hidden" class="form-control" name="parcelValue" aria-describedby="valueHelp">
-                                    </td>
-                                    <td class="text-center">
-                                        <span id="paymentMethod">COD / BT</span>
-                                        <input type="hidden" class="form-control" name="paymentMethod" aria-describedby="valueHelp">
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <!--Total Row-->
-                                <tr>
-                                    <td class="text-center numbering">Total Parcel</td>
-                                    <td id="totalParcel">XXXX</td>
-                                    <td></td>
-                                    <td class="text-center">
-                                        
-                                    </td>
-                                    <td class="text-center">
-                                       
-                                    </td>
-                                    <td class="text-center">
-                                        Total Amount:
-                                    </td>
-                                    <td class="text-center">
-                                        <span id="totalValue">$ XXX</span>
-                                        <input type="hidden" class="form-control" name="totalValue" id="totalValue" aria-describedby="totalValueHelp">
-                                    </td>
-                                    <td class="text-center">
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr> 
-                            </tbody>
-                        </table>
-                        <!--Second Table No automation required here-->
-                        <table class="table">
-                            <thead class="thead-light">
-                                <th colspan="6" class="text-center">OFFICIAL USE ONLY (CASH)</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Dispatcher:</td>
-                                    <td></td>
-                                    <td>Cash On Hand:</td>
-                                    <td></td>
-                                    <td>Date:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Operation Handler:</td>
-                                    <td></td>
-                                    <td>Cash On Hand:</td>
-                                    <td></td>
-                                    <td>Date:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Finance:</td>
-                                    <td></td>
-                                    <td>Cash On Hand:</td>
-                                    <td></td>
-                                    <td>Date:</td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
+                                                    <option value="<%= document.aid %>>">
+                                                        <%= document.agentType %>
+                                                            <%= document.agentName %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select>
+                                        </th>
+                                        <th scope="col">Date of Delivery:</th>
+                                        <th scope="col" colspan="3"><input type="date" class="form-control"
+                                                name="deliveryDate" id="deliveryDate" aria-describedby="contactHelp">
+                                        </th>
+                                        <th scope="col" colspan="3">
+                                            <a id="submitPodInfoButton" class="btn btn-primary btn-block">Create POD</a>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" class="text-center">No.</th>
+                                        <th scope="col" class="text-center">T/N</th>
+                                        <th scope="col" class="text-center">Item with me</th>
+                                        <th scope="col" class="text-center">Customer Name</th>
+                                        <th scope="col" class="text-center">Customer Address</th>
+                                        <th scope="col" class="text-center">Customer Contact</th>
+                                        <th scope="col" class="text-center">Value (BND)</th>
+                                        <th scope="col" class="text-center">Payment Method</th>
+                                        <th scope="col" class="text-center">Delivery Type</th>
+                                        <th scope="col" class="text-center">Success/Fail</th>
+                                        <th scope="col" class="text-center">Remark</th>
+                                    </tr>
+                                </thead>
+                                <!--Table Content-->
+                                <tbody id="taskBody">
+                                    <tr name="taskRow">
+                                        <td scope="col" class="text-center numbering">1.</td>
+                                        <td scope="col" name="trackingNumberRow">
+                                            <input type="text" class="form-control" name="trackingNumberTemp"
+                                                id="trackingNumberTemp" aria-describedby="trackingNumberHelp"
+                                                placeholder="Enter Tracking Number" maxlength="9"
+                                                onkeyup="checkTrackingNum(this, 'trackingNumberTemp')">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                        </table>
-                        <input type="hidden" class="form-control form-control-user" name="method" id="method" aria-describedby="contactHelp" value="pod_JPMC">
+                            <div class="row" id="alertBody">
+                                <p class="text-primary text-center fw-bold" id="loadingTN">Please wait...</p>
+                                <p class="text-danger text-center fw-bold" id="duplicateinput">Duplicate Tracking
+                                    Number, please try again</p>
+                                <p class="text-danger text-center fw-bold" id="wronginput">Wrong Tracking Number, please
+                                    try again</p>
+                            </div>
+                            <!--Second Table No automation required here-->
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <th colspan="6" class="text-center">OFFICIAL USE ONLY (CASH)</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dispatcher:</td>
+                                        <td></td>
+                                        <td>Cash On Hand:</td>
+                                        <td></td>
+                                        <td>Date:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Operation Handler:</td>
+                                        <td></td>
+                                        <td>Cash On Hand:</td>
+                                        <td></td>
+                                        <td>Date:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Finance:</td>
+                                        <td></td>
+                                        <td>Cash On Hand:</td>
+                                        <td></td>
+                                        <td>Date:</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
 
-                        <!--<a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>-->
+                            </table>
+                            <div class="row">
+                                <div class="col">
+                                    <a id="deleteRow" class="btn btn-danger btn-block">Delete Previous/Last Order</a>
+                                </div>
+                                <div class="col">
+                                    <a id="donePodButton" class="btn btn-primary btn-block">Done</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="text-primary text-center fw-bold" id="loadingSubmit">Please wait...</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a id="scanAgain" class="btn btn-info btn-block">Scan Again</a>
+                                </div>
+                                <div class="col">
+                                    <a id="submitBtn" class="btn btn-primary btn-block">Submit</a>
+                                </div>
+                            </div>
+                            <button id="submitBtnfinal" class="btn btn-primary btn-block">Submit Final</button>
+                            <input type="hidden" class="form-control form-control-user" name="method" id="method"
+                                aria-describedby="contactHelp" value="pod_ZAL">
+                            <input type="hidden" class="form-control form-control-user" name="dispatcherName"
+                                id="dispatcherName" aria-describedby="contactHelp">
+                            <input type="hidden" class="form-control form-control-user" name="dateTimeStart"
+                                id="dateTimeStart" aria-describedby="contactHelp">
+                            <input type="hidden" class="form-control form-control-user" name="dateTimeClose"
+                                id="dateTimeClose" aria-describedby="contactHelp">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <script>
+            let countTN = 0;
+            let endLoop = 0;
+            let countContent = 0;
+            let checkDuplicate = 0;
+            let printDone = 0;
+
+            var responsetn = '';
+            var json_responsetn = '';
+
+            //Scanned tracking number
+            function checkTrackingNum(field, autoMove) {
+                if (field.value.length >= field.maxLength) {
+                    document.getElementById("trackingNumberTemp").disabled = true;
+                    endLoop = 0;
+                    checkDuplicate = 0;
+                    printDone = 0;
+
+                    $("#wronginput").hide();
+                    $("#duplicateinput").hide();
+                    $("#loadingTN").fadeIn();
+
+                    //check duplicate
+                    if (document.getElementsByName('trackingNumberRow').length > 1) {
+                        for (let i = 0; i < document.getElementsByName('trackingNumberRow').length; i++) {
+                            if ((document.getElementById("trackingNumberTemp").value.trim()) == document.getElementsByName('trackingNumberRow')[i].innerHTML) {
+                                checkDuplicate = 1;
+                                i = document.getElementsByName('trackingNumberRow').length;
+                            }
+                        }
+                    }
+
+                    //retrieve data from Tookan
+                    if ((checkDuplicate == 0) && (endLoop == 0) && (printDone == 0)) {
+                        var request = new XMLHttpRequest();
+                        request.open('POST', 'https://api.tookanapp.com/v2/get_job_details');
+                        request.setRequestHeader('Content-Type', 'application/json');
+
+                        request.onreadystatechange = function () {
+                            if ((this.readyState === 4) && (endLoop == 0) && (printDone == 0)) {
+                                console.log('Status:', this.status);
+                                console.log('Headers:', this.getAllResponseHeaders());
+                                console.log('Body:', this.responseText);
+
+                                responsetn = this.responseText;
+                                json_responsetn = JSON.parse(responsetn);
+
+                                if ((json_responsetn.status != 404) && (printDone == 0)) {
+                                    //Table data
+                                    document.getElementsByName("trackingNumberRow")[countTN].innerHTML = json_responsetn.data[0].job_id;
+
+                                    let row_data_empty0 = document.createElement('td');
+                                    row_data_empty0.setAttribute('scope', 'col');
+
+                                    let row_data_customerName = document.createElement('td');
+                                    row_data_customerName.innerHTML = json_responsetn.data[0].customer_username;
+                                    row_data_customerName.setAttribute('scope', 'col');
+
+                                    let row_data_customerAddress = document.createElement('td');
+                                    row_data_customerAddress.innerHTML = json_responsetn.data[0].job_address;
+                                    row_data_customerAddress.setAttribute('scope', 'col');
+
+                                    let row_data_customerContact = document.createElement('td');
+                                    row_data_customerContact.innerHTML = json_responsetn.data[0].customer_phone;
+                                    row_data_customerContact.setAttribute('scope', 'col');
+
+                                    let row_data_valueBND = document.createElement('td');
+                                    row_data_valueBND.innerHTML = json_responsetn.data[0].job_description;
+                                    row_data_valueBND.setAttribute('scope', 'col');
+                                    row_data_valueBND.setAttribute('name', 'cashValueRow');
+
+                                    let row_data_paymentMethod = document.createElement('td');
+                                    row_data_paymentMethod.innerHTML = "";
+                                    row_data_paymentMethod.setAttribute('scope', 'col');
+
+                                    let row_data_deliveryType = document.createElement('td');
+                                    row_data_deliveryType.innerHTML = "";
+                                    row_data_deliveryType.setAttribute('scope', 'col');
+
+                                    let row_data_empty1 = document.createElement('td');
+                                    row_data_empty1.setAttribute('scope', 'col');
+                                    row_data_empty1.setAttribute('colspan', '2');
+
+                                    let taskRow = document.createElement('tr');
+                                    taskRow.setAttribute("name", "taskRow");
+
+                                    let row_data_number = document.createElement('td');
+                                    row_data_number.innerHTML = (countTN + 2) + ".";
+                                    row_data_number.setAttribute('scope', 'col');
+
+                                    let row_data_trackingNumber = document.createElement('td');
+                                    row_data_trackingNumber.setAttribute("name", "trackingNumberRow");
+                                    row_data_trackingNumber.setAttribute('scope', 'col');
+
+                                    let trackingNumberInputTemp = document.createElement('input');
+                                    trackingNumberInputTemp.setAttribute("type", "text");
+                                    trackingNumberInputTemp.setAttribute("class", "form-control");
+                                    trackingNumberInputTemp.setAttribute("name", "trackingNumberTemp");
+                                    trackingNumberInputTemp.setAttribute("id", "trackingNumberTemp");
+                                    trackingNumberInputTemp.setAttribute("aria-describedby", "trackingNumberHelp");
+                                    trackingNumberInputTemp.setAttribute("placeholder", "Enter Tracking Number");
+                                    trackingNumberInputTemp.setAttribute("maxlength", "9");
+                                    trackingNumberInputTemp.setAttribute("disabled", "true");
+                                    trackingNumberInputTemp.setAttribute("onkeyup", "checkTrackingNum(this, 'trackingNumberTemp')");
+
+                                    let row_data_empty2 = document.createElement('td');
+                                    row_data_empty2.setAttribute('colspan', '2');
+                                    row_data_empty2.setAttribute('scope', 'col');
+
+                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_empty0);
+                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_customerName);
+                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_customerAddress);
+                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_customerContact);
+                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_valueBND);
+                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_paymentMethod);
+                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_deliveryType);
+                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_empty1);
+
+                                    document.getElementById("taskBody").appendChild(taskRow);
+
+                                    document.getElementsByName("taskRow")[(countTN + 1)].appendChild(row_data_number);
+                                    document.getElementsByName("taskRow")[(countTN + 1)].appendChild(row_data_trackingNumber);
+                                    document.getElementsByName("trackingNumberRow")[(countTN + 1)].appendChild(trackingNumberInputTemp);
+
+                                    document.getElementById("taskBody").style.textAlign = "center";
+
+                                    //Input field data
+                                    let hiddenFormDataRow = document.createElement('div');
+                                    hiddenFormDataRow.setAttribute("name", "hiddenFormDataRow");
+                                    document.getElementById("hiddenFormData").appendChild(hiddenFormDataRow);
+
+                                    let numberInput = document.createElement('input');
+                                    numberInput.setAttribute("type", "text");
+                                    numberInput.setAttribute("name", "numbers");
+                                    numberInput.setAttribute("value", (countTN + 1) + ".");
+
+                                    let trackingNumberInput = document.createElement('input');
+                                    trackingNumberInput.setAttribute("type", "text");
+                                    trackingNumberInput.setAttribute("name", "trackingNumber");
+                                    trackingNumberInput.setAttribute("value", json_responsetn.data[0].job_id);
+
+                                    let contactNameInput = document.createElement('input');
+                                    contactNameInput.setAttribute("type", "text");
+                                    contactNameInput.setAttribute("name", "contactName");
+                                    contactNameInput.setAttribute("value", json_responsetn.data[0].customer_username);
+
+                                    let contactAddressInput = document.createElement('input');
+                                    contactAddressInput.setAttribute("type", "text");
+                                    contactAddressInput.setAttribute("name", "contactAddress");
+                                    contactAddressInput.setAttribute("value", json_responsetn.data[0].job_address);
+
+                                    let contactNumberInput = document.createElement('input');
+                                    contactNumberInput.setAttribute("type", "text");
+                                    contactNumberInput.setAttribute("name", "contactNumber");
+                                    contactNumberInput.setAttribute("value", json_responsetn.data[0].customer_phone);
+
+                                    let parcelValueInput = document.createElement('input');
+                                    parcelValueInput.setAttribute("type", "text");
+                                    parcelValueInput.setAttribute("name", "parcelValue");
+                                    parcelValueInput.setAttribute("value", json_responsetn.data[0].job_description);
+
+                                    let PaymentMethodInput = document.createElement('input');
+                                    PaymentMethodInput.setAttribute("type", "text");
+                                    PaymentMethodInput.setAttribute("name", "PaymentMethod");
+                                    PaymentMethodInput.setAttribute("value", "");
+
+                                    let deliveryTypeInput = document.createElement('input');
+                                    deliveryTypeInput.setAttribute("type", "text");
+                                    deliveryTypeInput.setAttribute("name", "deliveryType");
+                                    deliveryTypeInput.setAttribute("value", "");
+
+                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(numberInput);
+                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(trackingNumberInput);
+                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(contactNameInput);
+                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(contactAddressInput);
+                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(contactNumberInput);
+                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(parcelValueInput);
+                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(PaymentMethodInput);
+                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(deliveryTypeInput);
+
+                                    countTN = countTN + 1;
+
+                                    $("#deleteRow").fadeIn();
+
+                                    countContent = countContent + 1;
+                                    printDone = 1;
+
+                                    var assignTaskToAgent = 0;
+                                    var assignDateTimeToTask = 0;
+
+                                    if (assignTaskToAgent == 0) {
+                                        request.open('POST', 'https://api.tookanapp.com/v2/assign_task');
+                                        request.setRequestHeader('Content-Type', 'application/json');
+
+                                        request.onreadystatechange = function () {
+                                            if ((this.readyState === 4) && (assignTaskToAgent == 0)) {
+                                                console.log('Status:', this.status);
+                                                console.log('Headers:', this.getAllResponseHeaders());
+                                                console.log('Body:', this.responseText);
+
+                                                request.open('POST', 'https://api.tookanapp.com/v2/change_job_date');
+                                                request.setRequestHeader('Content-Type', 'application/json');
+
+                                                request.onreadystatechange = function () {
+                                                    if ((this.readyState === 4) && (assignDateTimeToTask == 0)) {
+                                                        console.log('Status:', this.status);
+                                                        console.log('Headers:', this.getAllResponseHeaders());
+                                                        console.log('Body:', this.responseText);
+
+                                                        assignDateTimeToTask = 1;
+                                                        endLoop = 1;
+
+                                                        $("#loadingTN").hide();
+
+                                                        document.getElementById("trackingNumberTemp").disabled = false;
+
+                                                        document.getElementById("trackingNumberTemp").focus();
+                                                    }
+                                                };
+
+                                                var body = {
+                                                    'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+                                                    "job_ids": [document.getElementsByName("trackingNumberRow")[(countTN - 1)].innerHTML],
+                                                    'layout_type': 0,
+                                                    'start_time': document.getElementById("dateTimeStart").value,
+                                                    'end_time': document.getElementById("dateTimeClose").value
+                                                };
+                                                request.send(JSON.stringify(body));
+
+                                                assignTaskToAgent = 1;
+                                            }
+                                        };
+
+                                        var body = {
+                                            'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+                                            'job_id': document.getElementsByName("trackingNumberRow")[(countTN - 1)].innerHTML,
+                                            'fleet_id': document.getElementById("agentName").value,
+                                            'team_id': '921691',
+                                            'job_status': '0'
+                                        };
+                                        request.send(JSON.stringify(body));
+                                    }
+                                }
+
+                                if (json_responsetn.status == 404) {
+                                    document.getElementById("trackingNumberTemp").value = "";
+
+                                    $("#loadingTN").hide();
+                                    $("#wronginput").fadeIn();
+                                    document.getElementById("trackingNumberTemp").disabled = false;
+                                }
+                            }
+                        };
+
+                        var body = {
+                            'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+                            'job_ids': [document.getElementById("trackingNumberTemp").value.trim()],
+                            'include_task_history': 1
+                        };
+                        request.send(JSON.stringify(body));
+                    }
+
+                    if ((checkDuplicate == 1) && (endLoop == 0)) {
+                        document.getElementById("trackingNumberTemp").value = "";
+
+                        $("#loadingTN").hide();
+                        $("#duplicateinput").fadeIn();
+                        document.getElementById("trackingNumberTemp").disabled = false;
+
+                        endLoop = 1;
+                    }
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", function (event) {
+                document.getElementById("trackingNumberTemp").disabled = true;
+                $("#loadingTN").hide();
+                $("#loadingSubmit").hide();
+                $("#wronginput").hide();
+                $("#duplicateinput").hide();
+                $("#hiddenFormData").hide();
+
+                $("#donePodButton").hide();
+                $("#scanAgain").hide();
+                $("#deleteRow").hide();
+                $("#submitBtn").hide();
+                $("#submitBtnfinal").hide();
+
+                document.getElementById("submitPodInfoButton").addEventListener("click", createPODTemplate);
+                document.getElementById("donePodButton").addEventListener("click", donePod);
+                document.getElementById("deleteRow").addEventListener("click", deleteRow);
+                document.getElementById("scanAgain").addEventListener("click", scanAgain);
+                document.getElementById("submitBtn").addEventListener("click", submitForm);
+
+                function createPODTemplate() {
+                    if ($("#deliveryDate").val().length == 0) {
+                        alert("Please do not leave the Date of Delivery field empty!");
+                    }
+
+                    if ($("#area").val().length == 0) {
+                        alert("Please do not leave the Area of Delivery field empty!");
+                    }
+
+                    if ($("#agentName").val().length == 0) {
+                        alert("Please do not leave the Dispatcher Name field empty!");
+                    }
+
+                    if (($("#deliveryDate").val().length != 0) && ($("#area").val().length != 0) && ($("#agentName").val().length != 0)) {
+                        $('#submitBtnfinal').attr('disabled', true);
+
+                        document.getElementById("dispatcherName").value = document.getElementById("agentName").options[document.getElementById("agentName").selectedIndex].text;
+
+                        document.getElementById("dateTimeStart").value = document.getElementById("deliveryDate").value + ' ' + "08:00:00";
+                        document.getElementById("dateTimeClose").value = document.getElementById("deliveryDate").value + ' ' + "22:00:00";
+
+                        $("#submitPodInfoButton").hide();
+                        $("#deleteRow").hide();
+                        $("#donePodButton").fadeIn();
+                        $("#scanAgain").hide();
+                        $("#submitBtn").hide();
+
+                        document.getElementById("trackingNumberTemp").disabled = false;
+                        document.getElementById("trackingNumberTemp").focus();
+                    }
+                }
+
+                function donePod() {
+                    $("#wronginput").hide();
+                    $("#duplicateinput").hide();
+
+                    document.getElementsByName("taskRow")[(document.getElementsByName("taskRow").length - 1)].remove();
+
+                    let taskRowFinal = document.createElement('tr');
+                    taskRowFinal.setAttribute("id", "taskRowFinal");
+
+                    document.getElementById("taskBody").appendChild(taskRowFinal);
+
+                    let row_data_totalParcelLabel = document.createElement('td');
+                    row_data_totalParcelLabel.innerHTML = "Total Parcel:";
+
+                    let row_data_totalParcel = document.createElement('td');
+                    row_data_totalParcel.innerHTML = document.getElementsByName("taskRow").length;
+
+                    let row_data_emptyfinal0 = document.createElement('td');
+                    row_data_emptyfinal0.setAttribute('colspan', '4');
+
+                    let row_data_totalAmountLabel = document.createElement('td');
+                    row_data_totalAmountLabel.innerHTML = "Total Amount:";
+
+                    let row_data_totalAmount = document.createElement('td');
+                    var totalAmount = 0;
+                    for (let i = 0; i < document.getElementsByName("taskRow").length; i++) {
+                        totalAmount = parseInt(document.getElementsByName("cashValueRow")[i].innerHTML) + totalAmount;
+                    }
+                    row_data_totalAmount.innerHTML = "$ " + totalAmount;
+
+                    let row_data_emptyfinal1 = document.createElement('td');
+                    row_data_emptyfinal1.setAttribute('colspan', '4');
+
+                    document.getElementById("taskRowFinal").appendChild(row_data_totalParcelLabel);
+                    document.getElementById("taskRowFinal").appendChild(row_data_totalParcel);
+                    document.getElementById("taskRowFinal").appendChild(row_data_emptyfinal0);
+                    document.getElementById("taskRowFinal").appendChild(row_data_totalAmountLabel);
+                    document.getElementById("taskRowFinal").appendChild(row_data_totalAmount);
+                    document.getElementById("taskRowFinal").appendChild(row_data_emptyfinal1);
+
+                    document.getElementById("taskBody").style.textAlign = "center";
+
+                    $("#donePodButton").hide();
+                    $("#deleteRow").hide();
+                    $("#scanAgain").fadeIn();
+                    $("#submitBtn").fadeIn();
+                }
+
+                function scanAgain() {
+                    $("#donePodButton").fadeIn();
+                    $("#scanAgain").hide();
+                    $("#submitBtn").hide();
+
+                    if (countTN > 0) {
+                        $("#deleteRow").fadeIn();
+                    }
+
+                    document.getElementById("taskRowFinal").remove();
+
+                    let taskRow = document.createElement('tr');
+                    taskRow.setAttribute("name", "taskRow");
+
+                    let row_data_number = document.createElement('td');
+                    row_data_number.innerHTML = (countTN + 1) + ".";
+                    row_data_number.setAttribute('scope', 'col');
+
+                    let row_data_trackingNumber = document.createElement('td');
+                    row_data_trackingNumber.setAttribute("name", "trackingNumberRow");
+                    row_data_trackingNumber.setAttribute('scope', 'col');
+
+                    let row_data_empty2 = document.createElement('td');
+                    row_data_empty2.setAttribute('colspan', '2');
+                    row_data_empty2.setAttribute('scope', 'col');
+
+                    let trackingNumberInputTemp = document.createElement('input');
+                    trackingNumberInputTemp.setAttribute("type", "text");
+                    trackingNumberInputTemp.setAttribute("class", "form-control");
+                    trackingNumberInputTemp.setAttribute("name", "trackingNumberTemp");
+                    trackingNumberInputTemp.setAttribute("id", "trackingNumberTemp");
+                    trackingNumberInputTemp.setAttribute("aria-describedby", "trackingNumberHelp");
+                    trackingNumberInputTemp.setAttribute("placeholder", "Enter Tracking Number");
+                    trackingNumberInputTemp.setAttribute("maxlength", "9");
+                    trackingNumberInputTemp.setAttribute("disabled", "true");
+                    trackingNumberInputTemp.setAttribute("onkeyup", "checkTrackingNum(this, 'trackingNumberTemp')");
+
+                    document.getElementById("taskBody").appendChild(taskRow);
+
+                    document.getElementsByName("taskRow")[(countTN)].appendChild(row_data_number);
+                    document.getElementsByName("taskRow")[(countTN)].appendChild(row_data_trackingNumber);
+                    document.getElementsByName("trackingNumberRow")[(countTN)].appendChild(trackingNumberInputTemp);
+
+                    document.getElementById("trackingNumberTemp").disabled = false;
+                    document.getElementById("trackingNumberTemp").focus();
+                }
+
+                function deleteRow() {
+                    $("#wronginput").hide();
+                    $("#duplicateinput").hide();
+
+                    document.getElementsByName("taskRow")[(document.getElementsByName("taskRow").length - 1)].remove();
+
+                    var request = new XMLHttpRequest();
+
+                    request.open('POST', 'https://api.tookanapp.com/v2/assign_task');
+
+                    request.setRequestHeader('Content-Type', 'application/json');
+
+                    request.onreadystatechange = function () {
+                        if (this.readyState === 4) {
+                            console.log('Status:', this.status);
+                            console.log('Headers:', this.getAllResponseHeaders());
+                            console.log('Body:', this.responseText);
+
+                            document.getElementsByName("taskRow")[(document.getElementsByName("taskRow").length - 1)].remove();
+                            document.getElementsByName("hiddenFormDataRow")[(document.getElementsByName("hiddenFormDataRow").length - 1)].remove();
+
+                            countTN = countTN - 1;
+
+                            let taskRow = document.createElement('tr');
+                            taskRow.setAttribute("name", "taskRow");
+
+                            let row_data_number = document.createElement('td');
+                            row_data_number.innerHTML = (countTN + 1) + ".";
+                            row_data_number.setAttribute('scope', 'col');
+
+                            let row_data_trackingNumber = document.createElement('td');
+                            row_data_trackingNumber.setAttribute("name", "trackingNumberRow");
+                            row_data_trackingNumber.setAttribute('scope', 'col');
+
+                            let row_data_empty2 = document.createElement('td');
+                            row_data_empty2.setAttribute('colspan', '2');
+                            row_data_empty2.setAttribute('scope', 'col');
+
+                            let trackingNumberInputTemp = document.createElement('input');
+                            trackingNumberInputTemp.setAttribute("type", "text");
+                            trackingNumberInputTemp.setAttribute("class", "form-control");
+                            trackingNumberInputTemp.setAttribute("name", "trackingNumberTemp");
+                            trackingNumberInputTemp.setAttribute("id", "trackingNumberTemp");
+                            trackingNumberInputTemp.setAttribute("aria-describedby", "trackingNumberHelp");
+                            trackingNumberInputTemp.setAttribute("placeholder", "Enter Tracking Number");
+                            trackingNumberInputTemp.setAttribute("maxlength", "9");
+                            trackingNumberInputTemp.setAttribute("disabled", "true");
+                            trackingNumberInputTemp.setAttribute("onkeyup", "checkTrackingNum(this, 'trackingNumberTemp')");
+
+                            document.getElementById("taskBody").appendChild(taskRow);
+
+                            document.getElementsByName("taskRow")[(countTN)].appendChild(row_data_number);
+                            document.getElementsByName("taskRow")[(countTN)].appendChild(row_data_trackingNumber);
+                            document.getElementsByName("trackingNumberRow")[(countTN)].appendChild(trackingNumberInputTemp);
+
+                            if (countTN == 0) {
+                                $("#deleteRow").hide();
+                            }
+
+                            document.getElementById("trackingNumberTemp").disabled = false;
+                            document.getElementById("trackingNumberTemp").focus();
+                        }
+                    };
+
+                    var body = {
+                        'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+                        'job_id': document.getElementsByName('trackingNumberRow')[(document.getElementsByName('trackingNumberRow').length - 1)].innerHTML,
+                        'fleet_id': '',
+                        'team_id': '',
+                        'job_status': '6'
+                    };
+
+                    request.send(JSON.stringify(body));
+                }
+
+                function submitForm() {
+                    $("#scanAgain").hide();
+                    $("#submitBtn").hide();
+                    $("#loadingSubmit").fadeIn();
+
+                    $('#submitBtnfinal').attr('disabled', false);
+                    document.getElementById('submitBtnfinal').click()
+                }
+            });
+        </script>
     </div>
-
-
-    
