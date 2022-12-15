@@ -235,7 +235,7 @@ const financeAcknowledgeRunner = ((req,res)=>{
         financeNotes: data.fincanceNotes,
     }
     let option = {upsert: false, new: false}
-    fmxPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+    runnerPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
         if(err) {
             req.flash('error', `Failed to acknowledge POD.`)
             res.redirect('/runner-podlist')
