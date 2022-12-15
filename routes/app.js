@@ -163,6 +163,15 @@ const {
 
 const { selfCollect } = require('../controller/withdraw')
 
+/*
+    1. Email to notify new pod created
+    2. restock & pickup pages and fucntions >>>> organized scripts >>>> Add total to POD and pod editable by Managers & Admin. >>>> Add in breakdown to finance summary >>>> change from POD to warehouse
+    3. beta test
+    4. logout
+    5. Hosting
+    6. wellous flow ??
+*/
+
 //User and Login
 router.get('/', login)//Landing Page
 router.get('/dashboard', dashboard)//Dashboard from nav bar
