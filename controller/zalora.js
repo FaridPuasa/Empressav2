@@ -213,16 +213,41 @@ const updateZaloraPodStatus = ((req,res)=>{
     zaloraPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
         if(err) {
             req.flash('error', `Failed to update POD status.`)
-            res.redirect('/moh-podlist')
+            res.redirect('/zalora-podlist')
         }
         else{
             req.flash('success', `POD status updated.`)
-            res.redirect('/moh-podlist')
+            res.redirect('/zalora-podlist')
             console.log(docs)
             console.log("POD status change to " + podstatus)
         }
     })
 })
+
+const financeAcknowledgeZalora = ((req,res)=>{
+    let data = req.body
+    let pod_id = data.pod_id
+    let acknowledge = "T"
+    let filter = {pod_id}
+    let update = {
+        acknowledge,
+        financeNotes: data.fincanceNotes,
+    }
+    let option = {upsert: false, new: false}
+    zaloraPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+        if(err) {
+            req.flash('error', `Failed to acknowledge POD.`)
+            res.redirect('/zalora-podlist')
+        }
+        else{
+            req.flash('success', `POD Acknowledged.`)
+            res.redirect('/zalora-podlist')
+            console.log(docs)
+            console.log("POD status change to " + podstatus)
+        }
+    })
+})
+
 
 const updateZaloraSelf = ((req,res) =>{
     let data = req.body
@@ -303,4 +328,5 @@ module.exports = {
     updateZaloraPodStatus,
     updateZaloraSelf,
     updateZalora,
+    financeAcknowledgeZalora
 }

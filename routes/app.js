@@ -38,7 +38,8 @@ const {
     updateZaloraPod,
     updateZaloraPodStatus,
     updateZaloraSelf,
-    updateZalora
+    updateZalora,
+    financeAcknowledgeZalora
 } = require ('../controller/zalora')
 
 const {
@@ -47,7 +48,8 @@ const {
     updateTmxPod,
     updateTmxPodStatus,
     updateTmxSelf,
-    updateTmx
+    updateTmx,
+    financeAcknowledgeTmx
 } = require ('../controller/tmx')
 
 const {
@@ -56,7 +58,8 @@ const {
     updateFmxPod,
     updateFmxPodStatus,
     updateFmxSelf,
-    updateFmx
+    updateFmx,
+    financeAcknowledgeFmx
 } = require ('../controller/fmx')
 
 const {
@@ -65,7 +68,8 @@ const {
     updateRunnerPod,
     updateRunnerPodStatus,
     updateRunnerSelf,
-    updateRunner
+    updateRunner,
+    financeAcknowledgeRunner
 } = require ('../controller/runner')
 
 const {
@@ -74,7 +78,8 @@ const {
     updatePersonalPod,
     updatePersonalPodStatus,
     updatePersonalSelf,
-    updatePersonal
+    updatePersonal,
+    financeAcknowledgePersonal
 } = require ('../controller/personal')
 
 const {
@@ -83,7 +88,8 @@ const {
     updateGrpPod,
     updateGrpPodStatus,
     updateGrpSelf,
-    updateGrp
+    updateGrp,
+    financeAcknowledgeGrp
 } = require ('../controller/grp')
 
 const {
@@ -92,7 +98,8 @@ const {
     updateLocalPod,
     updateLocalPodStatus,
     updateLocalSelf,
-    updateLocal
+    updateLocal,
+    financeAcknowledgeLocal
 } = require ('../controller/local')
 
 const {
@@ -111,7 +118,10 @@ const {
     updatePanagaSelf,
     updateMoh,
     updateJpmc,
-    updatePanaga
+    updatePanaga,
+    financeAcknowledgePanaga,
+    financeAcknowledgeJpmc,
+    financeAcknowledgeMoh
 } = require ('../controller/pharmacy')
 
 const {
@@ -213,16 +223,26 @@ router.post('/success-pod-grp', insertPodGrp)//Save POD to DB GRP
 router.get('/self-collect', self)//Self collect page
 
 //POD Status
-router.post('/success-POD', updateMohPodStatus)//After POD status update
-router.post('/success-POD', updateJpmcPodStatus)//After POD status update
-router.post('/success-POD', updatePanagaPodStatus)//After POD status update
-router.post('/success-POD', updateLocalPodStatus)//After POD status update
-router.post('/success-POD', updateZaloraPodStatus)//After POD status update
-router.post('/success-POD', updateFmxPodStatus)//After POD status update
-router.post('/success-POD', updateTmxPodStatus)//After POD status update
-router.post('/success-POD', updateRunnerPodStatus)//After POD status update
-router.post('/success-POD', updatePersonalPodStatus)//After POD status update
-router.post('/success-POD', updateGrpPodStatus)//After POD status update
+router.post('/update-POD-moh', updateMohPodStatus)//After POD status update
+router.post('/update-POD-jpmc', updateJpmcPodStatus)//After POD status update
+router.post('/update-POD-panaga', updatePanagaPodStatus)//After POD status update
+router.post('/update-POD-local', updateLocalPodStatus)//After POD status update
+router.post('/update-POD-zalora', updateZaloraPodStatus)//After POD status update
+router.post('/update-POD-fmx', updateFmxPodStatus)//After POD status update
+router.post('/update-POD-tmx', updateTmxPodStatus)//After POD status update
+router.post('/update-POD-runner', updateRunnerPodStatus)//After POD status update
+router.post('/update-POD-personal', updatePersonalPodStatus)//After POD status update
+router.post('/update-POD-grp', updateGrpPodStatus)//After POD status update
+router.post('/finance-edit-fmx', financeAcknowledgeFmx)//Finance Acknowledge POD
+router.post('/finance-edit-grp', financeAcknowledgeGrp)//Finance Acknowledge POD
+router.post('/finance-edit-moh', financeAcknowledgeMoh)//Finance Acknowledge POD
+router.post('/finance-edit-tmx', financeAcknowledgeTmx)//Finance Acknowledge POD
+router.post('/finance-edit-runner', financeAcknowledgeRunner)//Finance Acknowledge POD
+router.post('/finance-edit-personal', financeAcknowledgePersonal)//Finance Acknowledge POD
+router.post('/finance-edit-local',  financeAcknowledgeLocal)//Finance Acknowledge POD
+router.post('/finance-edit-panaga', financeAcknowledgePanaga)//Finance Acknowledge POD
+router.post('/finance-edit-jpmc', financeAcknowledgeJpmc)//Finance Acknowledge POD
+router.post('/finance-edit-zalora', financeAcknowledgeZalora)//Finance Acknowledge POD
 
 //Restock (BMF)
 router.get('/restock_order', restockForm)

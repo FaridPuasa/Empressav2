@@ -70,7 +70,8 @@
                                                 COMPLETE
                                             <%}%>
                                         </td>
-                                        <form action="/success-POD" method="POST">
+                                        <% if (user.role == "11" || user.role == "13" || user.role == "10") { %>
+                                        <form action="/update-POD-jpmc" method="POST">
                                             <% if(document.podstatus == "P1"){%>
                                                 <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
                                                 <input type="hidden" name="pod_status" value="P2">
@@ -85,12 +86,13 @@
                                                 <td><button class="btn btn-primary delivery-btn invisible">Completed</button></td>
                                             <%}%>
                                         </form>
+                                        <% } %>
                                     </tr>
                                 </div>
                                         
                                     <tr>
                                         <td colspan="12" class="hiddenRow">
-                                            <form method="POST" action="/edit-success">
+                                            <form method="POST" action="/finance-edit-jpmc">
                                             <div class="accordian-body collapse" id="demo1">
                                                 <div class="inner" id="inner<%= k %>">
                                                 
@@ -125,7 +127,14 @@
                                                             <td><%= document.contactNumber[i] %></td>
                                                             <td><%= document.parcelValue[i] %></td>
                                                             <td><%= document.PaymentMethod[i] %></td>
-                                                            <td><input type="text" name="financeNotes" id="financeNotes<%= i %>"></td>
+                                                            <td>
+                                                                <% if (user.role == "12" || user.role == "10") { %>
+                                                                <input type="text" name="financeNotes" id="financeNotes<%= i %>">
+                                                                <% } %>
+                                                                <% if (user.role != "12" || user.role != "10") { %>
+                                                                    <%= document.financeNotes[i] %>
+                                                                <% } %>
+                                                            </td>
                                                             <td><%= document.deliveryType[i] %></td>
                                                                 <!--If complete button show-->
                                                                 <% if(document.podstatus == "P3"){%>
@@ -172,16 +181,17 @@
                                                 </table>
                                                 </div>
 
-                                                    <div class="d-flex justify-content-center ">
-                                                        <% if (user.role == "12" || user.role == "10") { %>
-                                                        <button class="btn btn-primary">submit</button>
-                                                        <% } %>
-                                                        <% if (user.role == "11" || user.role == "13" || user.role == "10" ) { %>
-                                                        <button class="btn btn-success mx-2" onclick="createPDF()">Print</button>
-                                                        <% } %>
-                                                    </div>
-                                                
-                                            </form>  
+                                                <div class="d-flex justify-content-center ">
+                                                    <% if (user.role == "12" || user.role == "10") { %>
+                                                    <button class="btn btn-primary">Acknowledge & Submit</button>
+                                                    <% } %>
+                                                </div>
+                                            </form>
+                                            <div class="d-flex justify-content-center "></div>
+                                                <% if (user.role == "11" || user.role == "13" || user.role == "10" ) { %>
+                                                    <input type="button" class="btn btn-success my-2" onclick="createPDF()" value="Print">
+                                                <% } %>
+                                            </div>  
                                             </div> 
                                         </td>
                                     </tr>

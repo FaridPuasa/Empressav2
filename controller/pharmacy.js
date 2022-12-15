@@ -402,6 +402,30 @@ const updateMohPodStatus = ((req,res)=>{
 })
 //End - Update POD Status
 
+const financeAcknowledgeMoh = ((req,res)=>{
+    let data = req.body
+    let pod_id = data.pod_id
+    let acknowledge = "T"
+    let filter = {pod_id}
+    let update = {
+        acknowledge,
+        financeNotes: data.fincanceNotes,
+    }
+    let option = {upsert: false, new: false}
+    mohPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+        if(err) {
+            req.flash('error', `Failed to acknowledge POD.`)
+            res.redirect('/moh-podlist')
+        }
+        else{
+            req.flash('success', `POD Acknowledged.`)
+            res.redirect('/moh-podlist')
+            console.log(docs)
+            console.log("POD status change to " + podstatus)
+        }
+    })
+})
+
 //Start - Update MOH Self
 const updateMohSelf = ((req,res) =>{
     let data = req.body
@@ -494,17 +518,41 @@ const updateJpmcPodStatus = ((req,res)=>{
     jpmcPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
         if(err) {
             req.flash('error', `Failed to update POD status.`)
-            res.redirect('/moh-podlist')
+            res.redirect('/jpmc-podlist')
         }
         else{
             req.flash('success', `POD status updated.`)
-            res.redirect('/moh-podlist')
+            res.redirect('/jpmc-podlist')
             console.log(docs)
             console.log("POD status change to " + podstatus)
         }
     })
 })
 //End - Update POD Status
+
+const financeAcknowledgeJpmc = ((req,res)=>{
+    let data = req.body
+    let pod_id = data.pod_id
+    let acknowledge = "T"
+    let filter = {pod_id}
+    let update = {
+        acknowledge,
+        financeNotes: data.fincanceNotes,
+    }
+    let option = {upsert: false, new: false}
+    jpmcPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+        if(err) {
+            req.flash('error', `Failed to acknowledge POD.`)
+            res.redirect('/jpmc-podlist')
+        }
+        else{
+            req.flash('success', `POD Acknowledged.`)
+            res.redirect('/jpmc-podlist')
+            console.log(docs)
+            console.log("POD status change to " + podstatus)
+        }
+    })
+})
 
 //Start - Update JPMC Self
 const updateJpmcSelf = ((req,res) =>{
@@ -598,17 +646,41 @@ const updatePanagaPodStatus = ((req,res)=>{
     panagaPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
         if(err) {
             req.flash('error', `Failed to update POD status.`)
-            res.redirect('/moh-podlist')
+            res.redirect('/panaga-podlist')
         }
         else{
             req.flash('success', `POD status updated.`)
-            res.redirect('/moh-podlist')
+            res.redirect('/panaga-podlist')
             console.log(docs)
             console.log("POD status change to " + podstatus)
         }
     })
 })
 //End - Update POD Status
+
+const financeAcknowledgePanaga = ((req,res)=>{
+    let data = req.body
+    let pod_id = data.pod_id
+    let acknowledge = "T"
+    let filter = {pod_id}
+    let update = {
+        acknowledge,
+        financeNotes: data.fincanceNotes,
+    }
+    let option = {upsert: false, new: false}
+    panagaPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+        if(err) {
+            req.flash('error', `Failed to acknowledge POD.`)
+            res.redirect('/panaga-podlist')
+        }
+        else{
+            req.flash('success', `POD Acknowledged.`)
+            res.redirect('/panaga-podlist')
+            console.log(docs)
+            console.log("POD status change to " + podstatus)
+        }
+    })
+})
 
 //Start - Update Panaga Self
 const updatePanagaSelf = ((req,res) =>{
@@ -780,5 +852,8 @@ module.exports = {
     updatePanagaSelf,
     updateMoh,
     updateJpmc,
-    updatePanaga
+    updatePanaga,
+    financeAcknowledgePanaga,
+    financeAcknowledgeJpmc,
+    financeAcknowledgeMoh
 }

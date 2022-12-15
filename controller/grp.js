@@ -214,11 +214,35 @@ const updateGrpPodStatus = ((req,res)=>{
     grpPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
         if(err) {
             req.flash('error', `Failed to update POD status.`)
-            res.redirect('/moh-podlist')
+            res.redirect('/grp-podlist')
         }
         else{
             req.flash('success', `POD status updated.`)
-            res.redirect('/moh-podlist')
+            res.redirect('/grp-podlist')
+            console.log(docs)
+            console.log("POD status change to " + podstatus)
+        }
+    })
+})
+
+const financeAcknowledgeGrp = ((req,res)=>{
+    let data = req.body
+    let pod_id = data.pod_id
+    let acknowledge = "T"
+    let filter = {pod_id}
+    let update = {
+        acknowledge,
+        financeNotes: data.fincanceNotes,
+    }
+    let option = {upsert: false, new: false}
+    grpPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+        if(err) {
+            req.flash('error', `Failed to acknowledge POD.`)
+            res.redirect('/grp-podlist')
+        }
+        else{
+            req.flash('success', `POD Acknowledged.`)
+            res.redirect('/grp-podlist')
             console.log(docs)
             console.log("POD status change to " + podstatus)
         }
@@ -304,4 +328,5 @@ module.exports = {
     updateGrpPodStatus,
     updateGrpSelf,
     updateGrp,
+    financeAcknowledgeGrp
 }

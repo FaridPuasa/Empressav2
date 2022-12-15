@@ -14,6 +14,7 @@ const panagapodSchema  = new mongoose.Schema({
     did: string,
     deliveryDate: string,
     podstatus: string,
+    acknowledge: string,
     numbers: {type: [String]},
     trackingNumber: {type: [String]},
     fridge: {type: [Boolean]},
@@ -21,6 +22,7 @@ const panagapodSchema  = new mongoose.Schema({
     contactNumber: {type: [String]},
     contactAddress: {type: [String]},
     parcelValue: {type: [String]},
+    financeNotes: {type: [String]},
     paymentMethod: {type: [String]},
     deliveryType: {type: [String]},
 })

@@ -21,6 +21,7 @@ const zalorapodSchema  = new mongoose.Schema({
     contactNumber: {type: [String]},
     contactAddress: {type: [String]},
     parcelValue: {type: [String]},
+    financeNotes: {type: [String]},
     paymentMethod: {type: [String]},
     deliveryType: {type: [String]},
 })

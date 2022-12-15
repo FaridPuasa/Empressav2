@@ -225,6 +225,30 @@ const updateFmxPodStatus = ((req,res)=>{
     })
 })
 
+const financeAcknowledgeFmx = ((req,res)=>{
+    let data = req.body
+    let pod_id = data.pod_id
+    let acknowledge = "T"
+    let filter = {pod_id}
+    let update = {
+        acknowledge,
+        financeNotes: data.fincanceNotes,
+    }
+    let option = {upsert: false, new: false}
+    fmxPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+        if(err) {
+            req.flash('error', `Failed to acknowledge POD.`)
+            res.redirect('/fmx-podlist')
+        }
+        else{
+            req.flash('success', `POD Acknowledged.`)
+            res.redirect('/fmx-podlist')
+            console.log(docs)
+            console.log("POD status change to " + podstatus)
+        }
+    })
+})
+
 const updateFmxSelf = ((req,res) =>{
     let data = req.body
     let date =  moment().format("DD/MM/YYYY")
@@ -304,4 +328,5 @@ module.exports = {
     updateFmxPodStatus,
     updateFmxSelf,
     updateFmx,
+    financeAcknowledgeFmx,
 }

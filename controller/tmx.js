@@ -214,11 +214,35 @@ const updateTmxPodStatus = ((req,res)=>{
     tmxPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
         if(err) {
             req.flash('error', `Failed to update POD status.`)
-            res.redirect('/moh-podlist')
+            res.redirect('/tmx-podlist')
         }
         else{
             req.flash('success', `POD status updated.`)
-            res.redirect('/moh-podlist')
+            res.redirect('/tmx-podlist')
+            console.log(docs)
+            console.log("POD status change to " + podstatus)
+        }
+    })
+})
+
+const financeAcknowledgeTmx = ((req,res)=>{
+    let data = req.body
+    let pod_id = data.pod_id
+    let acknowledge = "T"
+    let filter = {pod_id}
+    let update = {
+        acknowledge,
+        financeNotes: data.fincanceNotes,
+    }
+    let option = {upsert: false, new: false}
+    tmxPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+        if(err) {
+            req.flash('error', `Failed to acknowledge POD.`)
+            res.redirect('/tmx-podlist')
+        }
+        else{
+            req.flash('success', `POD Acknowledged.`)
+            res.redirect('/tmx-podlist')
             console.log(docs)
             console.log("POD status change to " + podstatus)
         }
@@ -304,4 +328,5 @@ module.exports = {
     updateTmxPodStatus,
     updateTmxSelf,
     updateTmx,
+    financeAcknowledgeTmx
 }
