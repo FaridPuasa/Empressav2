@@ -87,6 +87,7 @@ const insertPodFmx = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
+    let acknowledge = "F"
     let status_pod = "P1" 
     let pod_id = "GR/POD/FMX: " + podSequence
     let trackingNumber = data.trackingNumber
@@ -137,6 +138,7 @@ const insertPodFmx = ((req,res)=>{
         PaymentMethod: data.PaymentMethod,
         deliveryType: data.deliveryType,
         createdAt: date,
+        acknowledge: acknowledge
     })
     pod.save((err,doc)=>{
         if (err){

@@ -86,7 +86,8 @@ const insertPodLocal = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "P1" 
+    let status_pod = "P1"
+    let acknowledge = "F" 
     let pod_id = "GR/POD/PS: " + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < trackingNumber.length; i++){
@@ -137,6 +138,7 @@ const insertPodLocal = ((req,res)=>{
         PaymentMethod: data.PaymentMethod,
         deliveryType: data.deliveryType,
         createdAt: date,
+        acknowledge: acknowledge
     })
     pod.save((err,doc)=>{
         if (err){

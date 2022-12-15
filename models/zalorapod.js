@@ -14,6 +14,7 @@ const zalorapodSchema  = new mongoose.Schema({
     did: string,
     deliveryDate: string,
     podstatus: string,
+    acknowledge: string,
     numbers: {type: [String]},
     trackingNumber: {type: [String]},
     contactName: {type: [String]},

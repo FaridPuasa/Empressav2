@@ -92,7 +92,8 @@ const insertPodMoh = ((req,res)=>{
     let data = req.body
     console.log(data)
     let podsequence = data.podsequence
-    let status_pod = "P1" 
+    let status_pod = "P1"
+    let acknowledge = "F"
     let pod_id = 'GR/POD/MOH:' + podsequence
     let trackingNumber = data.trackingNumber
     console.log(trackingNumber)
@@ -144,6 +145,7 @@ const insertPodMoh = ((req,res)=>{
         PaymentMethod: data.PaymentMethod,
         deliveryType: data.deliveryType,
         createdAt: date,
+        acknowledge: acknowledge
     })
     pod.save((err,doc)=>{
         if (err){
@@ -175,6 +177,7 @@ const insertPodJpmc = ((req,res)=>{
     let data = req.body
     let podSequence = data.podSequence
     let status_pod = "P1" 
+    let acknowledge = "F"
     let pod_id = 'GR/POD/JPMC:' + podSequence
     let trackingNumber = data.trackingNumberTemp
     for (let i = 0; i < trackingNumber.length; i++){
@@ -225,6 +228,7 @@ const insertPodJpmc = ((req,res)=>{
         PaymentMethod: data.PaymentMethod,
         deliveryType: data.deliveryType,
         createdAt: date,
+        acknowledge: acknowledge
     })
     pod.save((err,doc)=>{
         if (err){
@@ -256,6 +260,7 @@ const insertPodPanaga = ((req,res)=>{
     let data = req.body
     let podSequence = data.podSequence
     let status_pod = "P1" 
+    let acknowledge = "F"
     let pod_id = 'GR/POD/PNG:' + podSequence
     let trackingNumber = data.trackingNumber
     for (let i = 0; i < trackingNumber.length; i++){
@@ -305,6 +310,7 @@ const insertPodPanaga = ((req,res)=>{
         PaymentMethod: data.PaymentMethod,
         deliveryType: data.deliveryType,
         createdAt: date,
+        acknowledge: acknowledge
     })
     pod.save((err,doc)=>{
         if (err){
