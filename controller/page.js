@@ -991,7 +991,6 @@ const pickupRecord = (req,res)=> {
     )
 }
 
-
 const exportForm = (req,res) =>{
     let user = currentUser[0]
     res.render('export', {
