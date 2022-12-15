@@ -970,11 +970,31 @@ const financeForm = (req,res)=>{
     console.log(user)
     res.render('export', {
         title: "POD Summary",
-        partials: './partials/export/finance.ejs',
+        partials: './partials/export/financeByService.ejs',
         moment: moment,
         user
     })
 }
+
+const financeFormDrivers = (req,res)=>{
+    let user = currentUser[0]
+    console.log(user)
+    agentDB.find().then(
+        (document)=>{
+            res.render('export', {
+                title: "POD Summary",
+                partials: './partials/export/financeByDrivers.ejs',
+                moment: moment,
+                document,
+                user
+            })
+        },
+        (err)=>{
+
+        }
+    )
+}
+
 
 const pickupForm = (req,res)=> {
     let user = currentUser[0]
@@ -1048,10 +1068,7 @@ const logout = (req,res)=> {
     let session = req.session
     session.destroy((err)=>{
         if (err) return res.sendStatus(400)
-        res.render('login', {
-            title: 'login',
-            moment: moment
-        })
+        res.redirect('/')
         console.log('session destroy')
     })
 }
@@ -1096,6 +1113,7 @@ module.exports = {
     restockForm,
     exportForm,
     financeForm,
+    financeFormDrivers,
     pickupForm,
     register,
     passwordChange,

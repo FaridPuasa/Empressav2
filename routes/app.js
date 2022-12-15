@@ -116,7 +116,9 @@ const {
 
 const {
     exportInventory, 
-    exportPodSummary
+    exportFinanceSummary,
+    reconService,
+    exportFinanceSummaryDriver
 } = require('../controller/export')
 
 const {
@@ -131,6 +133,7 @@ const {
     restockForm,
     exportForm,
     financeForm,
+    financeFormDrivers,
     pickupForm,
     register,
     passwordChange,
@@ -164,8 +167,10 @@ router.post('/success-agent', insertAgent)//Success page for agent register
 //Extraction of Data
 router.get('/export', exportForm)//Export Page
 router.get('/export-finance', financeForm)//Finance Export Page
+router.get('/export-finance-by-driver', financeFormDrivers)
 router.post('/exportlist', exportInventory)//
-router.post('/summary-success', exportPodSummary)//
+router.post('/success-fin-service', exportFinanceSummary)//
+router.post('/success-fin-drivers', exportFinanceSummary)//
 
 //Item Entry
 router.get('/:services-in', serviceIn)//Item In by services page
