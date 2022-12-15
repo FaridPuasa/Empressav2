@@ -99,8 +99,7 @@
                                         <td scope="col" name="trackingNumberRow">
                                             <input type="text" class="form-control" name="trackingNumberTemp"
                                                 id="trackingNumberTemp" aria-describedby="trackingNumberHelp"
-                                                placeholder="Enter Tracking Number" maxlength="13"
-                                                onkeyup="checkTrackingNum(this, 'trackingNumberTemp')">
+                                                placeholder="Enter Tracking Number">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -187,302 +186,18 @@
             </div>
         </div>
         <script>
-            let countTN = 0;
-            let endLoop = 0;
-            let countContent = 0;
-            let checkDuplicate = 0;
-            let printDone = 0;
-
-            var responsetn = '';
-            var json_responsetn = '';
-
-            //Scanned tracking number
-            function checkTrackingNum(field, autoMove) {
-                if (field.value.length >= field.maxLength) {
-                    document.getElementById("trackingNumberTemp").disabled = true;
-                    endLoop = 0;
-                    checkDuplicate = 0;
-                    printDone = 0;
-
-                    $("#wronginput").hide();
-                    $("#duplicateinput").hide();
-                    $("#loadingTN").fadeIn();
-
-                    //check duplicate
-                    if (document.getElementsByName('trackingNumberRow').length > 1) {
-                        for (let i = 0; i < document.getElementsByName('trackingNumberRow').length; i++) {
-                            if ((document.getElementById("trackingNumberTemp").value.trim()) == document.getElementsByName('trackingNumberRow')[i].innerHTML) {
-                                checkDuplicate = 1;
-                                i = document.getElementsByName('trackingNumberRow').length;
-                            }
-                        }
-                    }
-
-                    //retrieve data from Tookan
-                    if ((checkDuplicate == 0) && (endLoop == 0) && (printDone == 0)) {
-                        var request = new XMLHttpRequest();
-                        request.open('POST', 'https://api.tookanapp.com/v2/get_job_details_by_order_id');
-                        request.setRequestHeader('Content-Type', 'application/json');
-
-                        request.onreadystatechange = function () {
-                            if ((this.readyState === 4) && (endLoop == 0) && (printDone == 0)) {
-                                console.log('Status:', this.status);
-                                console.log('Headers:', this.getAllResponseHeaders());
-                                console.log('Body:', this.responseText);
-
-                                responsetn = this.responseText;
-                                json_responsetn = JSON.parse(responsetn);
-
-                                if ((json_responsetn.status != 404) && (printDone == 0)) {
-                                    //Table data
-                                    document.getElementsByName("trackingNumberRow")[countTN].innerHTML = json_responsetn.data[0].job_id;
-
-                                    let row_data_empty0 = document.createElement('td');
-                                    row_data_empty0.setAttribute('scope', 'col');
-
-                                    let row_data_fridgeItem = document.createElement('td');
-                                    row_data_fridgeItem.setAttribute("name", "fridgeItemRow");
-                                    row_data_fridgeItem.setAttribute("text-align", "center");
-                                    row_data_fridgeItem.setAttribute('scope', 'col');
-
-                                    let divfridgeItem = document.createElement('div');
-                                    divfridgeItem.setAttribute("class", "form-check form-switch");
-                                    divfridgeItem.setAttribute("text-align", "center");
-                                    divfridgeItem.setAttribute("name", "divfridgeItemRow");
-                                    divfridgeItem.setAttribute('scope', 'col');
-
-                                    let fridgeItemToggle = document.createElement("input");
-                                    fridgeItemToggle.setAttribute("class", "form-check-input text-center");
-                                    fridgeItemToggle.setAttribute("type", "checkbox");
-                                    fridgeItemToggle.setAttribute("role", "switch");
-                                    fridgeItemToggle.setAttribute("name", "fridgeItemCheck");
-
-                                    let row_data_customerName = document.createElement('td');
-                                    row_data_customerName.innerHTML = json_responsetn.data[0].customer_username;
-                                    row_data_customerName.setAttribute('scope', 'col');
-
-                                    let row_data_customerAddress = document.createElement('td');
-                                    row_data_customerAddress.innerHTML = json_responsetn.data[0].job_address;
-                                    row_data_customerAddress.setAttribute('scope', 'col');
-
-                                    let row_data_customerContact = document.createElement('td');
-                                    row_data_customerContact.innerHTML = json_responsetn.data[0].customer_phone;
-                                    row_data_customerContact.setAttribute('scope', 'col');
-
-                                    let row_data_valueBND = document.createElement('td');
-                                    row_data_valueBND.innerHTML = json_responsetn.data[0].custom_field[15].data;
-                                    row_data_valueBND.setAttribute('scope', 'col');
-                                    row_data_valueBND.setAttribute('name', 'cashValueRow');
-
-                                    let row_data_paymentMethod = document.createElement('td');
-                                    row_data_paymentMethod.innerHTML = json_responsetn.data[0].custom_field[11].data;
-                                    row_data_paymentMethod.setAttribute('scope', 'col');
-
-                                    let row_data_deliveryType = document.createElement('td');
-                                    row_data_deliveryType.innerHTML = json_responsetn.data[0].custom_field[9].data;
-                                    row_data_deliveryType.setAttribute('scope', 'col');
-
-                                    let row_data_empty1 = document.createElement('td');
-                                    row_data_empty1.setAttribute('scope', 'col');
-
-                                    let taskRow = document.createElement('tr');
-                                    taskRow.setAttribute("name", "taskRow");
-
-                                    let row_data_number = document.createElement('td');
-                                    row_data_number.innerHTML = (countTN + 2) + ".";
-                                    row_data_number.setAttribute('scope', 'col');
-
-                                    let row_data_trackingNumber = document.createElement('td');
-                                    row_data_trackingNumber.setAttribute("name", "trackingNumberRow");
-                                    row_data_trackingNumber.setAttribute('scope', 'col');
-
-                                    let trackingNumberInputTemp = document.createElement('input');
-                                    trackingNumberInputTemp.setAttribute("type", "text");
-                                    trackingNumberInputTemp.setAttribute("class", "form-control");
-                                    trackingNumberInputTemp.setAttribute("name", "trackingNumberTemp");
-                                    trackingNumberInputTemp.setAttribute("id", "trackingNumberTemp");
-                                    trackingNumberInputTemp.setAttribute("aria-describedby", "trackingNumberHelp");
-                                    trackingNumberInputTemp.setAttribute("placeholder", "Enter Tracking Number");
-                                    trackingNumberInputTemp.setAttribute("maxlength", "13");
-                                    trackingNumberInputTemp.setAttribute("disabled", "true");
-                                    trackingNumberInputTemp.setAttribute("onkeyup", "checkTrackingNum(this, 'trackingNumberTemp')");
-
-                                    let row_data_empty2 = document.createElement('td');
-                                    row_data_empty2.setAttribute('colspan', '2');
-                                    row_data_empty2.setAttribute('scope', 'col');
-
-                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_empty0);
-                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_fridgeItem);
-                                    document.getElementsByName("fridgeItemRow")[(countTN)].appendChild(divfridgeItem);
-                                    document.getElementsByName("divfridgeItemRow")[(countTN)].appendChild(fridgeItemToggle);
-                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_customerName);
-                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_customerAddress);
-                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_customerContact);
-                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_valueBND);
-                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_paymentMethod);
-                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_deliveryType);
-                                    document.getElementsByName("taskRow")[countTN].appendChild(row_data_empty1);
-
-                                    document.getElementById("taskBody").appendChild(taskRow);
-
-                                    document.getElementsByName("taskRow")[(countTN + 1)].appendChild(row_data_number);
-                                    document.getElementsByName("taskRow")[(countTN + 1)].appendChild(row_data_trackingNumber);
-                                    document.getElementsByName("trackingNumberRow")[(countTN + 1)].appendChild(trackingNumberInputTemp);
-
-                                    document.getElementById("taskBody").style.textAlign = "center";
-
-                                    //Input field data
-                                    let hiddenFormDataRow = document.createElement('div');
-                                    hiddenFormDataRow.setAttribute("name", "hiddenFormDataRow");
-                                    document.getElementById("hiddenFormData").appendChild(hiddenFormDataRow);
-
-                                    let numberInput = document.createElement('input');
-                                    numberInput.setAttribute("type", "text");
-                                    numberInput.setAttribute("name", "numbers");
-                                    numberInput.setAttribute("value", (countTN + 1) + ".");
-
-                                    let trackingNumberInput = document.createElement('input');
-                                    trackingNumberInput.setAttribute("type", "text");
-                                    trackingNumberInput.setAttribute("name", "trackingNumber");
-                                    trackingNumberInput.setAttribute("value", json_responsetn.data[0].job_id);
-
-                                    let contactNameInput = document.createElement('input');
-                                    contactNameInput.setAttribute("type", "text");
-                                    contactNameInput.setAttribute("name", "contactName");
-                                    contactNameInput.setAttribute("value", json_responsetn.data[0].customer_username);
-
-                                    let contactAddressInput = document.createElement('input');
-                                    contactAddressInput.setAttribute("type", "text");
-                                    contactAddressInput.setAttribute("name", "contactAddress");
-                                    contactAddressInput.setAttribute("value", json_responsetn.data[0].job_address);
-
-                                    let contactNumberInput = document.createElement('input');
-                                    contactNumberInput.setAttribute("type", "text");
-                                    contactNumberInput.setAttribute("name", "contactNumber");
-                                    contactNumberInput.setAttribute("value", json_responsetn.data[0].customer_phone);
-
-                                    let parcelValueInput = document.createElement('input');
-                                    parcelValueInput.setAttribute("type", "text");
-                                    parcelValueInput.setAttribute("name", "parcelValue");
-                                    parcelValueInput.setAttribute("value", json_responsetn.data[0].custom_field[15].data);
-
-                                    let PaymentMethodInput = document.createElement('input');
-                                    PaymentMethodInput.setAttribute("type", "text");
-                                    PaymentMethodInput.setAttribute("name", "PaymentMethod");
-                                    PaymentMethodInput.setAttribute("value", json_responsetn.data[0].custom_field[11].data);
-
-                                    let deliveryTypeInput = document.createElement('input');
-                                    deliveryTypeInput.setAttribute("type", "text");
-                                    deliveryTypeInput.setAttribute("name", "deliveryType");
-                                    deliveryTypeInput.setAttribute("value", json_responsetn.data[0].custom_field[9].data);
-
-                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(numberInput);
-                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(trackingNumberInput);
-                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(contactNameInput);
-                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(contactAddressInput);
-                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(contactNumberInput);
-                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(parcelValueInput);
-                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(PaymentMethodInput);
-                                    document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(deliveryTypeInput);
-
-                                    countTN = countTN + 1;
-
-                                    $("#deleteRow").fadeIn();
-
-                                    countContent = countContent + 1;
-                                    printDone = 1;
-
-                                    var assignTaskToAgent = 0;
-                                    var assignDateTimeToTask = 0;
-
-                                    document.getElementById("newTrackingNumber").value = json_responsetn.data[0].job_id;
-
-                                    if (assignTaskToAgent == 0) {
-                                        request.open('POST', 'https://api.tookanapp.com/v2/assign_task');
-                                        request.setRequestHeader('Content-Type', 'application/json');
-
-                                        request.onreadystatechange = function () {
-                                            if ((this.readyState === 4) && (assignTaskToAgent == 0)) {
-                                                console.log('Status:', this.status);
-                                                console.log('Headers:', this.getAllResponseHeaders());
-                                                console.log('Body:', this.responseText);
-
-                                                request.open('POST', 'https://api.tookanapp.com/v2/change_job_date');
-                                                request.setRequestHeader('Content-Type', 'application/json');
-
-                                                request.onreadystatechange = function () {
-                                                    if ((this.readyState === 4) && (assignDateTimeToTask == 0)) {
-                                                        console.log('Status:', this.status);
-                                                        console.log('Headers:', this.getAllResponseHeaders());
-                                                        console.log('Body:', this.responseText);
-
-                                                        assignDateTimeToTask = 1;
-                                                        endLoop = 1;
-
-                                                        $("#loadingTN").hide();
-
-                                                        document.getElementById("trackingNumberTemp").disabled = false;
-
-                                                        document.getElementById("trackingNumberTemp").focus();
-                                                    }
-                                                };
-
-                                                var body = {
-                                                    'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
-                                                    "job_ids": [document.getElementById("newTrackingNumber").value],
-                                                    'layout_type': 0,
-                                                    'start_time': document.getElementById("dateTimeStart").value,
-                                                    'end_time': document.getElementById("dateTimeClose").value
-                                                };
-                                                request.send(JSON.stringify(body));
-
-                                                assignTaskToAgent = 1;
-                                            }
-                                        };
-
-                                        var body = {
-                                            'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
-                                            'job_id': document.getElementById("newTrackingNumber").value,
-                                            'fleet_id': document.getElementById("agentName").value,
-                                            'team_id': '921691',
-                                            'job_status': '0'
-                                        };
-                                        request.send(JSON.stringify(body));
-                                    }
-                                }
-
-                                if (json_responsetn.status == 404) {
-                                    document.getElementById("trackingNumberTemp").value = "";
-
-                                    $("#loadingTN").hide();
-                                    $("#wronginput").fadeIn();
-                                    document.getElementById("trackingNumberTemp").disabled = false;
-                                }
-                            }
-                        };
-
-                        var body = {
-                            'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
-                            'order_ids': [document.getElementById("trackingNumberTemp").value.trim()],
-                            'include_task_history': 1
-                        };
-                        request.send(JSON.stringify(body));
-                    }
-
-                    if ((checkDuplicate == 1) && (endLoop == 0)) {
-                        document.getElementById("trackingNumberTemp").value = "";
-
-                        $("#loadingTN").hide();
-                        $("#duplicateinput").fadeIn();
-                        document.getElementById("trackingNumberTemp").disabled = false;
-
-                        endLoop = 1;
-                    }
-                }
-            }
-
             document.addEventListener("DOMContentLoaded", function (event) {
                 document.getElementById("trackingNumberTemp").disabled = true;
+
+                let countTN = 0;
+                let endLoop = 0;
+                let countContent = 0;
+                let checkDuplicate = 0;
+                let printDone = 0;
+
+                var responsetn = '';
+                var json_responsetn = '';
+
                 $("#loadingTN").hide();
                 $("#loadingSubmit").hide();
                 $("#wronginput").hide();
@@ -528,8 +243,273 @@
                         $("#scanAgain").hide();
                         $("#submitBtn").hide();
 
+                        const repeatCheck = setInterval(checkTrackingNum, 5000);
+
                         document.getElementById("trackingNumberTemp").disabled = false;
                         document.getElementById("trackingNumberTemp").focus();
+                    }
+                }
+
+                //Scanned tracking number
+                function checkTrackingNum() {
+                    if (document.getElementById("trackingNumberTemp").value.length >= 12) {
+                        document.getElementById("trackingNumberTemp").disabled = true;
+                        endLoop = 0;
+                        checkDuplicate = 0;
+                        printDone = 0;
+
+                        $("#wronginput").hide();
+                        $("#duplicateinput").hide();
+                        $("#loadingTN").fadeIn();
+
+                        //check duplicate
+                        if (document.getElementsByName('trackingNumberRow').length > 1) {
+                            for (let i = 0; i < document.getElementsByName('trackingNumberRow').length; i++) {
+                                if ((document.getElementById("trackingNumberTemp").value.trim()) == document.getElementsByName('trackingNumberRow')[i].innerHTML) {
+                                    checkDuplicate = 1;
+                                    i = document.getElementsByName('trackingNumberRow').length;
+                                }
+                            }
+                        }
+
+                        //retrieve data from Tookan
+                        if ((checkDuplicate == 0) && (endLoop == 0) && (printDone == 0)) {
+                            var request = new XMLHttpRequest();
+                            request.open('POST', 'https://api.tookanapp.com/v2/get_job_details_by_order_id');
+                            request.setRequestHeader('Content-Type', 'application/json');
+
+                            request.onreadystatechange = function () {
+                                if ((this.readyState === 4) && (endLoop == 0) && (printDone == 0)) {
+                                    console.log('Status:', this.status);
+                                    console.log('Headers:', this.getAllResponseHeaders());
+                                    console.log('Body:', this.responseText);
+
+                                    responsetn = this.responseText;
+                                    json_responsetn = JSON.parse(responsetn);
+
+                                    if ((json_responsetn.status != 404) && (printDone == 0)) {
+                                        //Table data
+                                        document.getElementsByName("trackingNumberRow")[countTN].innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].job_id;
+
+                                        let row_data_empty0 = document.createElement('td');
+                                        row_data_empty0.setAttribute('scope', 'col');
+
+                                        let row_data_customerName = document.createElement('td');
+                                        row_data_customerName.innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].customer_username;
+                                        row_data_customerName.setAttribute('scope', 'col');
+
+                                        let row_data_customerAddress = document.createElement('td');
+                                        row_data_customerAddress.innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].job_address;
+                                        row_data_customerAddress.setAttribute('scope', 'col');
+
+                                        let row_data_customerContact = document.createElement('td');
+                                        row_data_customerContact.innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].customer_phone;
+                                        row_data_customerContact.setAttribute('scope', 'col');
+
+                                        let row_data_valueBND = document.createElement('td');
+                                        row_data_valueBND.innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].custom_field[2].data;
+                                        row_data_valueBND.setAttribute('scope', 'col');
+                                        row_data_valueBND.setAttribute('name', 'cashValueRow');
+
+                                        let row_data_paymentMethod = document.createElement('td');
+                                        row_data_paymentMethod.innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].custom_field[1].data;
+                                        row_data_paymentMethod.setAttribute('scope', 'col');
+
+                                        let row_data_deliveryType = document.createElement('td');
+                                        row_data_deliveryType.innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].job_description;
+                                        row_data_deliveryType.setAttribute('scope', 'col');
+
+                                        let row_data_empty1 = document.createElement('td');
+                                        row_data_empty1.setAttribute('scope', 'col');
+
+                                        let taskRow = document.createElement('tr');
+                                        taskRow.setAttribute("name", "taskRow");
+
+                                        let row_data_number = document.createElement('td');
+                                        row_data_number.innerHTML = (countTN + 2) + ".";
+                                        row_data_number.setAttribute('scope', 'col');
+
+                                        let row_data_trackingNumber = document.createElement('td');
+                                        row_data_trackingNumber.setAttribute("name", "trackingNumberRow");
+                                        row_data_trackingNumber.setAttribute('scope', 'col');
+
+                                        let trackingNumberInputTemp = document.createElement('input');
+                                        trackingNumberInputTemp.setAttribute("type", "text");
+                                        trackingNumberInputTemp.setAttribute("class", "form-control");
+                                        trackingNumberInputTemp.setAttribute("name", "trackingNumberTemp");
+                                        trackingNumberInputTemp.setAttribute("id", "trackingNumberTemp");
+                                        trackingNumberInputTemp.setAttribute("aria-describedby", "trackingNumberHelp");
+                                        trackingNumberInputTemp.setAttribute("placeholder", "Enter Tracking Number");
+                                        trackingNumberInputTemp.setAttribute("disabled", "true");
+
+                                        let row_data_empty2 = document.createElement('td');
+                                        row_data_empty2.setAttribute('colspan', '2');
+                                        row_data_empty2.setAttribute('scope', 'col');
+
+                                        document.getElementsByName("taskRow")[countTN].appendChild(row_data_empty0);
+                                        document.getElementsByName("taskRow")[countTN].appendChild(row_data_customerName);
+                                        document.getElementsByName("taskRow")[countTN].appendChild(row_data_customerAddress);
+                                        document.getElementsByName("taskRow")[countTN].appendChild(row_data_customerContact);
+                                        document.getElementsByName("taskRow")[countTN].appendChild(row_data_valueBND);
+                                        document.getElementsByName("taskRow")[countTN].appendChild(row_data_paymentMethod);
+                                        document.getElementsByName("taskRow")[countTN].appendChild(row_data_deliveryType);
+                                        document.getElementsByName("taskRow")[countTN].appendChild(row_data_empty1);
+
+                                        document.getElementById("taskBody").appendChild(taskRow);
+
+                                        document.getElementsByName("taskRow")[(countTN + 1)].appendChild(row_data_number);
+                                        document.getElementsByName("taskRow")[(countTN + 1)].appendChild(row_data_trackingNumber);
+                                        document.getElementsByName("trackingNumberRow")[(countTN + 1)].appendChild(trackingNumberInputTemp);
+
+                                        document.getElementById("taskBody").style.textAlign = "center";
+
+                                        //Input field data
+                                        let hiddenFormDataRow = document.createElement('div');
+                                        hiddenFormDataRow.setAttribute("name", "hiddenFormDataRow");
+                                        document.getElementById("hiddenFormData").appendChild(hiddenFormDataRow);
+
+                                        let numberInput = document.createElement('input');
+                                        numberInput.setAttribute("type", "text");
+                                        numberInput.setAttribute("name", "numbers");
+                                        numberInput.setAttribute("value", (countTN + 1) + ".");
+
+                                        let trackingNumberInput = document.createElement('input');
+                                        trackingNumberInput.setAttribute("type", "text");
+                                        trackingNumberInput.setAttribute("name", "trackingNumber");
+                                        trackingNumberInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].job_id);
+
+                                        let contactNameInput = document.createElement('input');
+                                        contactNameInput.setAttribute("type", "text");
+                                        contactNameInput.setAttribute("name", "contactName");
+                                        contactNameInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].customer_username);
+
+                                        let contactAddressInput = document.createElement('input');
+                                        contactAddressInput.setAttribute("type", "text");
+                                        contactAddressInput.setAttribute("name", "contactAddress");
+                                        contactAddressInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].job_address);
+
+                                        let contactNumberInput = document.createElement('input');
+                                        contactNumberInput.setAttribute("type", "text");
+                                        contactNumberInput.setAttribute("name", "contactNumber");
+                                        contactNumberInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].customer_phone);
+
+                                        let parcelValueInput = document.createElement('input');
+                                        parcelValueInput.setAttribute("type", "text");
+                                        parcelValueInput.setAttribute("name", "parcelValue");
+                                        parcelValueInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].custom_field[2].data);
+
+                                        let PaymentMethodInput = document.createElement('input');
+                                        PaymentMethodInput.setAttribute("type", "text");
+                                        PaymentMethodInput.setAttribute("name", "PaymentMethod");
+                                        PaymentMethodInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].custom_field[1].data);
+
+                                        let deliveryTypeInput = document.createElement('input');
+                                        deliveryTypeInput.setAttribute("type", "text");
+                                        deliveryTypeInput.setAttribute("name", "deliveryType");
+                                        deliveryTypeInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].job_description);
+
+                                        document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(numberInput);
+                                        document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(trackingNumberInput);
+                                        document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(contactNameInput);
+                                        document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(contactAddressInput);
+                                        document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(contactNumberInput);
+                                        document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(parcelValueInput);
+                                        document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(PaymentMethodInput);
+                                        document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(deliveryTypeInput);
+
+                                        countTN = countTN + 1;
+
+                                        $("#deleteRow").fadeIn();
+
+                                        countContent = countContent + 1;
+                                        printDone = 1;
+
+                                        var assignTaskToAgent = 0;
+                                        var assignDateTimeToTask = 0;
+
+                                        document.getElementById("newTrackingNumber").value = json_responsetn.data[(json_responsetn.data.length)-1].job_id;
+
+                                        if (assignTaskToAgent == 0) {
+                                            request.open('POST', 'https://api.tookanapp.com/v2/assign_task');
+                                            request.setRequestHeader('Content-Type', 'application/json');
+
+                                            request.onreadystatechange = function () {
+                                                if ((this.readyState === 4) && (assignTaskToAgent == 0)) {
+                                                    console.log('Status:', this.status);
+                                                    console.log('Headers:', this.getAllResponseHeaders());
+                                                    console.log('Body:', this.responseText);
+
+                                                    request.open('POST', 'https://api.tookanapp.com/v2/change_job_date');
+                                                    request.setRequestHeader('Content-Type', 'application/json');
+
+                                                    request.onreadystatechange = function () {
+                                                        if ((this.readyState === 4) && (assignDateTimeToTask == 0)) {
+                                                            console.log('Status:', this.status);
+                                                            console.log('Headers:', this.getAllResponseHeaders());
+                                                            console.log('Body:', this.responseText);
+
+                                                            assignDateTimeToTask = 1;
+                                                            endLoop = 1;
+
+                                                            $("#loadingTN").hide();
+
+                                                            document.getElementById("trackingNumberTemp").disabled = false;
+
+                                                            document.getElementById("trackingNumberTemp").focus();
+                                                        }
+                                                    };
+
+                                                    var body = {
+                                                        'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+                                                        "job_ids": [document.getElementById("newTrackingNumber").value],
+                                                        'layout_type': 0,
+                                                        'start_time': document.getElementById("dateTimeStart").value,
+                                                        'end_time': document.getElementById("dateTimeClose").value
+                                                    };
+                                                    request.send(JSON.stringify(body));
+
+                                                    assignTaskToAgent = 1;
+                                                }
+                                            };
+
+                                            var body = {
+                                                'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+                                                'job_id': document.getElementById("newTrackingNumber").value,
+                                                'fleet_id': document.getElementById("agentName").value,
+                                                'team_id': '921691',
+                                                'job_status': '0'
+                                            };
+                                            request.send(JSON.stringify(body));
+                                        }
+                                    }
+
+                                    if (json_responsetn.status == 404) {
+                                        document.getElementById("trackingNumberTemp").value = "";
+
+                                        $("#loadingTN").hide();
+                                        $("#wronginput").fadeIn();
+                                        document.getElementById("trackingNumberTemp").disabled = false;
+                                    }
+                                }
+                            };
+
+                            var body = {
+                                'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+                                'order_ids': [document.getElementById("trackingNumberTemp").value.trim()],
+                                'include_task_history': 1
+                            };
+                            request.send(JSON.stringify(body));
+                        }
+
+                        if ((checkDuplicate == 1) && (endLoop == 0)) {
+                            document.getElementById("trackingNumberTemp").value = "";
+
+                            $("#loadingTN").hide();
+                            $("#duplicateinput").fadeIn();
+                            document.getElementById("trackingNumberTemp").disabled = false;
+
+                            endLoop = 1;
+                        }
                     }
                 }
 
@@ -614,7 +594,6 @@
                     trackingNumberInputTemp.setAttribute("id", "trackingNumberTemp");
                     trackingNumberInputTemp.setAttribute("aria-describedby", "trackingNumberHelp");
                     trackingNumberInputTemp.setAttribute("placeholder", "Enter Tracking Number");
-                    trackingNumberInputTemp.setAttribute("onkeyup", "checkTrackingNum(this, 'trackingNumberTemp')");
 
                     document.getElementById("taskBody").appendChild(taskRow);
 
@@ -670,7 +649,6 @@
                             trackingNumberInputTemp.setAttribute("id", "trackingNumberTemp");
                             trackingNumberInputTemp.setAttribute("aria-describedby", "trackingNumberHelp");
                             trackingNumberInputTemp.setAttribute("placeholder", "Enter Tracking Number");
-                            trackingNumberInputTemp.setAttribute("onkeyup", "checkTrackingNum(this, 'trackingNumberTemp')");
 
                             document.getElementById("taskBody").appendChild(taskRow);
 
@@ -700,24 +678,6 @@
                     $("#scanAgain").hide();
                     $("#submitBtn").hide();
                     $("#loadingSubmit").fadeIn();
-                    for (let i = 0; i < document.getElementsByName('fridgeItemCheck').length; i++) {
-                        if (document.getElementsByName('fridgeItemCheck')[i].checked == true) {
-                            let fridgeItemInput = document.createElement('input');
-                            fridgeItemInput.setAttribute("type", "text");
-                            fridgeItemInput.setAttribute("name", "fridgeItem");
-                            fridgeItemInput.setAttribute("value", "Yes");
-
-                            document.getElementById("hiddenFridgeItemData").appendChild(fridgeItemInput);
-                        }
-                        if (document.getElementsByName('fridgeItemCheck')[i].checked == false) {
-                            let fridgeItemInput = document.createElement('input');
-                            fridgeItemInput.setAttribute("type", "text");
-                            fridgeItemInput.setAttribute("name", "fridgeItem");
-                            fridgeItemInput.setAttribute("value", "No");
-
-                            document.getElementById("hiddenFridgeItemData").appendChild(fridgeItemInput);
-                        }
-                    }
 
                     $('#submitBtnfinal').attr('disabled', false);
                     document.getElementById('submitBtnfinal').click()
