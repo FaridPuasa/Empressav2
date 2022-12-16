@@ -33,7 +33,7 @@
                 <% result.forEach(result=>{ %>
                     <% for(let i = 0; i < result.trackingNumber.length; i++){ %>
                         <tr class="rowNumber">
-                            <td name="dispatch"><%= result.agentName %><input type="hidden" name="disp" value="<%= result.agentName %>"></td>
+                            <td name="dispatch" id="dispatch"><%= result.agentName %><input type="hidden" name="disp" value="<%= result.agentName %>"></td>
                             <td name="date"><%= result.deliveryDate %></td>
                             <td><%= service %></td>
                             <td><%= result.trackingNumber[i] %></td>
@@ -102,12 +102,3 @@
 </div>
 </div>
 
-<script>
-    console.log(document.getElementsByName('formMETHOD').innertHTML)
-    console.log(document.getElementsByClassName('rowNumber').length)
-    for(i=0; i < document.getElementsByClassName('rowNumber').length; i++){
-        
-        let driver = document.getElementById('price[i]')
-        console.log(driver)
-    }
-</script>

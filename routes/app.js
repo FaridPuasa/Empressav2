@@ -171,6 +171,10 @@ const { selfCollect } = require('../controller/withdraw')
     4. logout
     5. Hosting
     6. wellous flow ??
+
+    notes:
+    1. Insert Done for restock and pickup (status to be added)
+    
 */
 
 //User and Login

@@ -24,9 +24,9 @@
                                     </tr>
                                     <tr>
                                         <th colspan="2">Date:</th>
-                                        <th><input type="date" class="form-control" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value=""></th>
+                                        <th><input type="date" class="form-control" name="pickupDate" id="pickupDate" aria-describedby="contactHelp" value=""></th>
                                         <th>Location:</th>
-                                        <th><input type="text" class="form-control" name="formMETHOD" id="formMETHOD" aria-describedby="contactHelp" value=""></th>
+                                        <th><input type="text" class="form-control" name="location" id="location" aria-describedby="contactHelp" value=""></th>
                                         <th>
                                             <span>
                                                 GR/LOC/PO:&nbsp;&nbsp;&nbsp;<%= sequence %>
@@ -101,10 +101,10 @@
                                 </a>
                             </div>
 
-                            <input type="hidden" class="form-control form-control-user" name="method" id="method" aria-describedby="contactHelp" value="pod_JPMC">
+                            <input type="hidden" class="form-control form-control-user" name="method" id="method" aria-describedby="contactHelp" value="pickupOrder">
 
                             <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">submit</button>
+                                <button class="btn btn-primary">Submit</button>
                             </div>
                         </div>
                     </form>

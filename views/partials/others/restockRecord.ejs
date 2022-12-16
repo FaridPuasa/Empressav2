@@ -1,8 +1,9 @@
+       
 <div class="container-fluid">
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary text-center">ZALORA | PROOF OF DELIVERY LIST</h6>
+            <h6 class="m-0 font-weight-bold text-primary text-center">RESTOCK LIST</h6>
         </div>
         
         <div class="card-body">
@@ -35,10 +36,10 @@
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>Pod ID</th>
+                                        <th>Restock ID</th>
                                         <th>Made By</th>
                                         <th>Dispatch</th>
-                                        <th>Area</th>
+                                        <th>Location</th>
                                         <th>Delivery Date</th>
                                         <th>Status</th>
                                     </tr>
@@ -53,45 +54,45 @@
                                                 </svg>
                                             </button>
                                         </td>
-                                        <td class="podid"><%= document.pod_id %></td>
+                                        <td class="podid"><%= document.restock_id %></td>
                                         <td class="madeby"><%= document.madeby %></td>
                                         <td class="agentName"><%= document.agentName %></td>
-                                        <td class="deliveryArea"><%= document.deliveryArea %></td>
-                                        <td class="deliveryDate"><%= document.deliveryDate %></td>
+                                        <td class="location"><%= document.location %></td>
+                                        <td class="restockDate"><%= document.restockDate %></td>
                                         <td class="podstatus">
-                                            <% if(document.podstatus == "P1"){%>
+                                            <% if(document.status == "P1"){%>
                                                 ON HOLD
                                             <%}%>
-                                            <% if(document.podstatus == "P2"){%>
+                                            <% if(document.status == "P2"){%>
                                                 IN PROGRESS
                                             <%}%>
-                                            <% if(document.podstatus == "P3"){%>
+                                            <% if(document.status == "P3"){%>
                                                 COMPLETE
                                             <%}%>
                                         </td>
                                         <% if (user.role == "11" || user.role == "13" || user.role == "10") { %>
-                                        <form action="/update-POD-fmx" method="POST">
-                                            <% if(document.podstatus == "P1"){%>
+                                        <form action="/update-POD-moh" method="POST">
+                                            <% if(document.status == "P1"){%>
                                                 <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
                                                 <input type="hidden" name="pod_status" value="P2">
-                                                <td><button class="btn btn-primary delivery-btn">Start Delivery</button></td>
+                                                <td><button class="btn btn-primary delivery-btn">Start Restock Order</button></td>
                                             <%}%>
-                                            <% if(document.podstatus == "P2"){%>
+                                            <% if(document.status == "P2"){%>
                                                 <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
                                                 <input type="hidden" name="pod_status" value="P3">
-                                                <td><button class="btn btn-primary delivery-btn">Complete Delivery</button></td>
+                                                <td><button class="btn btn-primary delivery-btn">Complete Restock Order</button></td>
                                             <%}%>
-                                            <% if(document.podstatus == "P3"){%>
+                                            <% if(document.status == "P3"){%>
                                                 <td><button class="btn btn-primary delivery-btn invisible">Completed</button></td>
                                             <%}%>
                                         </form>
-                                        <% } %>
+                                        <%}%>
                                     </tr>
                                 </div>
                                         
                                     <tr>
                                         <td colspan="12" class="hiddenRow">
-                                            <form method="POST" action="/finance-edit-fmx">
+                                            <form method="POST" action="/finance-edit-moh">
                                             <div class="accordian-body collapse" id="demo1">
                                                 <div class="inner" id="inner<%= k %>">
                                                 
@@ -101,7 +102,6 @@
                                                             <th>No.</th>
                                                             <th>T/N</th>
                                                             <th>Item with Me</th>
-                                                            <th>Fridge Item</th>	
                                                             <th>Customer Name</th>
                                                             <th>Customer Address</th>		
                                                             <th>Customer Contact</th>	
@@ -117,14 +117,13 @@
                                                     <tbody>
                                                         <% for(let i=0 ; i < document.numbers.length; i++) {%>
                                                         <tr data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
-                                                            <td><%= document.numbers[i] %></td>
-                                                            <td><%= document.trackingNumber[i] %></td>
-                                                            <td></td>
-                                                            <td><%= document.fridge[i] %></td>
-                                                            <td><%= document.contactName[i] %></td>
-                                                            <td><%= document.contactAddress[i] %></td>
-                                                            <td><%= document.contactNumber[i] %></td>
-                                                            <td><%= document.parcelValue[i] %></td>
+                                                            <td><%= document.numbering[i] %></td>
+                                                            <td><%= document.serviceType[i] %></td>
+                                                            <td><%= document.customerName[i] %></td>
+                                                            <td><%= document.customerAddress[i] %></td>
+                                                            <td><%= document.customerContact[i] %></td>
+                                                            <td><%= document.pickupQuantity[i] %></td>
+                                                            <td><%= document.itemValue[i] %></td>
                                                             <td><%= document.PaymentMethod[i] %></td>
                                                             <td>
                                                                 <% if (user.role == "12" || user.role == "10") { %>
@@ -134,11 +133,7 @@
                                                                     <%= document.financeNotes[i] %>
                                                                 <% } %>
                                                             </td>
-                                                            <td><%= document.deliveryType[i] %></td>
-                                                                <!--If complete button show-->
-                                                                <% if(document.podstatus == "P3"){%>
-                                                                    <td><button class="btn btn-primary delivery-btn">Completed</button></td>
-                                                                <%}%>
+                                                            <td></td>
                                                             <td></td>
                                                         </tr>
                                                         <%}%>
