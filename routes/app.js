@@ -166,16 +166,18 @@ const {
 const { selfCollect, reentry } = require('../controller/withdraw')
 
 /*
-    1. Email to notify new pod created
-    2. inventory out >>>> restock & pickup pages and fucntions >>>> organized scripts >>>> Add total to POD and pod editable by Managers & Admin. >>>> Add in breakdown to finance summary >>>> change from POD to warehouse
-    3. beta test
-    4. logout
-    5. Hosting
-    6. wellous flow ??
-
     notes:
-    1. Insert Done for restock and pickup (status to be added)
-
+    1. Insert Done for restock and pickup (Done)
+    2. Add total to POD and pod editable by Managers & Admin. (Editable part)
+    3. Add in breakdown to finance summary (Syahmi)
+    4. Change from POD to warehouse (In Progress)
+    5. Inventory Out (In Progress) //logic
+    6. Email to notify new pod created (Using changestream to database and emit)
+    7. Logout (Done)
+    8. Hosting (Heroku) (Today after meeting)
+    9. Beta Test
+    10. Wellous (On Hold TBC)
+    11. Dashboard (Restructure)
 */
 
 //User and Login
