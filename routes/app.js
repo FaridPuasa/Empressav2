@@ -174,7 +174,17 @@ const { selfCollect, reentry } = require('../controller/withdraw')
     6. wellous flow ??
 
     notes:
-    1. Insert Done for restock and pickup (status to be added)
+    1. Insert Done for restock and pickup (Done)
+    2. Add total to POD and pod editable by Managers & Admin. (Editable part)
+    3. Add in breakdown to finance summary (Syahmi)
+    4. Change from POD to warehouse (In Progress)
+    5. Inventory Out (In Progress)
+    6. Email to notify new pod created (Using changestream to database and emit)
+    7. Logout (Done)
+    8. Hosting (Heroku)
+    9. Beta Test
+    10. Wellous (On Hold TBC)
+    11. Dashboard (Restructure)
 
 */
 
