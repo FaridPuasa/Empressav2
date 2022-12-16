@@ -1147,6 +1147,16 @@ const wellousPage = (req,res)=> {
     })
 }
 
+const stockPageOut = (req,res)=> {
+    let user = currentUser[0]
+    res.render('selfcollect', {
+        title: "Self-Collect",
+        partials: "./partials/selfcollect/findinventory.ejs",
+        moment: moment,
+        user
+    })
+}
+
 module.exports = {
     dashboard,
     service,
@@ -1172,4 +1182,5 @@ module.exports = {
     wellousPage,
     pickupRecord,
     restockRecord,
+    stockPageOut,
 }
