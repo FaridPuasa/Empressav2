@@ -1157,6 +1157,16 @@ const stockPageOut = (req,res)=> {
     })
 }
 
+const reentryPage = (req,res)=> {
+    let user = currentUser[0]
+    res.render('itemin', {
+        title: "Re-entry",
+        partials: "./partials/itemin/reentry.ejs",
+        moment: moment,
+        user
+    })
+}
+
 module.exports = {
     dashboard,
     service,
@@ -1183,4 +1193,5 @@ module.exports = {
     pickupRecord,
     restockRecord,
     stockPageOut,
+    reentryPage
 }

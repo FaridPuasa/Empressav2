@@ -99,8 +99,40 @@ const selfCollect = ((req,res) =>{
     })
 })
 
+const reentry = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let filter = data.trackingNumber
+    let option = {upsert: false, new: false}
+    let update = {
+        currentStatus: "A3",
+        lastUpdate: date,
+        $push:{
+            history: {
+                statusDetail: "A3", 
+                dateUpdated: date,
+                updateBy: data.updateById, 
+                updateById: data.uid, 
+            }
+        }
+    }
+    console.log(filter)
+    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+        if(err){
+            console.log(err)
+            res.flash('error', `${tracker} failed to update to DB.`)
+            res.redirect('/re-entry')
+        }
+        else {
+            console.log(result)
+            res.flash('success', `${tracker} has been updated.`)
+            res.redirect('/re-entry')
+        }
+    })
+})
+
 module.exports = {
     itemWithdraw,
     selfCollect,
-    
+    reentry
 }
