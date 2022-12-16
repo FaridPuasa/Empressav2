@@ -58,7 +58,7 @@
                                         <td class="madeby"><%= document.madeby %></td>
                                         <td class="agentName"><%= document.agentName %></td>
                                         <td class="location"><%= document.location %></td>
-                                        <td class="restockDate"><%= document.restockDate %></td>
+                                        <td class="restockDate"><%= document.pickupDate %></td>
                                         <td class="podstatus">
                                             <% if(document.status == "P1"){%>
                                                 ON HOLD
@@ -100,10 +100,12 @@
                                                     <thead>
                                                         <tr class="info">
                                                             <th>No.</th>
-                                                            <th>Product Brand</th>
-                                                            <th>Prodruct Name</th>
-                                                            <th>Product Category</th>
-                                                            <th>Restock Quantity</th>
+                                                            <th>Service Type</th>
+                                                            <th>Customer Name</th>
+                                                            <th>Customer Address</th>		
+                                                            <th>Customer Contact</th>
+                                                            <th>Pickup Quantity</th>	
+                                                            <th>Value (BND)</th>	
                                                         </tr>
                                                     </thead>	
                                                                         
@@ -111,10 +113,12 @@
                                                         <% for(let i=0 ; i < document.numbers.length; i++) {%>
                                                         <tr data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
                                                             <td><%= document.numbering[i] %></td>
-                                                            <td><%= document.productBrand[i] %></td>
-                                                            <td><%= document.productName[i] %></td>
-                                                            <td><%= document.productCategory[i] %></td>
-                                                            <td><%= document.productQuantity[i] %></td>
+                                                            <td><%= document.serviceType[i] %></td>
+                                                            <td><%= document.customerName[i] %></td>
+                                                            <td><%= document.customerAddress[i] %></td>
+                                                            <td><%= document.customerContact[i] %></td>
+                                                            <td><%= document.pickupQuantity[i] %></td>
+                                                            <td><%= document.itemValue[i] %></td>
                                                         </tr>
                                                         <%}%>
                                                     </tbody>

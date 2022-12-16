@@ -154,7 +154,8 @@ const {
     wellousPage,
     miscPage,
     miscPageOut,
-    stockPageOut
+    stockPageOut,
+    reentryPage
 } = require('../controller/page')
 
 const {
@@ -162,7 +163,7 @@ const {
     withdrawMisc
 } = require('../controller/misc')
 
-const { selfCollect } = require('../controller/withdraw')
+const { selfCollect, reentry } = require('../controller/withdraw')
 
 /*
     1. Email to notify new pod created
@@ -174,7 +175,7 @@ const { selfCollect } = require('../controller/withdraw')
 
     notes:
     1. Insert Done for restock and pickup (status to be added)
-    
+
 */
 
 //User and Login
@@ -209,6 +210,7 @@ router.get('/wellous', wellousPage)//Item entry for Wellous
 router.get('/misc', miscPage)//Item entry for Miscellaneous
 router.get('/misc-out', miscPageOut)//Item exit for Miscellaneous
 router.get('/stock-out', stockPageOut)//Item exit for Miscellaneous
+router.get('/re-entry', reentryPage)//Item entry for returning back to WH
 router.post('/success-entry-zalora', insertZalora)//ZALORA Save to Warehouse DB
 router.post('/success-entry-pharmacy', insertPharmacy)//MOH,JPMC,PANAGA Save to Warehouse DB
 router.post('/success-entry-local', insertLocal)//LOCAL Save to Warehouse DB
@@ -222,6 +224,7 @@ router.post('/success-entry-misc', insertMisc)//MISC save to misc DB
 router.post('/success-instock', insertStock)//INSTOCK save to inventory DB
 router.post('/success-collection', selfCollect)//Update self collect
 router.post('/success-miscellaneous-out', withdrawMisc)//Update misc out
+router.post('/success-reentry', reentry)//Update misc out
 
 //Item List 
 router.get('/:services-list', itemList)//Item list by services page
