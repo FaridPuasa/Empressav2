@@ -64,16 +64,32 @@ function addRowToPod() {
 }
 </script>
 
-<script src="/public/js/wellous.js"></script>
+<script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+<script type="text/javascript">
+    const socket = io('http://localhost:5000/')
+    socket.on('connection')
 
-<script>
-    console.log(document.getElementById('dispatch').innertHTML)
-    console.log(document.getElementsByClassName('rowNumber').length)
-    for(i=0; i < document.getElementsByClassName('rowNumber').length; i++){
-        
-        let driver = document.getElementById('price[i]')
-        console.log(driver)
-    }
+    socket.on('notification', (data)=>{
+        let count = Object.keys(data).length;
+        let service = document.getElementById('serviceType')
+        let notification = document.getElementById('noti')
+        //let numbering = document.getElementsByClassName('numbers')
+
+        if(data.operationType == "insert"){
+            //document.getElementsByClassName('numbers').innerText = count
+            notification.innerText = data.fullDocument.trackingNumber + " has been added."
+            service.innerText = data.fullDocument.service + " Entry"
+            //console.log(numbering)
+        }
+
+
+        console.log(data)
+        console.log(data.operationType)
+        console.log(count)
+        console.log(data.fullDocument.service)
+        console.log(data.fullDocument.trackingNumber)
+    })
+
 </script>
 
 <!--<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>

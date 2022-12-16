@@ -8,6 +8,7 @@ const socketIO = require('socket.io')
 const http = require('http')
 const moment = require('moment')
 const flash = require('connect-flash')
+const nodemailer = require('nodemailer')
 const store = new session.MemoryStore
 //Server setup
 let server = http.createServer(app)
@@ -57,26 +58,24 @@ app.get('/', (req,res)=>{
 })
 */
 
-//const inventories = require('./models/inventories')
+const mohPodDB = require ('./models/mohpod')
+const jpmcPodDB = require('./models/jpmcpod')
+const panagaPodDB = require('./models/panagapod')
+const zaloraPodDB = require('./models/zalorapod')
+const localPodDB = require('./models/localpod')
+const tmxPodDB = require('./models/tmxpod')
+const fmxPodDB = require('./models/fmxpod')
+const grpPodDB = require('./models/grppod')
+const runnerPodDB = require('./models/runnerpod')
+const personalPodDB = require('./models/personalpod')
+const warehouseDB = require('./models/warehouseInventory')
+const waybillDB = require('./models/restock')
+const stockDB = require('./models/stocks')
+const pickupDB = require ('./models/pickup')
 
-//const cs = inventories.watch()
+const cs = warehouseDB.watch()
+const podMohWatch = mohPodDB.watch()
 
-/*
-// server setup
-io.on('connect', socket =>{
-    console.log("User Connected")
-    socket.on('disconnect', ()=>{
-        console.log("User Disconnected")
-    })
-})
-
-cs.on('change', change =>{
-    io.emit('changeData', change)
-    console.log(JSON.stringify(change))
-})
-*/
-
-const nodemailer = require('nodemailer')
 const trasporter = nodemailer.createTransport({
     service: "gmail",
     auth:{
@@ -89,14 +88,37 @@ const options ={
     from: "it-support@globex.com.bn",
     to: "farid.puasa@globex.com.bn",
     subject: "New POD Created.",
-    text: "......."
+    text: "New POD has been created by the Operation Team. <Link>"
 }
 
-trasporter.sendMail(options, (err, info)=>{
-    if (err){
-        console.log(err)
+podMohWatch.on('change', change =>{
+    if (change){
+        console.log("executing sending mail")
+        trasporter.sendMail(options, (err, info)=>{
+            if (err){
+                console.log(err)
+            }
+            console.log(info.response)
+        })
     }
-    console.log(info.response)
+    else{
+        console.log("no mail send")
+    }
+    //io.emit('changeData', change)
+    //console.log(JSON.stringify(change))
+})
+
+// server setup
+io.on('connection', (socket) =>{
+    console.log("Socket Connected" + socket.id)
+
+    
+    
+})
+
+cs.on('change', change =>{
+    io.emit('notification', change)
+    console.log(JSON.stringify(change))
 })
 
 const PORT = process.env.PORT || 5000;

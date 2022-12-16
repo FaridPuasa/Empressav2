@@ -22,7 +22,7 @@ const moment = require('moment')
 */
 
 const insertPharmacy = ((req,res)=> {
-    let date = moment().format("DD/MM/YYYY, h:mm:ss a")
+    let date = moment().format("DD/MM/YYYY")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
     let status = "A2"
@@ -70,9 +70,9 @@ const insertPharmacy = ((req,res)=> {
     warehouse.save(err=>{
         if (err) {
             console.log (err)
-            res.flash('error', `Tracking number already exist | Require fields missing`)
+            req.flash('error', `Tracking number already exist | Require fields missing`)
             res.render('error', {
-                errorcode: 'XXX',
+                title: 'xxx',
                 response: 'Not Acceptable &#x1F62B;',
                 message: 'No worries~ database detected duplication of tracking number.'
             })

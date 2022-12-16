@@ -21,7 +21,7 @@ const userSchema  = new mongoose.Schema({
     role: reqString,
     service: {type: [String]},
     firsttime: reqString,
-    dateCreate: {type: Date, default: date},
+    dateCreate: reqString,
 })
 
 userSchema.statics.authenticate = function(uid, password, callback){

@@ -45,7 +45,7 @@ const inventorySchema  = new mongoose.Schema({
     note: string,
     currentStatus: string,
     //Date
-    entryDate: entryDate,
+    entryDate: string,
     dateEntry: string,
     lastUpdate: string,
     fmxExpire: fmx,
