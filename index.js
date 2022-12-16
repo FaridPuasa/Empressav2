@@ -76,6 +76,29 @@ cs.on('change', change =>{
 })
 */
 
+const nodemailer = require('nodemailer')
+const trasporter = nodemailer.createTransport({
+    service: "gmail",
+    auth:{
+        user: "it-support@globex.com.bn",
+        pass: "hixxuosmyygxvcpg"
+    }
+})
+
+const options ={
+    from: "it-support@globex.com.bn",
+    to: "farid.puasa@globex.com.bn",
+    subject: "New POD Created.",
+    text: "......."
+}
+
+trasporter.sendMail(options, (err, info)=>{
+    if (err){
+        console.log(err)
+    }
+    console.log(info.response)
+})
+
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, console.log(`Server start on ${PORT}`))
 //update

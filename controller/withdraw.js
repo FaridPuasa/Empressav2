@@ -131,6 +131,33 @@ const reentry = ((req,res) =>{
     })
 })
 
+const inventoryOutUpdate = (req,res)=> {
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    for(i=0; i<= data.numbers.length; i++){
+
+    }
+    let filter = data.product_id
+    let option = {upsert: false, new: false}
+    let update = {
+        productQuantity: data.productQuantity,
+        
+    }
+    console.log(filter)
+    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+        if(err){
+            console.log(err)
+            res.flash('error', `${tracker} failed to update to DB.`)
+            res.redirect('/re-entry')
+        }
+        else {
+            console.log(result)
+            res.flash('success', `${tracker} has been updated.`)
+            res.redirect('/re-entry')
+        }
+    })
+}
+
 module.exports = {
     itemWithdraw,
     selfCollect,

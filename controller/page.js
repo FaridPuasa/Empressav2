@@ -1167,6 +1167,27 @@ const reentryPage = (req,res)=> {
     })
 }
 
+const inventoryOut = (req,res)=> {
+    let user = currentUser[0]
+    let data = req.body
+    let filter = {product_id: data.product_id}
+    stockDB.find(filter).then(
+        (result)=>{
+            res.render('selfcollect', {
+                title: "Inventory Out",
+                partials: "./partials/selfcollect/inventoryout.ejs",
+                moment: moment,
+                result,
+                user
+            })
+        },
+        (err)=>{
+            console.log(err)
+        }
+    )
+    
+}
+
 module.exports = {
     dashboard,
     service,
@@ -1193,5 +1214,6 @@ module.exports = {
     pickupRecord,
     restockRecord,
     stockPageOut,
-    reentryPage
+    reentryPage,
+    inventoryOut
 }
