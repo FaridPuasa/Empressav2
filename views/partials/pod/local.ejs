@@ -681,24 +681,6 @@
                     $("#scanAgain").hide();
                     $("#submitBtn").hide();
                     $("#loadingSubmit").fadeIn();
-                    for (let i = 0; i < document.getElementsByName('fridgeItemCheck').length; i++) {
-                        if (document.getElementsByName('fridgeItemCheck')[i].checked == true) {
-                            let fridgeItemInput = document.createElement('input');
-                            fridgeItemInput.setAttribute("type", "text");
-                            fridgeItemInput.setAttribute("name", "fridgeItem");
-                            fridgeItemInput.setAttribute("value", "Yes");
-
-                            document.getElementById("hiddenFridgeItemData").appendChild(fridgeItemInput);
-                        }
-                        if (document.getElementsByName('fridgeItemCheck')[i].checked == false) {
-                            let fridgeItemInput = document.createElement('input');
-                            fridgeItemInput.setAttribute("type", "text");
-                            fridgeItemInput.setAttribute("name", "fridgeItem");
-                            fridgeItemInput.setAttribute("value", "No");
-
-                            document.getElementById("hiddenFridgeItemData").appendChild(fridgeItemInput);
-                        }
-                    }
 
                     $('#submitBtnfinal').attr('disabled', false);
                     document.getElementById('submitBtnfinal').click()
