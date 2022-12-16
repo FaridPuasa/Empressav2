@@ -65,8 +65,11 @@
                                                 class="form-control">
                                                 <option value>Agent Selection</option>
                                                 <% document.forEach((document,index)=> { %>
-                                                <option value="<%= document.aid %>>"><%= document.agentType %> <%= document.agentName %></option>
-                                                <% }) %>
+                                                    <option value="<%= document.aid %>>">
+                                                        <%= document.agentType %>
+                                                            <%= document.agentName %>
+                                                    </option>
+                                                    <% }) %>
                                             </select>
                                         </th>
                                         <th scope="col">Date of Delivery:</th>
@@ -614,6 +617,8 @@
                     trackingNumberInputTemp.setAttribute("id", "trackingNumberTemp");
                     trackingNumberInputTemp.setAttribute("aria-describedby", "trackingNumberHelp");
                     trackingNumberInputTemp.setAttribute("placeholder", "Enter Tracking Number");
+                    trackingNumberInputTemp.setAttribute("maxlength", "9");
+                    trackingNumberInputTemp.setAttribute("disabled", "true");
                     trackingNumberInputTemp.setAttribute("onkeyup", "checkTrackingNum(this, 'trackingNumberTemp')");
 
                     document.getElementById("taskBody").appendChild(taskRow);
@@ -622,6 +627,7 @@
                     document.getElementsByName("taskRow")[(countTN)].appendChild(row_data_trackingNumber);
                     document.getElementsByName("trackingNumberRow")[(countTN)].appendChild(trackingNumberInputTemp);
 
+                    document.getElementById("trackingNumberTemp").disabled = false;
                     document.getElementById("trackingNumberTemp").focus();
                 }
 
@@ -670,6 +676,8 @@
                             trackingNumberInputTemp.setAttribute("id", "trackingNumberTemp");
                             trackingNumberInputTemp.setAttribute("aria-describedby", "trackingNumberHelp");
                             trackingNumberInputTemp.setAttribute("placeholder", "Enter Tracking Number");
+                            trackingNumberInputTemp.setAttribute("maxlength", "9");
+                            trackingNumberInputTemp.setAttribute("disabled", "true");
                             trackingNumberInputTemp.setAttribute("onkeyup", "checkTrackingNum(this, 'trackingNumberTemp')");
 
                             document.getElementById("taskBody").appendChild(taskRow);
@@ -681,6 +689,8 @@
                             if (countTN == 0) {
                                 $("#deleteRow").hide();
                             }
+
+                            document.getElementById("trackingNumberTemp").disabled = false;
                             document.getElementById("trackingNumberTemp").focus();
                         }
                     };

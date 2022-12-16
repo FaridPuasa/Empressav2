@@ -37,7 +37,7 @@
                                         <th scope="col">Area of Delivery:</th>
                                         <th scope="col" colspan="3">
                                             <select class="form-control" name='deliveryArea' id="area">
-                                                <option value>Area Selection</option>
+                                                <option class="active">Area Selection</option>
                                                 <option value="B1">BERAKAS 1</option>
                                                 <option value="B2">BERAKAS 2</option>
                                                 <option value="JT1">JALAN TUTONG 1</option>
@@ -66,8 +66,11 @@
                                                 class="form-control">
                                                 <option value>Agent Selection</option>
                                                 <% document.forEach((document,index)=> { %>
-                                                <option value="<%= document.aid %>>"><%= document.agentType %> <%= document.agentName %></option>
-                                                <% }) %>
+                                                    <option value="<%= document.aid %>>">
+                                                        <%= document.agentType %>
+                                                            <%= document.agentName %>
+                                                    </option>
+                                                    <% }) %>
                                             </select>
                                         </th>
                                         <th scope="col">Date of Delivery:</th>
@@ -115,7 +118,7 @@
 
                             <!--Second Table No automation required here-->
                             <table class="table">
-                                <thead class="thead-light table-bordered">
+                                <thead class="thead-light">
                                     <th colspan="6" class="text-center">OFFICIAL USE ONLY (CASH)</th>
                                 </thead>
                                 <tbody>
@@ -169,7 +172,7 @@
                             </div>
                             <button id="submitBtnfinal" class="btn btn-primary btn-block">Submit Final</button>
                             <input type="hidden" class="form-control form-control-user" name="method" id="method"
-                                aria-describedby="contactHelp" value="pod_JPMC">
+                                aria-describedby="contactHelp" value="pod_FMX">
                             <input type="hidden" class="form-control form-control-user" name="dispatcherName"
                                 id="dispatcherName" aria-describedby="contactHelp">
                             <input type="hidden" class="form-control form-control-user" name="dateTimeStart"
@@ -178,8 +181,6 @@
                                 id="dateTimeClose" aria-describedby="contactHelp">
                             <input type="hidden" class="form-control form-control-user" name="newTrackingNumber"
                                 id="newTrackingNumber" value="">
-
-                            <!--<a href="index.html" class="btn btn-primary btn-user btn-block">Submit</a>-->
                         </div>
                     </form>
                 </div>
@@ -289,38 +290,39 @@
 
                                     if ((json_responsetn.status != 404) && (printDone == 0)) {
                                         //Table data
-                                        document.getElementsByName("trackingNumberRow")[countTN].innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].job_id;
+                                        document.getElementsByName("trackingNumberRow")[countTN].innerHTML = json_responsetn.data[(json_responsetn.data.length) - 1].job_id;
 
                                         let row_data_empty0 = document.createElement('td');
                                         row_data_empty0.setAttribute('scope', 'col');
 
                                         let row_data_customerName = document.createElement('td');
-                                        row_data_customerName.innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].customer_username;
+                                        row_data_customerName.innerHTML = json_responsetn.data[(json_responsetn.data.length) - 1].customer_username;
                                         row_data_customerName.setAttribute('scope', 'col');
 
                                         let row_data_customerAddress = document.createElement('td');
-                                        row_data_customerAddress.innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].job_address;
+                                        row_data_customerAddress.innerHTML = json_responsetn.data[(json_responsetn.data.length) - 1].job_address;
                                         row_data_customerAddress.setAttribute('scope', 'col');
 
                                         let row_data_customerContact = document.createElement('td');
-                                        row_data_customerContact.innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].customer_phone;
+                                        row_data_customerContact.innerHTML = json_responsetn.data[(json_responsetn.data.length) - 1].customer_phone;
                                         row_data_customerContact.setAttribute('scope', 'col');
 
                                         let row_data_valueBND = document.createElement('td');
-                                        row_data_valueBND.innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].custom_field[2].data;
+                                        row_data_valueBND.innerHTML = json_responsetn.data[(json_responsetn.data.length) - 1].custom_field[2].data;
                                         row_data_valueBND.setAttribute('scope', 'col');
                                         row_data_valueBND.setAttribute('name', 'cashValueRow');
 
                                         let row_data_paymentMethod = document.createElement('td');
-                                        row_data_paymentMethod.innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].custom_field[1].data;
+                                        row_data_paymentMethod.innerHTML = json_responsetn.data[(json_responsetn.data.length) - 1].custom_field[1].data;
                                         row_data_paymentMethod.setAttribute('scope', 'col');
 
                                         let row_data_deliveryType = document.createElement('td');
-                                        row_data_deliveryType.innerHTML = json_responsetn.data[(json_responsetn.data.length)-1].job_description;
+                                        row_data_deliveryType.innerHTML = json_responsetn.data[(json_responsetn.data.length) - 1].job_description;
                                         row_data_deliveryType.setAttribute('scope', 'col');
 
                                         let row_data_empty1 = document.createElement('td');
                                         row_data_empty1.setAttribute('scope', 'col');
+                                        row_data_empty1.setAttribute('colspan', '2');
 
                                         let taskRow = document.createElement('tr');
                                         taskRow.setAttribute("name", "taskRow");
@@ -376,37 +378,37 @@
                                         let trackingNumberInput = document.createElement('input');
                                         trackingNumberInput.setAttribute("type", "text");
                                         trackingNumberInput.setAttribute("name", "trackingNumber");
-                                        trackingNumberInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].job_id);
+                                        trackingNumberInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length) - 1].job_id);
 
                                         let contactNameInput = document.createElement('input');
                                         contactNameInput.setAttribute("type", "text");
                                         contactNameInput.setAttribute("name", "contactName");
-                                        contactNameInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].customer_username);
+                                        contactNameInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length) - 1].customer_username);
 
                                         let contactAddressInput = document.createElement('input');
                                         contactAddressInput.setAttribute("type", "text");
                                         contactAddressInput.setAttribute("name", "contactAddress");
-                                        contactAddressInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].job_address);
+                                        contactAddressInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length) - 1].job_address);
 
                                         let contactNumberInput = document.createElement('input');
                                         contactNumberInput.setAttribute("type", "text");
                                         contactNumberInput.setAttribute("name", "contactNumber");
-                                        contactNumberInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].customer_phone);
+                                        contactNumberInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length) - 1].customer_phone);
 
                                         let parcelValueInput = document.createElement('input');
                                         parcelValueInput.setAttribute("type", "text");
                                         parcelValueInput.setAttribute("name", "parcelValue");
-                                        parcelValueInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].custom_field[2].data);
+                                        parcelValueInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length) - 1].custom_field[2].data);
 
                                         let PaymentMethodInput = document.createElement('input');
                                         PaymentMethodInput.setAttribute("type", "text");
                                         PaymentMethodInput.setAttribute("name", "PaymentMethod");
-                                        PaymentMethodInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].custom_field[1].data);
+                                        PaymentMethodInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length) - 1].custom_field[1].data);
 
                                         let deliveryTypeInput = document.createElement('input');
                                         deliveryTypeInput.setAttribute("type", "text");
                                         deliveryTypeInput.setAttribute("name", "deliveryType");
-                                        deliveryTypeInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length)-1].job_description);
+                                        deliveryTypeInput.setAttribute("value", json_responsetn.data[(json_responsetn.data.length) - 1].job_description);
 
                                         document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(numberInput);
                                         document.getElementsByName("hiddenFormDataRow")[countTN].appendChild(trackingNumberInput);
@@ -427,7 +429,7 @@
                                         var assignTaskToAgent = 0;
                                         var assignDateTimeToTask = 0;
 
-                                        document.getElementById("newTrackingNumber").value = json_responsetn.data[(json_responsetn.data.length)-1].job_id;
+                                        document.getElementById("newTrackingNumber").value = json_responsetn.data[(json_responsetn.data.length) - 1].job_id;
 
                                         if (assignTaskToAgent == 0) {
                                             request.open('POST', 'https://api.tookanapp.com/v2/assign_task');
