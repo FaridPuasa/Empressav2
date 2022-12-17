@@ -30,6 +30,7 @@
         </a>
     </li>
 
+    <% if (user.roles != "12"){ %>
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -60,9 +61,8 @@
                 <% if (user.service.includes(300)){ %> <a class="collapse-item" href="/local-in">Local Delivery</a> <% } %>
                 <% if (user.service.includes(400)){ %> <a class="collapse-item" href="/runner-in">Runner Service</a> <% } %>
                 <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/personal-in">Personal Shopping</a> <% } %>
-                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/wellous">Wellous</a> <% } %>
-                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/misc">Miscellaneous</a> <% } %>
-                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/in_stock">Inventory Stocks</a> <% } %>
+                <% if (user.service.includes(500)){ %> <a class="collapse-item" href="/misc">Miscellaneous</a> <% } %>
+                <% if (user.service.includes(501)){ %> <a class="collapse-item" href="/in_stock">Inventory Stocks</a> <% } %>
             </div>
         </div>
     </li>
@@ -88,11 +88,12 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Services</h6>
                 <% if (user.service.includes(200)){ %> <a class="collapse-item" href="/self-collect">Self Collection</a> <% } %>
-                <% if (user.service.includes(201)){ %> <a class="collapse-item" href="/misc-out">Miscellaneous Out</a> <% } %>
-                <% if (user.service.includes(202)){ %> <a class="collapse-item" href="/stock-out">Inventory Out</a> <% } %>
+                <% if (user.service.includes(500)){ %> <a class="collapse-item" href="/misc-out">Miscellaneous Out</a> <% } %>
+                <% if (user.service.includes(501)){ %> <a class="collapse-item" href="/stock-out">Inventory Out</a> <% } %>
             </div>
         </div>
     </li>
+    <% } %>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -123,9 +124,8 @@
                 <% if (user.service.includes(300)){ %> <a class="collapse-item" href="/local-list">Local Delivery</a> <% } %>
                 <% if (user.service.includes(400)){ %> <a class="collapse-item" href="/runner-list">Runner Service</a> <% } %>
                 <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/personal-list">Personal Shopping</a> <% } %>
-                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/wellous-list">Wellous</a> <% } %>
-                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/misc-list">Miscellaneous</a> <% } %>
-                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/stock-list">Inventory List</a> <% } %>
+                <% if (user.service.includes(500)){ %> <a class="collapse-item" href="/misc-list">Miscellaneous</a> <% } %>
+                <% if (user.service.includes(501)){ %> <a class="collapse-item" href="/stock-list">Inventory List</a> <% } %>
             </div>
         </div>
     </li>
@@ -151,12 +151,12 @@
                 <% if (user.service.includes(300)){ %> <a class="collapse-item" href="/local-podlist">Local Delivery</a> <% } %>
                 <% if (user.service.includes(400)){ %> <a class="collapse-item" href="/runner-podlist">Runner Service</a> <% } %>
                 <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/personal-podlist">Personal Shopping</a> <% } %>
-                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/wellous-podlist">Wellous</a> <% } %>
-                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/misc-podlist">Miscellaneous</a> <% } %>
+                <% if (user.service.includes(500)){ %> <a class="collapse-item" href="/misc-podlist">Miscellaneous</a> <% } %>
             </div>
         </div>
     </li>
 
+    <% if (user.roles != "12"){ %>
     <li class="nav-item">
         <a class="nav-link" href="/restock-list">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
@@ -165,6 +165,7 @@
             <span>Restock List</span>
         </a>
     </li>
+    <% } %>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -197,12 +198,11 @@
                 <% if (user.service.includes(300)){ %> <a class="collapse-item" href="/local-pod">Local Delivery</a> <% } %>
                 <% if (user.service.includes(400)){ %> <a class="collapse-item" href="/runner-pod">Runner Service</a> <% } %>
                 <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/personal-pod">Personal Shopping</a> <% } %>
-                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/wellous-pod">Wellous</a> <% } %>
-                <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/misc-pod">Miscellaneous</a> <% } %>
             </div>
         </div>
     </li>
 
+    <% if (user.roles != "12"){ %>
     <!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link" href="/restock_order">
@@ -213,7 +213,9 @@
             <span>Restock Order</span>
         </a>
     </li>
+    <% } %>
 
+    <% if (user.roles != "12"){ %>
     <!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link" href="/pickup_order">
@@ -224,6 +226,7 @@
             <span>Pickup Order</span>
         </a>
     </li>
+    <% } %>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -356,8 +359,6 @@
         </a>
     </li>
 
-    
-   
     <!-- Divider -->
     <hr class="sidebar-divider">
     <% } %>

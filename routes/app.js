@@ -168,8 +168,8 @@ const { selfCollect, reentry } = require('../controller/withdraw')
 /*
     notes:
     1. Insert Done for restock and pickup (Done)
-    2. Add total to POD and pod editable by Managers & Admin. (Editable part) (on hold)
-    3. Add in breakdown to finance summary (Syahmi)
+    2. Add total to POD (Done) and pod editable by Managers & Admin. (Editable part) (on hold)
+    3. Add in breakdown to finance summary (Syahmi) - pending
     4. Change from POD to warehouse (In Progress) - finance report
     5. Inventory Out (In Progress) //logic
     6. Email to notify new pod created (Using changestream to database and emit) (Done)
@@ -177,7 +177,7 @@ const { selfCollect, reentry } = require('../controller/withdraw')
     8. Hosting (Heroku) (Today after meeting)
     9. Beta Test
     10. Wellous (On Hold TBC)
-    11. Dashboard (Restructure)
+    11. Dashboard (Restructure) 
 */
 
 //User and Login

@@ -254,17 +254,88 @@
  var $table = $('#table')
 
   $(function() {
-        let listing = 'x'
+        let listing = '<%- JSON.stringify(listing) %>'
         //console.log(listing)
         var data = JSON.parse(listing) //testing required
         //console.log(data)
         for(i=0; i<data.length; i++){ //change the value to date
-                let start = data[i].value
-                let end = 100
-                let age = start - end
-                console.log(age)
-                data[i].age = age
+          if(data[i].role == "10"){
+            data[i].role = "Admin"
+          }
+          
+          if(data[i].role == "11"){
+            data[i].role = "Manager"
+          }
+
+          if(data[i].role == "12"){
+            data[i].role = "Finance"
+          }
+
+          if(data[i].role == "13"){
+            data[i].role = "User"
+          }
+
+          /*
+          Zalora = 100
+          FMX = 101
+          MOH = 200
+          JPMC = 201
+          Panaga = 202
+          Local = 300
+          Thermomix = 301
+          Runner = 400
+          personal = 401
+          Misc = 500
+          */
+          for(j=0; j<data[i].service.length; j++){
+            if(data[i].service[j] == "100"){
+              data[i].service[j] = "Zalora"
+            }
+
+            if(data[i].service[j] == "101"){
+              data[i].service[j] = "FMX"
+            }
+
+            if(data[i].service[j] == "200"){
+              data[i].service[j] = "MOH"
+            }
+
+            if(data[i].service[j] == "201"){
+              data[i].service[j] = "JPMC"
+            }
+
+            if(data[i].service[j] == "202"){
+              data[i].service[j] = "Panaga"
+            }
+
+            if(data[i].service[j] == "300"){
+              data[i].service[j] = "Local"
+            }
+
+            if(data[i].service[j] == "301"){
+              data[i].service[j] = "Thermomix"
+            }
+
+            if(data[i].service[j] == "400"){
+              data[i].service[j] = "Runner"
+            }
+
+            if(data[i].service[j] == "401"){
+              data[i].service[j] = "Personal"
+            }
+
+            if(data[i].service[j] == "500"){
+              data[i].service[j] = "Miscellaneous"
+            }
+
+            if(data[i].service[j] == "501"){
+              data[i].service[j] = "In-Stock"
+            }
+          }
+          console.log(data[i].service)
         }
+        
+
         $table.bootstrapTable({data: data})
         $table.bootstrapTable('updateFormatText', 'formatShowingRows', 'Showing')
   })

@@ -239,7 +239,7 @@ const userList = ((req,res)=>{
             res.render('user', {
                 title: "User List",
                 partials: "./partials/user/list.ejs",
-                documents,
+                listing: documents,
                 moment: moment,
                 user
             })
