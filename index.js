@@ -87,6 +87,7 @@ const trasporter = nodemailer.createTransport({
 const options ={
     from: "it-support@globex.com.bn",
     to: "farid.puasa@globex.com.bn",
+    cc: "john.ang@globex.com.bn",
     subject: "New POD Created.",
     text: "New POD has been created by the Operation Team. <Link>"
 }
@@ -100,6 +101,7 @@ podMohWatch.on('change', change =>{
             }
             console.log(info.response)
         })
+        console.log("mail sent!")
     }
     else{
         console.log("no mail send")
@@ -111,9 +113,10 @@ podMohWatch.on('change', change =>{
 // server setup
 io.on('connection', (socket) =>{
     console.log("Socket Connected" + socket.id)
-
-    
-    
+    socket.on('disconnect', () => {
+        socket.broadcast.emit('user-disconnected');
+        console.log( socket.id + " Disconnected")
+    })
 })
 
 cs.on('change', change =>{
