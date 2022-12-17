@@ -17,7 +17,7 @@ let io = socketIO(server)
 //Session setup
 app.use(session({
     secret: 'Unknown Value',
-    cookie: {maxAge: 600000},
+    cookie: {maxAge: 20000},
     saveUninitialized: false,
     resave: false,
     store
