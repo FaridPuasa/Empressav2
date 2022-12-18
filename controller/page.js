@@ -961,7 +961,7 @@ const restockRecord = (req,res)=> {
         (result)=>{
             res.render('podlist',{
                 title: `Restock Waybill`,
-                partials: ('./partials/podlist/local'),
+                partials: ('./partials/podlist/restock'),
                 moment: moment,
                 result,
                 user
@@ -979,7 +979,7 @@ const pickupRecord = (req,res)=> {
         (result)=>{
             res.render('podlist',{
                 title: `Pickup Waybill`,
-                partials: ('./partials/podlist/local'),
+                partials: ('./partials/podlist/pickup'),
                 moment: moment,
                 result,
                 user
