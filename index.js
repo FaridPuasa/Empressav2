@@ -69,12 +69,20 @@ const grpPodDB = require('./models/grppod')
 const runnerPodDB = require('./models/runnerpod')
 const personalPodDB = require('./models/personalpod')
 const warehouseDB = require('./models/warehouseInventory')
-const waybillDB = require('./models/restock')
 const stockDB = require('./models/stocks')
-const pickupDB = require ('./models/pickup')
 
 const cs = warehouseDB.watch()
 const podMohWatch = mohPodDB.watch()
+const podJpmcWatch = jpmcPodDB.watch()
+const podPanagaWatch = panagaPodDB.watch()
+const localPodWatch = localPodDB.watch()
+const tmxPodWatch = tmxPodDB.watch()
+const zaloraPodWatch = zaloraPodDB.watch()
+const fmxPodWatch = fmxPodDB.watch()
+const grpPodWatch = grpPodDB.watch()
+const runnerPodWatch = runnerPodDB.watch()
+const personalPodWatch = personalPodDB.watch()
+
 
 const trasporter = nodemailer.createTransport({
     service: "gmail",
@@ -84,15 +92,14 @@ const trasporter = nodemailer.createTransport({
     }
 })
 
-const options ={
-    from: "it-support@globex.com.bn",
-    to: "farid.puasa@globex.com.bn",
-    cc: "john.ang@globex.com.bn",
-    subject: "New POD Created.",
-    text: "New POD has been created by the Operation Team. <Link>"
-}
-
 podMohWatch.on('change', change =>{
+    const options ={
+        from: "it-support@globex.com.bn",
+        to: "farid.puasa@globex.com.bn",
+        cc: "john.ang@globex.com.bn",
+        subject: "New POD Created.",
+        text: "New POD for MOH has been created by the Operation Team. <Link>"
+    }
     if (change){
         console.log("executing sending mail")
         trasporter.sendMail(options, (err, info)=>{
@@ -106,10 +113,216 @@ podMohWatch.on('change', change =>{
     else{
         console.log("no mail send")
     }
-    //io.emit('changeData', change)
-    //console.log(JSON.stringify(change))
 })
 
+podJpmcWatch.on('change', change =>{
+    const options ={
+        from: "it-support@globex.com.bn",
+        to: "finance2@gorushbn.com",
+        cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
+        subject: "New POD Created.",
+        text: "New POD for JPMC has been created by the Operation Team. <Link>"
+    }
+    if (change){
+        console.log("executing sending mail")
+        trasporter.sendMail(options, (err, info)=>{
+            if (err){
+                console.log(err)
+            }
+            console.log(info.response)
+        })
+        console.log("mail sent!")
+    }
+    else{
+        console.log("no mail send")
+    }
+})
+
+podPanagaWatch.on('change', change =>{
+    const options ={
+        from: "it-support@globex.com.bn",
+        to: "finance2@gorushbn.com",
+        cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
+        subject: "New POD Created.",
+        text: "New POD for Panaga has been created by the Operation Team. <Link>"
+    }
+    if (change){
+        console.log("executing sending mail")
+        trasporter.sendMail(options, (err, info)=>{
+            if (err){
+                console.log(err)
+            }
+            console.log(info.response)
+        })
+        console.log("mail sent!")
+    }
+    else{
+        console.log("no mail send")
+    }
+})
+
+localPodWatch.on('change', change =>{
+    const options ={
+        from: "it-support@globex.com.bn",
+        to: "finance2@gorushbn.com",
+        cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
+        subject: "New POD Created.",
+        text: "New POD for Local Delivery has been created by the Operation Team. <Link>"
+    }
+    if (change){
+        console.log("executing sending mail")
+        trasporter.sendMail(options, (err, info)=>{
+            if (err){
+                console.log(err)
+            }
+            console.log(info.response)
+        })
+        console.log("mail sent!")
+    }
+    else{
+        console.log("no mail send")
+    }
+})
+
+zaloraPodWatch.on('change', change =>{
+    const options ={
+        from: "it-support@globex.com.bn",
+        to: "finance2@gorushbn.com",
+        cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
+        subject: "New POD Created.",
+        text: "New POD for Zalora has been created by the Operation Team. <Link>"
+    }
+    if (change){
+        console.log("executing sending mail")
+        trasporter.sendMail(options, (err, info)=>{
+            if (err){
+                console.log(err)
+            }
+            console.log(info.response)
+        })
+        console.log("mail sent!")
+    }
+    else{
+        console.log("no mail send")
+    }
+})
+
+
+
+tmxPodWatch.on('change', change =>{
+    const options ={
+        from: "it-support@globex.com.bn",
+        to: "finance2@gorushbn.com",
+        cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
+        subject: "New POD Created.",
+        text: "New POD for TMX has been created by the Operation Team. <Link>"
+    }
+    if (change){
+        console.log("executing sending mail")
+        trasporter.sendMail(options, (err, info)=>{
+            if (err){
+                console.log(err)
+            }
+            console.log(info.response)
+        })
+        console.log("mail sent!")
+    }
+    else{
+        console.log("no mail send")
+    }
+})
+
+fmxPodWatch.on('change', change =>{
+    const options ={
+        from: "it-support@globex.com.bn",
+        to: "finance2@gorushbn.com",
+        cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
+        subject: "New POD Created.",
+        text: "New POD for FMX has been created by the Operation Team. <Link>"
+    }
+    if (change){
+        console.log("executing sending mail")
+        trasporter.sendMail(options, (err, info)=>{
+            if (err){
+                console.log(err)
+            }
+            console.log(info.response)
+        })
+        console.log("mail sent!")
+    }
+    else{
+        console.log("no mail send")
+    }
+})
+
+grpPodWatch.on('change', change =>{
+    const options ={
+        from: "it-support@globex.com.bn",
+        to: "finance2@gorushbn.com",
+        cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
+        subject: "New POD Created.",
+        text: "New POD for GRP has been created by the Operation Team. <Link>"
+    }
+    if (change){
+        console.log("executing sending mail")
+        trasporter.sendMail(options, (err, info)=>{
+            if (err){
+                console.log(err)
+            }
+            console.log(info.response)
+        })
+        console.log("mail sent!")
+    }
+    else{
+        console.log("no mail send")
+    }
+})
+
+runnerPodWatch.on('change', change =>{
+    const options ={
+        from: "it-support@globex.com.bn",
+        to: "finance2@gorushbn.com",
+        cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
+        subject: "New POD Created.",
+        text: "New POD for runner services has been created by the Operation Team. <Link>"
+    }
+    if (change){
+        console.log("executing sending mail")
+        trasporter.sendMail(options, (err, info)=>{
+            if (err){
+                console.log(err)
+            }
+            console.log(info.response)
+        })
+        console.log("mail sent!")
+    }
+    else{
+        console.log("no mail send")
+    }
+})
+
+personalPodWatch.on('change', change =>{
+    const options ={
+        from: "it-support@globex.com.bn",
+        to: "finance2@gorushbn.com",
+        cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
+        subject: "New POD Created.",
+        text: "New POD for Personal Shopping has been created by the Operation Team. <Link>"
+    }
+    if (change){
+        console.log("executing sending mail")
+        trasporter.sendMail(options, (err, info)=>{
+            if (err){
+                console.log(err)
+            }
+            console.log(info.response)
+        })
+        console.log("mail sent!")
+    }
+    else{
+        console.log("no mail send")
+    }
+})
 // server setup
 io.on('connection', (socket) =>{
     console.log("Socket Connected" + socket.id)
