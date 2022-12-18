@@ -76,7 +76,7 @@ const exportInventory = (req,res) =>{
     )
 }
 
-const exportFinanceSummary = (req,res) =>{
+const xxx = (req,res) =>{
     let data = req.body
     let services = data.service
     let status = data.currentStatus
@@ -172,14 +172,12 @@ const exportFinanceSummary = (req,res) =>{
     )
 }
 
-const exportFinanceSummaryDriver = (req,res) =>{
+const exportFinanceSummary = (req,res) =>{
     let data = req.body
     let end = data.enddate
     let start = data.startdate
     let user = currentUser[0]
-
     console.log(data)
-
     let filter = {
         deliveryDate: {
             $gte: start, 
@@ -212,27 +210,87 @@ const exportFinanceSummaryDriver = (req,res) =>{
     )
 }
 
+const exportFinanceSummaryDriver = (req,res) =>{
+    let data = req.body
+    let end = data.enddate
+    let start = data.startdate
+    let user = currentUser[0]
+    console.log(data)
+    let filter = {
+        deliveryDate: {
+            $gte: start, 
+            $lte: end
+        } 
+    }
+    console.log(filter)
+    warehouseDB.find(filter).then(
+        (result)=>{
+            console.log('Successfully extracted required data.')
+            console.log(result[0])
+            res.render('finance', {
+                title: 'Finance Summary',
+                partials: './partials/export/reconDrivers.ejs',
+                result,
+                user
+            })
+        },
+        (err)=>{
+            console.log('Failed to extract required data.')
+            console.log(err)
+            res.render('error', {
+                title: 'Extraction Error',
+                error_code: '',
+                response: '',
+                message: '',
+                user
+            })
+        }
+    )
+}
+
 const reconService = (req,res)=> {
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
-    let button = data.formmethod
-    let filter = data.trackingNumber
-    let option = {upsert: false, new: false}
-    if(button == "RS-success"){
+    for (let i = 0; i < trackingNumber.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
         let update = {
-            paymentStatus: data.paymentStatus
+            paymentStatus: data.paymentStatus,
+            ackCode: data.ackCode,
         }
-        warehouseDB.findOneAndUpdate(filter,update,option, (err,docs)=>{
+        let option = {upsert: false, new: false}
+        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
             if (err){
-                console.log(`Failed update: ${trackingNumber}`)
-                req.flash('error', `Failed to update: ${trackingNumber}`)
-                //socket
+                //console.log(`Failed update: ${trackingNumber}`)
+               //req.flash('error', `Failed to update: ${trackingNumber}`)
             }
             else{
-                console.log(`Successfully update: ${trackingNumber}`)
-                req.flash('success', `${trackingNumber} has been updated on the database.`)
-                res.status(201).send()
-                //socket
+                console.log(`Successfully update: ${trackingNumber[i]}`)
+                //req.flash('success', `${trackingNumber} has been updated on the database.`)
+                //res.status(201).send()
+            }
+        })
+    }
+}
+
+const reconDriver = (req,res)=> {
+    let date = moment().format("DD/MM/YYYY, h:mm:ss a")
+    let data = req.body
+    for (let i = 0; i < trackingNumber.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            paymentStatus: data.paymentStatus,
+            ackCode: data.ackCode,
+        }
+        let option = {upsert: false, new: false}
+        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
+            if (err){
+                //console.log(`Failed update: ${trackingNumber}`)
+               //req.flash('error', `Failed to update: ${trackingNumber}`)
+            }
+            else{
+                console.log(`Successfully update: ${trackingNumber[i]}`)
+                //req.flash('success', `${trackingNumber} has been updated on the database.`)
+                //res.status(201).send()
             }
         })
     }
@@ -243,5 +301,6 @@ module.exports = {
     exportInventory,
     exportFinanceSummary,
     reconService,
+    reconDriver,
     exportFinanceSummaryDriver
 }

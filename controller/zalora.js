@@ -26,6 +26,7 @@ const insertZalora = ((req,res)=>{
     let attempt = 'false'
     let reentry = 'false'
     let reschedule = 'false'
+    let paymentStatus = "F"
     let startCount = 0
     let parcelStatus = {
         statusHistory: status, 
@@ -47,6 +48,7 @@ const insertZalora = ((req,res)=>{
         fridgeItem: data.fridgeItem,
         deliveryType: data.delvieryType,
         paymentType: data.paymentType,
+        paymentStatus: paymentStatus,
         value: data.value,
         status: data.status,
         remark: data.remark,
@@ -184,6 +186,37 @@ const updateZaloraPod = ((req,res) =>{
         }
         let option = {upsert: false, new: false}
         console.log(filter)
+        warehouseDB.find(filter).then(
+            (result)=> {
+                if (result.count == "0"){
+                    let count = result.count + 1
+                    result.count = count 
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = "L" //max attempt reached.
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else{
+                    console.log("Failed to retrieve count")
+                }
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
         warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
             if(err){
                 console.log(err)

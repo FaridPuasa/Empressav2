@@ -38,6 +38,8 @@ const inventorySchema  = new mongoose.Schema({
     deliveryType: string,
     paymentType: string,
     paymentStatus: string,
+    financeNotes: string,
+    ackCode: string,
     value: string,
     service: string,
     status: string,
@@ -47,6 +49,7 @@ const inventorySchema  = new mongoose.Schema({
     //Date
     entryDate: string,
     dateEntry: string,
+    deliveryDate: string,
     lastUpdate: string,
     fmxExpire: fmx,
     grpExpire: grp,

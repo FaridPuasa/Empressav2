@@ -128,7 +128,8 @@ const {
     exportInventory, 
     exportFinanceSummary,
     reconService,
-    exportFinanceSummaryDriver
+    exportFinanceSummaryDriver,
+    reconDriver
 } = require('../controller/export')
 
 const {
@@ -202,8 +203,10 @@ router.get('/export', exportForm)//Export Page
 router.get('/export-finance', financeForm)//Finance Export Page
 router.get('/export-finance-by-driver', financeFormDrivers)
 router.post('/exportlist', exportInventory)//
-router.post('/success-fin-service', exportFinanceSummary)//
-router.post('/success-fin-drivers', exportFinanceSummary)//
+router.post('/success-fin-service', exportFinanceSummary)//finance recon
+router.post('/success-fin-drivers', exportFinanceSummary)//finance recon
+router.post('/RS-success',reconService)//
+router.post('/RD-success',reconDriver)//
 
 //Item Entry & Exit
 router.get('/:services-in', serviceIn)//Item In by services page
