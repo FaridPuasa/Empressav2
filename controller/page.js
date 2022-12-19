@@ -624,12 +624,13 @@ const serviceIn = (req,res)=> {
 
 const itemList = (req,res) =>{
     let services = req.params.services
+    let filter = {service: services.toUpperCase()}
     let user = currentUser[0]
-    console.log(services)
-    warehouseDB.find().then(
+    console.log(filter)
+    warehouseDB.find(filter).then(
         (documents)=>{
-            console.log(documents)
-            if(services == 'moh' && documents[0].service == 'MOH'){
+            //console.log(documents)
+            if(services == 'moh'){
                 console.log(documents[0])
                 res.render('list',{
                     title: `${services} List`,
@@ -639,7 +640,8 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'jpmc' && documents[0].service == 'JPMC'){
+            if(services == 'jpmc'){
+                console.log('this code running')
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/jpmc'),
@@ -648,7 +650,7 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'panaga' && documents[0].service == 'PANAGA'){
+            else if(services == 'panaga'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/panaga'),
@@ -657,7 +659,7 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'fmx' && documents[0].service == 'FMX'){
+            else if(services == 'fmx'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/fmx'),
@@ -666,7 +668,7 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'zalora' && documents[0].service == 'ZALORA'){
+            else if(services == 'zalora'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/zalora'),
@@ -674,7 +676,7 @@ const itemList = (req,res) =>{
                     moment: moment,
                     user,
                 })
-            }else if(services == 'grp' && documents[0].service == 'GRP'){
+            }else if(services == 'grp'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/grp'),
@@ -683,7 +685,7 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'runner' && documents[0].service == 'RUNNER'){
+            else if(services == 'runner'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/runner'),
@@ -692,7 +694,7 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'personal' && documents[0].service == 'PERSONAL'){
+            else if(services == 'personal'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/personal'),
@@ -701,7 +703,7 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'local' && documents[0].service == 'LOCAL'){
+            else if(services == 'local'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/local'),

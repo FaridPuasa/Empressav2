@@ -166,7 +166,8 @@ const {
     withdrawMisc
 } = require('../controller/misc')
 
-const { selfCollect, reentry } = require('../controller/withdraw')
+const { selfCollect, reentry } = require('../controller/withdraw');
+const { insertRestock, insertPickup } = require('../controller/waybill');
 
 /*
     notes:
@@ -281,11 +282,11 @@ router.post('/finance-edit-zalora', financeAcknowledgeZalora)//Finance Acknowled
 //Restock (BMF)
 router.get('/restock_order', restockForm)
 router.get('/restock_list', restockRecord)
-router.post('/success-ro',)
+router.post('/success-ro',insertRestock)
 
 //Pickup 
 router.get('/pickup_order', pickupForm)
-router.get('/pickup-list', pickupRecord)
-router.post('/success-po',)
+router.get('/pickup_list', pickupRecord)
+router.post('/success-po',insertPickup)
 
 module.exports = router

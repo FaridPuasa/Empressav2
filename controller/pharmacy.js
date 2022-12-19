@@ -22,6 +22,7 @@ const moment = require('moment')
 */
 
 const insertPharmacy = ((req,res)=> {
+    let service = req.params
     let date = moment().format("DD/MM/YYYY")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
@@ -83,7 +84,7 @@ const insertPharmacy = ((req,res)=> {
             let services = req.params.services
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
-            res.status(200).redirect('/moh-in')
+            res.status(200).redirect('/:service-in')
         }
     })
 })
