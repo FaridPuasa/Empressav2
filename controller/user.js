@@ -98,7 +98,7 @@ const grantAccess = ((req,res)=>{
                     res.status(200).render('login', {
                         uid,
                         title: 'Change Password',
-                        partials: './partials/user/changepassword'
+                        partials: './partials/user/changePassword'
                     })
                     console.log(req.session)
                 }
