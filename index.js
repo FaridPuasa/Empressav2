@@ -95,7 +95,7 @@ const trasporter = nodemailer.createTransport({
 podMohWatch.on('change', change =>{
     const options ={
         from: "it-support@globex.com.bn",
-        to: "farid.puasa@globex.com.bn",
+        to: "ar@gorushbn.com",
         cc: "john.ang@globex.com.bn",
         subject: "New POD Created.",
         text: "New POD for MOH has been created by the Operation Team. <Link>"
@@ -118,7 +118,7 @@ podMohWatch.on('change', change =>{
 podJpmcWatch.on('change', change =>{
     const options ={
         from: "it-support@globex.com.bn",
-        to: "finance2@gorushbn.com",
+        to: "ar@gorushbn.com",
         cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
         subject: "New POD Created.",
         text: "New POD for JPMC has been created by the Operation Team. <Link>"
@@ -141,7 +141,7 @@ podJpmcWatch.on('change', change =>{
 podPanagaWatch.on('change', change =>{
     const options ={
         from: "it-support@globex.com.bn",
-        to: "finance2@gorushbn.com",
+        to: "ar@gorushbn.com",
         cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
         subject: "New POD Created.",
         text: "New POD for Panaga has been created by the Operation Team. <Link>"
@@ -164,7 +164,7 @@ podPanagaWatch.on('change', change =>{
 localPodWatch.on('change', change =>{
     const options ={
         from: "it-support@globex.com.bn",
-        to: "finance2@gorushbn.com",
+        to: "ar@gorushbn.com",
         cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
         subject: "New POD Created.",
         text: "New POD for Local Delivery has been created by the Operation Team. <Link>"
@@ -187,7 +187,7 @@ localPodWatch.on('change', change =>{
 zaloraPodWatch.on('change', change =>{
     const options ={
         from: "it-support@globex.com.bn",
-        to: "finance2@gorushbn.com",
+        to: "ar@gorushbn.com",
         cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
         subject: "New POD Created.",
         text: "New POD for Zalora has been created by the Operation Team. <Link>"
@@ -212,7 +212,7 @@ zaloraPodWatch.on('change', change =>{
 tmxPodWatch.on('change', change =>{
     const options ={
         from: "it-support@globex.com.bn",
-        to: "finance2@gorushbn.com",
+        to: "ar@gorushbn.com",
         cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
         subject: "New POD Created.",
         text: "New POD for TMX has been created by the Operation Team. <Link>"
@@ -235,7 +235,7 @@ tmxPodWatch.on('change', change =>{
 fmxPodWatch.on('change', change =>{
     const options ={
         from: "it-support@globex.com.bn",
-        to: "finance2@gorushbn.com",
+        to: "ar@gorushbn.com",
         cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
         subject: "New POD Created.",
         text: "New POD for FMX has been created by the Operation Team. <Link>"
@@ -258,7 +258,7 @@ fmxPodWatch.on('change', change =>{
 grpPodWatch.on('change', change =>{
     const options ={
         from: "it-support@globex.com.bn",
-        to: "finance2@gorushbn.com",
+        to: "ar@gorushbn.com",
         cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
         subject: "New POD Created.",
         text: "New POD for GRP has been created by the Operation Team. <Link>"
@@ -281,7 +281,7 @@ grpPodWatch.on('change', change =>{
 runnerPodWatch.on('change', change =>{
     const options ={
         from: "it-support@globex.com.bn",
-        to: "finance2@gorushbn.com",
+        to: "ar@gorushbn.com",
         cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
         subject: "New POD Created.",
         text: "New POD for runner services has been created by the Operation Team. <Link>"
@@ -304,7 +304,7 @@ runnerPodWatch.on('change', change =>{
 personalPodWatch.on('change', change =>{
     const options ={
         from: "it-support@globex.com.bn",
-        to: "finance2@gorushbn.com",
+        to: "ar@gorushbn.com",
         cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
         subject: "New POD Created.",
         text: "New POD for Personal Shopping has been created by the Operation Team. <Link>"
