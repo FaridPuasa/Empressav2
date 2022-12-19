@@ -9,7 +9,7 @@ const http = require('http')
 const moment = require('moment')
 const flash = require('connect-flash')
 const nodemailer = require('nodemailer')
-//const store = new session.MemoryStore
+
 //Server setup
 let server = http.createServer(app)
 let io = socketIO(server)
@@ -31,7 +31,6 @@ app.use(flash());
 
 //Global varibales
 app.use(function (req, res, next) {
-    //console.log(store)
     res.locals.message = req.flash()
     next();
 });
@@ -48,15 +47,6 @@ mongoose.connect(db, {
 .catch(err => console.log(err))
 
 app.use('/', routes)
-
-/*
-app.get('/', (req,res)=>{
-    res.render('layout', {
-        title: "demo",
-        moment: moment
-    })
-})
-*/
 
 const mohPodDB = require ('./models/mohpod')
 const jpmcPodDB = require('./models/jpmcpod')
@@ -323,6 +313,7 @@ personalPodWatch.on('change', change =>{
         console.log("no mail send")
     }
 })
+/*
 // server setup
 io.on('connection', (socket) =>{
     console.log("Socket Connected" + socket.id)
@@ -336,6 +327,7 @@ cs.on('change', change =>{
     io.emit('notification', change)
     console.log(JSON.stringify(change))
 })
+*/
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, console.log(`Server start on ${PORT}`))
