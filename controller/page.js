@@ -12,7 +12,6 @@ const warehouseDB = require('../models/warehouseInventory')
 const waybillDB = require('../models/restock')
 const stockDB = require('../models/stocks')
 const pickupDB = require ('../models/pickup')
-const userDB = require('../models/user')
 const agentDB = require('../models/agent')
 let moment = require('moment')
 const { currentUser } = require('../controller/user')
@@ -956,19 +955,21 @@ const restockForm = (req,res)=> {
 }
 
 const restockRecord = (req,res)=> {
+    console.log("thi9s code running")
     let user = currentUser[0]
     waybillDB.find().sort().then(
-        (result)=>{
+        (document)=>{
             res.render('podlist',{
                 title: `Restock Waybill`,
                 partials: ('./partials/podlist/restock'),
                 moment: moment,
-                result,
+                document,
                 user
             })
         },
         (err)=> {
-
+            console.log(err)
+            console.log("Error on page")
         }
     )
 }
@@ -976,12 +977,12 @@ const restockRecord = (req,res)=> {
 const pickupRecord = (req,res)=> {
     let user = currentUser[0]
     pickupDB.find().sort().then(
-        (result)=>{
+        (document)=>{
             res.render('podlist',{
                 title: `Pickup Waybill`,
                 partials: ('./partials/podlist/pickup'),
                 moment: moment,
-                result,
+                document,
                 user
             })
         },

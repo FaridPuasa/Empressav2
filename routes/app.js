@@ -280,14 +280,12 @@ router.post('/finance-edit-zalora', financeAcknowledgeZalora)//Finance Acknowled
 
 //Restock (BMF)
 router.get('/restock_order', restockForm)
-router.get('/restock-list', restockRecord)
+router.get('/restock_list', restockRecord)
 router.post('/success-ro',)
 
 //Pickup 
 router.get('/pickup_order', pickupForm)
 router.get('/pickup-list', pickupRecord)
 router.post('/success-po',)
-
-//
 
 module.exports = router
