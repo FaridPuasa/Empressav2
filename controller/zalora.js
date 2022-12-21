@@ -37,9 +37,9 @@ const insertZalora = ((req,res)=>{
     let warehouse = new warehouseDB ({
         //Main
         trackingNumber: data.trackingNumber,
-        contactName: data.contactName,
-        contactNumber: data.contactNumber,
-        contactAddress: data.contactAddress,
+        contactName: data.name,
+        contactNumber: data.contact,
+        contactAddress: data.address,
         patientNumber: data.patientNumber,
         areaCode: data.areaCode,
         serviceTag: data.serviceTag,
