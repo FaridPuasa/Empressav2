@@ -81,7 +81,7 @@ const insertPharmacy = ((req,res)=> {
             })
         }
         else{
-            let services = req.params.services
+            let service = req.params.service
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
             res.status(200).redirect('/:service-in')
