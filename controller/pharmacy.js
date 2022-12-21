@@ -50,7 +50,7 @@ const insertPharmacy = ((req,res)=> {
         shelfCode: data.shelfCode,
         zone: data.zone,
         fridgeItem: data.fridgeItem,
-        deliveryType: data.delvieryType,
+        deliveryType: data.deliveryType,
         paymentType: data.paymentType,
         paymentStatus: paymentStatus,
         value: data.value,
