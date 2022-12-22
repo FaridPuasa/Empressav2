@@ -22,7 +22,6 @@ const moment = require('moment')
 */
 
 const insertPharmacy = ((req,res)=> {
-    let service = req.params
     let date = moment().format("DD/MM/YYYY")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
@@ -31,6 +30,7 @@ const insertPharmacy = ((req,res)=> {
     let reentry = 'false'
     let reschedule = 'false'
     let paymentStatus = "F"
+    let service = data.service
     let startCount = 0
     let parcelStatus = {
         statusHistory: status, 
@@ -71,18 +71,39 @@ const insertPharmacy = ((req,res)=> {
     })
     warehouse.history.push(parcelStatus)
     warehouse.save(err=>{
+        if(err) {
+            if (err.name === "MongoServerError" && err.code === 11000){
+                console.log(err)
+                res.render('error', {
+                    title: '11000',
+                    response: 'DB Error',
+                    message: 'No worries~ database detected duplication entry.'
+                })
+            }
+            else{
+                console.log(err)
+                res.render('error', {
+                    title: '406',
+                    response: 'Not Acceptable',
+                    message: `Entry didn't meet the requirements.`
+                })
+            }
+        }
         if (err) {
-            console.log (err)
-            req.flash('error', `Tracking number already exist | Require fields missing`)
-            res.render('error', {
-                title: 'xxx',
-                response: 'Not Acceptable &#x1F62B;',
-                message: 'No worries~ database detected duplication of tracking number.'
-            })
+            if(err.name === "MongoServerError" && err.code === 11000){
+                console.log (err)
+                req.flash('error', `Tracking number already exist | Require fields missing.`)
+                res.redirect('')
+            }
+            else{
+                console.log (err)
+                req.flash('error', `Status 406: Not Acceptable | Check your data entry.`)
+                res.redirect('')
+            }
         }
         else{
             let service = req.params.service
-            console.log('Status: 201 - success entry to database')
+            console.log('Status: 200 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
             res.status(200).redirect('/:service-in')
         }

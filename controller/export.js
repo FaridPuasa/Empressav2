@@ -188,7 +188,7 @@ const exportFinanceSummary = (req,res) =>{
     warehouseDB.find(filter).then(
         (result)=>{
             console.log('Successfully extracted required data.')
-            console.log(result[0])
+            console.log(result)
             res.render('finance', {
                 title: 'Finance Summary',
                 partials: './partials/export/reconService.ejs',

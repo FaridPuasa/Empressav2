@@ -723,12 +723,6 @@ const itemList = (req,res) =>{
         },
         (err)=>{
             console.log(err)
-            console.log('Error 404 - page not found')
-                res.render('error', {
-                    title: '404',
-                    response: '',
-                    message: 'Page not found'
-                })
         }
     )
 }
