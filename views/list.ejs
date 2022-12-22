@@ -1,274 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <%- include('partials/head.ejs') %>
+<%- include('partials/head.ejs') %>
 
-<body id="page-top">
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-        <!-- sidebar navigation -->
-        <%- include('partials/sidebar.ejs') %>
+    <body id="page-top">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            <!-- sidebar navigation -->
+            <%- include('partials/sidebar.ejs') %>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-            <!-- Main Content -->
-            <div id="content">
+                <!-- Content Wrapper -->
+                <div id="content-wrapper" class="d-flex flex-column">
+                    <!-- Main Content -->
+                    <div id="content">
 
-                <!-- top navigation -->
-                <%- include('partials/topbar.ejs') %>
+                        <!-- top navigation -->
+                        <%- include('partials/topbar.ejs') %>
 
-                <!-- Begin Page Content -->
+                            <!-- Begin Page Content -->
 
-                <!-- content of page goes here -->
-                <%- include(partials) %>
-                
-                <!-- /.container-fluid -->
+                            <!-- content of page goes here -->
+                            <%- include(partials) %>
 
-            </div>
-            <!-- End of Main Content -->
+                                <!-- /.container-fluid -->
 
-            <%- include('partials/footer.ejs') %>
+                    </div>
+                    <!-- End of Main Content -->
 
+                    <%- include('partials/footer.ejs') %>
+
+                </div>
+                <!-- End of Content Wrapper -->
         </div>
-        <!-- End of Content Wrapper -->
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Logout Modal-->
-    <%- include('partials/logoutModal.ejs') %>
+        <!-- Logout Modal-->
+        <%- include('partials/logoutModal.ejs') %>
 
-    <!-- scripts goes here -->
-    
-    <%- include('partials/scripts.ejs') %>
+            <!-- scripts goes here -->
 
-    <script src="/public/js/data.js"></script>
+            <%- include('partials/scripts.ejs') %>
 
-    <script>
-        
-    </script>
+                <script src="/public/js/data.js"></script>
 
-    <script>
-        let listing = '<%- JSON.stringify(list) %>'
+                <script>
 
-        var $table = $('#table')
-        var $remove = $('#remove')
-        var selections = []
-      
-        function getIdSelections() {
-            return $.map($table.bootstrapTable('getSelections'), function (row) {
-                return row.id
-            })
-        }
-      
-        function responseHandler(res) {
-            $.each(res.rows, function (i, row) {
-                row.state = $.inArray(row.id, selections) !== -1
-            })
-            return res
-        }
-      
-        function detailFormatter(index, row) {
-            var html = []
-            $.each(row, function (key, value) {
-                html.push('<p><b>' + key + ':</b> ' + value + '</p>')
-            })
-            return html.join('')
-        }
-      
-        function operateFormatter(value, row, index) {
-            for(i=0; i < listing.length; i++){
-            return [
-                `<button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </script>
+
+                <script>
+                    let listing = '<%- JSON.stringify(list) %>'
+
+                    var $table = $('#table')
+                    var $remove = $('#remove')
+                    var selections = []
+
+                    function getIdSelections() {
+                        return $.map($table.bootstrapTable('getSelections'), function (row) {
+                            return row.id
+                        })
+                    }
+
+                    function responseHandler(res) {
+                        $.each(res.rows, function (i, row) {
+                            row.state = $.inArray(row.id, selections) !== -1
+                        })
+                        return res
+                    }
+
+                    function detailFormatter(index, row) {
+                        var html = []
+                        $.each(row, function (key, value) {
+                            html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+                        })
+                        return html.join('')
+                    }
+
+                    function operateFormatter(value, row, index) {
+                        for (i = 0; i < listing.length; i++) {
+                            return [
+                                `<button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-ellipsis-h"></i>
                 </button>`
-                ,
-                
-                    `<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                ,
+
+                                `<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal${i}" href="#">Details</a>
                 </div>`
-                
-            ].join('')
-            }
-        }
-        
-        /*
-        window.operateEvents = {
-            'click .like': function (e, value, row, index) {
-                console.log('You click like action, row: ' + JSON.stringify(row))
-            },
-            'click .remove': function (e, value, row, index) {
-                $table.bootstrapTable('remove', {
-                field: 'id',
-                values: [row.id]
-                })
-            }
-        }*/
-      
-        // function totalTextFormatter(data) {
-        //   return 'Total'
-        // }
-      
-        // function totalNameFormatter(data) {
-        //   return data.length
-        // }
-      
-        // function totalPriceFormatter(data) {
-        //   var field = this.field
-        //   return '$' + data.map(function (row) {
-        //     return +row[field].substring(1)
-        //   }).reduce(function (sum, i) {
-        //     return sum + i
-        //   }, 0)
-        // }
-      
-       var $table = $('#table')
-       
-        $(function() {
-            
-            //console.log(listing)
-            var data = JSON.parse(listing) //testing required
-            //console.log(data)
-            for(i=0; i<data.length; i++){ //change the value to date
-                let start = moment(data[i].dateEntry, "DD/MM/YYYY").format()
-                console.log(moment(data[i].dateEntry, "DD/MM/YYYY").format("DD/MM/YYYY"))
-                let end = moment().format()
-                console.log(moment().format("DD/MM/YYYY"))
 
-                let dif = new Date(end) - new Date(start)
-                let d = dif/(1000*3600*24)
-                if (Math.round(d) == 1){
-                    data[i].age = Math.round(d) +" day"
-                }
-                if (Math.round(d) > 1){
-                    data[i].age = Math.round(d) +" days"
-                }
-                console.log( data[i].age)
-                let status = data[i].currentStatus
+                            ].join('')
+                        }
+                    }
 
-                /*
-                    IN WAREHOUSE = A1
-                    IN MEDICINE ROOM = A2
-                    RE-ENTRY = A3
-                    SCHEDULE FOR DELIVERY = B
-                    DELIVERY IN PROGRESS = C
-                    SUCCESSFUL DELIVERY = D1
-                    SELF COLLECT = D2
-                    FAILED DELIVERY = D3
-                    CANCELLED DELIVERY = D4
-                */
+                    /*
+                    window.operateEvents = {
+                        'click .like': function (e, value, row, index) {
+                            console.log('You click like action, row: ' + JSON.stringify(row))
+                        },
+                        'click .remove': function (e, value, row, index) {
+                            $table.bootstrapTable('remove', {
+                            field: 'id',
+                            values: [row.id]
+                            })
+                        }
+                    }*/
 
-                if(status == "A1"){
-                    data[i].currentStatus = "IN WAREHOUSE"
-                }
+                    // function totalTextFormatter(data) {
+                    //   return 'Total'
+                    // }
 
-                if(status == "A2"){
-                    data[i].currentStatus = "IN MEDICINE ROOM"
-                }
+                    // function totalNameFormatter(data) {
+                    //   return data.length
+                    // }
 
-                if(status == "A3"){
-                    data[i].currentStatus = "RE-ENTRY"
-                }
+                    // function totalPriceFormatter(data) {
+                    //   var field = this.field
+                    //   return '$' + data.map(function (row) {
+                    //     return +row[field].substring(1)
+                    //   }).reduce(function (sum, i) {
+                    //     return sum + i
+                    //   }, 0)
+                    // }
 
-                if(status == "B"){
-                    data[i].currentStatus = "SCHEDULE FOR DELVIERY"
-                }
+                    var $table = $('#table')
 
-                if(status == "C"){
-                    data[i].currentStatus = "DELIVERY IN PROGRESS"
-                }
+                    $(function () {
 
-                if(status == "D1"){
-                    data[i].currentStatus = "SUCCESSFUL DELIVERY"
-                }
+                        //console.log(listing)
+                        var data = JSON.parse(listing) //testing required
+                        console.log(data)
+                        for (i = 0; i < data.length; i++) { //change the value to date
+                            let start = moment(data[i].dateEntry, "DD/MM/YYYY").format()
+                            console.log(moment(data[i].dateEntry, "DD/MM/YYYY").format("DD/MM/YYYY"))
+                            let end = moment().format()
+                            console.log(moment().format("DD/MM/YYYY"))
 
-                if(status == "D2"){
-                    data[i].currentStatus = "SELF COLLECT"
-                }
+                            let dif = new Date(end) - new Date(start)
+                            let d = dif / (1000 * 3600 * 24)
+                            if (Math.round(d) == 1) {
+                                data[i].age = Math.round(d) + " day"
+                            }
+                            if (Math.round(d) > 1) {
+                                if ((data[i].service == "MOH") || (data[i].service == "JPMC") || (data[i].service == "PNG")) {
+                                    if (Math.round(d) < 7) {
+                                        data[i].age = Math.round(d) + " days"
+                                    }
+                                    if (Math.round(d) >= 7) {
+                                        data[i].age = Math.round(d) + " days, task expired"
+                                    }
+                                }
 
-                if(status == "D3"){
-                    data[i].currentStatus = "FAILED DELIVERY"
-                }
+                                if ((data[i].service == "GRP") || (data[i].service == "ZALORA")) {
+                                    if (Math.round(d) < 21) {
+                                        data[i].age = Math.round(d) + " days"
+                                    }
+                                    if (Math.round(d) >= 21) {
+                                        data[i].age = Math.round(d) + " days, task expired"
+                                    }
+                                }
 
-                if(status == "D4"){
-                    data[i].currentStatus = "CANCELLED DELIVERY"
-                }
+                                if (data[i].service == "FMX") {
+                                    if (Math.round(d) < 16) {
+                                        data[i].age = Math.round(d) + " days"
+                                    }
+                                    if (Math.round(d) >= 16) {
+                                        data[i].age = Math.round(d) + " days, task expired"
+                                    }
+                                }
+                            }
+                            if (Math.round(d) < 1) {
+                                data[i].age = 0 + " day"
+                            }
+                            console.log(data[i].age)
+                            let status = data[i].currentStatus
 
-                let expire = moment(data[i].mohExpire).format('DD/MM/YYYY')
-                data[i].mohExpire = expire
-            }
+                            /*
+                                IN WAREHOUSE = A1
+                                IN MEDICINE ROOM = A2
+                                RE-ENTRY = A3
+                                SCHEDULE FOR DELIVERY = B
+                                DELIVERY IN PROGRESS = C
+                                SUCCESSFUL DELIVERY = D1
+                                SELF COLLECT = D2
+                                FAILED DELIVERY = D3
+                                CANCELLED DELIVERY = D4
+                            */
 
-            for(i=0; i<data.length; i++){ //change the value to date
-                for(j=0; j<data[i].trackingNumber.length; j++){ //change the value to date
-                    
-                    console.log(data[i].trackingNumber[j])
-                }
-            }
-            $table.bootstrapTable({data: data})
-            $table.bootstrapTable('updateFormatText', 'formatShowingRows', 'Showing')
-        })
-      
-      // Events
-        $('.dropdown-container')
-            .on('click', '.dropdown-button', function() {
-                $(this).siblings('.dropdown-list').toggle();
-            })
-            .on('input', '.dropdown-search', function() {
-                var target = $(this);
-                var dropdownList = target.closest('.dropdown-list');
-                var search = target.val().toLowerCase();
-            
-                if (!search) {
-                    dropdownList.find('li').show();
-                    return false;
-                }
-            
-                dropdownList.find('li').each(function() {
-                    var text = $(this).text().toLowerCase();
-                    var match = text.indexOf(search) > -1;
-                    $(this).toggle(match);
-                });
-            })
-            .on('change', '[type="checkbox"]', function() {
-            var container = $(this).closest('.dropdown-container');
-            var numChecked = container. find('[type="checkbox"]:checked').length;
-            container.find('.quantity').text(numChecked || 'Any');
-        });
-      
-        $(document).ready(function () {
-            var seachHtml = "";
-            var checkBoxIdNoPart = 0;
-            $("table.table-bordered thead tr th div.th-inner").each(function () {
-            checkBoxIdNoPart++;
-            seachHtml +=
-                '<input class="checkBoxClass"  value=' + checkBoxIdNoPart + ' type="checkbox">' 
-            });
-    
-            $('.dropdown-list').append(seachHtml);
-    
-            $("#search_input").keyup(function () {
-                var searchText = $(this).val().toLowerCase();
-                // Show only matching TR, hide rest of them
-                $.each(checkBoxValArray, function (index, value) {
-                    $.each($('#table tbody td:nth-child(' + value + ')'), function () {
-                    if ($(this).text().toLowerCase().indexOf(searchText) != -1)
-                        $(this).parent().show();
-                    else
-                        $(this).parent().hide();
+                            if (status == "A1") {
+                                data[i].currentStatus = "IN WAREHOUSE"
+                            }
+
+                            if (status == "A2") {
+                                data[i].currentStatus = "IN MEDICINE ROOM"
+                            }
+
+                            if (status == "A3") {
+                                data[i].currentStatus = "RE-ENTRY"
+                            }
+
+                            if (status == "B") {
+                                data[i].currentStatus = "SCHEDULE FOR DELVIERY"
+                            }
+
+                            if (status == "C") {
+                                data[i].currentStatus = "DELIVERY IN PROGRESS"
+                            }
+
+                            if (status == "D1") {
+                                data[i].currentStatus = "SUCCESSFUL DELIVERY"
+                            }
+
+                            if (status == "D2") {
+                                data[i].currentStatus = "SELF COLLECT"
+                            }
+
+                            if (status == "D3") {
+                                data[i].currentStatus = "FAILED DELIVERY"
+                            }
+
+                            if (status == "D4") {
+                                data[i].currentStatus = "CANCELLED DELIVERY"
+                            }
+
+                            if (data[i].service == "MOH") {
+                                let expire = moment(data[i].mohExpire).format('DD/MM/YYYY')
+                                data[i].mohExpire = expire
+                            }
+
+                            if (data[i].service == "JPMC") {
+                                let expire = moment(data[i].jpmcExpire).format('DD/MM/YYYY')
+                                data[i].jpmcExpire = expire
+                            }
+
+                            if (data[i].service == "PNG") {
+                                let expire = moment(data[i].pngExpire).format('DD/MM/YYYY')
+                                data[i].pngExpire = expire
+                            }
+
+                            if (data[i].service == "ZALORA") {
+                                let expire = moment(data[i].zalExpire).format('DD/MM/YYYY')
+                                data[i].zalExpire = expire
+                            }
+
+                            if (data[i].service == "GRP") {
+                                let expire = moment(data[i].grpExpire).format('DD/MM/YYYY')
+                                data[i].grpExpire = expire
+                            }
+
+                            if (data[i].service == "FMX") {
+                                let expire = moment(data[i].fmxExpire).format('DD/MM/YYYY')
+                                data[i].fmxExpire = expire
+                            }
+                        }
+
+                        for (i = 0; i < data.length; i++) { //change the value to date
+                            for (j = 0; j < data[i].trackingNumber.length; j++) { //change the value to date
+
+                                console.log(data[i].trackingNumber[j])
+                            }
+                        }
+                        $table.bootstrapTable({ data: data })
+                        $table.bootstrapTable('updateFormatText', 'formatShowingRows', 'Showing')
+                    })
+
+                    // Events
+                    $('.dropdown-container')
+                        .on('click', '.dropdown-button', function () {
+                            $(this).siblings('.dropdown-list').toggle();
+                        })
+                        .on('input', '.dropdown-search', function () {
+                            var target = $(this);
+                            var dropdownList = target.closest('.dropdown-list');
+                            var search = target.val().toLowerCase();
+
+                            if (!search) {
+                                dropdownList.find('li').show();
+                                return false;
+                            }
+
+                            dropdownList.find('li').each(function () {
+                                var text = $(this).text().toLowerCase();
+                                var match = text.indexOf(search) > -1;
+                                $(this).toggle(match);
+                            });
+                        })
+                        .on('change', '[type="checkbox"]', function () {
+                            var container = $(this).closest('.dropdown-container');
+                            var numChecked = container.find('[type="checkbox"]:checked').length;
+                            container.find('.quantity').text(numChecked || 'Any');
+                        });
+
+                    $(document).ready(function () {
+                        var seachHtml = "";
+                        var checkBoxIdNoPart = 0;
+                        $("table.table-bordered thead tr th div.th-inner").each(function () {
+                            checkBoxIdNoPart++;
+                            seachHtml +=
+                                '<input class="checkBoxClass"  value=' + checkBoxIdNoPart + ' type="checkbox">'
+                        });
+
+                        $('.dropdown-list').append(seachHtml);
+
+                        $("#search_input").keyup(function () {
+                            var searchText = $(this).val().toLowerCase();
+                            // Show only matching TR, hide rest of them
+                            $.each(checkBoxValArray, function (index, value) {
+                                $.each($('#table tbody td:nth-child(' + value + ')'), function () {
+                                    if ($(this).text().toLowerCase().indexOf(searchText) != -1)
+                                        $(this).parent().show();
+                                    else
+                                        $(this).parent().hide();
+                                });
+                            });
+                        });
+
+                        var checkBoxValArray = [];
+                        $('.checkBoxClass').click(function () {
+                            checkBoxValArray.push($(this).val());
+                        });
                     });
-                });
-            });
-    
-            var checkBoxValArray = [];
-            $('.checkBoxClass').click(function () {
-                checkBoxValArray.push($(this).val());
-            });
-        });
-    </script>
+                </script>
 
-</body>
+    </body>
+
 </html>

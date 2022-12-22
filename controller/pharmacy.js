@@ -1,5 +1,5 @@
 const warehouseDB = require('../models/warehouseInventory')
-const mohPodDB = require ('../models/mohpod')
+const mohPodDB = require('../models/mohpod')
 const jpmcPodDB = require('../models/jpmcpod')
 const panagaPodDB = require('../models/panagapod')
 const moment = require('moment')
@@ -21,7 +21,7 @@ const moment = require('moment')
     Service code = 200,201,202
 */
 
-const insertPharmacy = ((req,res)=> {
+const insertPharmacy = ((req, res) => {
     let date = moment().format("DD/MM/YYYY")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
@@ -33,12 +33,12 @@ const insertPharmacy = ((req,res)=> {
     let service = data.service
     let startCount = 0
     let parcelStatus = {
-        statusHistory: status, 
+        statusHistory: status,
         dateUpdated: dateEntry,
-        updateBy: data.username, 
-        updateById: data.uid, 
+        updateBy: data.username,
+        updateById: data.uid,
     }
-    let warehouse = new warehouseDB ({
+    let warehouse = new warehouseDB({
         //Main
         trackingNumber: data.trackingNumber,
         contactName: data.name,
@@ -70,33 +70,61 @@ const insertPharmacy = ((req,res)=> {
         count: startCount,
     })
     //if
-    warehouse.history.push(parcelStatus)
-    warehouse.save(err=>{
-        if (err) {
-            if(err.name === "MongoServerError" && err.code === 11000){
-                console.log (err)
-                req.flash('error', `Error Code: 11000 | Tracking number already exist | Require fields missing.`)
-                res.redirect('')
+
+    if (service == "MOH") {
+        warehouse.history.push(parcelStatus)
+        warehouse.save(err => {
+            if (err) {
+                if (err.name === "MongoServerError" && err.code === 11000) {
+                    console.log(err)
+                    req.flash('error', `Error Code: 11000 | Tracking number already exist | Require fields missing.`)
+                    res.redirect('')
+                }
+                else {
+                    console.log(err)
+                    req.flash('error', `Status 406: Not Acceptable | Check your data entry.`)
+                    res.redirect('/moh-in')
+                }
             }
-            else{
-                console.log (err)
-                req.flash('error', `Status 406: Not Acceptable | Check your data entry.`)
-                res.redirect('/moh-in')
+            else {
+                let service = req.params.service
+                console.log('Status: 200 - success entry to database')
+                req.flash('success', `${data} has been added to the database.`)
+                res.status(200).redirect('/moh-in')
             }
-        }
-        else{
-            let service = req.params.service
-            console.log('Status: 200 - success entry to database')
-            req.flash('success', `${data} has been added to the database.`)
-            res.status(200).redirect('/moh-in')
-        }
-    })
+        })
+    }
+
+    if (service == "JPMC") {
+        warehouse.history.push(parcelStatus)
+        warehouse.save(err => {
+            if (err) {
+                if (err.name === "MongoServerError" && err.code === 11000) {
+                    console.log(err)
+                    req.flash('error', `Error Code: 11000 | Tracking number already exist | Require fields missing.`)
+                    res.redirect('')
+                }
+                else {
+                    console.log(err)
+                    req.flash('error', `Status 406: Not Acceptable | Check your data entry.`)
+                    res.redirect('/jpmc-in')
+                }
+            }
+            else {
+                let service = req.params.service
+                console.log('Status: 200 - success entry to database')
+                req.flash('success', `${data} has been added to the database.`)
+                res.status(200).redirect('/jpmc-in')
+            }
+        })
+    }
+
     //end if
 })
 //End - Insert Item
 
 //Start - Create POD MOH
-const insertPodMoh = ((req,res)=>{
+const insertPodMoh = ((req, res) => {
     let date = moment().format("DD/MM/YYYY")
     let data = req.body
     console.log(data)
@@ -106,8 +134,8 @@ const insertPodMoh = ((req,res)=>{
     let pod_id = 'GR/POD/MOH:' + podsequence
     let trackingNumber = data.trackingNumber
     console.log(trackingNumber)
-    for (let i = 0; i < trackingNumber.length; i++){
-        let filter = {trackingNumber: trackingNumber[i]}
+    for (let i = 0; i < trackingNumber.length; i++) {
+        let filter = { trackingNumber: trackingNumber[i] }
         let update = {
             status: "B", //need to find a way to change to delivery in progress
             lastUpdate: date,
@@ -116,27 +144,27 @@ const insertPodMoh = ((req,res)=>{
             deliveryDate: date,
             $push: {
                 history: {
-                    statusHistory: "B", 
+                    statusHistory: "B",
                     dateUpdated: date,
-                    updateBy: data.username, 
-                    updateById: data.uid, 
+                    updateBy: data.username,
+                    updateById: data.uid,
                 }
             }
         }
-        let option = {upsert: false, new: false}
-        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
-            if (err){
+        let option = { upsert: false, new: false }
+        warehouseDB.findOneAndUpdate(filter, update, option, (err, docs) => {
+            if (err) {
                 //console.log(`Failed update: ${trackingNumber}`)
-               //req.flash('error', `Failed to update: ${trackingNumber}`)
+                //req.flash('error', `Failed to update: ${trackingNumber}`)
             }
-            else{
+            else {
                 console.log(`Successfully update: ${trackingNumber[i]}`)
                 //req.flash('success', `${trackingNumber} has been updated on the database.`)
                 //res.status(201).send()
             }
         })
     }
-    let pod = new mohPodDB ({
+    let pod = new mohPodDB({
         pod_id: pod_id,
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
@@ -157,9 +185,9 @@ const insertPodMoh = ((req,res)=>{
         createdAt: date,
         acknowledge: acknowledge
     })
-    pod.save((err,doc)=>{
-        if (err){
-            console.log (err)
+    pod.save((err, doc) => {
+        if (err) {
+            console.log(err)
             //res.flash('error', `Tracking number already exist | Require fields missing`)
             res.render('error', {
                 title: 'xxx',
@@ -167,7 +195,7 @@ const insertPodMoh = ((req,res)=>{
                 message: 'No worries~ database detected duplication of tracking number.'
             })
         }
-        else{
+        else {
             console.log(doc)
             //console.log('Status: 201 - success entry to database')
             //req.flash('success', `${data} has been added to the database.`)
@@ -182,16 +210,16 @@ const insertPodMoh = ((req,res)=>{
 //End - Create POD MOH
 
 //Start - Create POD JPMC
-const insertPodJpmc = ((req,res)=>{
+const insertPodJpmc = ((req, res) => {
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "P1" 
+    let status_pod = "P1"
     let acknowledge = "F"
     let pod_id = 'GR/POD/JPMC:' + podSequence
     let trackingNumber = data.trackingNumberTemp
-    for (let i = 0; i < trackingNumber.length; i++){
-        let filter = {trackingNumber: trackingNumber[i]}
+    for (let i = 0; i < trackingNumber.length; i++) {
+        let filter = { trackingNumber: trackingNumber[i] }
         let update = {
             status: "B", //need to find a way to change to delivery in progress
             lastUpdate: date,
@@ -199,28 +227,28 @@ const insertPodJpmc = ((req,res)=>{
             driver: data.dispatcherName,
             $push: {
                 history: {
-                    statusHistory: "B", 
+                    statusHistory: "B",
                     dateUpdated: date,
-                    updateBy: data.username, 
-                    updateById: data.uid, 
+                    updateBy: data.username,
+                    updateById: data.uid,
                 }
             }
         }
-        let option = {upsert: false, new: false}
-        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
-            if (err){
+        let option = { upsert: false, new: false }
+        warehouseDB.findOneAndUpdate(filter, update, option, (err, docs) => {
+            if (err) {
                 console.log(`Failed update: ${trackingNumber}`)
                 req.flash('error', `Failed to update: ${trackingNumber}`)
             }
-            else{
+            else {
                 console.log(`Successfully update: ${trackingNumber}`)
                 req.flash('success', `${trackingNumber} has been updated on the database.`)
                 res.status(201).send()
             }
         })
     }
-    let option = {upsert: false, new: false}
-    let pod = new jpmcPodDB ({
+    let option = { upsert: false, new: false }
+    let pod = new jpmcPodDB({
         pod_id: pod_id,
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
@@ -240,9 +268,9 @@ const insertPodJpmc = ((req,res)=>{
         createdAt: date,
         acknowledge: acknowledge
     })
-    pod.save((err,doc)=>{
-        if (err){
-            console.log (err)
+    pod.save((err, doc) => {
+        if (err) {
+            console.log(err)
             //res.flash('error', `Tracking number already exist | Require fields missing`)
             res.render('error', {
                 errorcode: 'XXX',
@@ -250,7 +278,7 @@ const insertPodJpmc = ((req,res)=>{
                 message: 'No worries~ database detected duplication of tracking number.'
             })
         }
-        else{
+        else {
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
             res.status(201).send()
@@ -265,16 +293,16 @@ const insertPodJpmc = ((req,res)=>{
 //End - Create POD JPMC
 
 //Start - Create POD Panaga
-const insertPodPanaga = ((req,res)=>{
+const insertPodPanaga = ((req, res) => {
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
-    let status_pod = "P1" 
+    let status_pod = "P1"
     let acknowledge = "F"
     let pod_id = 'GR/POD/PNG:' + podSequence
     let trackingNumber = data.trackingNumber
-    for (let i = 0; i < trackingNumber.length; i++){
-        let filter = {trackingNumber: trackingNumber[i]}
+    for (let i = 0; i < trackingNumber.length; i++) {
+        let filter = { trackingNumber: trackingNumber[i] }
         let update = {
             status: "B", //need to find a way to change to delivery in progress
             lastUpdate: date,
@@ -282,27 +310,27 @@ const insertPodPanaga = ((req,res)=>{
             driver: data.dispatcherName,
             $push: {
                 history: {
-                    statusHistory: "B", 
+                    statusHistory: "B",
                     dateUpdated: date,
-                    updateBy: data.username, 
-                    updateById: data.uid, 
+                    updateBy: data.username,
+                    updateById: data.uid,
                 }
             }
         }
-        let option = {upsert: false, new: false}
-        warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
-            if (err){
+        let option = { upsert: false, new: false }
+        warehouseDB.findOneAndUpdate(filter, update, option, (err, docs) => {
+            if (err) {
                 console.log(`Failed update: ${trackingNumber}`)
                 req.flash('error', `Failed to update: ${trackingNumber}`)
             }
-            else{
+            else {
                 console.log(`Successfully update: ${trackingNumber}`)
                 req.flash('success', `${trackingNumber} has been updated on the database.`)
                 res.status(201).send()
             }
         })
     }
-    let pod = new panagaPodDB ({
+    let pod = new panagaPodDB({
         pod_id: pod_id,
         madeby: data.madeby,
         deliveryArea: data.deliveryArea,
@@ -322,9 +350,9 @@ const insertPodPanaga = ((req,res)=>{
         createdAt: date,
         acknowledge: acknowledge
     })
-    pod.save((err,doc)=>{
-        if (err){
-            console.log (err)
+    pod.save((err, doc) => {
+        if (err) {
+            console.log(err)
             //res.flash('error', `Tracking number already exist | Require fields missing`)
             res.render('error', {
                 errorcode: 'XXX',
@@ -332,7 +360,7 @@ const insertPodPanaga = ((req,res)=>{
                 message: 'No worries~ database detected duplication of tracking number.'
             })
         }
-        else{
+        else {
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
             res.status(201).send()
@@ -347,60 +375,60 @@ const insertPodPanaga = ((req,res)=>{
 //End - Create POD Panaga
 
 //Start - Update Item MOH
-const updateMohPod = ((req,res) =>{
+const updateMohPod = ((req, res) => {
     let data = req.body
-    let date =  moment().format("DD/MM/YYYY")
+    let date = moment().format("DD/MM/YYYY")
     let tracker = data.trackingNumber
     console.log(tracker)
-    for (let i = 0; i < tracker.length; i++){
-        let filter = {trackingNumber: trackingNumber[i]}
+    for (let i = 0; i < tracker.length; i++) {
+        let filter = { trackingNumber: trackingNumber[i] }
         let update = {
             status: "C", //need to find a way to change to C
             lastUpdate: date,
             $push: {
                 history: {
-                    statusDetail: "C", 
+                    statusDetail: "C",
                     dateUpdated: date,
-                    updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateBy: data.username,
+                    updateById: data.userID,
                 }
             }
         }
-        let option = {upsert: false, new: false}
+        let option = { upsert: false, new: false }
         console.log(filter)
         warehouseDB.find(filter).then(
-            (result)=> {
-                if (result.count == "0"){
-                    let count = result.count + 1
-                    result.count = count 
-                    console.log("result.count " + count)
-                    result.save()
-                    console.log("Success update")
-                }
-                else if(result.count <= "2"){
+            (result) => {
+                if (result.count == "0") {
                     let count = result.count + 1
                     result.count = count
                     console.log("result.count " + count)
                     result.save()
                     console.log("Success update")
                 }
-                else if(result.count <= "2"){
+                else if (result.count <= "2") {
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if (result.count <= "2") {
                     let count = "L" //max attempt reached.
                     result.count = count
                     console.log("result.count " + count)
                     result.save()
                     console.log("Success update")
                 }
-                else{
+                else {
                     console.log("Failed to retrieve count")
                 }
             },
-            (err)=>{
+            (err) => {
                 console.log(err)
             }
         )
-        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
-            if(err){
+        warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
+            if (err) {
                 console.log(err)
                 res.render('error', {
                     errorcode: 'XXX',
@@ -421,19 +449,19 @@ const updateMohPod = ((req,res) =>{
 //End - Update Item MOH
 
 //Start - Update POD Status
-const updateMohPodStatus = ((req,res)=>{
+const updateMohPodStatus = ((req, res) => {
     let data = req.body
     let pod_id = data.pod_id
     let podstatus = data.pod_status
-    let filter = {pod_id}
-    let update = {podstatus}
-    let option = {upsert: false, new: false}
-    mohPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
-        if(err) {
+    let filter = { pod_id }
+    let update = { podstatus }
+    let option = { upsert: false, new: false }
+    mohPodDB.findOneAndUpdate(filter, update, option, (err, docs) => {
+        if (err) {
             req.flash('error', `Failed to update POD status.`)
             res.redirect('/moh-podlist')
         }
-        else{
+        else {
             req.flash('success', `POD status updated.`)
             res.redirect('/moh-podlist')
             console.log(docs)
@@ -443,22 +471,22 @@ const updateMohPodStatus = ((req,res)=>{
 })
 //End - Update POD Status
 
-const financeAcknowledgeMoh = ((req,res)=>{
+const financeAcknowledgeMoh = ((req, res) => {
     let data = req.body
     let pod_id = data.pod_id
     let acknowledge = "T"
-    let filter = {pod_id}
+    let filter = { pod_id }
     let update = {
         acknowledge,
         financeNotes: data.fincanceNotes,
     }
-    let option = {upsert: false, new: false}
-    mohPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
-        if(err) {
+    let option = { upsert: false, new: false }
+    mohPodDB.findOneAndUpdate(filter, update, option, (err, docs) => {
+        if (err) {
             req.flash('error', `Failed to acknowledge POD.`)
             res.redirect('/moh-podlist')
         }
-        else{
+        else {
             req.flash('success', `POD Acknowledged.`)
             res.redirect('/moh-podlist')
             console.log(docs)
@@ -468,25 +496,25 @@ const financeAcknowledgeMoh = ((req,res)=>{
 })
 
 //Start - Update MOH Self
-const updateMohSelf = ((req,res) =>{
+const updateMohSelf = ((req, res) => {
     let data = req.body
-    let date =  moment().format("DD/MM/YYYY")
+    let date = moment().format("DD/MM/YYYY")
     let tracker = data.trackingNumber
-    let option = {upsert: false, new: false}
+    let option = { upsert: false, new: false }
     let update = {
-        currentStatus: "D2", 
-        $push:{
+        currentStatus: "D2",
+        $push: {
             history: {
-                statusDetail: "D2", 
+                statusDetail: "D2",
                 dateUpdated: date,
-                updateBy: data.updateById, 
-                updateById: data.uid, 
+                updateBy: data.updateById,
+                updateById: data.uid,
             }
         }
     }
     console.log(filter)
-    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
-        if(err){
+    warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
+        if (err) {
             console.log(err)
             res.render('error', {
                 errorcode: 'XXX',
@@ -506,60 +534,60 @@ const updateMohSelf = ((req,res) =>{
 //End - Update MOH Self
 
 //Start - Update Item JPMC
-const updateJpmcPod = ((req,res) =>{
+const updateJpmcPod = ((req, res) => {
     let data = req.body
-    let date =  moment().format("DD/MM/YYYY")
+    let date = moment().format("DD/MM/YYYY")
     let tracker = data.trackingNumber
     console.log(tracker)
-    for (let i = 0; i < tracker.length; i++){
-        let filter = {trackingNumber: trackingNumber[i]}
+    for (let i = 0; i < tracker.length; i++) {
+        let filter = { trackingNumber: trackingNumber[i] }
         let update = {
             status: "C", //need to find a way to change to C
             lastUpdate: date,
             $push: {
                 history: {
-                    statusDetail: "C", 
+                    statusDetail: "C",
                     dateUpdated: date,
-                    updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateBy: data.username,
+                    updateById: data.userID,
                 }
             }
         }
-        let option = {upsert: false, new: false}
+        let option = { upsert: false, new: false }
         console.log(filter)
         warehouseDB.find(filter).then(
-            (result)=> {
-                if (result.count == "0"){
-                    let count = result.count + 1
-                    result.count = count 
-                    console.log("result.count " + count)
-                    result.save()
-                    console.log("Success update")
-                }
-                else if(result.count <= "2"){
+            (result) => {
+                if (result.count == "0") {
                     let count = result.count + 1
                     result.count = count
                     console.log("result.count " + count)
                     result.save()
                     console.log("Success update")
                 }
-                else if(result.count <= "2"){
+                else if (result.count <= "2") {
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if (result.count <= "2") {
                     let count = "L" //max attempt reached.
                     result.count = count
                     console.log("result.count " + count)
                     result.save()
                     console.log("Success update")
                 }
-                else{
+                else {
                     console.log("Failed to retrieve count")
                 }
             },
-            (err)=>{
+            (err) => {
                 console.log(err)
             }
         )
-        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
-            if(err){
+        warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
+            if (err) {
                 console.log(err)
                 res.render('error', {
                     errorcode: 'XXX',
@@ -580,19 +608,19 @@ const updateJpmcPod = ((req,res) =>{
 //End - Update Item JPMC
 
 //Start - Update POD Status
-const updateJpmcPodStatus = ((req,res)=>{
+const updateJpmcPodStatus = ((req, res) => {
     let data = req.body
     let pod_id = data.pod_id
     let podstatus = data.pod_status
-    let filter = {pod_id}
-    let update = {podstatus}
-    let option = {upsert: false, new: false}
-    jpmcPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
-        if(err) {
+    let filter = { pod_id }
+    let update = { podstatus }
+    let option = { upsert: false, new: false }
+    jpmcPodDB.findOneAndUpdate(filter, update, option, (err, docs) => {
+        if (err) {
             req.flash('error', `Failed to update POD status.`)
             res.redirect('/jpmc-podlist')
         }
-        else{
+        else {
             req.flash('success', `POD status updated.`)
             res.redirect('/jpmc-podlist')
             console.log(docs)
@@ -602,22 +630,22 @@ const updateJpmcPodStatus = ((req,res)=>{
 })
 //End - Update POD Status
 
-const financeAcknowledgeJpmc = ((req,res)=>{
+const financeAcknowledgeJpmc = ((req, res) => {
     let data = req.body
     let pod_id = data.pod_id
     let acknowledge = "T"
-    let filter = {pod_id}
+    let filter = { pod_id }
     let update = {
         acknowledge,
         financeNotes: data.fincanceNotes,
     }
-    let option = {upsert: false, new: false}
-    jpmcPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
-        if(err) {
+    let option = { upsert: false, new: false }
+    jpmcPodDB.findOneAndUpdate(filter, update, option, (err, docs) => {
+        if (err) {
             req.flash('error', `Failed to acknowledge POD.`)
             res.redirect('/jpmc-podlist')
         }
-        else{
+        else {
             req.flash('success', `POD Acknowledged.`)
             res.redirect('/jpmc-podlist')
             console.log(docs)
@@ -627,25 +655,25 @@ const financeAcknowledgeJpmc = ((req,res)=>{
 })
 
 //Start - Update JPMC Self
-const updateJpmcSelf = ((req,res) =>{
+const updateJpmcSelf = ((req, res) => {
     let data = req.body
-    let date =  moment().format("DD/MM/YYYY")
+    let date = moment().format("DD/MM/YYYY")
     let tracker = data.trackingNumber
-    let option = {upsert: false, new: false}
+    let option = { upsert: false, new: false }
     let update = {
-        currentStatus: "D2", 
-        $push:{
+        currentStatus: "D2",
+        $push: {
             history: {
-                statusDetail: "D2", 
+                statusDetail: "D2",
                 dateUpdated: date,
-                updateBy: data.updateById, 
-                updateById: data.uid, 
+                updateBy: data.updateById,
+                updateById: data.uid,
             }
         }
     }
     console.log(filter)
-    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
-        if(err){
+    warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
+        if (err) {
             console.log(err)
             res.render('error', {
                 errorcode: 'XXX',
@@ -665,60 +693,60 @@ const updateJpmcSelf = ((req,res) =>{
 //End - Update JPMC Self
 
 //Start - Update Item Panaga
-const updatePanagaPod = ((req,res) =>{
+const updatePanagaPod = ((req, res) => {
     let data = req.body
-    let date =  moment().format("DD/MM/YYYY")
+    let date = moment().format("DD/MM/YYYY")
     let tracker = data.trackingNumber
     console.log(tracker)
-    for (let i = 0; i < tracker.length; i++){
-        let filter = {trackingNumber: trackingNumber[i]}
+    for (let i = 0; i < tracker.length; i++) {
+        let filter = { trackingNumber: trackingNumber[i] }
         let update = {
             status: "C", //need to find a way to change to C
             lastUpdate: date,
             $push: {
                 history: {
-                    statusDetail: "C", 
+                    statusDetail: "C",
                     dateUpdated: date,
-                    updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateBy: data.username,
+                    updateById: data.userID,
                 }
             }
         }
-        let option = {upsert: false, new: false}
+        let option = { upsert: false, new: false }
         console.log(filter)
         warehouseDB.find(filter).then(
-            (result)=> {
-                if (result.count == "0"){
-                    let count = result.count + 1
-                    result.count = count 
-                    console.log("result.count " + count)
-                    result.save()
-                    console.log("Success update")
-                }
-                else if(result.count <= "2"){
+            (result) => {
+                if (result.count == "0") {
                     let count = result.count + 1
                     result.count = count
                     console.log("result.count " + count)
                     result.save()
                     console.log("Success update")
                 }
-                else if(result.count <= "2"){
+                else if (result.count <= "2") {
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if (result.count <= "2") {
                     let count = "L" //max attempt reached.
                     result.count = count
                     console.log("result.count " + count)
                     result.save()
                     console.log("Success update")
                 }
-                else{
+                else {
                     console.log("Failed to retrieve count")
                 }
             },
-            (err)=>{
+            (err) => {
                 console.log(err)
             }
         )
-        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
-            if(err){
+        warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
+            if (err) {
                 console.log(err)
                 res.render('error', {
                     errorcode: 'XXX',
@@ -739,19 +767,19 @@ const updatePanagaPod = ((req,res) =>{
 //End - Update Item Panaga
 
 //Start - Update POD Status
-const updatePanagaPodStatus = ((req,res)=>{
+const updatePanagaPodStatus = ((req, res) => {
     let data = req.body
     let pod_id = data.pod_id
     let podstatus = data.pod_status
-    let filter = {pod_id}
-    let update = {podstatus}
-    let option = {upsert: false, new: false}
-    panagaPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
-        if(err) {
+    let filter = { pod_id }
+    let update = { podstatus }
+    let option = { upsert: false, new: false }
+    panagaPodDB.findOneAndUpdate(filter, update, option, (err, docs) => {
+        if (err) {
             req.flash('error', `Failed to update POD status.`)
             res.redirect('/panaga-podlist')
         }
-        else{
+        else {
             req.flash('success', `POD status updated.`)
             res.redirect('/panaga-podlist')
             console.log(docs)
@@ -761,22 +789,22 @@ const updatePanagaPodStatus = ((req,res)=>{
 })
 //End - Update POD Status
 
-const financeAcknowledgePanaga = ((req,res)=>{
+const financeAcknowledgePanaga = ((req, res) => {
     let data = req.body
     let pod_id = data.pod_id
     let acknowledge = "T"
-    let filter = {pod_id}
+    let filter = { pod_id }
     let update = {
         acknowledge,
         financeNotes: data.fincanceNotes,
     }
-    let option = {upsert: false, new: false}
-    panagaPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
-        if(err) {
+    let option = { upsert: false, new: false }
+    panagaPodDB.findOneAndUpdate(filter, update, option, (err, docs) => {
+        if (err) {
             req.flash('error', `Failed to acknowledge POD.`)
             res.redirect('/panaga-podlist')
         }
-        else{
+        else {
             req.flash('success', `POD Acknowledged.`)
             res.redirect('/panaga-podlist')
             console.log(docs)
@@ -786,25 +814,25 @@ const financeAcknowledgePanaga = ((req,res)=>{
 })
 
 //Start - Update Panaga Self
-const updatePanagaSelf = ((req,res) =>{
+const updatePanagaSelf = ((req, res) => {
     let data = req.body
-    let date =  moment().format("DD/MM/YYYY")
+    let date = moment().format("DD/MM/YYYY")
     let tracker = data.trackingNumber
-    let option = {upsert: false, new: false}
+    let option = { upsert: false, new: false }
     let update = {
-        currentStatus: "D2", 
-        $push:{
+        currentStatus: "D2",
+        $push: {
             history: {
-                statusDetail: "D2", 
+                statusDetail: "D2",
                 dateUpdated: date,
-                updateBy: data.updateById, 
-                updateById: data.uid, 
+                updateBy: data.updateById,
+                updateById: data.uid,
             }
         }
     }
     console.log(filter)
-    warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
-        if(err){
+    warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
+        if (err) {
             console.log(err)
             res.render('error', {
                 errorcode: 'XXX',
@@ -824,13 +852,14 @@ const updatePanagaSelf = ((req,res) =>{
 //End - Update Panaga Self
 
 //Start - Update MOH Edit Details
-const updateMoh = ((req,res) => {
+const updateMoh = ((req, res) => {
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
     let tracker = data.trackingNumber
-    let filter = {trackingNumber: tracker}
-    let update = {adress: data.adress, contact: data.contact,area: data.area, areaIndicator: data.areaIndicator,
+    let filter = { trackingNumber: tracker }
+    let update = {
+        adress: data.adress, contact: data.contact, area: data.area, areaIndicator: data.areaIndicator,
         $push: {
             editHistory: {
                 oldAddress: req.body.oldAddress,
@@ -842,15 +871,15 @@ const updateMoh = ((req,res) => {
             }
         }
     }
-    let option = {upsert: false, new: false}
-    warehouseDB.findOneAndUpdate(filter,update,option, (err,result)=>{
-        if (err){
+    let option = { upsert: false, new: false }
+    warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
+        if (err) {
             console.log(err)
             console.log(`${tracker} failed to be updated.`)
             res.status(400).send()
             res.flash('error', `Failed to update ${tracker}`)
         }
-        else{
+        else {
             console.log(result)
             console.log(`${tracker} has been updated.`)
             res.status(201).send()
@@ -862,13 +891,14 @@ const updateMoh = ((req,res) => {
 //End - Update MOH Edit Details
 
 //Start - Update JPMC Edit Details
-const updateJpmc = ((req,res) => {
+const updateJpmc = ((req, res) => {
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
     let tracker = data.trackingNumber
-    let filter = {trackingNumber: tracker}
-    let update = {adress: data.adress, contact: data.contact,area: data.area, areaIndicator: data.areaIndicator,
+    let filter = { trackingNumber: tracker }
+    let update = {
+        adress: data.adress, contact: data.contact, area: data.area, areaIndicator: data.areaIndicator,
         $push: {
             editHistory: {
                 oldAddress: req.body.oldAddress,
@@ -880,15 +910,15 @@ const updateJpmc = ((req,res) => {
             }
         }
     }
-    let option = {upsert: false, new: false}
-    warehouseDB.findOneAndUpdate(filter,update,option, (err,result)=>{
-        if (err){
+    let option = { upsert: false, new: false }
+    warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
+        if (err) {
             console.log(err)
             console.log(`${tracker} failed to be updated.`)
             res.status(400).send()
             res.flash('error', `Failed to update ${tracker}`)
         }
-        else{
+        else {
             console.log(result)
             console.log(`${tracker} has been updated.`)
             res.status(201).send()
@@ -900,13 +930,14 @@ const updateJpmc = ((req,res) => {
 //End - Update JPMC Edit Details
 
 //Start - Update Panaga Edit Details
-const updatePanaga = ((req,res) => {
+const updatePanaga = ((req, res) => {
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
     let tracker = data.trackingNumber
-    let filter = {trackingNumber: tracker}
-    let update = {adress: data.adress, contact: data.contact,area: data.area, areaIndicator: data.areaIndicator,
+    let filter = { trackingNumber: tracker }
+    let update = {
+        adress: data.adress, contact: data.contact, area: data.area, areaIndicator: data.areaIndicator,
         $push: {
             editHistory: {
                 oldAddress: req.body.oldAddress,
@@ -918,15 +949,15 @@ const updatePanaga = ((req,res) => {
             }
         }
     }
-    let option = {upsert: false, new: false}
-    warehouseDB.findOneAndUpdate(filter,update,option, (err,result)=>{
-        if (err){
+    let option = { upsert: false, new: false }
+    warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
+        if (err) {
             console.log(err)
             console.log(`${tracker} failed to be updated.`)
             res.status(400).send()
             res.flash('error', `Failed to update ${tracker}`)
         }
-        else{
+        else {
             console.log(result)
             console.log(`${tracker} has been updated.`)
             res.status(201).send()
