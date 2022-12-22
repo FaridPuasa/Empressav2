@@ -177,18 +177,15 @@
                             }
                             console.log(data[i].age)
                             let status = data[i].currentStatus
+                            let paymentStatus = data[i].paymentStatus
 
-                            /*
-                                IN WAREHOUSE = A1
-                                IN MEDICINE ROOM = A2
-                                RE-ENTRY = A3
-                                SCHEDULE FOR DELIVERY = B
-                                DELIVERY IN PROGRESS = C
-                                SUCCESSFUL DELIVERY = D1
-                                SELF COLLECT = D2
-                                FAILED DELIVERY = D3
-                                CANCELLED DELIVERY = D4
-                            */
+                            if (paymentStatus == "F") {
+                                data[i].paymentStatus = "NOT COLLECTED"
+                            }
+
+                            if (paymentStatus == "T") {
+                                data[i].paymentStatus = "COLLECTED"
+                            }
 
                             if (status == "A1") {
                                 data[i].currentStatus = "IN WAREHOUSE"
