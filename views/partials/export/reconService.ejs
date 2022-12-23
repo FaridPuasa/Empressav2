@@ -25,6 +25,7 @@
                                 <th>Delivery Type</th>
                                 <th>Value (BND)</th>
                                 <th>Payment Method</th>
+                                <th>Proof of Payment</th>
                                 <th>Remarks</th>
                                 <th>Payment Confirmed</th>
                             </tr>
@@ -71,6 +72,8 @@
                                             <div class="form-floating">
                                                 <textarea class="form-control" name="ackCode" placeholder="" id="" style="height: 100px"></textarea>
                                             </div>
+                                        </td>
+                                        <td name="proofOfPayment">
                                         </td>
                                         <td>
                                             <% if (result.paymentStatus[i] == "T") { %>
