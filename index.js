@@ -93,7 +93,7 @@ podMohWatch.on('change', change =>{
         subject: "New POD Created.",
         text: "New POD for MOH has been created by the Operation Team. <Link>"
     }
-    if (change){
+    if (change.operationType == 'insert'){
         console.log("executing sending mail")
         trasporter.sendMail(options, (err, info)=>{
             if (err){
