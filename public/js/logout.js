@@ -1,11 +1,11 @@
 (function() {
-    const idleDurationSecs = 20000;
+    const idleDurationSecs = 60000;
     const redirectUrl = '/logout';
     let idleTimeout;
 
     const resetIdleTimeout = function() {
         if(idleTimeout) clearTimeout(idleTimeout);
-        idleTimeout = setTimeout(() => location.href = redirectUrl, idleDurationSecs * 1000);
+        idleTimeout = setTimeout(() => location.href = redirectUrl, idleDurationSecs);
     };
 	
 	// Key events for reset time

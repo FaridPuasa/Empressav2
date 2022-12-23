@@ -9,6 +9,7 @@ const http = require('http')
 const moment = require('moment')
 const flash = require('connect-flash')
 const nodemailer = require('nodemailer')
+const MemoryStore = require('memorystore')(session)
 
 //Server setup
 let server = http.createServer(app)
@@ -17,10 +18,12 @@ let io = socketIO(server)
 //Session setup
 app.use(session({
     secret: 'Unknown Value',
-    cookie: {maxAge: 20000},
+    cookie: {maxAge: 300000},
+    store: new MemoryStore({
+        checkPeriod: 86400000
+    }),
     saveUninitialized: false,
     resave: false,
-    
 }))
 
 app.use(express.urlencoded({extended:true}))
@@ -85,8 +88,8 @@ const trasporter = nodemailer.createTransport({
 podMohWatch.on('change', change =>{
     const options ={
         from: "it-support@globex.com.bn",
-        to: "ar@gorushbn.com",
-        cc: "john.ang@globex.com.bn",
+        to: ["farid.puasa@globex.com.bn","ar@gorushbn.com"],
+        cc: ["john.ang@globex.com.bn","farid.puasa@globex.com.bn", "nurellia.matzin@globex.com.bn", "syahmi.ghafar@globex.com.bn"],
         subject: "New POD Created.",
         text: "New POD for MOH has been created by the Operation Team. <Link>"
     }

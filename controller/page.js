@@ -19,8 +19,10 @@ const { currentUser } = require('../controller/user')
 
 const dashboard = (req,res) =>{
     //let id = req.params.user
-    console.log(currentUser[0])
-    let user = currentUser[0]
+    //console.log("This is an user: " + req.session.user)
+    let sessionuser = req.session.user
+    //console.log(sessionuser)
+    let user = sessionuser
     warehouseDB.aggregate([{ 
         $group:{
             _id: {service: '$service', currentStatus: '$currentStatus', areaCode: '$areaCode'},
@@ -28,7 +30,7 @@ const dashboard = (req,res) =>{
         }
         }]).then(
         (result)=>{
-            console.log(result)
+            console.log(user.service.includes("200"))
             res.status(200).render('dashboard', {
                 title: 'Dashboard',
                 user,
@@ -44,7 +46,9 @@ const dashboard = (req,res) =>{
 const service = (req,res) =>{
     let services = req.params.services
     let service = services.toUpperCase()
-    let user = currentUser[0]
+    let sessionuser = req.session.user
+    console.log(sessionuser)
+    let user = sessionuser
     console.log(service)
     if(services == 'moh'){
         mohPodDB.find().sort({$natural: -1}).limit(1).then(
@@ -468,8 +472,9 @@ const service = (req,res) =>{
 }
 
 const self = (req,res) =>{
-    let user = currentUser[0]
-    console.log(user.uid)
+    let sessionuser = req.session.user
+    console.log(sessionuser)
+    let user = sessionuser
     res.render('selfcollect',{
         title: "Self Collect",
         partials: './partials/selfcollect/selfcollect.ejs',
@@ -531,8 +536,10 @@ const inventoryList = (req,res) =>{
 
 const serviceIn = (req,res)=> {
     let services = req.params.services
-    let user = currentUser[0]
-    console.log(services)
+    let sessionuser = req.session.user
+    console.log(sessionuser)
+    let user = sessionuser
+    console.log(user)
     if(services == 'moh'){
         res.render('itemin',{
             title: `${services} In`,

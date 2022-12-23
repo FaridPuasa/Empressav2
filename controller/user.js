@@ -93,6 +93,8 @@ const grantAccess = ((req,res)=>{
             if (user) {
                 req.session.authenticated = true
                 req.session.user = user
+                let sessionUser = req.session.user
+                console.log("The current user: " + sessionUser)
                 let firsttime = user.firsttime
                 if (firsttime === "true") {
                     res.status(200).render('login', {

@@ -25,6 +25,7 @@
     "express-session": "^1.17.3",
     "http": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
+    "memorystore": "^1.6.7",
     "moment": "^2.29.4",
     "mongoose": "^6.7.0",
     "morgan": "^1.10.0",
