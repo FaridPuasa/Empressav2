@@ -174,8 +174,9 @@ const xxx = (req,res) =>{
 
 const exportFinanceSummary = (req,res) =>{
     let data = req.body
-    let end = data.enddate
-    let start = data.startdate
+    let service = data.service
+    let end = moment(data.enddate, "YYYY-MM-DD").format("DD/MM/YYYY")
+    let start = moment(data.startdate, "YYYY-MM-DD").format("DD/MM/YYYY") 
     let user = currentUser[0]
     console.log(data)
     let filter = {
@@ -190,6 +191,7 @@ const exportFinanceSummary = (req,res) =>{
             console.log('Successfully extracted required data.')
             console.log(result)
             res.render('finance', {
+                service,
                 title: 'Finance Summary',
                 partials: './partials/export/reconService.ejs',
                 result,
