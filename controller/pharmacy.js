@@ -454,8 +454,72 @@ const updateMohPodStatus = ((req, res) => {
     let pod_id = data.pod_id
     let podstatus = data.pod_status
     let filter = { pod_id }
+    console.log(filter)
     let update = { podstatus }
     let option = { upsert: false, new: false }
+    let date = moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++) {
+        let filter1 = { trackingNumber: data.trackingNumber[i] }
+        console.log(filter1)
+        let update1 = {
+            currentStatus: "C", //need to find a way to change to C
+            lastUpdate: date,
+            $push: {
+                history: {
+                    statusDetail: "C",
+                    dateUpdated: date,
+                    updateBy: data.username,
+                    updateById: data.userID,
+                }
+            }
+        }
+        let option1 = { upsert: false, new: false }
+        console.log(filter1)
+        warehouseDB.find(filter1).then(
+            (result) => {
+                console.log('result: '+ result[0].count)
+                if (result[0].count == "0") {
+                    let count = result[0].count + 1
+                    result[0].count = count
+                    console.log("result.count " + count)
+                    result[0].save()
+                    console.log("Success update")
+                }
+                else if (result[0].count <= "2") {
+                    let count = result[0].count + 1
+                    result[0].count = count
+                    console.log("result.count " + count)
+                    result[0].save()
+                    console.log("Success update")
+                }
+                else if (result[0].count > "2") {
+                    let count = "" //max attempt reached.
+                    result[0].count = count
+                    console.log("result.count " + count)
+                    result[0].save()
+                    console.log("Success update")
+                }
+                else {
+                    console.log("Failed to retrieve count")
+                }
+            },
+            (err) => {
+                console.log(err)
+            }
+        )
+        warehouseDB.findOneAndUpdate(filter1, update1, option1, (err, result) => {
+            if (err) {
+                console.log(err)
+                
+            }
+            else {
+                console.log(result)
+                
+            }
+        })
+    }
     mohPodDB.findOneAndUpdate(filter, update, option, (err, docs) => {
         if (err) {
             req.flash('error', `Failed to update POD status.`)

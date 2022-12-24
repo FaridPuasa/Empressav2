@@ -44,6 +44,7 @@
                                         <th>Status</th>
                                     </tr>
                                 </thead>
+                                <form action="/update-POD-moh" method="POST">
                                 <tbody>
                                     <% document.forEach((document,index)=> {%>
                                     <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
@@ -71,7 +72,7 @@
                                             <%}%>
                                         </td>
                                         <% if (user.role == "11" || user.role == "13" || user.role == "10") { %>
-                                        <form action="/update-POD-moh" method="POST">
+                                        
                                             <% if(document.podstatus == "P1"){%>
                                                 <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
                                                 <input type="hidden" name="pod_status" value="P2">
@@ -85,7 +86,7 @@
                                             <% if(document.podstatus == "P3"){%>
                                                 <td><button class="btn btn-primary delivery-btn invisible">Completed</button></td>
                                             <%}%>
-                                        </form>
+                                        
                                         <%}%>
                                     </tr>
                                 </div>
@@ -197,6 +198,7 @@
                                     </tr>
                                     <%})%>
                                 </tbody>
+                                </form>
                             </table>
                             <% } %>
                         </div>
