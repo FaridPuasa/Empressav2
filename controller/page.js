@@ -657,7 +657,7 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'panaga'){
+            if(services == 'panaga'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/panaga'),
@@ -666,7 +666,7 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'fmx'){
+            if(services == 'fmx'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/fmx'),
@@ -675,7 +675,7 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'zalora'){
+            if(services == 'zalora'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/zalora'),
@@ -683,7 +683,8 @@ const itemList = (req,res) =>{
                     moment: moment,
                     user,
                 })
-            }else if(services == 'grp'){
+            }
+            if(services == 'grp'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/grp'),
@@ -692,7 +693,7 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'runner'){
+            if(services == 'runner'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/runner'),
@@ -701,7 +702,7 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'personal'){
+            if(services == 'personal'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/personal'),
@@ -710,21 +711,13 @@ const itemList = (req,res) =>{
                     user,
                 })
             }
-            else if(services == 'local'){
+            if(services == 'local'){
                 res.render('list',{
                     title: `${services} List`,
                     partials: ('./partials/list/local'),
                     list: documents,
                     moment: moment,
                     user,
-                })
-            }
-            else{
-                console.log('Error 404 - page not found')
-                res.render('error', {
-                    title: '404',
-                    response: '',
-                    message: 'Page not found'
                 })
             }
         },
