@@ -1,5 +1,5 @@
 (function() {
-    const idleDurationSecs = 600000;
+    const idleDurationSecs = 6000000;
     const redirectUrl = '/logout';
     let idleTimeout;
 

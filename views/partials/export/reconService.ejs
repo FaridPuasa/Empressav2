@@ -32,11 +32,10 @@
                         </thead>
                         <tbody>
                             <% result.forEach(result=>{ %>
-                                <% for(let i=0; i < result.trackingNumber.length; i++){ %>
                                     <tr class="rowNumber">
                                         <td name="dispatch" id="dispatch">
-                                            <%= result.agentName %><input type="hidden" name="disp"
-                                                    value="<%= result.agentName %>">
+                                            <%= result.driver %><input type="hidden" name="disp"
+                                                    value="<%= result.driver %>">
                                         </td>
                                         <td name="date">
                                             <%= result.deliveryDate %>
@@ -45,50 +44,49 @@
                                             <%= service %>
                                         </td>
                                         <td>
-                                            <%= result.trackingNumber[i] %>
-                                            <input type="hidden" name="trackingNumber" value="<%= result.trackingNumber[i] %>">
+                                            <%= result.trackingNumber %>
+                                            <input type="hidden" name="trackingNumber" value="<%= result.trackingNumber %>">
                                         </td>
                                         <td></td>
                                         <td>
-                                            <%= result.contactName[i] %>
+                                            <%= result.contactName %>
                                         </td>
                                         <td>
-                                            <%= result.contactAddress[i] %>
+                                            <%= result.contactAddress %>
                                         </td>
                                         <td>
-                                            <%= result.contactNumber[i] %>
+                                            <%= result.contactNumber %>
                                         </td>
                                         <td>
-                                            <%= result.deliveryType[i] %>
+                                            <%= result.deliveryType %>
                                         </td>
-                                        <td id=" price<%= [i] %>">
-                                            <%= result.parcelValue[i] %><input type="hidden" id="val<%= [i] %>"
-                                                    value="<%= result.parcelValue[i] %>">
+                                        <td id=" price">
+                                            <%= result.value %><input type="hidden" id="val"
+                                                    value="<%= result.value %>">
                                         </td>
                                         <td name="method">
-                                            <%= result.PaymentMethod[i] %>
+                                            <%= result.paymentType %>
+                                        </td>
+                                        <td name="proofOfPayment">
                                         </td>
                                         <td>
                                             <div class="form-floating">
                                                 <textarea class="form-control" name="ackCode" placeholder="" id="" style="height: 100px"></textarea>
                                             </div>
                                         </td>
-                                        <td name="proofOfPayment">
-                                        </td>
                                         <td>
-                                            <% if (result.paymentStatus[i] == "T") { %>
+                                            <% if (result.paymentStatus == "T") { %>
                                                 <div class="form-switch">
-                                                    <input class="form-check-input disabled" type="checkbox" role="switch" id="flexSwitchCheckDefault<%= i %>" checked>
+                                                    <input class="form-check-input disabled" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
                                                 </div>
                                             <% } %>
-                                            <% if (result.paymentStatus[i] == "F") { %>
+                                            <% if (result.paymentStatus == "F") { %>
                                                 <div class="form-switch">
-                                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault<%= i %>">
+                                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                                                 </div>
                                             <% } %>
                                         </td>
                                     </tr>
-                                    <% } %>
                                 <% }) %>
                         </tbody>
                     </table>
