@@ -10,6 +10,12 @@ const moment = require('moment')
 const flash = require('connect-flash')
 const nodemailer = require('nodemailer')
 const MemoryStore = require('memorystore')(session)
+const morgan = require('morgan')
+const fs = require('fs')
+const path = require('path')
+
+const accessLogStream = fs.createWriteStream(path.join(__dirname, "system.log"), {flags: 'a'})
+app.use(morgan('common', {stream: accessLogStream}))
 
 //Server setup
 let server = http.createServer(app)
