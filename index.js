@@ -82,7 +82,6 @@ const grpPodWatch = grpPodDB.watch()
 const runnerPodWatch = runnerPodDB.watch()
 const personalPodWatch = personalPodDB.watch()
 
-
 const trasporter = nodemailer.createTransport({
     service: "gmail",
     auth:{
