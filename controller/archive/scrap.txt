@@ -1,0 +1,656 @@
+//Start - Update Item MOH
+const updateMohPod = ((req, res) => {
+    let data = req.body
+    let date = moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++) {
+        let filter = { trackingNumber: trackingNumber[i] }
+        let update = {
+            status: "C", //need to find a way to change to C
+            lastUpdate: date,
+            $push: {
+                history: {
+                    statusDetail: "C",
+                    dateUpdated: date,
+                    updateBy: data.username,
+                    updateById: data.uid,
+                }
+            }
+        }
+        let option = { upsert: false, new: false }
+        console.log(filter)
+        warehouseDB.find(filter).then(
+            (result) => {
+                if (result.count == "0") {
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if (result.count <= "2") {
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if (result.count > "2") {
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else {
+                    console.log("Error on updating count the information on database")
+                    res.render('error', {
+                        title: "Error",
+                        code: '400',
+                        response: 'Server failed to update information to database',
+                        message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                        user,
+                    })
+                }
+            },
+            (err) => {
+                console.log("Error on getting the information on database")
+                console.log(err)
+                res.render('error', {
+                    title: "Error",
+                    code: '404',
+                    response: 'Server failed to retrive information from database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
+                })
+            }
+        )
+        warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
+            if (err) {
+                console.log("Error on updating the information on database")
+                console.log(err)
+                res.render('error', {
+                    title: "Error",
+                    code: '400',
+                    response: 'Server failed to update information to database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+//End - Update Item MOH
+
+//Start - Update Item Panaga
+const updatePanagaPod = ((req, res) => {
+    let data = req.body
+    let date = moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++) {
+        let filter = { trackingNumber: trackingNumber[i] }
+        let update = {
+            status: "C", //need to find a way to change to C
+            lastUpdate: date,
+            $push: {
+                history: {
+                    statusDetail: "C",
+                    dateUpdated: date,
+                    updateBy: data.username,
+                    updateById: data.uid,
+                }
+            }
+        }
+        let option = { upsert: false, new: false }
+        console.log(filter)
+        warehouseDB.find(filter).then(
+            (result) => {
+                if (result.count == "0") {
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if (result.count <= "2") {
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if (result.count <= "2") {
+                    let count = "L" //max attempt reached.
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else {
+                    console.log("Error on updating count the information on database")
+                    res.render('error', {
+                        title: "Error",
+                        code: '400',
+                        response: 'Server failed to update information to database',
+                        message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                        user,
+                    })
+                }
+            },
+            (err) => {
+                console.log("Error on getting the information on database")
+                console.log(err)
+                res.render('error', {
+                    title: "Error",
+                    code: '404',
+                    response: 'Server failed to retrive information from database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
+                })
+            }
+        )
+        warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
+            if (err) {
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+//End - Update Item Panaga
+
+const updateFmxPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "C", //need to find a way to change to C
+            lastUpdate: date,
+            $push: {
+                history: {
+                    statusDetail: "C", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.find(filter).then(
+            (result)=> {
+                if (result.count == "0"){
+                    let count = result.count + 1
+                    result.count = count 
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = "L" //max attempt reached.
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else {
+                    console.log("Error on updating count the information on database")
+                    res.render('error', {
+                        title: "Error",
+                        code: '400',
+                        response: 'Server failed to update information to database',
+                        message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                        user,
+                    })
+                }
+            },
+            (err) => {
+                console.log("Error on getting the information on database")
+                console.log(err)
+                res.render('error', {
+                    title: "Error",
+                    code: '404',
+                    response: 'Server failed to retrive information from database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
+                })
+            }
+        )
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if (err) {
+                console.log("Error on updating the information on database")
+                console.log(err)
+                res.render('error', {
+                    title: "Error",
+                    code: '400',
+                    response: 'Server failed to update information to database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
+                })
+            }
+            else {
+                console.log(result)
+                console.log('Status: 200 - database has been updated')
+                res.render('Success', {
+                    title: 'Success',
+                    code: '200',
+                    response: 'Successful update to database',
+                    message: 'All tracking numbers has been updated',
+                    user
+                })
+            }
+        })
+    }
+})
+
+const updateGrpPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "C", //need to find a way to change to C
+            lastUpdate: date,
+            $push: {
+                history: {
+                    statusDetail: "C", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.find(filter).then(
+            (result)=> {
+                if (result.count == "0"){
+                    let count = result.count + 1
+                    result.count = count 
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = "L" //max attempt reached.
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else {
+                    console.log("Error on updating count the information on database")
+                    res.render('error', {
+                        title: "Error",
+                        code: '400',
+                        response: 'Server failed to update information to database',
+                        message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                        user,
+                    })
+                }
+            },
+            (err) => {
+                console.log("Error on getting the information on database")
+                console.log(err)
+                res.render('error', {
+                    title: "Error",
+                    code: '404',
+                    response: 'Server failed to retrive information from database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
+                })
+            }
+        )
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if (err) {
+                console.log("Error on updating the information on database")
+                console.log(err)
+                res.render('error', {
+                    title: "Error",
+                    code: '400',
+                    response: 'Server failed to update information to database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
+                })
+            }
+            else {
+                console.log(result)
+                console.log('Status: 200 - database has been updated')
+                res.render('Success', {
+                    title: 'Success',
+                    code: '200',
+                    response: 'Successful update to database',
+                    message: 'All tracking numbers has been updated',
+                    user
+                })
+            }
+        })
+    }
+})
+
+const updateLocalPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "C", //need to find a way to change to C
+            lastUpdate: date,
+            $push: {
+                history: {
+                    statusDetail: "C", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.find(filter).then(
+            (result)=> {
+                if (result.count == "0"){
+                    let count = result.count + 1
+                    result.count = count 
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = "L" //max attempt reached.
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else{
+                    console.log("Failed to retrieve count")
+                }
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if(err){
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+
+const updatePersonalPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "C", //need to find a way to change to C
+            lastUpdate: date,
+            $push: {
+                history: {
+                    statusDetail: "C", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.find(filter).then(
+            (result)=> {
+                if (result.count == "0"){
+                    let count = result.count + 1
+                    result.count = count 
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = "L" //max attempt reached.
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else{
+                    console.log("Failed to retrieve count")
+                }
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if(err){
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+
+const updateTmxPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "C", //need to find a way to change to C
+            lastUpdate: date,
+            $push: {
+                history: {
+                    statusDetail: "C", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.find(filter).then(
+            (result)=> {
+                if (result.count == "0"){
+                    let count = result.count + 1
+                    result.count = count 
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = "L" //max attempt reached.
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else{
+                    console.log("Failed to retrieve count")
+                }
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if(err){
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})
+
+
+const updateZaloraPod = ((req,res) =>{
+    let data = req.body
+    let date =  moment().format("DD/MM/YYYY")
+    let tracker = data.trackingNumber
+    console.log(tracker)
+    for (let i = 0; i < tracker.length; i++){
+        let filter = {trackingNumber: trackingNumber[i]}
+        let update = {
+            status: "C", //need to find a way to change to C
+            lastUpdate: date,
+            $push: {
+                history: {
+                    statusDetail: "C", 
+                    dateUpdated: date,
+                    updateBy: data.username, 
+                    updateById: data.userID, 
+                }
+            }
+        }
+        let option = {upsert: false, new: false}
+        console.log(filter)
+        warehouseDB.find(filter).then(
+            (result)=> {
+                if (result.count == "0"){
+                    let count = result.count + 1
+                    result.count = count 
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = result.count + 1
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else if(result.count <= "2"){
+                    let count = "L" //max attempt reached.
+                    result.count = count
+                    console.log("result.count " + count)
+                    result.save()
+                    console.log("Success update")
+                }
+                else{
+                    console.log("Failed to retrieve count")
+                }
+            },
+            (err)=>{
+                console.log(err)
+            }
+        )
+        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
+            if(err){
+                console.log(err)
+                res.render('error', {
+                    errorcode: 'XXX',
+                    response: 'Not Acceptable &#x1F62B;',
+                    message: 'No worries~ database detected duplication of tracking number.'
+                })
+            }
+            else {
+                console.log(result)
+                res.render('sucess', {
+                    response: 'Successfuly updated',
+                    message: 'Congratulations~ All tracking number has been updated.'
+                })
+            }
+        })
+    }
+})

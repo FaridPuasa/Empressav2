@@ -22,6 +22,8 @@ const moment = require('moment')
 */
 
 const insertPharmacy = ((req, res) => {
+    let sessionuser = req.session.user
+    let user = sessionuser
     let date = moment().format("DD/MM/YYYY")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
@@ -78,7 +80,7 @@ const insertPharmacy = ((req, res) => {
                 if (err.name === "MongoServerError" && err.code === 11000) {
                     console.log(err)
                     req.flash('error', `Error Code: 11000 | Tracking number already exist | Require fields missing.`)
-                    res.redirect('')
+                    res.redirect('/moh-in')
                 }
                 else {
                     console.log(err)
@@ -87,7 +89,6 @@ const insertPharmacy = ((req, res) => {
                 }
             }
             else {
-                let service = req.params.service
                 console.log('Status: 200 - success entry to database')
                 req.flash('success', `${data} has been added to the database.`)
                 res.status(200).redirect('/moh-in')
@@ -102,7 +103,7 @@ const insertPharmacy = ((req, res) => {
                 if (err.name === "MongoServerError" && err.code === 11000) {
                     console.log(err)
                     req.flash('error', `Error Code: 11000 | Tracking number already exist | Require fields missing.`)
-                    res.redirect('')
+                    res.redirect('/jpmc-in')
                 }
                 else {
                     console.log(err)
@@ -111,10 +112,32 @@ const insertPharmacy = ((req, res) => {
                 }
             }
             else {
-                let service = req.params.service
                 console.log('Status: 200 - success entry to database')
                 req.flash('success', `${data} has been added to the database.`)
                 res.status(200).redirect('/jpmc-in')
+            }
+        })
+    }
+
+    if (service == "PANAGA") {
+        warehouse.history.push(parcelStatus)
+        warehouse.save(err => {
+            if (err) {
+                if (err.name === "MongoServerError" && err.code === 11000) {
+                    console.log(err)
+                    req.flash('error', `Error Code: 11000 | Tracking number already exist | Require fields missing.`)
+                    res.redirect('/panaga-in')
+                }
+                else {
+                    console.log(err)
+                    req.flash('error', `Status 406: Not Acceptable | Check your data entry.`)
+                    res.redirect('/panaga-in')
+                }
+            }
+            else {
+                console.log('Status: 200 - success entry to database')
+                req.flash('success', `${data} has been added to the database.`)
+                res.status(200).redirect('/panaga-in')
             }
         })
     }
@@ -154,13 +177,11 @@ const insertPodMoh = ((req, res) => {
         let option = { upsert: false, new: false }
         warehouseDB.findOneAndUpdate(filter, update, option, (err, docs) => {
             if (err) {
-                //console.log(`Failed update: ${trackingNumber}`)
-                //req.flash('error', `Failed to update: ${trackingNumber}`)
+                console.log(`Failed update: ${trackingNumber}`)
+                console.log(err)
             }
             else {
                 console.log(`Successfully update: ${trackingNumber[i]}`)
-                //req.flash('success', `${trackingNumber} has been updated on the database.`)
-                //res.status(201).send()
             }
         })
     }
@@ -187,22 +208,25 @@ const insertPodMoh = ((req, res) => {
     })
     pod.save((err, doc) => {
         if (err) {
+            console.log("Error on Creating JPMC POD")
             console.log(err)
-            //res.flash('error', `Tracking number already exist | Require fields missing`)
             res.render('error', {
-                title: 'xxx',
-                response: 'Not Acceptable &#x1F62B;',
-                message: 'No worries~ database detected duplication of tracking number.'
+                title: "Error",
+                code: '404',
+                response: 'Server failed to retrive information from database',
+                message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                user,
             })
         }
         else {
             console.log(doc)
-            //console.log('Status: 201 - success entry to database')
-            //req.flash('success', `${data} has been added to the database.`)
-            res.render('success', {
-                title: 'POD Success',
-                response: `GR/POD/ZAL:${podsequence}`,
-                message: 'Successfully save the POD documents to database'
+            console.log('Status: 200 - success entry to database')
+            res.render('Success', {
+                title: 'Success',
+                code: '200',
+                response: 'MOH POD has been created.',
+                message: 'An email has been sent to Finance Department for their action.',
+                user
             })
         }
     })
@@ -238,16 +262,13 @@ const insertPodJpmc = ((req, res) => {
         warehouseDB.findOneAndUpdate(filter, update, option, (err, docs) => {
             if (err) {
                 console.log(`Failed update: ${trackingNumber}`)
-                req.flash('error', `Failed to update: ${trackingNumber}`)
+                console.log(err)
             }
             else {
                 console.log(`Successfully update: ${trackingNumber}`)
-                req.flash('success', `${trackingNumber} has been updated on the database.`)
-                res.status(201).send()
             }
         })
     }
-    let option = { upsert: false, new: false }
     let pod = new jpmcPodDB({
         pod_id: pod_id,
         madeby: data.madeby,
@@ -270,22 +291,25 @@ const insertPodJpmc = ((req, res) => {
     })
     pod.save((err, doc) => {
         if (err) {
+            console.log("Error on Creating JPMC POD")
             console.log(err)
-            //res.flash('error', `Tracking number already exist | Require fields missing`)
             res.render('error', {
-                errorcode: 'XXX',
-                response: 'Not Acceptable &#x1F62B;',
-                message: 'No worries~ database detected duplication of tracking number.'
+                title: "Error",
+                code: '404',
+                response: 'Server failed to retrive information from database',
+                message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                user,
             })
         }
         else {
+            console.log(doc)
             console.log('Status: 201 - success entry to database')
-            req.flash('success', `${data} has been added to the database.`)
-            res.status(201).send()
-            res.redirect('/success', {
-                title: 'POD Success',
-                response: `GR/POD/JPMC: ${podSequence}`,
-                message: 'Successfully save the POD documents to database'
+            res.render('Success', {
+                title: 'Success',
+                code: '200',
+                response: 'JPMC POD has been created.',
+                message: 'An email has been sent to Finance Department for their action.',
+                user
             })
         }
     })
@@ -321,12 +345,10 @@ const insertPodPanaga = ((req, res) => {
         warehouseDB.findOneAndUpdate(filter, update, option, (err, docs) => {
             if (err) {
                 console.log(`Failed update: ${trackingNumber}`)
-                req.flash('error', `Failed to update: ${trackingNumber}`)
+                console.log(err)
             }
             else {
                 console.log(`Successfully update: ${trackingNumber}`)
-                req.flash('success', `${trackingNumber} has been updated on the database.`)
-                res.status(201).send()
             }
         })
     }
@@ -352,104 +374,35 @@ const insertPodPanaga = ((req, res) => {
     })
     pod.save((err, doc) => {
         if (err) {
+            console.log("Error on Creating JPMC POD")
             console.log(err)
-            //res.flash('error', `Tracking number already exist | Require fields missing`)
             res.render('error', {
-                errorcode: 'XXX',
-                response: 'Not Acceptable &#x1F62B;',
-                message: 'No worries~ database detected duplication of tracking number.'
+                title: "Error",
+                code: '404',
+                response: 'Server failed to retrive information from database',
+                message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                user,
             })
         }
         else {
+            console.log(doc)
             console.log('Status: 201 - success entry to database')
-            req.flash('success', `${data} has been added to the database.`)
-            res.status(201).send()
-            res.redirect('/success', {
-                title: 'POD Success',
-                response: `GR/POD/PNG: ${podSequence}`,
-                message: 'Successfully save the POD documents to database'
+            res.render('Success', {
+                title: 'Success',
+                code: '200',
+                response: 'PANAGA POD has been created.',
+                message: 'An email has been sent to Finance Department for their action.',
+                user
             })
         }
     })
 })
 //End - Create POD Panaga
 
-//Start - Update Item MOH
-const updateMohPod = ((req, res) => {
-    let data = req.body
-    let date = moment().format("DD/MM/YYYY")
-    let tracker = data.trackingNumber
-    console.log(tracker)
-    for (let i = 0; i < tracker.length; i++) {
-        let filter = { trackingNumber: trackingNumber[i] }
-        let update = {
-            status: "C", //need to find a way to change to C
-            lastUpdate: date,
-            $push: {
-                history: {
-                    statusDetail: "C",
-                    dateUpdated: date,
-                    updateBy: data.username,
-                    updateById: data.userID,
-                }
-            }
-        }
-        let option = { upsert: false, new: false }
-        console.log(filter)
-        warehouseDB.find(filter).then(
-            (result) => {
-                if (result.count == "0") {
-                    let count = result.count + 1
-                    result.count = count
-                    console.log("result.count " + count)
-                    result.save()
-                    console.log("Success update")
-                }
-                else if (result.count <= "2") {
-                    let count = result.count + 1
-                    result.count = count
-                    console.log("result.count " + count)
-                    result.save()
-                    console.log("Success update")
-                }
-                else if (result.count <= "2") {
-                    let count = "L" //max attempt reached.
-                    result.count = count
-                    console.log("result.count " + count)
-                    result.save()
-                    console.log("Success update")
-                }
-                else {
-                    console.log("Failed to retrieve count")
-                }
-            },
-            (err) => {
-                console.log(err)
-            }
-        )
-        warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
-            if (err) {
-                console.log(err)
-                res.render('error', {
-                    errorcode: 'XXX',
-                    response: 'Not Acceptable &#x1F62B;',
-                    message: 'No worries~ database detected duplication of tracking number.'
-                })
-            }
-            else {
-                console.log(result)
-                res.render('sucess', {
-                    response: 'Successfuly updated',
-                    message: 'Congratulations~ All tracking number has been updated.'
-                })
-            }
-        })
-    }
-})
-//End - Update Item MOH
-
 //Start - Update POD Status
 const updateMohPodStatus = ((req, res) => {
+    let sessionuser = req.session.user
+    let user = sessionuser
     let data = req.body
     let pod_id = data.pod_id
     let podstatus = data.pod_status
@@ -471,7 +424,7 @@ const updateMohPodStatus = ((req, res) => {
                     statusDetail: "C",
                     dateUpdated: date,
                     updateBy: data.username,
-                    updateById: data.userID,
+                    updateById: data.uid,
                 }
             }
         }
@@ -502,34 +455,75 @@ const updateMohPodStatus = ((req, res) => {
                     console.log("Success update")
                 }
                 else {
-                    console.log("Failed to retrieve count")
+                    console.log("Error on updating count the information on database")
+                    res.render('error', {
+                        title: "Error",
+                        code: '400',
+                        response: 'Server failed to update information to database',
+                        message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                        user,
+                    })
                 }
             },
             (err) => {
+                console.log("Error on getting the information on database")
                 console.log(err)
+                res.render('error', {
+                    title: "Error",
+                    code: '404',
+                    response: 'Server failed to retrive information from database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
+                })
             }
         )
         warehouseDB.findOneAndUpdate(filter1, update1, option1, (err, result) => {
             if (err) {
+                console.log("Error on updating the information on database")
                 console.log(err)
-                
+                res.render('error', {
+                    title: "Error",
+                    code: '400',
+                    response: 'Server failed to update information to database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
+                })
             }
             else {
                 console.log(result)
-                
+                console.log('Status: 200 - database has been updated')
+                res.render('Success', {
+                    title: 'Success',
+                    code: '200',
+                    response: 'Successful update to database',
+                    message: 'All tracking numbers has been updated',
+                    user
+                })
             }
         })
     }
     mohPodDB.findOneAndUpdate(filter, update, option, (err, docs) => {
         if (err) {
-            req.flash('error', `Failed to update POD status.`)
-            res.redirect('/moh-podlist')
+            console.log("Error on updating the information on database")
+            console.log(err)
+            res.render('error', {
+                title: "Error",
+                code: '400',
+                response: 'Server failed to update information to database',
+                message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                user,
+            })
         }
         else {
-            req.flash('success', `POD status updated.`)
-            res.redirect('/moh-podlist')
             console.log(docs)
-            console.log("POD status change to " + podstatus)
+            console.log('Status: 200 - database has been updated')
+            res.render('Success', {
+                title: 'Success',
+                code: '200',
+                response: 'Successful update to database',
+                message: 'All tracking numbers has been updated',
+                user
+            })
         }
     })
 })
@@ -554,7 +548,7 @@ const financeAcknowledgeMoh = ((req, res) => {
             req.flash('success', `POD Acknowledged.`)
             res.redirect('/moh-podlist')
             console.log(docs)
-            console.log("POD status change to " + podstatus)
+            console.log("pod acknowledge")
         }
     })
 })
@@ -571,7 +565,7 @@ const updateMohSelf = ((req, res) => {
             history: {
                 statusDetail: "D2",
                 dateUpdated: date,
-                updateBy: data.updateById,
+                updateBy: data.username,
                 updateById: data.uid,
             }
         }
@@ -579,18 +573,25 @@ const updateMohSelf = ((req, res) => {
     console.log(filter)
     warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
         if (err) {
+            console.log("Error on updating the information on database")
             console.log(err)
             res.render('error', {
-                errorcode: 'XXX',
-                response: 'Not Acceptable &#x1F62B;',
-                message: 'No worries~ database detected duplication of tracking number.'
+                title: "Error",
+                code: '400',
+                response: 'Server failed to update information to database',
+                message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                user,
             })
         }
         else {
             console.log(result)
-            res.render('sucess', {
-                response: 'Successfuly updated',
-                message: 'Congratulations~ All tracking number has been updated.'
+            console.log('Status: 200 - database has been updated')
+            res.render('Success', {
+                title: 'Success',
+                code: '200',
+                response: 'Successful update to database',
+                message: 'All tracking numbers has been updated',
+                user
             })
         }
     })
@@ -613,7 +614,7 @@ const updateJpmcPod = ((req, res) => {
                     statusDetail: "C",
                     dateUpdated: date,
                     updateBy: data.username,
-                    updateById: data.userID,
+                    updateById: data.uid,
                 }
             }
         }
@@ -643,27 +644,49 @@ const updateJpmcPod = ((req, res) => {
                     console.log("Success update")
                 }
                 else {
-                    console.log("Failed to retrieve count")
+                    console.log("Error on updating count the information on database")
+                    res.render('error', {
+                        title: "Error",
+                        code: '400',
+                        response: 'Server failed to update information to database',
+                        message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                        user,
+                    })
                 }
             },
             (err) => {
+                console.log("Error on getting the information on database")
                 console.log(err)
+                res.render('error', {
+                    title: "Error",
+                    code: '404',
+                    response: 'Server failed to retrive information from database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
+                })
             }
         )
         warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
             if (err) {
+                console.log("Error on updating the information on database")
                 console.log(err)
                 res.render('error', {
-                    errorcode: 'XXX',
-                    response: 'Not Acceptable &#x1F62B;',
-                    message: 'No worries~ database detected duplication of tracking number.'
+                    title: "Error",
+                    code: '400',
+                    response: 'Server failed to update information to database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
                 })
             }
             else {
                 console.log(result)
-                res.render('sucess', {
-                    response: 'Successfuly updated',
-                    message: 'Congratulations~ All tracking number has been updated.'
+                console.log('Status: 200 - database has been updated')
+                res.render('Success', {
+                    title: 'Success',
+                    code: '200',
+                    response: 'Successful update to database',
+                    message: 'All tracking numbers has been updated',
+                    user
                 })
             }
         })
@@ -713,7 +736,7 @@ const financeAcknowledgeJpmc = ((req, res) => {
             req.flash('success', `POD Acknowledged.`)
             res.redirect('/jpmc-podlist')
             console.log(docs)
-            console.log("POD status change to " + podstatus)
+            console.log("POD acknowledged")
         }
     })
 })
@@ -730,7 +753,7 @@ const updateJpmcSelf = ((req, res) => {
             history: {
                 statusDetail: "D2",
                 dateUpdated: date,
-                updateBy: data.updateById,
+                updateBy: data.username,
                 updateById: data.uid,
             }
         }
@@ -738,97 +761,32 @@ const updateJpmcSelf = ((req, res) => {
     console.log(filter)
     warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
         if (err) {
+            console.log("Error on updating the information on database")
             console.log(err)
             res.render('error', {
-                errorcode: 'XXX',
-                response: 'Not Acceptable &#x1F62B;',
-                message: 'No worries~ database detected duplication of tracking number.'
+                title: "Error",
+                code: '400',
+                response: 'Server failed to update information to database',
+                message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                user,
             })
         }
         else {
             console.log(result)
-            res.render('sucess', {
-                response: 'Successfuly updated',
-                message: 'Congratulations~ All tracking number has been updated.'
+            console.log('Status: 200 - database has been updated')
+            res.render('Success', {
+                title: 'Success',
+                code: '200',
+                response: 'Successful update to database',
+                message: 'All tracking numbers has been updated',
+                user
             })
         }
     })
 })
 //End - Update JPMC Self
 
-//Start - Update Item Panaga
-const updatePanagaPod = ((req, res) => {
-    let data = req.body
-    let date = moment().format("DD/MM/YYYY")
-    let tracker = data.trackingNumber
-    console.log(tracker)
-    for (let i = 0; i < tracker.length; i++) {
-        let filter = { trackingNumber: trackingNumber[i] }
-        let update = {
-            status: "C", //need to find a way to change to C
-            lastUpdate: date,
-            $push: {
-                history: {
-                    statusDetail: "C",
-                    dateUpdated: date,
-                    updateBy: data.username,
-                    updateById: data.userID,
-                }
-            }
-        }
-        let option = { upsert: false, new: false }
-        console.log(filter)
-        warehouseDB.find(filter).then(
-            (result) => {
-                if (result.count == "0") {
-                    let count = result.count + 1
-                    result.count = count
-                    console.log("result.count " + count)
-                    result.save()
-                    console.log("Success update")
-                }
-                else if (result.count <= "2") {
-                    let count = result.count + 1
-                    result.count = count
-                    console.log("result.count " + count)
-                    result.save()
-                    console.log("Success update")
-                }
-                else if (result.count <= "2") {
-                    let count = "L" //max attempt reached.
-                    result.count = count
-                    console.log("result.count " + count)
-                    result.save()
-                    console.log("Success update")
-                }
-                else {
-                    console.log("Failed to retrieve count")
-                }
-            },
-            (err) => {
-                console.log(err)
-            }
-        )
-        warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
-            if (err) {
-                console.log(err)
-                res.render('error', {
-                    errorcode: 'XXX',
-                    response: 'Not Acceptable &#x1F62B;',
-                    message: 'No worries~ database detected duplication of tracking number.'
-                })
-            }
-            else {
-                console.log(result)
-                res.render('sucess', {
-                    response: 'Successfuly updated',
-                    message: 'Congratulations~ All tracking number has been updated.'
-                })
-            }
-        })
-    }
-})
-//End - Update Item Panaga
+
 
 //Start - Update POD Status
 const updatePanagaPodStatus = ((req, res) => {
@@ -889,7 +847,7 @@ const updatePanagaSelf = ((req, res) => {
             history: {
                 statusDetail: "D2",
                 dateUpdated: date,
-                updateBy: data.updateById,
+                updateBy: data.username,
                 updateById: data.uid,
             }
         }
@@ -897,18 +855,25 @@ const updatePanagaSelf = ((req, res) => {
     console.log(filter)
     warehouseDB.findOneAndUpdate(filter, update, option, (err, result) => {
         if (err) {
+            console.log("Error on updating the information on database")
             console.log(err)
             res.render('error', {
-                errorcode: 'XXX',
-                response: 'Not Acceptable &#x1F62B;',
-                message: 'No worries~ database detected duplication of tracking number.'
+                title: "Error",
+                code: '400',
+                response: 'Server failed to update information to database',
+                message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                user,
             })
         }
         else {
             console.log(result)
-            res.render('sucess', {
-                response: 'Successfuly updated',
-                message: 'Congratulations~ All tracking number has been updated.'
+            console.log('Status: 200 - database has been updated')
+            res.render('Success', {
+                title: 'Success',
+                code: '200',
+                response: 'Successful update to database',
+                message: 'All tracking numbers has been updated',
+                user
             })
         }
     })
@@ -1039,13 +1004,11 @@ module.exports = {
     insertPodMoh,
     insertPodJpmc,
     insertPodPanaga,
-    updateMohPod,
     updateMohPodStatus,
     updateMohSelf,
     updateJpmcPod,
     updateJpmcPodStatus,
     updateJpmcSelf,
-    updatePanagaPod,
     updatePanagaPodStatus,
     updatePanagaSelf,
     updateMoh,

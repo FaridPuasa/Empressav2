@@ -19,7 +19,8 @@ const moment = require('moment')
 */
 
 const insertZalora = ((req,res)=>{
-    let date = moment().format("DD/MM/YYYY, h:mm:ss a")
+    let user = req.session.user
+    let date = moment().format("DD/MM/YYYY")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
     let status = "A1"
@@ -68,24 +69,27 @@ const insertZalora = ((req,res)=>{
     warehouse.history.push(parcelStatus)
     warehouse.save(err=>{
         if (err) {
-            console.log (err)
-            res.flash('error', `Tracking number already exist | Require fields missing`)
-            res.render('error', {
-                errorcode: 'XXX',
-                response: 'Not Acceptable &#x1F62B;',
-                message: 'No worries~ database detected duplication of tracking number.'
-            })
+            if (err.name === "MongoServerError" && err.code === 11000) {
+                console.log(err)
+                req.flash('error', `Error Code: 11000 | Tracking number already exist | Require fields missing.`)
+                res.redirect('/zalora-in')
+            }
+            else {
+                console.log(err)
+                req.flash('error', `Status 406: Not Acceptable | Check your data entry.`)
+                res.redirect('/zalora-in')
+            }
         }
-        else{
-            console.log('Status: 201 - success entry to database')
+        else {
+            console.log('Status: 200 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
-            res.status(201).send()
-            res.redirect('/:service-in')
+            res.status(200).redirect('/zalora-in')
         }
     })
 })
 
 const insertPodZalora = ((req,res)=>{
+    let user = req.session.user
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
     let podSequence = data.podSequence
@@ -113,12 +117,9 @@ const insertPodZalora = ((req,res)=>{
         warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
             if (err){
                 console.log(`Failed update: ${trackingNumber}`)
-                req.flash('error', `Failed to update: ${trackingNumber}`)
             }
             else{
                 console.log(`Successfully update: ${trackingNumber}`)
-                req.flash('success', `${trackingNumber} has been updated on the database.`)
-                res.status(201).send()
             }
         })
     }
@@ -143,117 +144,180 @@ const insertPodZalora = ((req,res)=>{
         acknowledge: acknowledge
     })
     pod.save((err,doc)=>{
-        if (err){
-            console.log (err)
-            //res.flash('error', `Tracking number already exist | Require fields missing`)
+        if (err) {
+            console.log("Error on Creating LOCAL POD")
+            console.log(err)
             res.render('error', {
-                errorcode: 'XXX',
-                response: 'Not Acceptable &#x1F62B;',
-                message: 'No worries~ database detected duplication of tracking number.'
+                title: "Error",
+                code: '404',
+                response: 'Server failed to create information to database',
+                message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                user,
             })
         }
-        else{
-            console.log('Status: 201 - success entry to database')
-            req.flash('success', `${data} has been added to the database.`)
-            res.status(201).send()
-            res.redirect('/success', {
-                title: 'POD Success',
-                response: `GR/POD/ZAL: ${podSequence}`,
-                message: 'Successfully save the POD documents to database'
+        else {
+            console.log(doc)
+            console.log('Status: 200 - success entry to database')
+            res.render('Success', {
+                title: 'Success',
+                code: '200',
+                response: 'MOH POD has been created.',
+                message: 'An email has been sent to Finance Department for their action.',
+                user
             })
         }
     })
 })
 
-const updateZaloraPod = ((req,res) =>{
+const updateZaloraPodStatus = ((req,res)=>{
+    let sessionuser = req.session.user
+    let user = sessionuser
     let data = req.body
-    let date =  moment().format("DD/MM/YYYY")
+    let pod_id = data.pod_id
+    let podstatus = data.pod_status
+    let filter = { pod_id }
+    console.log(filter)
+    let update = { podstatus }
+    let option = { upsert: false, new: false }
+    let date = moment().format("DD/MM/YYYY")
     let tracker = data.trackingNumber
     console.log(tracker)
-    for (let i = 0; i < tracker.length; i++){
-        let filter = {trackingNumber: trackingNumber[i]}
-        let update = {
-            status: "C", //need to find a way to change to C
+    for (let i = 0; i < tracker.length; i++) {
+        let filter1 = { trackingNumber: data.trackingNumber[i] }
+        console.log(filter1)
+        let update1 = {
+            currentStatus: "C", //need to find a way to change to C
             lastUpdate: date,
             $push: {
                 history: {
-                    statusDetail: "C", 
+                    statusDetail: "C",
                     dateUpdated: date,
-                    updateBy: data.username, 
-                    updateById: data.userID, 
+                    updateBy: data.username,
+                    updateById: data.uid,
                 }
             }
         }
-        let option = {upsert: false, new: false}
-        console.log(filter)
-        warehouseDB.find(filter).then(
-            (result)=> {
-                if (result.count == "0"){
-                    let count = result.count + 1
-                    result.count = count 
+        let option1 = { upsert: false, new: false }
+        console.log(filter1)
+        warehouseDB.find(filter1).then(
+            (result) => {
+                console.log('result: '+ result[0].count)
+                if (result[0].count == "0") {
+                    let count = result[0].count + 1
+                    result[0].count = count
                     console.log("result.count " + count)
-                    result.save()
+                    result[0].save()
                     console.log("Success update")
                 }
-                else if(result.count <= "2"){
-                    let count = result.count + 1
-                    result.count = count
+                else if (result[0].count <= "2") {
+                    let count = result[0].count + 1
+                    result[0].count = count
                     console.log("result.count " + count)
-                    result.save()
+                    result[0].save()
                     console.log("Success update")
                 }
-                else if(result.count <= "2"){
-                    let count = "L" //max attempt reached.
-                    result.count = count
+                else if (result[0].count > "2") {
+                    let count = "" //max attempt reached.
+                    result[0].count = count
                     console.log("result.count " + count)
-                    result.save()
+                    result[0].save()
                     console.log("Success update")
                 }
-                else{
-                    console.log("Failed to retrieve count")
+                else {
+                    console.log("Error on updating count the information on database")
+                    res.render('error', {
+                        title: "Error",
+                        code: '400',
+                        response: 'Server failed to update information to database',
+                        message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                        user,
+                    })
                 }
             },
-            (err)=>{
-                console.log(err)
-            }
-        )
-        warehouseDB.findOneAndUpdate(filter, update, option, (err,result) => {
-            if(err){
+            (err) => {
+                console.log("Error on getting the information on database")
                 console.log(err)
                 res.render('error', {
-                    errorcode: 'XXX',
-                    response: 'Not Acceptable &#x1F62B;',
-                    message: 'No worries~ database detected duplication of tracking number.'
+                    title: "Error",
+                    code: '404',
+                    response: 'Server failed to retrive information from database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
+                })
+            }
+        )
+        warehouseDB.findOneAndUpdate(filter1, update1, option1, (err, result) => {
+            if (err) {
+                console.log("Error on updating the information on database")
+                console.log(err)
+                res.render('error', {
+                    title: "Error",
+                    code: '400',
+                    response: 'Server failed to update information to database',
+                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                    user,
                 })
             }
             else {
                 console.log(result)
-                res.render('sucess', {
-                    response: 'Successfuly updated',
-                    message: 'Congratulations~ All tracking number has been updated.'
+                console.log('Status: 200 - database has been updated')
+                res.render('Success', {
+                    title: 'Success',
+                    code: '200',
+                    response: 'Successful update to database',
+                    message: 'All tracking numbers has been updated',
+                    user
                 })
             }
         })
     }
+    fmxPodDB.findOneAndUpdate(filter, update, option, (err, docs) => {
+        if (err) {
+            console.log("Error on updating the information on database")
+            console.log(err)
+            res.render('error', {
+                title: "Error",
+                code: '400',
+                response: 'Server failed to update information to database',
+                message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
+                user,
+            })
+        }
+        else {
+            console.log(docs)
+            console.log('Status: 200 - database has been updated')
+            res.render('Success', {
+                title: 'Success',
+                code: '200',
+                response: 'Successful update to database',
+                message: 'All tracking numbers has been updated',
+                user
+            })
+        }
+    })
 })
 
-const updateZaloraPodStatus = ((req,res)=>{
+const financeAcknowledgeLocal = ((req,res)=>{
     let data = req.body
     let pod_id = data.pod_id
-    let podstatus = data.pod_status
+    let acknowledge = "T"
     let filter = {pod_id}
-    let update = {podstatus}
+    let update = {
+        acknowledge,
+        financeNotes: data.fincanceNotes,
+    }
     let option = {upsert: false, new: false}
     zaloraPodDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
-        if(err) {
-            req.flash('error', `Failed to update POD status.`)
-            res.redirect('/zalora-podlist')
+        if(err){
+            console.log(err)
+            req.flash('error', `Failed to acknowledge POD.`)
+            res.redirect('/local-podlist')
         }
         else{
-            req.flash('success', `POD status updated.`)
-            res.redirect('/zalora-podlist')
+            req.flash('success', `POD Acknowledged.`)
+            res.redirect('/local-podlist')
             console.log(docs)
-            console.log("POD status change to " + podstatus)
+            console.log("pod acknowledge")
         }
     })
 })
@@ -277,7 +341,7 @@ const financeAcknowledgeZalora = ((req,res)=>{
             req.flash('success', `POD Acknowledged.`)
             res.redirect('/zalora-podlist')
             console.log(docs)
-            console.log("POD status change to " + podstatus)
+            console.log("pod acknowledge")
         }
     })
 })
@@ -358,7 +422,6 @@ const updateZalora = ((req,res) => {
 module.exports = {
     insertZalora,
     insertPodZalora,
-    updateZaloraPod,
     updateZaloraPodStatus,
     updateZaloraSelf,
     updateZalora,

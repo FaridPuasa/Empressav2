@@ -45,7 +45,6 @@ const {
 const {
     insertTmx,
     insertPodTmx,
-    updateTmxPod,
     updateTmxPodStatus,
     updateTmxSelf,
     updateTmx,
@@ -55,7 +54,6 @@ const {
 const {
     insertFmx,
     insertPodFmx,
-    updateFmxPod,
     updateFmxPodStatus,
     updateFmxSelf,
     updateFmx,
@@ -75,7 +73,6 @@ const {
 const {
     insertPersonal,
     insertPodPersonal,
-    updatePersonalPod,
     updatePersonalPodStatus,
     updatePersonalSelf,
     updatePersonal,
@@ -85,7 +82,6 @@ const {
 const {
     insertGrp,
     insertPodGrp,
-    updateGrpPod,
     updateGrpPodStatus,
     updateGrpSelf,
     updateGrp,
@@ -95,7 +91,6 @@ const {
 const {
     insertLocal,
     insertPodLocal,
-    updateLocalPod,
     updateLocalPodStatus,
     updateLocalSelf,
     updateLocal,
@@ -107,13 +102,11 @@ const {
     insertPodMoh,
     insertPodJpmc,
     insertPodPanaga,
-    updateMohPod,
     updateMohPodStatus,
     updateMohSelf,
     updateJpmcPod,
     updateJpmcPodStatus,
     updateJpmcSelf,
-    updatePanagaPod,
     updatePanagaPodStatus,
     updatePanagaSelf,
     updateMoh,
@@ -240,6 +233,33 @@ router.get('/inventory-list', inventoryList)//Item list for instock
 
 //POD List
 router.get('/:services-podlist', podList)//POD List by services page
+
+router.get('/error', (req,res)=>{
+    let sessionuser = req.session.user
+    //console.log(sessionuser)
+    let user = sessionuser
+    res.render('error', {
+        title: 'Error 404',
+        code: '404',
+        response: 'abc',
+        message: 'ccc',
+        user
+    })
+})
+
+router.get('/success', (req,res)=>{
+    let sessionuser = req.session.user
+    //console.log(sessionuser)
+    let user = sessionuser
+    res.render('Success', {
+        title: 'Success 404',
+        code: '200',
+        response: 'abc',
+        message: 'ccc',
+        user
+    })
+})
+
 
 //Create POD
 router.get('/:services-pod', service)//POD form page by services page

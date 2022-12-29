@@ -63,5 +63,11 @@ GET http://localhost:5000/user_register
 ###
 POST http://localhost:5000/success
 
+###
+POST https://clientstg.fmx.asia/token
 
-
+{
+    "userNameOrEmailAddress" : "glba0001",
+    "password" : "J02B4VcU",
+    "grant_type" : "password"
+}
