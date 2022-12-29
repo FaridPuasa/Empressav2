@@ -35,7 +35,6 @@ const {
 const {
     insertZalora,
     insertPodZalora,
-    updateZaloraPod,
     updateZaloraPodStatus,
     updateZaloraSelf,
     updateZalora,
@@ -63,7 +62,6 @@ const {
 const {
     insertRunner,
     insertPodRunner,
-    updateRunnerPod,
     updateRunnerPodStatus,
     updateRunnerSelf,
     updateRunner,

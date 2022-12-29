@@ -90,7 +90,7 @@ const insertZalora = ((req,res)=>{
 
 const insertPodZalora = ((req,res)=>{
     let user = req.session.user
-    let date = moment().format("DD/MM/YYYY, h:mm:ss a")
+    let date = moment().format("DD/MM/YYYY")
     let data = req.body
     let podSequence = data.podSequence
     let status_pod = "P1" 
@@ -271,7 +271,7 @@ const updateZaloraPodStatus = ((req,res)=>{
             }
         })
     }
-    fmxPodDB.findOneAndUpdate(filter, update, option, (err, docs) => {
+    zaloraPodDB.findOneAndUpdate(filter, update, option, (err, docs) => {
         if (err) {
             console.log("Error on updating the information on database")
             console.log(err)

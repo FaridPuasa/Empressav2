@@ -24,7 +24,7 @@ let io = socketIO(server)
 //Session setup
 app.use(session({
     secret: 'Unknown Value',
-    cookie: {maxAge: 43200000, path: '/'},
+    cookie: {maxAge: 43200000},
     store: new MemoryStore({
         checkPeriod: 86400000
     }),
