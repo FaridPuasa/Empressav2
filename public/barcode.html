@@ -1,31 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js" integrity="sha512-QEAheCz+x/VkKtxeGoDq6nsGyzTx/0LMINTgQjqZ0h3+NjP+bCsPYz3hn0HnBkGmkIFSr7QcEZT+KyEM7lbLPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    
-    
-    <script>
-        function generateBarcode(value){
-            //let bcv = document.getElementsByName('barcode').value
-            //let display = document.getElementById('barcode').innerHTML
-            JsBarcode('#barcode', value, {
-            format: 'code128',
-            displayValue: true,
-            })
-        }
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"
+        integrity="sha512-QEAheCz+x/VkKtxeGoDq6nsGyzTx/0LMINTgQjqZ0h3+NjP+bCsPYz3hn0HnBkGmkIFSr7QcEZT+KyEM7lbLPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <title>Document</title>
 </head>
+
 <body>
-    <div>
-        <label for="Barcode">Barcode</label>
-        <input type="text" name="barcode" onchange="generateBarcode(this.value)" value="GRE001001001LEV">
+    <div style="text-align: center;">
+        <h1>Barcode Generator</h1>
+        <label for="batchNumber">Batch Number:</label>
+        <br><input type="text" id="batchNumber" style="text-align: center;">
+
+        <br><br><label for="brandId">Brand ID:</label>
+        <br><input type="text" id="brandId" style="text-align: center;">
+
+        <br><br><label for="modelId">Model ID:</label>
+        <br><input type="text" id="modelId" style="text-align: center;">
+
+        <br><br><label for="vendor">Vendor:</label>
+        <br><input type="text" id="vendor" style="text-align: center;">
+
+        <br><br><button id="generateBarcode">Generate Barcode</button>
+
+        <br><br><label for="barcodeValue">Barcode Value:</label>
+        <br><input type="text" id="barcodeValue" value="" style="text-align: center;" readonly>
+
+        <br><svg id="barcode"></svg>
     </div>
-    <div>
-        <svg id="barcode"></svg>
-    </div>
+
+    <script>
+        document.getElementById("generateBarcode").addEventListener("click", generateBarcode);
+
+        function generateBarcode() {
+            //let bcv = document.getElementsByName('barcode').value
+            //let display = document.getElementById('barcode').innerHTML
+
+            document.getElementById("barcodeValue").value = "GRE" + document.getElementById("batchNumber").value + document.getElementById("brandId").value +
+                document.getElementById("modelId").value + document.getElementById("vendor").value;
+
+            JsBarcode('#barcode', document.getElementById("barcodeValue").value, {
+                format: 'code128',
+                displayValue: true,
+            })
+        }
+    </script>
 </body>
+
 </html>
