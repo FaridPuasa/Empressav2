@@ -1,3 +1,10 @@
+<style>
+    .imguploadedbank {
+        height: 200px;
+        width: 200px;
+    }
+</style>
+
 <div class="container-fluid">
 
     <!-- DataTales Example -->
@@ -10,28 +17,28 @@
             <!-- Outer Row -->
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-12 col-md-9">
-                    <form  method="POST" action="/RS-success">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Driver Name</th>
-                                <th>POD Date</th>
-                                <th>Services</th>
-                                <th>Tracking Number</th>
-                                <th>Additional Details</th>
-                                <th>Contact Name</th>
-                                <th>Contact Address</th>
-                                <th>Contact Number</th>
-                                <th>Delivery Type</th>
-                                <th>Value (BND)</th>
-                                <th>Payment Method</th>
-                                <th>Proof of Payment</th>
-                                <th>Remarks</th>
-                                <th>Payment Confirmed</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% result.forEach(result=>{ %>
+                    <form method="POST" action="/RS-success">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Driver Name</th>
+                                    <th>POD Date</th>
+                                    <th>Services</th>
+                                    <th>Tracking Number</th>
+                                    <th>Additional Details</th>
+                                    <th>Contact Name</th>
+                                    <th>Contact Address</th>
+                                    <th>Contact Number</th>
+                                    <th>Delivery Type</th>
+                                    <th>Value (BND)</th>
+                                    <th>Payment Method</th>
+                                    <th>Proof of Payment</th>
+                                    <th>Remarks</th>
+                                    <th>Payment Confirmed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% result.forEach(result=>{ %>
                                     <tr class="rowNumber">
                                         <td name="dispatch" id="dispatch">
                                             <%= result.driver %><input type="hidden" name="disp"
@@ -45,7 +52,8 @@
                                         </td>
                                         <td>
                                             <%= result.trackingNumber %>
-                                            <input type="hidden" name="trackingNumber" value="<%= result.trackingNumber %>">
+                                                <input type="hidden" name="trackingNumber"
+                                                    value="<%= result.trackingNumber %>">
                                         </td>
                                         <td></td>
                                         <td>
@@ -71,29 +79,32 @@
                                         </td>
                                         <td>
                                             <div class="form-floating">
-                                                <textarea class="form-control" name="ackCode" placeholder="" id="" style="height: 100px"></textarea>
+                                                <textarea class="form-control" name="ackCode" placeholder="" id=""
+                                                    style="height: 100px"></textarea>
                                             </div>
                                         </td>
                                         <td>
-                                            <% if (result.paymentStatus == "T") { %>
+                                            <% if (result.paymentStatus=="T" ) { %>
                                                 <div class="form-switch">
-                                                    <input class="form-check-input disabled" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+                                                    <input class="form-check-input disabled" type="checkbox"
+                                                        role="switch" id="flexSwitchCheckDefault" checked>
                                                 </div>
-                                            <% } %>
-                                            <% if (result.paymentStatus == "F") { %>
-                                                <div class="form-switch">
-                                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                                                </div>
-                                            <% } %>
+                                                <% } %>
+                                                    <% if (result.paymentStatus=="F" ) { %>
+                                                        <div class="form-switch">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                role="switch" id="flexSwitchCheckDefault">
+                                                        </div>
+                                                        <% } %>
                                         </td>
                                     </tr>
-                                <% }) %>
-                        </tbody>
-                    </table>
+                                    <% }) %>
+                            </tbody>
+                        </table>
 
-                    <div class="d-flex justify-content-center mb-5">
-                        <button class="btn btn-primary">submit</button>
-                    </div>
+                        <div class="d-flex justify-content-center mb-5">
+                            <button class="btn btn-primary">submit</button>
+                        </div>
                     </form>
 
 
@@ -116,6 +127,98 @@
                 </div>
             </div>
         </div>
+
+        <script defer>
+            let countTrackingNum = document.getElementsByName("trackingNumber").length;
+            let checkDuplicateDriver = 0;
+            let currentSummaryRow = 0;
+
+            for (let i = 0; i < countTrackingNum; i++) {
+                function checkPOP() {
+                    var signCheck = 0;
+                    var popCheck = 0;
+
+                    var request = new XMLHttpRequest();
+                    request.open('POST', 'https://api.tookanapp.com/v2/get_job_details');
+                    request.setRequestHeader('Content-Type', 'application/json');
+                    request.onreadystatechange = function () {
+                        if (this.readyState === 4) {
+                            console.log('Status:', this.status);
+                            console.log('Headers:', this.getAllResponseHeaders());
+                            console.log('Body:', this.responseText);
+
+                            responsetn = this.responseText;
+                            json_responsetn = JSON.parse(responsetn);
+
+                            taskHistoryLength = json_responsetn.data[0].task_history.length;
+
+                            for (let j = 0; j < taskHistoryLength; j++) {
+                                document.getElementsByName("proofOfPayment")[i].innerText = "N/A";
+                                if ((json_responsetn.data[0].task_history[j].type == "signature_image_added") && (signCheck == 0)) {
+                                    signCheck = 1;
+                                }
+
+                                if ((json_responsetn.data[0].task_history[j].type == "image_added") && (signCheck == 1)) {
+                                    document.getElementsByName("proofOfPayment")[i].innerText = "";
+                                    popCheck = 1;
+
+                                    var img = document.createElement('img');
+                                    img.setAttribute("name", "imguploadedbank");
+                                    img.setAttribute("class", "imguploadedbank");
+                                    img.src = json_responsetn.data[0].task_history[j].description;
+                                    document.getElementsByName("proofOfPayment")[i].appendChild(img);
+
+                                    j = taskHistoryLength;
+                                }
+
+                                if ((signCheck == 0) || (popCheck == 0)) {
+                                    if (j == (taskHistoryLength - 1)) {
+                                        j = taskHistoryLength;
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    var body = {
+                        'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+                        'job_ids': [
+                            document.getElementsByName("trackingNumber")[i].value
+                        ],
+                        'include_task_history': 1
+                    };
+                    request.send(JSON.stringify(body));
+                }
+
+                function createDriverSummary() {
+                    checkDuplicateDriver = 0;
+                    currentSummaryRow = 0;
+
+                    var currentDriver = document.getElementsByName("dispatch")[i].innerText;
+
+                    //check driver if existed
+                    if (document.getElementsByName('summaryRow').length > 1) {
+                        for (let k = 0; k < document.getElementsByName('summaryRow').length; k++) {
+                            if (currentDriver == document.getElementsByName("drivers")[k].innerText) {
+                                currentSummaryRow = k;
+                                checkDuplicateDriver = 1;
+                                k = document.getElementsByName('summaryRow').length;
+                            }
+                        }
+                    }
+
+                    if (checkDuplicateDriver == 0){
+
+                    }
+
+                    if (checkDuplicateDriver == 1){
+                        
+                    }
+                }
+
+                checkPOP();
+                /* createDriverSummary(); */
+            }
+        </script>
         <!-- <script defer>
             let checkDuplicateDriver = 0;
             let currentSummaryRow = 0;
@@ -140,14 +243,6 @@
                         }
                     }
                 }
-
-                
-
-
-
-
-
-
 
                 if ((document.getElementsByName("method")[i].innerText) == "Cash") {
                     let row_data_date = document.createElement('td');
