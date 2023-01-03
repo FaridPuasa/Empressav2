@@ -16,7 +16,6 @@ const agentDB = require('../models/agent')
 let moment = require('moment')
 //const { currentUser } = require('../controller/user')
 
-
 const dashboard = (req,res) =>{
     //let id = req.params.user
     //console.log("This is an user: " + req.session.user)
