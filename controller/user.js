@@ -54,7 +54,8 @@ const insertUser = ((req,res)=>{
             if (err.name === "MongoServerError" && err.code === 11000){
                 console.log(err)
                 res.render('error', {
-                    title: '11000',
+                    title: 'Error',
+                    code: '11000',
                     response: 'DB Error',
                     message: 'No worries~ database detected duplication entry.'
                 })
@@ -62,7 +63,8 @@ const insertUser = ((req,res)=>{
             else{
                 console.log(err)
                 res.render('error', {
-                    title: '406',
+                    title: 'Error',
+                    code: '406',
                     response: 'Not Acceptable',
                     message: `Entry didn't meet the requirements.`
                 })
