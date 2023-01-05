@@ -3,7 +3,7 @@
     <!-- DataTales Example -->
 <div class="card shadow mb-4">
 <div class="card-header py-3">
-<h6 class="m-0 font-weight-bold text-primary text-center">USER LIST</h6>
+<h6 class="m-0 font-weight-bold text-primary text-center">MOH | INVENTORY LIST</h6>
 </div>
 
 <div class="card-body">
@@ -31,11 +31,11 @@
                     id="table"
                     data-toolbar="#toolbar"
                     data-search="true"
-                    data-show-refresh="false"
+                    data-show-refresh="true"
                     data-show-toggle="true"
-                    data-show-fullscreen="false"
-                    data-show-columns="false"
-                    data-show-columns-toggle-all="false"
+                    data-show-fullscreen="true"
+                    data-show-columns="true"
+                    data-show-columns-toggle-all="true"
                     data-detail-view="false"
                     data-show-export="true"
                     data-click-to-select="true"
@@ -49,11 +49,20 @@
                     data-response-handler="responseHandler">
                 <thead>
                     <tr>
-                        <th data-field="name" data-sortable="true">User Name</th>
-                        <th data-field="email" data-sortable="true">User Email</th>
-                        <th data-field="contact" data-sortable="true">User Contact</th>
-                        <th data-field="role" data-sortable="true">User Roles</th>
-                        <th data-field="service" data-sortable="true">User Permission</th>
+                        <th data-field="trackingNumber" data-sortable="true">Tracking Number</th>
+                        <th data-field="contactName" data-sortable="true">Contact Name</th>
+                        <th data-field="contactAddress" data-sortable="true">Contact Address</th>
+                        <th data-field="contactNumber" data-sortable="true">Contact Number</th>
+                        <th data-field="areaCode" data-sortable="true">Area Code</th>
+                        <th data-field="paymentType" data-sortable="true" data-visible="false">Payment Method</th>
+                        <th data-field="value" data-sortable="true">Item Value (BND)</th>
+                        <th data-field="age" data-sortable="true">Item Age</th>
+                        <th data-field="deliveryType" data-sortable="true" data-visible="false">Delivery Type</th>
+                        <th data-field="currentStatus" data-sortable="true" data-visible="false">Item Status</th>
+                        <th data-field="dateEntry" data-sortable="true" data-visible="false">Entry Date</th>
+                        <th data-field="mohExpire" data-sortable="true" data-visible="false">Expire Date</th>
+                        <th data-field="remark" data-sortable="true" data-visible="false">Remark</th>
+                        <th data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,4 +78,3 @@
 </div>
 </div>
 </div>
-

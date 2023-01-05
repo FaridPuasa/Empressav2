@@ -865,11 +865,11 @@ const itemList = (req,res) =>{
         //console.log(sessionuser)
         let user = sessionuser
         console.log(filter)
-        warehouseDB.find(filter).then(
+        warehouseDB.find().then(
             (documents)=>{
                 //console.log(documents)
                 if(services == 'moh'){
-                    console.log(documents[0])
+                    console.log("This This")
                     res.render('list',{
                         title: `${services} List`,
                         partials: ('./partials/list/moh'),

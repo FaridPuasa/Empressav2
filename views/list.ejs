@@ -46,15 +46,10 @@
 
             <%- include('partials/scripts.ejs') %>
 
-                <script src="/public/js/data.js"></script>
 
                 <script>
-
-                </script>
-
-                <script>
-                    let listing = '<%- JSON.stringify(list) %>'
-
+                    let listing = `<%- JSON.stringify(list) %>`
+                    console.log(listing)
                     var $table = $('#table')
                     var $remove = $('#remove')
                     var selections = []
@@ -254,12 +249,6 @@
                             }
                         }
 
-                        for (i = 0; i < data.length; i++) { //change the value to date
-                            for (j = 0; j < data[i].trackingNumber.length; j++) { //change the value to date
-
-                                console.log(data[i].trackingNumber[j])
-                            }
-                        }
                         $table.bootstrapTable({ data: data })
                         $table.bootstrapTable('updateFormatText', 'formatShowingRows', 'Showing')
                     })
@@ -323,5 +312,4 @@
                 </script>
 
     </body>
-
 </html>

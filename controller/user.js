@@ -241,7 +241,7 @@ const userList = ((req,res)=>{
     userDB.find().then(
         (documents)=>{
             console.log(documents)
-            res.render('user', {
+            res.render('userlist', {
                 title: "User List",
                 partials: "./partials/user/list.ejs",
                 listing: documents,
