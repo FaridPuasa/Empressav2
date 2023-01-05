@@ -687,7 +687,7 @@ const instock = (req,res) =>{
                     let sequence = 1
                     res.render('itemin', {
                         title: "Item In",
-                        partials: './partials/itemin/newinventory.ejs',
+                        partials: './partials/itemin/newInventory.ejs',
                         moment: moment,
                         sequence: sequence,
                         user,
@@ -698,7 +698,7 @@ const instock = (req,res) =>{
                     console.log(sequence)
                     res.render('itemin', {
                         title: "Item In",
-                        partials: './partials/itemin/newinventory.ejs',
+                        partials: './partials/itemin/newInventory.ejs',
                         moment: moment,
                         sequence: sequence,
                         user,
