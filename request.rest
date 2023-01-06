@@ -71,3 +71,18 @@ POST https://clientstg.fmx.asia/token
     "password" : "J02B4VcU",
     "grant_type" : "password"
 }
+
+###
+POST https://media.smsgupshup.com/GatewayAPI/rest
+Content-Type: application/x-www-form-urlencoded
+
+{
+    "userid" : "2000155005" ,
+    "password" : "sh1gw4e",
+    "phone_number": "91989212345",
+    "method" : "OPT_IN",
+    "auth_scheme" : "plain",
+    "v" : "1.1",
+    "channel" : "WHATSAPP", 
+    "format" : "json"
+}

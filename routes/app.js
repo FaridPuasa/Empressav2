@@ -149,7 +149,8 @@ const {
     stockPageOut,
     reentryPage,
     pickupRecord,
-    restockRecord
+    restockRecord,
+    miscList
 } = require('../controller/page')
 
 const {
@@ -227,7 +228,9 @@ router.post('/success-reentry', reentry)//Update misc out
 
 //Item List 
 router.get('/:services-list', itemList)//Item list by services page
-router.get('/inventory-list', inventoryList)//Item list for instock 
+router.get('/inventorylist', inventoryList)//Item list for instock 
+router.get('/misclist', miscList)//Item list for instock 
+
 
 //POD List
 router.get('/:services-podlist', podList)//POD List by services page

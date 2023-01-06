@@ -13,6 +13,7 @@ const waybillDB = require('../models/restock')
 const stockDB = require('../models/stocks')
 const pickupDB = require ('../models/pickup')
 const agentDB = require('../models/agent')
+const miscDB = require('../models/misc')
 let moment = require('moment')
 //const { currentUser } = require('../controller/user')
 
@@ -725,6 +726,8 @@ const inventoryList = (req,res) =>{
         res.redirect('/')
     }
     else{
+        let sessionuser = req.session.user
+        let user = sessionuser
         stockDB.find().then(
             (result)=>{
                 console.log(result)
@@ -733,6 +736,40 @@ const inventoryList = (req,res) =>{
                     partials: './partials/list/inventory.ejs',
                     moment: moment, 
                     list: result,
+                })
+            },
+            (err)=>{
+                console.log('Error on page or route not found')
+                console.log(err)
+                res.render('error', {
+                    title: 'Error',
+                    code: '404',
+                    response: 'Server failed to retrieve information from database',
+                    message: 'Please logout and try again, If the issue persist please contact +673 233 2065 ext 812',
+                    user,
+                })
+            }
+        )
+    }
+}
+
+const miscList = (req,res) =>{
+    if(!req.session.user){
+        console.log('User not authenticated: Session Expire')
+        res.redirect('/')
+    }
+    else{
+        let sessionuser = req.session.user
+        let user = sessionuser
+        miscDB.find().then(
+            (result)=>{
+                console.log(result)
+                res.render('misc', {
+                    title: "Inventory",
+                    partials: './partials/list/misc.ejs',
+                    moment: moment, 
+                    list: result,
+                    user,
                 })
             },
             (err)=>{
@@ -1695,5 +1732,6 @@ module.exports = {
     restockRecord,
     stockPageOut,
     reentryPage,
-    inventoryOut
+    inventoryOut,
+    miscList,
 }
