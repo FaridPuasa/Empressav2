@@ -48,6 +48,7 @@ app.set('view engine', 'ejs')
 
 const mongoose = require('mongoose');
 const db = require('./config/keys').MongoURI;
+mongoose.set('strictQuery',true)
 mongoose.connect(db, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

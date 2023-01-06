@@ -310,10 +310,10 @@ const readAgent = (req,res)=> {
     let user = currentUser[0]
     agentDB.find().then(
         (documents)=>{
-            res.render('user', {
+            res.render('agenlist', {
                 title: "User List",
-                partials: "./partials/user/list.ejs",
-                documents,
+                partials: "./partials/user/alist.ejs",
+                listing: documents,
                 moment: moment,
                 user
             })

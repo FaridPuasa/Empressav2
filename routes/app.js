@@ -209,7 +209,7 @@ router.get('/wellous', wellousPage)//Item entry for Wellous
 router.get('/misc', miscPage)//Item entry for Miscellaneous
 router.get('/misc-out', miscPageOut)//Item exit for Miscellaneous
 router.get('/stock-out', stockPageOut)//Item exit for Miscellaneous
-router.get('/re-entry', reentryPage)//Item entry for returning back to WH
+router.get('/re_entry', reentryPage)//Item entry for returning back to WH
 router.post('/success-entry-zalora', insertZalora)//ZALORA Save to Warehouse DB
 router.post('/success-entry-pharmacy', insertPharmacy)//MOH,JPMC,PANAGA Save to Warehouse DB
 router.post('/success-entry-local', insertLocal)//LOCAL Save to Warehouse DB
