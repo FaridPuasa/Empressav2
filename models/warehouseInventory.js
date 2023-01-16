@@ -87,6 +87,7 @@ const inventorySchema  = new mongoose.Schema({
         editedBy: string, 
         editedAt: string
     }],
+    receipt: string,
 }, {timestamps: true})
 
 //inventorySchema.index({createdAt: 1},{expireAfterSeconds: 31536000});//1 year

@@ -251,22 +251,31 @@ const exportFinanceSummaryDriver = (req,res) =>{
 }
 
 const reconService = (req,res)=> {
-    let date = moment().format("DD/MM/YYYY, h:mm:ss a")
+    let date = moment().format("DD/MM/YYYY")
     let data = req.body
-    for (let i = 0; i < trackingNumber.length; i++){
-        let filter = {trackingNumber: trackingNumber[i]}
-        let update = {
-            paymentStatus: data.paymentStatus,
-            ackCode: data.ackCode,
+    for (let i = 0; i < data.trackingNumber.length; i++){
+        let ps = data.paymentStatus[i]
+        let update
+        console.log (ps)
+        if(ps === "on"){
+            ps = "T"
+            console.log(ps)
+            update = {
+                paymentStatus: ps,
+                ackCode: data.ackCode[i]
+            }
         }
+        let filter = {trackingNumber: data.trackingNumber[i]}
         let option = {upsert: false, new: false}
+        console.log(filter)
+        console.log(update)
         warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
             if (err){
                 //console.log(`Failed update: ${trackingNumber}`)
                //req.flash('error', `Failed to update: ${trackingNumber}`)
             }
             else{
-                console.log(`Successfully update: ${trackingNumber[i]}`)
+                console.log(`Successfully update: `)
                 //req.flash('success', `${trackingNumber} has been updated on the database.`)
                 //res.status(201).send()
             }
@@ -277,13 +286,29 @@ const reconService = (req,res)=> {
 const reconDriver = (req,res)=> {
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let data = req.body
-    for (let i = 0; i < trackingNumber.length; i++){
-        let filter = {trackingNumber: trackingNumber[i]}
-        let update = {
-            paymentStatus: data.paymentStatus,
-            ackCode: data.ackCode,
+    for (let i = 0; i < data.trackingNumber.length; i++){
+        let ps = data.paymentStatus[i]
+        let update
+        console.log (ps)
+        if(ps === "on"){
+            ps = "T"
+            console.log(ps)
+            update = {
+                paymentStatus: ps,
+                ackCode: data.ackCode[i]
+            }
         }
+        if(ps != "on" || ps == undefined || ps == "undefined" || ps == void(0)){
+            ps = "F"
+            update = {
+                paymentStatus: ps,
+                ackCode: data.ackCode[i]
+            }
+        }
+        let filter = {trackingNumber: data.trackingNumber[i]}
         let option = {upsert: false, new: false}
+        console.log(filter)
+        console.log(update)
         warehouseDB.findOneAndUpdate(filter,update,option,(err,docs)=>{
             if (err){
                 //console.log(`Failed update: ${trackingNumber}`)
@@ -298,11 +323,196 @@ const reconDriver = (req,res)=> {
     }
 }
 
+const easyinvoice = require ('easyinvoice')
+const fs = require ('fs')
+
+const axios = require('axios')
+
+const receiptGenerator = (req,res)=>{
+    let fileName = `${Date.now()}.pdf`
+    let date = moment().format('DD MMM YY')
+    let time = moment().format('LT')
+    let year = moment().format('YY')
+    let trackingNumber = req.body.tracker
+    let filter = {trackingNumber}
+    console.log(filter)
+    warehouseDB.find(filter).then(
+        (result)=>{
+            console.log(result)
+            let docs = result[0]
+            let service 
+            if(docs.service == "MOH"){
+                service = "Pharmacy Services (MOH)"
+            }
+            if(docs.service == "JPMC"){
+                service = "Pharmacy Services (JPMC / PJSC)"
+            }
+            if(docs.service == "PANAGA"){
+                service = "Pharmacy Services (PANAGA)"
+            }
+            if(docs.service == "FMX"){
+                service = "Last Mile Delivery (FMX)"
+            }
+            if(docs.service == "TMX"){
+                service = "Fullfillment Services (Thermomix)"
+            }
+            if(docs.service == "RUNNER"){
+                service = "Runner Services (Go Beli Store)"
+            }
+            if(docs.service == "PERSONAL"){
+                service = "Personal Shopping (Go Beli Store)"
+            }
+            if(docs.service == "LOCAL"){
+                service = "Last Mile Delivery (Local Deliveries)"
+            }
+            if(docs.service == "ZALORA"){
+                service = "Last Mile Delivery (Zalora)"
+            }
+            if(docs.service == "GRP"){
+                service = "Fullfillment (Go Rush Plus)"
+            }
+
+            let count = fs.readdirSync('./receipt').length
+            console.log(count)
+            if(count >= 0 && count <= 9){
+                count = "000" + count
+            }
+            if(count >= 10 && count <= 99){
+                count = "00" + count
+            }
+            if(count >= 100 && count <= 999){
+                count = "0" + count
+            }
+            if(count >= 1000 && count <= 9999){
+                count
+            }
+            let serialNumbers = "GR:" + year +"/" + count
+            //let fileName = `${year}-`
+            //let serialNumbers = fileName.toString()
+            var data = {
+                "customize": {
+                    "template": fs.readFileSync('./receipt/index.html', 'base64')
+                },
+                "images": {
+                    "logo": fs.readFileSync('./public/img/mini.png', 'base64')
+                },
+                "sender": {
+                    "company": "Go Rush Express",
+                    "address": "Unit 9, Block A, Simpang 188, Jalan Pengiran Babu Raja, Kampong Kiarong.",
+                    "zip": "BE1318",
+                    "city": "Bandar Seri Begawan",
+                    "country": "Brunei Darussalam"
+                },
+                "client": {
+                    "company": docs.contactName,
+                    "address": docs.contactAddress,
+                    "city": "Bandar Seri Begawan",
+                    "country": "Brunei Darussalam",
+                    "custom1": docs.contactNumber
+                },
+                "information": {
+                    // Invoice number
+                    "number": serialNumbers,
+                    // Invoice data
+                    "date": date,
+                    "due-date": time
+                },
+                "products": [
+                    {
+                        "quantity": 1,
+                        "description": service,
+                        "tax-rate": 0,
+                        "price": docs.value
+                    }
+                ],
+                "bottom-notice": "This is auto generated receipt. For any enquiries please contact +673 233 2065.",
+                "settings": {
+                    "currency": "USD",
+                },
+                "translate": {
+                    "invoice": "OFFICIAL RECEIPT", 
+                    "number": "Serial No",
+                    "date": "Date",
+                    "due-date": "Time",
+                },
+            };
+            console.log(data)
+          
+            const generate = async()=> {
+                try{
+                    let result = await easyinvoice.createInvoice(data)
+                    fs.writeFileSync(`./receipt/${fileName}`, result.pdf, 'base64');
+                }
+                catch(e){
+                    console.log(e)
+                }
+            }
+            generate()
+
+            let update = {receipt: fileName}
+            let option = {upsert: false, new: false}
+            warehouseDB.findOneAndUpdate(filter, update, option, (err, docs)=>{
+                if(err){
+                    console.log(err)
+                }
+                else{
+                    console.log(docs)
+                    console.log("Receipt name added")
+                }
+            })
+            res.send(data)
+        },
+        (err)=>{
+            console.log(err)
+            console.log("Failed to generate receipt")
+        }
+    )
+}
+
+let dotenv = require('dotenv').config()
+const userid = process.env.WAID
+const pass = process.env.WAPASS
+
+const sendReceipt = (req,res)=>{
+    let data = req.body
+    let tracker = data.trackingNumber
+    let filter = {trackingNumber: "451996397"}
+    warehouseDB.find(filter).then(
+        (result)=>{
+            let doc = result[0]
+            let phone = doc.contactNumber
+            let sendTo = "00" + phone.replaceAll(/\s/g,'')
+            let actual = sendTo.replace('+','')
+            let receipt = doc.receipt
+            console.log(doc)
+            console.log(actual)
+            const media = `./receipt/${receipt}.pdf`
+            const URL = `https://media.smsgupshup.com/GatewayAPI/rest?send_to=${actual}&msg_type=document&userid=${userid}&auth_scheme=plain&password=${pass}&method=SendMediaMessage&v=1.1&media_url=${media}&caption=Hello, This is your receipt. Thank you for using our services.&isHSM=true&isTemplate=true&data_encoding=text&format=json&footer=Go Rush Express`
+            
+            axios.get(URL). then(
+                (response)=>{
+                    console.log(response.status) 
+                    console.log(response.data)
+                    console.log("WhatsApp Template sent!")
+                },
+                (err)=>{
+                    console.log(err)
+                }
+            )
+        },
+        (err)=>{
+            console.log(err)
+            console.log("Failed to send a WhatsApp Template to the receipient")
+        }
+    )
+}
 
 module.exports = {
     exportInventory,
     exportFinanceSummary,
     reconService,
     reconDriver,
-    exportFinanceSummaryDriver
+    exportFinanceSummaryDriver,
+    receiptGenerator,
+    sendReceipt
 }

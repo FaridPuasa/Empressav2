@@ -8,3 +8,176 @@
 <% if (user.service.includes(400)){ %> <a class="collapse-item" href="/runner-pod">Runner Service</a> <% } %>
 <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/personal-pod">Personal Shopping</a> <% } %>
 <% if (user.service.includes(401)){ %> <a class="collapse-item" href="/misc-pod">Miscellaneous</a> <% } %>
+
+
+let year = moment().year()
+            let str
+            let last
+            fs.readdir("./receipt", (err,list)=>{
+                last = list.length - 1
+                console.log(last)
+                if(last == 0){
+                    last += 1
+                    //str = last.toString()
+                    console.log("If " + last)
+                    let serialNumbers = `${year}-${last}`
+                    //console.log(serialNumbers)
+                    let data = {
+                        "documentTitle": "OFFICIAL RECEIPT",
+                        "sender" : {
+                            "company" : "Go Rush Express",
+                            "address" : "Unit 9, Block A, Simpang 188, Jalan Pengiran Babu Raja, Kampong Kiarong.",
+                            "zip": "BE1318",
+                            "city": "Bandar Seri Begawan",
+                            "country": "Brunei Darussalam",
+                        },
+                        "client" : {
+                            "reference": docs.trackingNumber,
+                            "company" : docs.contactName,
+                            "address" : docs.contactAddress,
+                            "zip" : " ",
+                            "city" : "Bandar Seri Begawan",
+                            "country" : "Brunei Darussalam",
+                        },
+                        "products" : [
+                            {
+                                "quanity" : 1,
+                                "description" : service,
+                                "price" : docs.value
+                            }
+                        ],
+                        "information" : {
+                            "date" : date,
+                            "number" : serialNumbers,
+                        },
+                        "bottom-notice": "This is auto generated receipt. For any enquiries please contact +673 233 2065.",
+                        "settings" : {
+                            "currency" : "BND",
+                            "locale": "en-US",
+                            "format": "A4",
+                            "orientation" : "portrait"
+                        }
+                    }
+                    console.log(data)
+
+                    const generate = async()=>{
+                        try{
+                            let receipt = await easyinvoice.createInvoice(data)
+                            console.log(receipt)
+                            fs.writeFileSync("./receipt/invoice.pdf", receipt.pdf, 'base64');
+                            console.log("OR created")
+                            
+                        }
+                        catch(err){
+                            console.log(err)
+                        }
+                        
+                    }
+                    generate()
+                }
+                else{
+                    last
+                    //str = last.toString()
+                    console.log("Else " + last)
+                    last += 1
+                    //str = last.toString()
+                    console.log("If " + last)
+                    let serialNumbers = `${year}-${last}`
+                    console.log(serialNumbers)
+                    let data = {
+                        "documentTitle": "OFFICIAL RECEIPT",
+                        "sender" : {
+                            "company" : "Go Rush Express",
+                            "address" : "Unit 9, Block A, Simpang 188, Jalan Pengiran Babu Raja, Kampong Kiarong.",
+                            "zip": "BE1318",
+                            "city": "Bandar Seri Begawan",
+                            "country": "Brunei Darussalam",
+                        },
+                        "client" : {
+                            "reference": docs.trackingNumber,
+                            "company" : docs.contactName,
+                            "address" : docs.contactAddress,
+                            "zip" : " ",
+                            "city" : "Bandar Seri Begawan",
+                            "country" : "Brunei Darussalam",
+                        },
+                        "products" : [
+                            {
+                                "quanity" : 1,
+                                "description" : service,
+                                "price" : docs.value
+                            }
+                        ],
+                        "information" : {
+                            "date" : date,
+                            "number" : serialNumbers,
+                        },
+                        "bottom-notice": "This is auto generated receipt. For any enquiries please contact +673 233 2065.",
+                        "settings" : {
+                            "currency" : "BND",
+                            "locale": "en-US",
+                            "format": "A4",
+                            "orientation" : "portrait"
+                        }
+                    }
+                    console.log(data)
+
+
+                    const generate = async()=>{
+                        let receipt = await easyinvoice.createInvoice(data)
+                        fs.writeFileSync("./receipt/invoice.pdf", receipt.pdf, 'base64');
+                        console.log("OR created")
+                    }
+                   /*
+                    easyinvoice.createInvoice(data, function (result) {
+                        fs.writeFileSync("./receipt/invoice.pdf", result.pdf, 'base64');
+                        console.log('PDF base64 string: ', result.pdf);
+                        console.log("OR Create")
+                    });
+                   */
+                }
+                /*
+                let lastFile = fs.readFileSync(`receipt/${year}-${str}.pdf`)
+                if(lastFile){
+                    number = parseInt(str) + 1
+                    str = number
+                }
+                else{
+                    console.log(err)
+                }
+                */
+            })
+
+            let data= {
+                documentTitle: "OFFICIAL RECEIPT",
+                sender: {
+                    company: "GO RUSH EXPRESS",
+                    address: "Brunei Darussalam",
+                    zip: "BE1318",
+                    city: "Brunei Darussalam",
+                    country: "Brunei Darussalam"
+                },
+                client: {
+                    reference: "Brunei Darussalam",
+                    company: "Brunei Darussalam",
+                    address: "Brunei Darussalam",
+                    city: "Brunei Darussalam"
+                    country: "Brunei Darussalam"
+                },
+                products: {
+                    quantity: 1
+                    description: "MOH",
+                    price: 5,
+                },
+                information: {
+                    date: "2023-01-01",
+                    number: '2023-0001'
+                },
+                bottom-notice: "This is auto generated receipt. For any enquiries please contact +673 233 2065.",
+                settings: {
+                    currency: "BND",
+                    locale: "en-US",
+                    format: "A4",
+                    orientation: "portrait"
+                }
+            }

@@ -151,3 +151,6 @@ function authenticateToken(req,res,next){
     })
 }
 */
+
+
+https://media.smsgupshup.com/GatewayAPI/rest?userid=2000215252&password={{PASSWORD}}&send_to=006737257190&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=This+is+your+receipt.&isTemplate=true&header=Test&footer=Go+Rush+Management

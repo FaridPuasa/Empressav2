@@ -73,7 +73,7 @@ POST https://clientstg.fmx.asia/token
 }
 
 ###
-POST https://media.smsgupshup.com/GatewayAPI/rest
+GET https://media.smsgupshup.com/GatewayAPI/rest
 Content-Type: application/x-www-form-urlencoded
 
 {

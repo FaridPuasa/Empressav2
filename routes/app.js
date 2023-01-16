@@ -120,8 +120,12 @@ const {
     exportFinanceSummary,
     reconService,
     exportFinanceSummaryDriver,
-    reconDriver
+    reconDriver,
+    receiptGenerator,
+    sendReceipt
 } = require('../controller/export')
+
+router.post('/receiptGenerate', receiptGenerator)
 
 const {
     dashboard,
@@ -309,5 +313,118 @@ router.post('/success-ro',insertRestock)
 router.get('/pickup_order', pickupForm)
 router.get('/pickup_list', pickupRecord)
 router.post('/success-po',insertPickup)
+
+
+const easyinvoice = require('easyinvoice')
+var fs = require('fs');
+const axios = require('axios')
+
+router.get('/test',(req,res)=>{
+    // var data = {
+    //     // Customize enables you to provide your own templates
+    //     // Please review the documentation for instructions and examples
+    //     // Your own data
+    //     "sender": {
+    //         "company": "Sample Corp",
+    //         "address": "Sample Street 123",
+    //         "zip": "1234 AB",
+    //         "city": "Sampletown",
+    //         "country": "Samplecountry"
+    //         //"custom1": "custom value 1",
+    //         //"custom2": "custom value 2",
+    //         //"custom3": "custom value 3"
+    //     },
+    //     // Your recipient
+    //     "client": {
+    //         "company": "Client Corp",
+    //         "address": "Clientstreet 456",
+    //         "zip": "4567 CD",
+    //         "city": "Clientcity",
+    //         "country": "Clientcountry"
+    //         // "custom1": "custom value 1",
+    //         // "custom2": "custom value 2",
+    //         // "custom3": "custom value 3"
+    //     },
+    //     "information": {
+    //         // Invoice number
+    //         "number": "2021.0001",
+    //         // Invoice data
+    //         "date": "12-12-2021",
+    //         // Invoice due date
+    //         "due-date": "31-12-2021"
+    //     },
+    //     // The products you would like to see on your invoice
+    //     // Total values are being calculated automatically
+    //     "products": [
+    //         {
+    //             "quantity": 2,
+    //             "description": "Product 1",
+    //             "tax-rate": 6,
+    //             "price": 33.87
+    //         },
+    //         {
+    //             "quantity": 4.1,
+    //             "description": "Product 2",
+    //             "tax-rate": 6,
+    //             "price": 12.34
+    //         },
+    //         {
+    //             "quantity": 4.5678,
+    //             "description": "Product 3",
+    //             "tax-rate": 21,
+    //             "price": 6324.453456
+    //         }
+    //     ],
+    //     // The message you would like to display on the bottom of your invoice
+    //     "bottom-notice": "Kindly pay your invoice within 15 days.",
+    //     // Settings to customize your invoice
+    //     "settings": {
+    //         "currency": "USD", // See documentation 'Locales and Currency' for more info. Leave empty for no currency.
+    //         // "locale": "nl-NL", // Defaults to en-US, used for number formatting (See documentation 'Locales and Currency')
+    //         // "tax-notation": "gst", // Defaults to 'vat'
+    //         // "margin-top": 25, // Defaults to '25'
+    //         // "margin-right": 25, // Defaults to '25'
+    //         // "margin-left": 25, // Defaults to '25'
+    //         // "margin-bottom": 25, // Defaults to '25'
+    //         // "format": "A4", // Defaults to A4, options: A3, A4, A5, Legal, Letter, Tabloid
+    //         // "height": "1000px", // allowed units: mm, cm, in, px
+    //         // "width": "500px", // allowed units: mm, cm, in, px
+    //         // "orientation": "landscape", // portrait or landscape, defaults to portrait
+    //     },
+    //     // Translate your invoice to your preferred language
+    //     "translate": {
+    //         // "invoice": "FACTUUR",  // Default to 'INVOICE'
+    //         // "number": "Nummer", // Defaults to 'Number'
+    //         // "date": "Datum", // Default to 'Date'
+    //         // "due-date": "Verloopdatum", // Defaults to 'Due Date'
+    //         // "subtotal": "Subtotaal", // Defaults to 'Subtotal'
+    //         // "products": "Producten", // Defaults to 'Products'
+    //         // "quantity": "Aantal", // Default to 'Quantity'
+    //         // "price": "Prijs", // Defaults to 'Price'
+    //         // "product-total": "Totaal", // Defaults to 'Total'
+    //         // "total": "Totaal" // Defaults to 'Total'
+    //     },
+    // };
+
+    // const invoicePDF = async()=>{
+    //     let result = await easyinvoice.createInvoice(data)
+    //     fs.writeFileSync(`./receipt/${Date.now()}.pdf`, result.pdf, 'base64');
+    //     console.log("OR Create")
+    // }
+    // invoicePDF()   
+    //const URL = 'https://media.smsgupshup.com/GatewayAPI/rest?send_to=006737257190&msg_type=Text&userid=2000215252&auth_scheme=plain&password=6@SemFzr&method=SendMessage&v=1.1&format=json&msg=This is your receipt.&header=Test&footer=Go Rush Management&isTemplate=true'
+    //const URL = 'https://media.smsgupshup.com/GatewayAPI/rest?method=UploadMedia&media_type=document&userid=2000215252&password=6@SemFzr&v=1.1&auth_scheme=plain&format=json&media_file=@/media/DATA/1673506769113.pdf&send_to=006737257190'
+    let a = "Farid Puasa"
+    let b = "123456789"
+    let c = "MOH"
+    //let msg = `Hello%2C+${a}.%0A%0AWe+have+received+your+order.+Please+refer+to+the+following+for+your+reference.+%0A%0ATracking+Number%3A+${b}%0AService%3A+${c}%0A%0AThank+you+for+your+order`
+    //let msg = `Hello%2C+Farid+Puasa.%0A%0AWe+have+received+your+order.+Please+refer+to+the+following+for+your+reference.+%0A%0ATracking+Number%3A+123456%0AService%3A+MOH%0A%0AThank+you+for+your+order.`
+    let msg = `Hello%2C%0A%0AWe+have+received+your+order.+Please+refer+to+the+following+for+your+reference.%0A%0ATracking+Number%3A+${b}%0A%0AOur+team+will+process+your+order.+Thank+you`
+    const URL = `https://media.smsgupshup.com/GatewayAPI/rest?userid=2000215252&password=6@SemFzr&send_to=006737257190&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=${msg}&isTemplate=true&header=Order+Confirmation&footer=Go+Rush+Express`
+    console.log(URL)
+    axios.post(URL).then(response=>{console.log(response)}).catch(err=>{console.log(err)})
+})
+
+router.get('/sending', sendReceipt)
 
 module.exports = router

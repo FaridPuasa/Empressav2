@@ -24,6 +24,10 @@ const insertTmx = ((req,res)=>{
     let date = moment().format("DD/MM/YYYY, h:mm:ss a")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
+    let name = data.name.replace(/[`'"+@]+/g, '').trim()
+    let address = data.address.replace(/[`'"+@]+/g, '').trim()
+    let contact = data.contactNumber.replace(/[`'"+@]+/g, '').trim()
+    let remark = data.remark.replace(/[`'"+@]+/g, '').trim()
     let status = "A1"
     let attempt = 'false'
     let reentry = 'false'
@@ -39,9 +43,9 @@ const insertTmx = ((req,res)=>{
     let warehouse = new warehouseDB ({
         //Main
         trackingNumber: data.trackingNumber,
-        contactName: data.contactName,
-        contactNumber: data.contactNumber,
-        contactAddress: data.contactAddress,
+        contactName: name,
+        contactNumber: contact,
+        contactAddress: address,
         patientNumber: data.patientNumber,
         areaCode: data.areaCode,
         serviceTag: data.serviceTag,
@@ -53,7 +57,7 @@ const insertTmx = ((req,res)=>{
         paymentStatus: paymentStatus,
         value: data.value,
         status: data.status,
-        remark: data.remark,
+        remark: remark,
         note: data.note,
         currentStatus: status,
         service: data.service,
