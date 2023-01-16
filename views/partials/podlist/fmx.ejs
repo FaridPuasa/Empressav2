@@ -44,7 +44,7 @@
                                 </thead>
                                 <tbody>
                                     <% document.forEach((document,index)=> {%>
-                                    <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+                                    <tr data-toggle="collapse" data-target="#demo<%=index %>" class="accordion-toggle">  
                                         <td>
                                             <button class="btn btn-default btn-xs">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-menu-down" viewBox="0 0 16 16">
@@ -68,7 +68,7 @@
                                                 COMPLETE
                                             <%}%>
                                         </td>
-                                        <% if (user.role == "11" || user.role == "13" || user.role == "10") { %>
+                                        <% if (user.role.includes("10") || user.role.includes("11") || user.role.includes("13")) { %>
                                         <form action="/update-POD-fmx" method="POST">
                                             <% if(document.podstatus == "P1"){%>
                                                 <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
@@ -91,8 +91,8 @@
                                     <tr>
                                         <td colspan="12" class="hiddenRow">
                                             <form method="POST" action="/finance-edit-fmx">
-                                            <div class="accordian-body collapse" id="demo1">
-                                                <div class="inner" id="inner<%= k %>">
+                                                <div class="accordian-body collapse" id="demo<%=index %>">
+                                                    <div class="inner" id="inner<%= index %>">
                                                 
                                                 <table class="table table-striped table-bordered">
                                                     <thead>
@@ -180,23 +180,22 @@
                                                 </div>
 
                                                 <div class="d-flex justify-content-center ">
-                                                    <% if (user.role == "12" || user.role == "10") { %>
+                                                    <% if (user.role === "12" || user.role === "10") { %>
                                                         <button class="btn btn-primary">Acknowledge & Submit</button>
                                                     <% } %>
                                                 </div>
-                                            </form> 
-                                            <div class="d-flex justify-content-center "></div>
-                                                <% if (user.role == "11" || user.role == "13" || user.role == "10" ) { %>
+                                                <div class="d-flex justify-content-center">
+                                                    <% if (document.acknowledge === "T") { %>
                                                     <input type="button" class="btn btn-success my-2" onclick="createPDF()" value="Print">
-                                                <% } %>
-                                            </div>
+                                                    <% } %>
+                                                </div>
+                                            </form> 
                                             </div> 
                                         </td>
                                     </tr>
                                     <%})%>
                                 </tbody>
                             </table>
-                          
                         </div>
                     </div>
                 </div>

@@ -30,8 +30,7 @@
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
                                 </div>
                             <% } %>
-                            <% for(let k = 0; k < document.length ; k++){ %>
-                            <div class="tab tableFrist" id="tab<%= k %>">
+                            <div class="tab tableFrist">
                             <table class="table table-condensed table-striped text-center tableFrist">
                                 <thead>
                                     <tr>
@@ -46,8 +45,7 @@
                                 </thead>
                                 <tbody>
                                     <% document.forEach((document,index)=> {%>
-                                    <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
-                                        <td>
+                                        <tr data-toggle="collapse" data-target="#demo<%=index %>" class="accordion-toggle">                                          <td>
                                             <button class="btn btn-default btn-xs">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-menu-down" viewBox="0 0 16 16">
                                                     <path d="M7.646.146a.5.5 0 0 1 .708 0L10.207 2H14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h3.793L7.646.146zM1 7v3h14V7H1zm14-1V4a1 1 0 0 0-1-1h-3.793a1 1 0 0 1-.707-.293L8 1.207l-1.5 1.5A1 1 0 0 1 5.793 3H2a1 1 0 0 0-1 1v2h14zm0 5H1v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2zM2 4.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
@@ -70,7 +68,7 @@
                                                 COMPLETE
                                             <%}%>
                                         </td>
-                                        <% if (user.role == "11" || user.role == "13" || user.role == "10") { %>
+                                        <% if (user.role.includes("10") || user.role.includes("11") || user.role.includes("13")) { %>
                                         <form action="/update-POD-panaga" method="POST">
                                             <% if(document.podstatus == "P1"){%>
                                                 <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
@@ -93,8 +91,8 @@
                                     <tr>
                                         <td colspan="12" class="hiddenRow">
                                             <form method="POST" action="/finance-edit-panaga">
-                                            <div class="accordian-body collapse" id="demo1">
-                                                <div class="inner" id="inner<%= k %>">
+                                                <div class="accordian-body collapse" id="demo<%=index %>">
+                                                    <div class="inner" id="inner<%= index %>">
                                                 
                                                 <table class="table table-striped table-bordered">
                                                     <thead>
@@ -147,7 +145,7 @@
                                                 </table>
                                                 </div>
 
-                                                <div class="footer" id="footer<%= k %>">
+                                                <div class="footer">
                                                 <table class="table">
                                                     <thead class="thead-light">
                                                         <th colspan="9" class="text-center">OFFICIAL USE ONLY (CASH)</th>
@@ -181,23 +179,23 @@
                                                 </table>
                                                 </div>
 
-                                                    <div class="d-flex justify-content-center ">
-                                                        <% if (user.role == "12" || user.role == "10") { %>
-                                                        <button class="btn btn-primary">submit</button>
-                                                        <% } %>
-                                                        <% if (user.role == "11" || user.role == "13" || user.role == "10" ) { %>
-                                                        <button class="btn btn-success mx-2" onclick="createPDF()">Print</button>
-                                                        <% } %>
-                                                    </div>
-                                                
-                                            </form>  
+                                                <div class="d-flex justify-content-center ">
+                                                    <% if (user.role === "12" || user.role === "10") { %>
+                                                        <button class="btn btn-primary">Acknowledge & Submit</button>
+                                                    <% } %>
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <% if (document.acknowledge === "T") { %>
+                                                    <input type="button" class="btn btn-success my-2" onclick="createPDF()" value="Print">
+                                                    <% } %>
+                                                </div>
+                                            </form> 
                                             </div> 
                                         </td>
                                     </tr>
                                     <%})%>
                                 </tbody>
                             </table>
-                            <% } %>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,6 @@ const jpmcPodDB = require('../models/jpmcpod')
 const panagaPodDB = require('../models/panagapod')
 const moment = require('moment')
 
-
 /*
     IN WAREHOUSE = A1
     IN MEDICINE ROOM = A2
