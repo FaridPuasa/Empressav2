@@ -77,18 +77,18 @@ const insertGrp = ((req,res) =>{
             if (err.name === "MongoServerError" && err.code === 11000) {
                 console.log(err)
                 req.flash('error', `Error Code: 11000 | Tracking number already exist | Require fields missing.`)
-                res.redirect('/fmx-in')
+                res.redirect('/grp-in')
             }
             else {
                 console.log(err)
                 req.flash('error', `Status 406: Not Acceptable | Check your data entry.`)
-                res.redirect('/fmx-in')
+                res.redirect('/grp-in')
             }
         }
         else {
             console.log('Status: 200 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
-            res.status(200).redirect('/fmx-in')
+            res.status(200).redirect('/grp-in')
         }
     })
 })

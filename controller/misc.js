@@ -67,7 +67,7 @@ const insertMisc = (req,res)=> {
     misc.save(err=>{
         if (err) {
             console.log (err)
-            res.flash('error', `Tracking number already exist | Require fields missing`)
+            req.flash('error', `Tracking number already exist | Require fields missing`)
             res.render('error', {
                 errorcode: 'XXX',
                 response: 'Not Acceptable &#x1F62B;',
