@@ -69,22 +69,29 @@
                                             <%}%>
                                         </td>
                                         <% if (user.role.includes("10") || user.role.includes("11") || user.role.includes("13")) { %>
-                                        <form action="/update-POD-jpmc" method="POST">
-                                            <% if(document.podstatus == "P1"){%>
-                                                <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
-                                                <input type="hidden" name="pod_status" value="P2">
-                                                <td><button class="btn btn-primary delivery-btn">Start Delivery</button></td>
-                                            <%}%>
-                                            <% if(document.podstatus == "P2"){%>
-                                                <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
-                                                <input type="hidden" name="pod_status" value="P3">
-                                                <td><button class="btn btn-primary delivery-btn">Complete Delivery</button></td>
-                                            <%}%>
-                                            <% if(document.podstatus == "P3"){%>
-                                                <td><button class="btn btn-primary delivery-btn invisible">Completed</button></td>
-                                            <%}%>
-                                        </form>
-                                        <% } %>
+                                            <form action="/update-POD-jpmc" method="POST">
+                                                <% if (user.role.includes("10") || user.role.includes("11") || user.role.includes("13")) { %>
+                                                    <% if(document.podstatus == "P1"){%>
+                                                        <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
+                                                        <% for(let j=0 ; j < document.numbers.length; j++) {%>
+                                                        <input type="hidden" name="trackingNumber" value="<%= document.trackingNumber[j] %>">
+                                                        <%}%>
+                                                        <input type="hidden" name="pod_status" value="P2">
+                                                        <td><button class="btn btn-primary delivery-btn">Start Delivery</button></td>
+                                                    <%}%>
+                                                    <% if(document.podstatus == "P2"){%>
+                                                        <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
+                                                        <input type="hidden" name="pod_status" value="P3">
+                                                        <% for(let j=0 ; j < document.numbers.length; j++) {%>
+                                                            <input type="hidden" name="trackingNumber" value="<%= document.trackingNumber[j] %>">
+                                                        <%}%>
+                                                        <td><button class="btn btn-primary delivery-btn">Complete Delivery</button></td>
+                                                    <%}%>
+                                                    <% if(document.podstatus == "P3"){%>
+                                                        <td><button class="btn btn-primary delivery-btn invisible">Completed</button></td>
+                                                    <%}%>
+                                                <%}%>
+                                            </form>
                                     </tr>
                                 </div>
                                         

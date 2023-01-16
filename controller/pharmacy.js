@@ -485,24 +485,10 @@ const updateMohPodStatus = ((req, res) => {
             if (err) {
                 console.log("Error on updating the information on database")
                 console.log(err)
-                res.render('error', {
-                    title: "Error",
-                    code: '400',
-                    response: 'Server failed to update information to database',
-                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
-                    user,
-                })
             }
             else {
                 console.log(result)
                 console.log('Status: 200 - database has been updated')
-                res.render('Success', {
-                    title: 'Success',
-                    code: '200',
-                    response: 'Successful update to database',
-                    message: 'All tracking numbers has been updated',
-                    user
-                })
             }
         })
     }
