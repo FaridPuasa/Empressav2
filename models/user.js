@@ -32,7 +32,8 @@ userSchema.statics.authenticate = function(uid, password, callback){
         console.log(user)
         if(error){
             console.log(error)
-        } else if(!user){
+        } 
+        else if(!user){
             var err = new Error("user not found");
             err.status = 401;
             console.log(err);

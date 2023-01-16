@@ -86,6 +86,14 @@ const grantAccess = ((req,res)=>{
     let uid = data.uid
     let password = data.password
     console.log(req.sessionID)
+    if(uid == undefined || uid == null || password == null || password == undefined){
+        res.render('error', {
+            title: 'Error',
+            code: '404',
+            response: 'Not Found',
+            message: `No such user found`
+        })
+    }
     userDB.authenticate(uid, password, (err,user) =>{
         //console.log(user)
         if (req.session.authenticated){
@@ -131,22 +139,23 @@ const grantAccess = ((req,res)=>{
                 }
                 else{
                     console.log("Failed to detect user status [firsttimer == undefined]")
-                    res.status(404).render('error',{
-                        title: '404',
+                    res.render('error', {
+                        title: 'Error',
+                        code: '404',
                         response: 'Not Found',
-                        message: 'No such user ID exists.'
+                        message: `No such user found`
                     })
                 }
             }
             else {
                 //console.log(err)
-                res.status(404).render('error',{
-                    title: '401',
-                    response: 'Not authorized',
-                    message: 'You are not authorized.'
+                res.render('error', {
+                    title: 'Error',
+                    code: '401',
+                    response: 'Not Authorize',
+                    message: `Entry didn't meet the requirements.`
                 })
             }
-
             //req.flash('error', `Please check your credentials.`)
             //console.log('User credentials error')
             //res.redirect('/')
