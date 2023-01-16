@@ -78,7 +78,7 @@ const insertMisc = (req,res)=> {
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
             res.status(201).send()
-            res.redirect('/:services-in')
+            res.redirect('/misc-in')
         }
     })
 }
