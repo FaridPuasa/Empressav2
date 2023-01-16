@@ -25,7 +25,7 @@ const insertRunner = ((req,res)=>{
     let data = req.body
     let name = data.name.replace(/[`'"+@]+/g, '').trim()
     let address = data.address.replace(/[`'"+@]+/g, '').trim()
-    let contact = data.contactNumber.replace(/[`'"+@]+/g, '').trim()
+    let contact = data.contact.replace(/[`'"+@]+/g, '').trim()
     let remark = data.remark.replace(/[`'"+@]+/g, '').trim()
     let status = "A1"
     let attempt = 'false'

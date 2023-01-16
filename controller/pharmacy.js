@@ -27,9 +27,10 @@ const insertPharmacy = ((req, res) => {
     let date = moment().format("DD/MM/YYYY")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
+    console.log(data.name)
     let name = data.name.replace(/[`'"+@]+/g, '').trim()
     let address = data.address.replace(/[`'"+@]+/g, '').trim()
-    let contact = data.contactNumber.replace(/[`'"+@]+/g, '').trim()
+    let contact = data.contact.replace(/[`'"+@]+/g, '').trim()
     let remark = data.remark.replace(/[`'"+@]+/g, '').trim()
     let status = "A2"
     let attempt = 'false'
