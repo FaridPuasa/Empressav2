@@ -413,7 +413,7 @@ router.get('/test',(req,res)=>{
     // }
     // invoicePDF()   
     //const URL = 'https://media.smsgupshup.com/GatewayAPI/rest?send_to=006737257190&msg_type=Text&userid=2000215252&auth_scheme=plain&password=6@SemFzr&method=SendMessage&v=1.1&format=json&msg=This is your receipt.&header=Test&footer=Go Rush Management&isTemplate=true'
-    const data = fs.readFileSync('@/media/DATA/1673506769113.pdf')
+    const data = '1673506769113.pdf'
     const fileURL = `@/media/DATA/${data}`
     const URL = `https://media.smsgupshup.com/GatewayAPI/rest?method=UploadMedia&media_type=document&userid=2000215252&password=6@SemFzr&v=1.1&auth_scheme=plain&format=json&media_file=${fileURL}.pdf&send_to=006737257190`
     //let a = "Farid Puasa"

@@ -902,9 +902,9 @@ const itemList = (req,res) =>{
         //console.log(sessionuser)
         let user = sessionuser
         console.log(filter)
-        warehouseDB.find().then(
+        warehouseDB.find(filter).then(
             (documents)=>{
-                //console.log(documents)
+                console.log(documents)
                 if(services == 'moh'){
                     console.log("This This")
                     res.render('list',{
