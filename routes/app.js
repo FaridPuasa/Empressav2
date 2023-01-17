@@ -308,7 +308,7 @@ router.post('/finance-edit-zalora', financeAcknowledgeZalora)//Finance Acknowled
 router.get('/restock_order', restockForm)
 router.get('/restock_list', restockRecord)
 router.post('/success-ro',insertRestock)
-
+router.post('/success-po',insertPickup)
 //Pickup 
 router.get('/pickup_order', pickupForm)
 router.get('/pickup_list', pickupRecord)

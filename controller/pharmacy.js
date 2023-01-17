@@ -4,7 +4,6 @@ const jpmcPodDB = require('../models/jpmcpod')
 const panagaPodDB = require('../models/panagapod')
 const moment = require('moment')
 
-
 /*
     IN WAREHOUSE = A1
     IN MEDICINE ROOM = A2
@@ -27,9 +26,10 @@ const insertPharmacy = ((req, res) => {
     let date = moment().format("DD/MM/YYYY")
     let dateEntry = moment().format("DD/MM/YYYY")
     let data = req.body
+    console.log(data.name)
     let name = data.name.replace(/[`'"+@]+/g, '').trim()
     let address = data.address.replace(/[`'"+@]+/g, '').trim()
-    let contact = data.contactNumber.replace(/[`'"+@]+/g, '').trim()
+    let contact = data.contact.replace(/[`'"+@]+/g, '').trim()
     let remark = data.remark.replace(/[`'"+@]+/g, '').trim()
     let status = "A2"
     let attempt = 'false'
@@ -485,24 +485,10 @@ const updateMohPodStatus = ((req, res) => {
             if (err) {
                 console.log("Error on updating the information on database")
                 console.log(err)
-                res.render('error', {
-                    title: "Error",
-                    code: '400',
-                    response: 'Server failed to update information to database',
-                    message: 'Please logout and try again. If the issue persist contact +673 233 2065 ext 812',
-                    user,
-                })
             }
             else {
                 console.log(result)
                 console.log('Status: 200 - database has been updated')
-                res.render('Success', {
-                    title: 'Success',
-                    code: '200',
-                    response: 'Successful update to database',
-                    message: 'All tracking numbers has been updated',
-                    user
-                })
             }
         })
     }

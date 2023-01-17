@@ -67,7 +67,7 @@ const insertMisc = (req,res)=> {
     misc.save(err=>{
         if (err) {
             console.log (err)
-            res.flash('error', `Tracking number already exist | Require fields missing`)
+            req.flash('error', `Tracking number already exist | Require fields missing`)
             res.render('error', {
                 errorcode: 'XXX',
                 response: 'Not Acceptable &#x1F62B;',
@@ -78,7 +78,7 @@ const insertMisc = (req,res)=> {
             console.log('Status: 201 - success entry to database')
             req.flash('success', `${data} has been added to the database.`)
             res.status(201).send()
-            res.redirect('/:services-in')
+            res.redirect('/misc-in')
         }
     })
 }

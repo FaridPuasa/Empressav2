@@ -1300,8 +1300,8 @@ const restockForm = (req,res)=> {
                     })
                 }
                 else{
-                    let sequence = result.sequence + 1
-                    console.log(result.sequence)
+                    let sequence = parseInt(result[0].sequence) + 1
+                    console.log(result[0].sequence)
                     res.render('restock',{
                         title: `BMF WAYBILL`,
                         sequence: sequence,
@@ -1331,12 +1331,13 @@ const restockRecord = (req,res)=> {
         res.redirect('/')
     }
     else{   
-        console.log("thi9s code running")
+        console.log("this code running")
         let sessionuser = req.session.user
         //console.log(sessionuser)
         let user = sessionuser
         waybillDB.find().sort().then(
             (document)=>{
+                console.log(document)
                 res.render('podlist',{
                     title: `Restock Waybill`,
                     partials: ('./partials/podlist/restock'),
@@ -1493,7 +1494,7 @@ const pickupForm = (req,res)=> {
                     })
                 }
                 else{
-                    let sequence = parseInt(result.sequence) + 1
+                    let sequence = parseInt(result[0].sequence) + 1
                     console.log("ELSE: "+ sequence)
                     res.render('pickup',{
                         title: "Pickup Order",

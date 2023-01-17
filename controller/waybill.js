@@ -3,6 +3,9 @@ const pickupDB = require ('../models/pickup')
 const moment = require('moment')
 
 const insertRestock = (req,res)=> {
+    let sessionuser = req.session.user
+    let user = sessionuser
+    console.log(user)
     let data = req.body
     let date =  moment().format("DD/MM/YYYY")
     let sequence = data.sequence
@@ -23,36 +26,45 @@ const insertRestock = (req,res)=> {
         restockQuantity: data.restockQuantity,
         restockDate: date
     })
-    waybillDB.save((err,docs)=> {
+    waybill.save((err,docs)=> {
         if(err) {
             if (err.name === "MongoServerError" && err.code === 11000){
                 console.log(err)
                 res.render('error', {
                     title: '11000',
+                    code: "11000",
                     response: 'DB Error',
-                    message: 'No worries~ database detected duplication entry.'
+                    message: 'No worries~ database detected duplication entry.',
+                    user
                 })
             }
             else{
                 console.log(err)
                 res.render('error', {
                     title: '406',
+                    code: "406",
                     response: 'Not Acceptable',
-                    message: `Entry didn't meet the requirements.`
+                    message: `Entry didn't meet the requirements.`,
+                    user
                 })
             }
         }
        else{
-            res.status(200).render ('success', {
-                title: 'success',
-                response: 'Account Created',
-                message: `Wohoo!`,
-            })
+        console.log(user)
+        res.render('Success', {
+            title: 'Success',
+            code: '200',
+            response: 'Success Creating Restock Order',
+            message: 'All green',
+            user
+        })
        }
     })
 }
 
 const insertPickup = (req,res)=> {
+    let sessionuser = req.session.user
+    let user = sessionuser
     let data = req.body
     let date =  moment().format("DD/MM/YYYY")
     let sequence = data.sequence
@@ -81,24 +93,30 @@ const insertPickup = (req,res)=> {
                 console.log(err)
                 res.render('error', {
                     title: '11000',
+                    code: "11000",
                     response: 'DB Error',
-                    message: 'No worries~ database detected duplication entry.'
+                    message: 'No worries~ database detected duplication entry.',
+                    user
                 })
             }
             else{
                 console.log(err)
                 res.render('error', {
-                    title: '406',
+                    title: 'Error',
+                    code: "406",
                     response: 'Not Acceptable',
-                    message: `Entry didn't meet the requirements.`
+                    message: `Entry didn't meet the requirements.`,
+                    user
                 })
             }
         }
        else{
-            res.status(200).render ('success', {
-                title: 'success',
-                response: 'Account Created',
-                message: `Wohoo!`,
+            res.render('Success', {
+                title: 'Success',
+                code: '200',
+                response: 'Success Creating Restock Order',
+                message: 'All green',
+                user
             })
        }
     })

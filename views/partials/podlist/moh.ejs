@@ -43,12 +43,12 @@
                                         <th>Status</th>
                                     </tr>
                                 </thead>
-                                <form action="/update-POD-moh" method="POST">
+                                
                                 <tbody>
                                     <% document.forEach((document,index)=> {%>
-                                    <tr data-toggle="collapse" data-target="#demo<%=index %>" class="accordion-toggle">
+                                    <tr>
                                         <td>
-                                            <input type="button" class="btn my-2"  value="&darr;">
+                                            <input type="button" class="btn py-2"  value="&darr;" data-toggle="collapse" data-target="#demo<%=index %>" class="accordion-toggle">
                                         </td>
                                         <td class="podid"><%= document.pod_id %></td>
                                         <td class="madeby"><%= document.madeby %></td>
@@ -66,23 +66,29 @@
                                                 COMPLETE
                                             <%}%>
                                         </td>
-                                        <% if (user.role == "11" || user.role == "13" || user.role == "10") { %>
-                                        
+                                        <form action="/update-POD-moh" method="POST">
+                                        <% if (user.role.includes("10") || user.role.includes("11") || user.role.includes("13")) { %>
                                             <% if(document.podstatus == "P1"){%>
                                                 <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
+                                                <% for(let j=0 ; j < document.numbers.length; j++) {%>
+                                                <input type="hidden" name="trackingNumber" value="<%= document.trackingNumber[j] %>">
+                                                <%}%>
                                                 <input type="hidden" name="pod_status" value="P2">
                                                 <td><button class="btn btn-primary delivery-btn">Start Delivery</button></td>
                                             <%}%>
                                             <% if(document.podstatus == "P2"){%>
                                                 <input type="hidden" name="pod_id" value="<%= document.pod_id %>">
                                                 <input type="hidden" name="pod_status" value="P3">
+                                                <% for(let j=0 ; j < document.numbers.length; j++) {%>
+                                                    <input type="hidden" name="trackingNumber" value="<%= document.trackingNumber[j] %>">
+                                                <%}%>
                                                 <td><button class="btn btn-primary delivery-btn">Complete Delivery</button></td>
                                             <%}%>
                                             <% if(document.podstatus == "P3"){%>
                                                 <td><button class="btn btn-primary delivery-btn invisible">Completed</button></td>
                                             <%}%>
-                                        
                                         <%}%>
+                                    </form>
                                     </tr>
                                 </div>
                                         
@@ -124,10 +130,10 @@
                                                             <td><%= document.parcelValue[i] %></td>
                                                             <td><%= document.PaymentMethod[i] %></td>
                                                             <td>
-                                                                <% if (user.role == "12" || user.role == "10") { %>
+                                                                <% if (user.role === "12" || user.role === "10") { %>
                                                                 <input type="text" name="financeNotes" id="financeNotes<%= index %>" value="<%= document.financeNotes[i] %>">
                                                                 <% } %>
-                                                                <% if (user.role = "12" || user.role != "10") { %>
+                                                                <% if (user.role === "11" || user.role === "13") { %>
                                                                     <%= document.financeNotes[i] %>
                                                                 <% } %>
                                                             </td>
@@ -178,22 +184,22 @@
                                                 </div>
 
                                                 <div class="d-flex justify-content-center ">
-                                                    <% if (user.role == "12" || user.role == "10") { %>
+                                                    <% if (user.role === "12" || user.role === "10") { %>
                                                         <button class="btn btn-primary">Acknowledge & Submit</button>
                                                     <% } %>
                                                 </div>
-                                            </form> 
-                                            <div class="d-flex justify-content-center "></div>
-                                                <% if (user.role == "11" || user.role == "13" || user.role == "10" ) { %>
+                                                <div class="d-flex justify-content-center">
+                                                    <% if (document.acknowledge === "T") { %>
                                                     <input type="button" class="btn btn-success my-2" onclick="createPDF()" value="Print">
-                                                <% } %>
-                                            </div>
+                                                    <% } %>
+                                                </div>
+                                            </form> 
+                                            
                                             </div> 
                                         </td>
                                     </tr>
                                     <%})%>
                                 </tbody>
-                                </form>
                             </table>
                         </div>
                     </div>
