@@ -413,16 +413,16 @@ router.get('/test',(req,res)=>{
     // }
     // invoicePDF()   
     //const URL = 'https://media.smsgupshup.com/GatewayAPI/rest?send_to=006737257190&msg_type=Text&userid=2000215252&auth_scheme=plain&password=6@SemFzr&method=SendMessage&v=1.1&format=json&msg=This is your receipt.&header=Test&footer=Go Rush Management&isTemplate=true'
-    const data = '1673506769113.pdf'
-    const fileURL = `@/media/DATA/${data}`
-    const URL = `https://media.smsgupshup.com/GatewayAPI/rest?method=UploadMedia&media_type=document&userid=2000215252&password=6@SemFzr&v=1.1&auth_scheme=plain&format=json&media_file=${fileURL}.pdf&send_to=006737257190`
+    //const data = '1673506769113.pdf'
+    //const fileURL = `@/media/DATA/${data}`
+    //const URL = `https://media.smsgupshup.com/GatewayAPI/rest?method=UploadMedia&media_type=document&userid=2000215252&password=6@SemFzr&v=1.1&auth_scheme=plain&format=json&media_file=${fileURL}.pdf&send_to=006737257190`
     //let a = "Farid Puasa"
-    //let b = "123456789"
+    let b = "123456789"
     //let c = "MOH"
     //let msg = `Hello%2C+${a}.%0A%0AWe+have+received+your+order.+Please+refer+to+the+following+for+your+reference.+%0A%0ATracking+Number%3A+${b}%0AService%3A+${c}%0A%0AThank+you+for+your+order`
     //let msg = `Hello%2C+Farid+Puasa.%0A%0AWe+have+received+your+order.+Please+refer+to+the+following+for+your+reference.+%0A%0ATracking+Number%3A+123456%0AService%3A+MOH%0A%0AThank+you+for+your+order.`
-    //let msg = `Hello%2C%0A%0AWe+have+received+your+order.+Please+refer+to+the+following+for+your+reference.%0A%0ATracking+Number%3A+${b}%0A%0AOur+team+will+process+your+order.+Thank+you`
-    //const URL = `https://media.smsgupshup.com/GatewayAPI/rest?userid=2000215252&password=6@SemFzr&send_to=006737257190&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=${msg}&isTemplate=true&header=Order+Confirmation&footer=Go+Rush+Express`
+    let msg = `Hello%2C%0A%0AWe+have+received+your+order.+Please+refer+to+the+following+for+your+reference.%0A%0ATracking+Number%3A+${b}%0A%0AOur+team+will+process+your+order.+Thank+you`
+    const URL = `https://media.smsgupshup.com/GatewayAPI/rest?userid=2000215252&password=6@SemFzr&send_to=006737257190&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=${msg}&isTemplate=true&header=Order+Confirmation&footer=Go+Rush+Express`
     console.log(URL)
     axios.post(URL).then(response=>{console.log(response)}).catch(err=>{console.log(err)})
 })
