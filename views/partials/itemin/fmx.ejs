@@ -155,28 +155,7 @@
             </div>
         </div>
     </div>
-    <script>
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
-            "userNameOrEmailAddress": "glba0001",
-            "password": "J02B4VcU",
-            "source": "string"
-        });
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        fetch("https://clientstg.fmx.asia/api/tokenauth/authenticate", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function (event) {
             function delaySubmit() {
