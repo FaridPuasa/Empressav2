@@ -1045,22 +1045,13 @@ const podList = (req,res)=> {
         else if(services == 'jpmc'){
             jpmcPodDB.find().sort().then(
                 (document)=>{
-                    if (document == []){
-                        res.render('error', {
-                            title: '404',
-                            response: '',
-                            message: 'Page not found'
-                        })
-                    }
-                    else{
-                        res.render('podlist',{
-                            title: `${service} POD List`,
-                            partials: ('./partials/podlist/jpmc'),
-                            moment: moment,
-                            document,
-                            user
-                        })
-                    }
+                res.render('podlist',{
+                        title: `${service} POD List`,
+                        partials: ('./partials/podlist/jpmc'),
+                        moment: moment,
+                        document,
+                        user
+                    })
                 },
                 (err)=>{
                     console.log('Error on getting JPMC POD Information')
@@ -1196,7 +1187,7 @@ const podList = (req,res)=> {
             )
         }
         else if(services == 'personal'){
-            personalPodDB.find().sort().then(
+            tmxPodDB.find().sort().then(
                 (document)=>{
                     res.render('podlist',{
                         title: `${service} POD List`,
@@ -1207,7 +1198,7 @@ const podList = (req,res)=> {
                     })
                 },
                 (err)=>{
-                    console.log('Error on getting Personal POD Information')
+                    console.log('Error on getting PERSONAL POD Information')
                     console.log(err)
                     res.render('error', {
                         title: 'Error',
@@ -1215,7 +1206,7 @@ const podList = (req,res)=> {
                         response: 'Server failed to retrieve information from database',
                         message: 'Please logout and try again, If the issue persist please contact +673 233 2065 ext 812',
                         user,
-                    })
+                    })            
                 }
             )
         }
@@ -1239,7 +1230,8 @@ const podList = (req,res)=> {
                         response: 'Server failed to retrieve information from database',
                         message: 'Please logout and try again, If the issue persist please contact +673 233 2065 ext 812',
                         user,
-                    })            }
+                    })            
+                }
             )
         }
         else if(services == 'local'){
