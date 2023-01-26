@@ -100,7 +100,7 @@
                 <h6 class="collapse-header">Services</h6>
                 <% if (user.service.includes("200")){ %> <a class="collapse-item" href="/self-collect">Self Collection</a> <% } %>
                 <% if (user.service.includes("500")){ %> <a class="collapse-item" href="/misc-out">Miscellaneous Out</a> <% } %>
-                <% if (user.service.includes("501")){ %> <a class="collapse-item" href="/stock-out">Inventory Out</a> <% } %>
+                <% if (user.service.includes("200")){ %> <a class="collapse-item" href="/stock-out">Inventory Out</a> <% } %>
             </div>
         </div>
     </li>
@@ -136,7 +136,7 @@
                 <% if (user.service.includes("400")){ %> <a class="collapse-item" href="/runner-list">Runner Service</a> <% } %>
                 <% if (user.service.includes("401")){ %> <a class="collapse-item" href="/personal-list">Personal Shopping</a> <% } %>
                 <% if (user.service.includes("500")){ %> <a class="collapse-item" href="/misclist">Miscellaneous</a> <% } %>
-                <% if (user.service.includes("501")){ %> <a class="collapse-item" href="/inventorylist">Inventory List</a> <% } %>
+                <% if (user.service.includes("200")){ %> <a class="collapse-item" href="/inventorylist">Inventory List</a> <% } %>
             </div>
         </div>
     </li>

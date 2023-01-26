@@ -76,22 +76,48 @@
                     }
 
                     function operateFormatter(value, row, index) {
+                        //console.log(index)
+                        var data = JSON.parse(listing)
                         for (i = 0; i < listing.length; i++) {
+                            //console.log(i)
+                            console.log(data[index].trackingNumber)
+                            let j = data[index].trackingNumber
                             return [
                                 `<button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-ellipsis-h"></i>
-                </button>`
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </button>`
                                 ,
 
                                 `<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal${i}" href="#">Details</a>
-                </div>`
-
+                                    <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal${index}" href="#">Details</a>
+                                </div>`
+                                ,
+                                `
+                                <div class="modal fade" id="exampleModal${index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Tracking Number: ${j} </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                `
                             ].join('')
                         }
                     }
 
-                    /*
+                    
                     window.operateEvents = {
                         'click .like': function (e, value, row, index) {
                             console.log('You click like action, row: ' + JSON.stringify(row))
@@ -102,7 +128,7 @@
                             values: [row.id]
                             })
                         }
-                    }*/
+                    }
 
                     // function totalTextFormatter(data) {
                     //   return 'Total'
@@ -129,6 +155,8 @@
                         var data = JSON.parse(listing) //testing required
                         console.log(data)
                         for (i = 0; i < data.length; i++) { //change the value to date
+                            let dateEntry = data[i].dateEntry + " | " + data[i].timeEntry   
+                            console.log(dateEntry)
                             let start = moment(data[i].dateEntry, "DD/MM/YYYY").format()
                             console.log(moment(data[i].dateEntry, "DD/MM/YYYY").format("DD/MM/YYYY"))
                             let end = moment().format()

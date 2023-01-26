@@ -20,8 +20,9 @@ const moment = require('moment')
 */
 
 const insertFmx = ((req,res)=>{
-    let date = moment().format("DD/MM/YYYY, h:mm:ss a")
+    let date = moment().format("DD/MM/YYYY")
     let dateEntry = moment().format("DD/MM/YYYY")
+    let timeEntry = moment().format('LT')
     let data = req.body
     let name = data.name.replace(/[`'"+@]+/g, '').trim()
     let address = data.address.replace(/[`'"+@]+/g, '').trim()
@@ -63,6 +64,7 @@ const insertFmx = ((req,res)=>{
         //Date
         entryDate: date,
         dateEntry: dateEntry,
+        timeEntry: timeEntry,
         lastUpdate: dateEntry,
         //Extra
         attempt: attempt,

@@ -70,6 +70,7 @@ const runnerPodDB = require('./models/runnerpod')
 const personalPodDB = require('./models/personalpod')
 const warehouseDB = require('./models/warehouseInventory')
 const stockDB = require('./models/stocks')
+const { default: axios } = require('axios')
 
 const cs = warehouseDB.watch()
 const podMohWatch = mohPodDB.watch()
@@ -111,6 +112,9 @@ podMohWatch.on('change', change =>{
     }
     else{
         console.log("no mail send")
+    }
+    if (change.operationType == "update"){
+        axios.get('https://media.smsgupshup.com/GatewayAPI/rest?send_to=006737257190&msg_type=Text&userid=2000215252&auth_scheme=plain&password=6@SemFzr&method=SendMessage&v=1.1&format=json&msg=This is your receipt.&header=Test&footer=Go Rush Management&isTemplate=true').then(result=>{console.log(result.data)}).catch(err=>{console.log(err)})
     }
 })
 

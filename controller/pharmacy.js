@@ -24,7 +24,8 @@ const insertPharmacy = ((req, res) => {
     let sessionuser = req.session.user
     let user = sessionuser
     let date = moment().format("DD/MM/YYYY")
-    let dateEntry = moment().format("DD/MM/YYYY")
+    let dateEntry = moment().format("DD/MM/YYYY" )
+    let timeEntry = moment().format('LT')
     let data = req.body
     console.log(data.name)
     let name = data.name.replace(/[`'"+@]+/g, '').trim()
@@ -68,6 +69,7 @@ const insertPharmacy = ((req, res) => {
         //Date
         entryDate: date,
         dateEntry: dateEntry,
+        timeEntry: timeEntry,
         lastUpdate: dateEntry,
         //Extra
         attempt: attempt,

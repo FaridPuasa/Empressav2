@@ -736,6 +736,7 @@ const inventoryList = (req,res) =>{
                     partials: './partials/list/inventory.ejs',
                     moment: moment, 
                     list: result,
+                    user
                 })
             },
             (err)=>{

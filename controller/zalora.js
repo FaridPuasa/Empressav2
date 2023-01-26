@@ -22,6 +22,7 @@ const insertZalora = ((req,res)=>{
     let user = req.session.user
     let date = moment().format("DD/MM/YYYY")
     let dateEntry = moment().format("DD/MM/YYYY")
+    let timeEntry = moment().format('LT')
     let data = req.body
     let name = data.name.replace(/[`'"+@]+/g, '').trim()
     let address = data.address.replace(/[`'"+@]+/g, '').trim()
@@ -63,6 +64,7 @@ const insertZalora = ((req,res)=>{
         //Date
         entryDate: date,
         dateEntry: dateEntry,
+        timeEntry: timeEntry,
         lastUpdate: dateEntry,
         //Extra
         attempt: attempt,

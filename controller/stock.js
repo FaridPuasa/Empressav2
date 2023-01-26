@@ -16,6 +16,7 @@ const insertStock = ((req,res)=>{
         productQuantity: data.productQuantity,
         productPrice: data.productPrice,
         productSalePrice: data.productSalePrice,
+        productExpiry: data.productExpiry,
         productColor:data.productColor,
         productSize: data.productSize,
         quantity: data.quantity,
