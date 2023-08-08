@@ -75,60 +75,76 @@
                         return html.join('')
                     }
 
-                    function operateFormatter(value, row, index) {
-                        //console.log(index)
-                        var data = JSON.parse(listing)
-                        for (i = 0; i < listing.length; i++) {
-                            //console.log(i)
-                            console.log(data[index].trackingNumber)
-                            let j = data[index].trackingNumber
-                            return [
-                                `<button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-ellipsis-h"></i>
-                                </button>`
-                                ,
+                    // function operateFormatter(value, row, index) {
+                    //     //console.log(index)
+                    //     var data = JSON.parse(listing)
+                    //     for (i = 0; i < row.history.length; i++) {
+                    //         //console.log(row.history.length)
+                    //         console.log(row)
+                    //         //console.log(data[index].trackingNumber)
+                    //         let n = index + 1
+                    //         let m = row[i].history[i].dateUpdated
+                    //         let j = data[index].trackingNumber
+                    //         //console.log(n)
+                    //         console.log(m)
+                    //         return [
+                    //             `<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal${index}">Additional Details</button>`
+                    //             ,
 
-                                `<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal${index}" href="#">Details</a>
-                                </div>`
-                                ,
-                                `
-                                <div class="modal fade" id="exampleModal${index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tracking Number: ${j} </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
-                                `
-                            ].join('')
-                        }
-                    }
-
+                    //             `
+                    //             <div class="modal fade" id="modal${index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    //             <div class="modal-dialog" role="document">
+                    //                 <div class="modal-content">
+                    //                 <div class="modal-header">
+                    //                     <h5 class="modal-title" id="modal${index}label">Tracking Number: ${j} </h5>
+                    //                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    //                     <span aria-hidden="true">&times;</span>
+                    //                     </button>
+                    //                 </div>
+                    //                 <div class="modal-body">
+                    //                     <table class="table table-striped">
+                    //                         <thead>
+                    //                             <tr>
+                    //                                 <th scope="col">#</th>
+                    //                                 <th scope="col">Update By</th>
+                    //                                 <th scope="col">Last Update</th>
+                    //                             </tr>
+                    //                         </thead>
+                    //                         <tbody>
+                    //                         <% list.forEach((list,index)=>{ %>
+                    //                             <tr>
+                    //                                 <td></td>
+                    //                                 <td></td>
+                    //                                 <td></td>
+                    //                             </tr>
+                    //                         <% }) %>
+                    //                         </tbody>
+                    //                     </table>
+                    //                 </div>
+                    //                 <div class="modal-footer">
+                    //                     <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                    //                 </div>
+                    //                 </div>
+                    //             </div>
+                    //             </div>
+                    //             `
+                    //         ].join('')
+                    //     }
+                    // }
                     
-                    window.operateEvents = {
-                        'click .like': function (e, value, row, index) {
-                            console.log('You click like action, row: ' + JSON.stringify(row))
-                        },
-                        'click .remove': function (e, value, row, index) {
-                            $table.bootstrapTable('remove', {
-                            field: 'id',
-                            values: [row.id]
-                            })
-                        }
-                    }
+                    
+                    // window.operateEvents = {
+                    //     'click .like': function (e, value, row, index) {
+                    //         console.log('You click like action, row: ' + JSON.stringify(row))
+                    //     },
+                    //     'click .remove': function (e, value, row, index) {
+                    //         $table.bootstrapTable('remove', {
+                    //         field: 'id',
+                    //         values: [row.id]
+                    //         })
+                    //     }
+                    // }
+                    
 
                     // function totalTextFormatter(data) {
                     //   return 'Total'
@@ -155,6 +171,10 @@
                         var data = JSON.parse(listing) //testing required
                         console.log(data)
                         for (i = 0; i < data.length; i++) { //change the value to date
+                            // for(j = 0; j < data[i].history.length; j++){
+                            //     console.log(data[i].history[j].updateBy)
+                            // }
+
                             let dateEntry = data[i].dateEntry + " | " + data[i].timeEntry   
                             console.log(dateEntry)
                             let start = moment(data[i].dateEntry, "DD/MM/YYYY").format()
@@ -276,6 +296,8 @@
                                 data[i].fmxExpire = expire
                             }
                         }
+
+
 
                         $table.bootstrapTable({ data: data })
                         $table.bootstrapTable('updateFormatText', 'formatShowingRows', 'Showing')

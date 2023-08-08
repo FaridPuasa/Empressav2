@@ -319,30 +319,134 @@ const easyinvoice = require('easyinvoice')
 var fs = require('fs');
 const axios = require('axios');
 const url = require('url')
+const warehouseDB = require('../models/warehouseInventory')
+const FormData = require('form-data');
 
-router.post('/test',(req,res)=>{
+let dotenv = require('dotenv').config()
+const waid = process.env.WAID
+const wapw = process.env.WAPASS
+
+router.get('/postTest',(req,res)=>{
+    let body = req.body
+    let tracker = body.tracker
+    warehouseDB.find(tracker).then(
+        (result)=>{
+            let data = new FormData();
+            let receipt = result[0].receipt
+            data.append('method', 'UploadMedia');
+            data.append('media_type', 'document');
+            data.append('userid', waid);
+            data.append('password', wapw);
+            data.append('v', '1.1');
+            data.append('auth_scheme', 'plain');
+            data.append('format', 'json');
+            data.append('media_file', fs.createReadStream(`./receipt/${receipt}.pdf`),`./receipt/${receipt}.pdf`);
+            let config = {
+                method: 'post',
+                url: 'http://media.smsgupshup.com/GatewayAPI/rest',
+                headers: { ...data.getHeaders()},
+                data : data
+            };
+
+            axios(config)
+                .then((response)=> {
+                    console.log(JSON.stringify(response.data.response.id))
+                    let filter = result[0]._id
+                    let media = response.data.response.id //'tXxitm6WpT8ai88wBlJcezkMQioqhIzvTym8A_EGD3vIyGBr3SZn-BxQYQeFj9gYI7SYuIQKfI7mSURGmdbE8wtxvD_BOnWK-tkraQ'//
+                    let update = {media: media}
+                    let option = {upsert: false, new: false}
+                    console.log(response.data.response.id)
+                    warehouseDB.findByIdAndUpdate(filter,update,option,(err,docs)=>{
+                        if(err){
+                            console.log(err)
+                            console.log("Error on updating the media id")
+                        }
+                        else{
+                            console.log(docs)
+                        }
+                    })
+                })
+                .catch(err=>{console.log(err)})
+        },
+        (err)=>{
+            console.log(err)
+        }
+    )
+ })
+
+ 
+router.get('/post',(req,res)=>{
+    let body = req.body
+    let filter = body.trackingNumber
+    warehouseDB.find(filter).then(
+        (result)=>{
+            let media =  '7v1hBmb97TVMYD3-Mo3Zib1g7L2vChNvRyycPKxyy2c-tKsaeHv3LTJ6cVRsTF6Tiy7gkdgeUEUvk9O8cKkAeQLNhIOOV-KM2_4hlQ' //result[0].mid
+            //let contact = "00" + result[0].contactNumber
+            let contact = '006737257190' //result[0].contactNumber
+            let url = `
+            http://media.smsgupshup.com/GatewayAPI/rest?
+            format=json&
+            userid=${waid}&
+            password=${wapw}&
+            v=1.1&
+            auth_scheme=plain&
+            msg_type=DOCUMENT&
+            method=SendMediaMessage&
+            media_id=${media}&,
+            caption=Hello, This is your receipt. Thank you for using our services.&
+            footer=Go Rush Express&
+            isTemplate=true&
+            send_to=${contact}`
+
+            let data = new FormData();
+            let config = {
+                method: 'get',
+                url: url,
+                headers: { 
+                ...data.getHeaders()
+                },
+                data : data
+            };
+            
+            axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
+        (err)=>{
+            console.log(err)
+        }
+    )
+})
+
+
+router.get('/test',(req,res)=>{
     const FormData = require('form-data');
     
     const form = new FormData();
     form.append('method', 'UploadMedia');
     form.append('media_type', 'DOCUMENT');
-    form.append('userid', '2000215252');
-    form.append('password', '6@SemFzr');
+    form.append('userid', '2000215252');//.env
+    form.append('password', '6@SemFzr');//.env
     form.append('v', '1.1');
     form.append('auth_scheme', 'plain');
     form.append('format', 'json');
-    form.append('media_file', fs.readFileSync('./receipt/1673506769113.pdf'), '"./receipt/1673506769113.pdf"');
+    form.append('media_file', fs.readFileSync('./receipt/test.pdf'), '"./receipt/test.pdf"');//file name pulled from database
     
     axios.post('https://media.smsgupshup.com/GatewayAPI/rest',form,{headers:{'Content-Type': '"multipart/form-data"' }})
     .then(response=>{
+        //console.log(response)
         console.log(response.data.response.id)
-        const media = response.data.response.id
+        const media = 'VuYUhXjW1kE07V0dOoyNpyx0Vb0-f3akybrUdMR13G8Okmop24XG_G9xlVO3uQhs09hvAls1LbQfVBg9AeE6nSurTYE2Ttg6ZGjYRg'//response.data.response.id //'tXxitm6WpT8ai88wBlJcezkMQioqhIzvTym8A_EGD3vIyGBr3SZn-BxQYQeFj9gYI7SYuIQKfI7mSURGmdbE8wtxvD_BOnWK-tkraQ'//
         console.log(media)
-        let data = {
+        let atad = {
             'format': 'json',
-            'userid': '2000215252',
-            'password': '6@SemFzr',
-            'send_to': '006737257190',
+            'userid': '2000215252',//.env
+            'password': '6@SemFzr',//.env
+            'send_to': '006737257190',//dynamic phone number
             'v': '1.1',
             'auth_scheme': 'plain',
             'msg_type': 'DOCUMENT',
@@ -352,13 +456,15 @@ router.post('/test',(req,res)=>{
             'footer': 'Go Rush Express',
             'isTemplate': 'true'
         }
-        const query = new url.URLSearchParams(data)
+        const query = new url.URLSearchParams(atad)
         axios.get(`https://media.smsgupshup.com/GatewayAPI/rest?${query}`)
-        .then(result=>{console.log(result.data)})
+        .then(result=>{console.log(result)})
         .catch(err=>{console.log(err)})
     })
     .catch(err=>{console.log(err)});
 
+    //let phones = []
+    //axios.get(`https://media.smsgupshup.com/GatewayAPI/rest?userid=2000215252&password=6@SemFzr&phone_number=${phones}&method=OPT_IN&auth_scheme=plain&v=1.1&channel=WHATSAPP&format=json`,).then(response=>{console.log(response)}).catch(err=>{console.log(err)})
     //const URL = 'https://media.smsgupshup.com/GatewayAPI/rest?send_to=006737257190&msg_type=Text&userid=2000215252&auth_scheme=plain&password=6@SemFzr&method=SendMessage&v=1.1&format=json&msg=This is your receipt.&header=Test&footer=Go Rush Management&isTemplate=true'
     //const data = '1673506769113.pdf'
     //const fileURL = `/media/DATA/${data}`
@@ -396,6 +502,9 @@ router.post('/test',(req,res)=>{
 router.get('/testget', (req,res)=>{
     res.render('testpage')
 })
+
+
+
 
 router.get('/sending', sendReceipt)
 
